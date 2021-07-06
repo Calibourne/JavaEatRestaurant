@@ -316,7 +316,7 @@
                                     </VBox>
                                  </children>
                               </Group>
-                              <Group fx:id="addToBlacklist_sctn">
+                              <Group fx:id="addToBlacklist_sctn" visible="false">
                                  <children>
                                     <VBox layoutX="195.0" layoutY="14.0" prefHeight="40.0" prefWidth="210.0">
                                        <children>

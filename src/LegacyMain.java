@@ -382,7 +382,7 @@ public class LegacyMain {
 	public static void main(String[] args) throws IOException {
 		MyFileLogWriter.initializeMyFileWriter();
 
-		if (rest.getFirstRun()) {
+		if (/*rest.getFirstRun()*/true) {
 			try {
 				List<String[]> input = CSVExporter.importCSV("input.csv");
 
@@ -408,7 +408,7 @@ public class LegacyMain {
 				}
 			} finally {
 				// Shared s = Shared.getInstance();
-				rest.saveDatabase("Rest.ser");
+				//rest.saveDatabase("Rest.ser");
 				System.out.println("All commands executed. Please check \"" + OUTPUT_FILE + "\".");
 			}
 		}

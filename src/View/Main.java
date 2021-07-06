@@ -18,9 +18,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Restaurant rest = Restaurant.getInstance();
-        Parent root = FXMLLoader.load(getClass().getResource("Controllers/managerWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Controllers/Home.fxml"));
         primaryStage.setTitle("JavaEat");
-        //primaryStage.getIcons().add(new Image("Icon.jpg"));
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image("/Icon.jpg"));

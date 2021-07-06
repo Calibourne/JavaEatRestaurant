@@ -1,0 +1,100 @@
+.HBox{
+    -fx-background-color :  #05071F;
+}
+.HBox .button{
+    -fx-background-color: none;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-underline: false;
+}
+.HBox .button:hover{
+    -fx-underline: true;
+    -fx-font-size: 20;
+}
+.HBox .button:pressed{
+    -fx-text-fill: gold;
+}
+.button{
+    -fx-background-color: #05071F;
+    -fx-text-fill: white;
+}
+.button:hover{
+    -fx-background-color: #10165F;
+}
+.label{
+    -fx-text-fill: white;
+}
+.check-box{
+    -fx-background-color: none;
+    -fx-text-fill: white;
+}
+.combo-box{
+    -fx-background-color: #05071F;
+}
+
+.combo-box:hover, .combo-box .arrow-button:hover{
+    -fx-background-color: #0b1349;
+}
+.combo-box:pressed, .combo-box .arrow-button:pressed{
+    -fx-background-color: #10165F;
+}
+
+.combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell , .combo-box .list-cell{
+    -fx-background-color: #05071F ;
+    -fx-text-fill: white ;
+}
+.combo-box .combo-box-popup .list-cell:hover {
+    -fx-text-fill: gold ;
+    -fx-background-color: #10165F ;
+}
+
+.combo-box .arrow{
+    -fx-background-color:#2478E9;
+}
+.combo-box .arrow-button{
+    -fx-background-color: #05071F;
+}
+
+.text-field{
+    -fx-background-color: none;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 1 0;
+}
+
+.check-box .box {
+    -fx-background-color: #10165F;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #28a3f4;
+}
+.radio-button{
+    -fx-text-fill: white;
+}
+
+.radio-button .radio {
+    -fx-background-color: #10165F;
+    -fx-background-image: null;
+}
+
+.radio-button .dot {
+    -fx-mark-highlight-color: #28a3f4;
+    -fx-mark-color: #28a3f4 ;
+}
+
+.separator{
+    -fx-border-style: solid;
+    -fx-padding: 0 -50 0 0;
+}
+.separator *.line{
+    -fx-border-color: #10165F;
+}
+
+.date-picker{
+    -fx-background-color: #05071F;
+}

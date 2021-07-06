@@ -1,3 +1,6 @@
+.VBox{
+    -fx-background-color: #02030A;
+}
 .HBox{
     -fx-background-color :  #05071F;
 }

@@ -52,6 +52,8 @@ public class RecordsManagementController {
     private Group addArea_sctn;
     @FXML
     private Group addToBlacklist_sctn;
+    @FXML
+    private ComboBox<String> selectionBox;
     //endregion
     @FXML
     private VBox rd_vbox;
@@ -66,12 +68,14 @@ public class RecordsManagementController {
 
     public void initialize(){
         HashMap<String,Group> groups = new HashMap<>();
+
         restaurant = Restaurant.getInstance();
         addCook_sctn.setVisible(false);
         addDeliPerson_sctn.setVisible(false);
         addCustomer_sctn.setVisible(false);
         addComponent_sctn.setVisible(false);
         addCook_sctn.setVisible(false);
+
         groups.put("Cook",addCook_sctn);
         groups.put("Delivery person",addDeliPerson_sctn);
         groups.put("Customer",addCustomer_sctn);
@@ -82,23 +86,11 @@ public class RecordsManagementController {
         groups.put("Delivery Area", addArea_sctn);
         groups.put("Blacklisted customer", addToBlacklist_sctn);
 
-        String[] ar = {
-                "Cook",
-                "Delivery person",
-                "Customer",
-                "Ingredient",
-                "Dish",
-                "Order",
-                "Delivery",
-                "Delivery Area",
-                "Blacklisted customer",
-        };
-        ComboBox cb = (ComboBox) addRecord_sctn.getChildren().get(1);
-        cb.setItems(FXCollections.observableList(Arrays.stream(ar).toList()));
-        cb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        addRecordSelectionGroup(selectionBox);
+        selectionBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-                String chosen = cb.getItems().get((Integer) number2).toString();
+                String chosen = selectionBox.getItems().get((Integer) number2).toString();
                 groups.values().forEach(i -> i.setVisible(false));
                 try {
                     groups.get(chosen).setVisible(true);
@@ -127,8 +119,9 @@ public class RecordsManagementController {
                     System.out.println("unknown group");
                     break;
             }
-            Stage s = (Stage) btn.getScene().getWindow();
-            s.close();
+            addRecordSelectionGroup(selectionBox);
+            //Stage s = (Stage) btn.getScene().getWindow();
+            //s.close();
         }
         if (e.getSource() == ed_RB)
         {
@@ -266,5 +259,33 @@ public class RecordsManagementController {
         catch (ClassCastException e) {
             System.err.println(e.getMessage());
         }
+    }
+    private void addRecordSelectionGroup(ComboBox cb) {
+        String[] startOptions = {
+                "Delivery Area",
+                "Cook",
+                "Customer",
+                "Ingredient"
+        };
+        Set<String> set = (Set<String>) new HashSet<String>(Arrays.stream(startOptions).toList());
+        if(restaurant.getAreas().size() > 0) {
+            set.add("Delivery Person");
+        }
+        if (restaurant.getCustomers().size() > 0){
+            set.add("Blacklisted Customer");
+        }
+        if(restaurant.getComponents().size() > 0) {
+            set.add("Dish");
+        }
+        if(restaurant.getDishes().size() > 0 &&
+                restaurant.getCustomers().values().stream()
+                        .filter(c->!restaurant.getBlacklist().contains(c)).toList().size()>0) {
+            set.add("Order");
+        }
+        if(restaurant.getOrders().size()>0 && restaurant.getDeliveryPersons().size()>0){
+            set.add("Delivery");
+        }
+
+        cb.getItems().addAll(FXCollections.observableList(set.stream().sorted().toList()));
     }
 }

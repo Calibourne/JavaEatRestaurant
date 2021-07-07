@@ -3,7 +3,8 @@
 }
 .HBox{
     -fx-background-color :  #05071F;
-}
+} /* horizontal box */
+
 .HBox .button{
     -fx-background-color: none;
     -fx-text-fill: white;
@@ -81,7 +82,7 @@
 }
 
 .radio-button .radio {
-    -fx-background-color: #10165F;
+    -fx-background-color: #3f4bff;
     -fx-background-image: null;
 }
 

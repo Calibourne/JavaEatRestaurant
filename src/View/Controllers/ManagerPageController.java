@@ -4,10 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -76,6 +79,18 @@ public class ManagerPageController {
         if(e.getSource() == btnOrders) {
             pnlOrders.setStyle("-fx-background-color: #13194c");
             pnlOrders.toFront();
+        }
+        if(e.getSource() == btnSignout) {
+            try {
+                Stage s = (Stage) btnSignout.getScene().getWindow();
+                Parent p = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+                s.hide();
+                s.setScene(new Scene(p));
+                s.centerOnScreen();
+                s.show();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 }

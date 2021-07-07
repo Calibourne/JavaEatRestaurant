@@ -29,15 +29,19 @@ public class LoginPageController {
 
     @FXML
     private void LoginButtonOnAction(ActionEvent e){
-        if(usernameField.getText().equals("manager") && passwordField.getText().equals("manager")){
+        if(usernameField.getText().equals("m") && passwordField.getText().equals("m")){
             try {
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("managerPage.fxml"));
+                s.hide();
                 s.setScene(new Scene(p));
+                s.centerOnScreen();
+                s.show();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
         }
+
         if (usernameField.getText().equals("customer") && passwordField.getText().equals("customer")){
             loginMessageLabel.setText("Placeholder for correct login credentials"); // need to change to a main page prompt
         }

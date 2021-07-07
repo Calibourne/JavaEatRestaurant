@@ -57,7 +57,7 @@ public class ManagerPageController {
     @FXML
     private AnchorPane pnlRecordsManagement;
     public void initialize(){
-        pnlOverview.setStyle("-fx-background-color: #02030A");
+        pnlOverview.setStyle("-fx-background-color: #1F4591");
         pnlOverview.toFront();
         try {
             Node recordsM = FXMLLoader.load(getClass().getResource("Records.fxml"));
@@ -69,11 +69,11 @@ public class ManagerPageController {
     }
     public void handleButtonClick(ActionEvent e) {
         if(e.getSource() == btnOverview) {
-            pnlOverview.setStyle("-fx-background-color: #02030A");
+            pnlOverview.setStyle("-fx-background-color: #1F4591");
             pnlOverview.toFront();
         }
         if(e.getSource() == btnRecords) {
-            pnlRecords.setStyle("-fx-background-color: #02030A");
+            pnlRecords.setStyle("-fx-background-color: #1F4591");
             pnlRecords.toFront();
         }
         if(e.getSource() == btnOrders) {

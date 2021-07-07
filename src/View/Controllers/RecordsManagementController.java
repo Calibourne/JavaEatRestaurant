@@ -86,7 +86,11 @@ public class RecordsManagementController {
         groups.put("Delivery Area", addArea_sctn);
         groups.put("Blacklisted customer", addToBlacklist_sctn);
 
-        addRecordSelectionGroup(selectionBox);
+        //addRecordSelectionGroup(selectionBox);
+
+        editListableNode(new Tuple[]{
+                new Tuple(selectionBox.getParent(),1,groups.keySet().stream().toList())
+        });
         selectionBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
@@ -119,7 +123,7 @@ public class RecordsManagementController {
                     System.out.println("unknown group");
                     break;
             }
-            addRecordSelectionGroup(selectionBox);
+            //addRecordSelectionGroup(selectionBox);
             //Stage s = (Stage) btn.getScene().getWindow();
             //s.close();
         }

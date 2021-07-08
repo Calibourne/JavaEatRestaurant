@@ -191,7 +191,7 @@
             <Image url="@../images/icons8_Search_52px.png" />
          </ImageView>
       </Pane>
-      <Pane fx:id="pnlRecords" prefHeight="200.0" prefWidth="200.0" stylesheets="@RecordsScreenStyle.css" visible="false">
+      <Pane fx:id="pnlRecords" prefHeight="200.0" prefWidth="200.0" stylesheets="@RecordsScreenStyle.css">
          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="793.0" spacing="85.75" styleClass="HBox" stylesheets="@RecordsScreenStyle.css">
             <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Add Record">
                <HBox.margin>

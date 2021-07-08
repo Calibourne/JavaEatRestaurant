@@ -8,7 +8,12 @@
 .HBox .combo-box{
     -fx-background-color: #1F4591;
 }
-
+.HBox .combo-box .arrow-button{
+    -fx-background-color: #1F4591;
+}
+.HBox .combo-box .arrow{
+    -fx-background-color: #061E47;
+}
 .HBox .combo-box:hover,
 .HBox .combo-box .arrow-button:hover{
     -fx-background-color: #2B6AD0;

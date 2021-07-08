@@ -114,22 +114,22 @@
       <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
       <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
          <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" styleClass="SearchBar" />
-         <Label layoutX="57.0" layoutY="25.0" text="Restaurant Orders" textFill="#e7e5e5">
+         <Label layoutX="57.0" layoutY="25.0" text="Restaurant Overview" textFill="#e7e5e5">
             <font>
                <Font size="24.0" />
             </font>
          </Label>
          <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <Label text="22000" textFill="#2a73ff">
+               <Label fx:id="numOfDeliveries_lbl" text="22000" textFill="#ffb92b">
                   <font>
                      <Font name="System Bold" size="26.0" />
                   </font>
                </Label>
-               <Label text="Total Orders" textFill="#e7e5e5" />
+               <Label text="Total Deliveries" textFill="#e7e5e5" />
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <Label text="1500" textFill="#26bfbc">
+               <Label fx:id="numOfDelivered_lbl" text="1500" textFill="#3ebd26">
                   <font>
                      <Font name="System Bold" size="26.0" />
                   </font>
@@ -137,20 +137,20 @@
                <Label text="Total delivered" textFill="#e7e5e5" />
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <Label text="1000" textFill="#fa5f7e">
+               <Label fx:id="numOfCustomers_lbl" text="1000" textFill="#61bafa">
                   <font>
                      <Font name="System Bold" size="26.0" />
                   </font>
                </Label>
-               <Label text="Pending Orders" textFill="#e7e5e5" />
+               <Label text="Total Customers" textFill="#e7e5e5" />
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <Label text="780" textFill="#de0000">
+               <Label fx:id="numOfBlacklisted_lbl" text="780" textFill="#de0000">
                   <font>
                      <Font name="System Bold" size="26.0" />
                   </font>
                </Label>
-               <Label text="Orders on Hold" textFill="#e7e5e5" />
+               <Label text="Total Blacklisted" textFill="#e7e5e5" />
             </VBox>
          </HBox>
          <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="178.0" prefHeight="42.0" prefWidth="712.0" spacing="80.0" styleClass="HBox">
@@ -191,7 +191,7 @@
             <Image url="@../images/icons8_Search_52px.png" />
          </ImageView>
       </Pane>
-      <Pane fx:id="pnlRecords" prefHeight="200.0" prefWidth="200.0" stylesheets="@RecordsScreenStyle.css">
+      <Pane fx:id="pnlRecords" prefHeight="200.0" prefWidth="200.0" stylesheets="@RecordsScreenStyle.css" visible="false">
          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="793.0" spacing="85.75" styleClass="HBox" stylesheets="@RecordsScreenStyle.css">
             <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Add Record">
                <HBox.margin>

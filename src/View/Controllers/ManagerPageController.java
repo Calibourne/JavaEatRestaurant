@@ -1,5 +1,6 @@
 package View.Controllers;
 
+import Model.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ManagerPageController {
+    // region FXML comps
     @FXML
     private Label lblGreeting;
 
@@ -56,9 +58,28 @@ public class ManagerPageController {
 
     @FXML
     private AnchorPane pnlRecordsManagement;
+
+    @FXML
+    private Label numOfDeliveries_lbl;
+
+    @FXML
+    private Label numOfDelivered_lbl;
+
+    @FXML
+    private Label numOfCustomers_lbl;
+
+    @FXML
+    private Label numOfBlacklisted_lbl;
+    // endregion
     public void initialize(){
+        Restaurant res = Restaurant.getInstance();
         pnlOverview.setStyle("-fx-background-color: #1F4591");
         pnlOverview.toFront();
+        numOfDeliveries_lbl.setText(String.format("%d",res.getDeliveries().size()));
+        numOfDelivered_lbl.setText(String.format("%d",res.getDeliveries().values()
+                .stream().filter(d->d.isDelivered()).toList().size()));
+        numOfCustomers_lbl.setText(String.format("%d",res.getCustomers().size()));
+        numOfBlacklisted_lbl.setText(String.format("%d",res.getBlacklist().size()));
         try {
             Node recordsM = FXMLLoader.load(getClass().getResource("Records.fxml"));
             pnlRecordsManagement.getChildren().add(recordsM);

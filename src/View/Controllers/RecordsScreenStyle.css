@@ -36,14 +36,14 @@
     -fx-text-fill: white;
 }
 .combo-box{
-    -fx-background-color: #05071F;
+    -fx-background-color: #061E47;
 }
 
 .combo-box:hover, .combo-box .arrow-button:hover{
-    -fx-background-color: #0b1349;
+    -fx-background-color: #2B6AD0;
 }
 .combo-box:pressed, .combo-box .arrow-button:pressed{
-    -fx-background-color: #10165F;
+    -fx-background-color: #68A4F1;
 }
 
 .combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell , .combo-box .list-cell{
@@ -51,15 +51,15 @@
     -fx-text-fill: white ;
 }
 .combo-box .combo-box-popup .list-cell:hover {
-    -fx-text-fill: gold ;
-    -fx-background-color: #10165F ;
+    -fx-text-fill: gold;
+    -fx-background-color: #2B6AD0;
 }
 
 .combo-box .arrow{
-    -fx-background-color:#2478E9;
+    -fx-background-color:#1F4591;
 }
 .combo-box .arrow-button{
-    -fx-background-color: #05071F;
+    -fx-background-color: #061E47;
 }
 
 .text-field{
@@ -70,7 +70,7 @@
 }
 
 .check-box .box {
-    -fx-background-color: #10165F;
+    -fx-background-color: #061E47;
 }
 
 .check-box:selected .mark {
@@ -78,7 +78,7 @@
 }
 
 .check-box:selected .box {
-    -fx-background-color: #28a3f4;
+    -fx-background-color: #68A4F1;
 }
 .radio-button{
     -fx-text-fill: white;
@@ -96,12 +96,18 @@
 
 .separator{
     -fx-border-style: solid;
-    -fx-padding: 0 -50 0 0;
+    /*-fx-padding: 0 -50 0 0;*/
 }
 .separator *.line{
-    -fx-border-color: #10165F;
+    -fx-border-color: #061E47;
 }
 
 .date-picker{
-    -fx-background-color: #05071F;
+    -fx-background-color: #061E47;
+}
+.Container{
+    -fx-border-radius: 1em;
+    -fx-border-width: 2px;
+    -fx-padding: 0.5em;
+    -fx-border-color: white;
 }

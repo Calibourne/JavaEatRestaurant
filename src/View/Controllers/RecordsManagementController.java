@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -140,8 +141,9 @@ public class RecordsManagementController {
     }
     private void createSections(Group group) {
         try{
+            GridPane grid = (GridPane) group.getChildren().get(0);
             if (group.getId().equals("addCook_sctn") || group.getId().equals("addCustomer_sctn") || group.getId().equals("addDeliPerson_sctn")) {
-                VBox genderContainer = (VBox) group.getChildren().get(3);
+                VBox genderContainer = (VBox) grid.getChildren().get(3);
                 editListableNode(new Tuple[]{
                             new Tuple<Gender>(genderContainer, 1,
                             Arrays.stream(Gender.values()).toList(),
@@ -151,7 +153,7 @@ public class RecordsManagementController {
 
             switch (group.getId()) {
                 case "addCook_sctn": {
-                    VBox expertiseContainer = (VBox) group.getChildren().get(4);
+                    VBox expertiseContainer = (VBox) grid.getChildren().get(4);
                     editListableNode(new Tuple[]{
                             new Tuple<Expertise>(expertiseContainer, 1,
                                     Arrays.stream(Expertise.values()).toList(),
@@ -160,8 +162,8 @@ public class RecordsManagementController {
                     break;
                 }
                 case "addDeliPerson_sctn": {
-                    VBox vehicleContainer = (VBox) group.getChildren().get(4),
-                            deliveryAreaContainer = (VBox) group.getChildren().get(5);
+                    VBox vehicleContainer = (VBox) grid.getChildren().get(4),
+                            deliveryAreaContainer = (VBox) grid.getChildren().get(5);
                     editListableNode(new Tuple[]{
                             new Tuple<Vehicle>(vehicleContainer, 1,
                                     Arrays.stream(Vehicle.values()).toList(),
@@ -173,7 +175,7 @@ public class RecordsManagementController {
                     break;
                 }
                 case "addCustomer_sctn": {
-                    VBox neighborhoodContainer = (VBox) group.getChildren().get(4);
+                    VBox neighborhoodContainer = (VBox) grid.getChildren().get(4);
                     editListableNode(new Tuple[]{
                             new Tuple<Neighberhood>(neighborhoodContainer, 1,
                                     Arrays.stream(Neighberhood.values()).toList(),
@@ -186,8 +188,8 @@ public class RecordsManagementController {
                     break;
                 }
                 case "addDish_sctn": {
-                    VBox dishTypeContainer = (VBox) group.getChildren().get(1),
-                            ingredientsContainer = (VBox) group.getChildren().get(2);
+                    VBox dishTypeContainer = (VBox) grid.getChildren().get(1),
+                            ingredientsContainer = (VBox) grid.getChildren().get(2);
                     editListableNode(new Tuple[]{
                             new Tuple<DishType>(dishTypeContainer, 1,
                                     Arrays.stream(DishType.values()).toList(),
@@ -199,9 +201,9 @@ public class RecordsManagementController {
                     break;
                 }
                 case "addOrder_sctn": {
-                    VBox customerContainer = (VBox) group.getChildren().get(0),
-                            dishesContainer = (VBox) group.getChildren().get(1),
-                            deliveryContainer = (VBox) group.getChildren().get(2);
+                    VBox customerContainer = (VBox) grid.getChildren().get(0),
+                            dishesContainer = (VBox) grid.getChildren().get(1),
+                            deliveryContainer = (VBox) grid.getChildren().get(2);
                     editListableNode(new Tuple[]{
                             new Tuple<Customer>(customerContainer, 1,
                                     restaurant.getCustomers().values().stream().toList(),
@@ -217,12 +219,12 @@ public class RecordsManagementController {
                     break;
                 }
                 case "addDelivery_sctn": {
-                    VBox deliveryPersonContainer = (VBox) group.getChildren().get(0);
+                    VBox deliveryPersonContainer = (VBox) grid.getChildren().get(0);
                     editListableNode(new Tuple[]{
                             new Tuple<DeliveryPerson>(deliveryPersonContainer, 1,
                                     restaurant.getDeliveryPersons().values().stream().toList(),
                                     "Assign delivery person"),
-                            new Tuple<Order>(ed_vbox, 1,
+                            new Tuple<Order>((Parent) ed_vbox.getChildren().get(0), 1,
                                     restaurant.getOrders().values().stream()
                                             .filter(o -> o.getDelivery() == null).toList(),
                                     "Select Express order"),
@@ -234,7 +236,7 @@ public class RecordsManagementController {
                     break;
                 }
                 case "addArea_sctn":{
-                    VBox neighbourhoodContainer = (VBox) group.getChildren().get(1);
+                    VBox neighbourhoodContainer = (VBox) grid.getChildren().get(1);
                     editListableNode(new Tuple[]{
                           new Tuple<Neighberhood>(neighbourhoodContainer, 1,
                                   Arrays.stream(Neighberhood.values()).toList(),
@@ -243,7 +245,7 @@ public class RecordsManagementController {
                     break;
                 }
                 case "addToBlacklist_sctn":{
-                    VBox customerContainer = (VBox) group.getChildren().get(0);
+                    VBox customerContainer = (VBox) grid.getChildren().get(0);
                     editListableNode(new Tuple[]{
                             new Tuple<Customer>(customerContainer,1,
                                     restaurant.getCustomers().values().stream().filter(c->!restaurant.getBlacklist().contains(c)).toList(),

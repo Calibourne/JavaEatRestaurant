@@ -1,28 +1,26 @@
 package View;
 
 import Model.Restaurant;
-import View.Controllers.LoginPageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Restaurant rest = Restaurant.getInstance();
-        Parent root = FXMLLoader.load(getClass().getResource("Controllers/LoginPage.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/LoginPage.fxml")));
         primaryStage.setTitle("JavaEat");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);

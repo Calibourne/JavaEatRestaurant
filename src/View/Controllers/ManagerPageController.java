@@ -84,7 +84,7 @@ public class ManagerPageController {
         pnlOverview.toFront();
 
         try {
-            Node recordsM = FXMLLoader.load(getClass().getResource("Records.fxml"));
+            Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/Records.fxml"));
             pnlRecordsManagement.getChildren().add(recordsM);
         }
         catch (IOException e) {
@@ -107,7 +107,7 @@ public class ManagerPageController {
         if(e.getSource() == btnSignout) {
             try {
                 Stage s = (Stage) btnSignout.getScene().getWindow();
-                Parent p = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+                Parent p = FXMLLoader.load(getClass().getResource("../fxmls/LoginPage.fxml"));
                 s.hide();
                 s.setScene(new Scene(p));
                 s.centerOnScreen();

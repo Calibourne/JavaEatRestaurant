@@ -32,7 +32,7 @@ public class LoginPageController {
         if(usernameField.getText().equals("m") && passwordField.getText().equals("m")){
             try {
                 Stage s = (Stage) loginButton.getScene().getWindow();
-                Parent p = FXMLLoader.load(getClass().getResource("managerPage.fxml"));
+                Parent p = FXMLLoader.load(getClass().getResource("../fxmls/managerPage.fxml"));
                 s.hide();
                 s.setScene(new Scene(p));
                 s.centerOnScreen();

@@ -85,13 +85,13 @@
 }
 
 .radio-button .radio {
-    -fx-background-color: #3f4bff;
+    -fx-background-color: #061E47;
     -fx-background-image: null;
 }
 
 .radio-button .dot {
-    -fx-mark-highlight-color: #28a3f4;
-    -fx-mark-color: #28a3f4 ;
+    -fx-mark-highlight-color: #68A4F1;
+    -fx-mark-color: #68A4F1;
 }
 
 .separator{

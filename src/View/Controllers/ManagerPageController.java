@@ -72,14 +72,17 @@ public class ManagerPageController {
     private Label numOfBlacklisted_lbl;
     // endregion
     public void initialize(){
+
         Restaurant res = Restaurant.getInstance();
-        pnlOverview.setStyle("-fx-background-color: #1F4591");
-        pnlOverview.toFront();
         numOfDeliveries_lbl.setText(String.format("%d",res.getDeliveries().size()));
         numOfDelivered_lbl.setText(String.format("%d",res.getDeliveries().values()
                 .stream().filter(d->d.isDelivered()).toList().size()));
         numOfCustomers_lbl.setText(String.format("%d",res.getCustomers().size()));
         numOfBlacklisted_lbl.setText(String.format("%d",res.getBlacklist().size()));
+
+        pnlOverview.setStyle("-fx-background-color: #1F4591");
+        pnlOverview.toFront();
+
         try {
             Node recordsM = FXMLLoader.load(getClass().getResource("Records.fxml"));
             pnlRecordsManagement.getChildren().add(recordsM);

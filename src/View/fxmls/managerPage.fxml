@@ -47,10 +47,30 @@
             <Insets left="50.0" />
          </padding>
       </Button>
-      <Button fx:id="btnRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="260.0" text="Manage Records">
+      <Button fx:id="btnRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="260.0" text="Add Records">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../images/icons8_Box_32px.png" />
+               <Image url="@../images/icons8_Plus_32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Edit Records">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Edit_32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Remove Records">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Minus_32px.png" />
             </ImageView>
          </graphic>
          <padding>
@@ -61,26 +81,6 @@
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Open_Envelope_32px.png" />
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="50.0" />
-         </padding>
-      </Button>
-      <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Customers">
-         <graphic>
-            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../images/icons8_Person_32px.png" />
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="50.0" />
-         </padding>
-      </Button>
-      <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Menus">
-         <graphic>
-            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../images/icons8_Xbox_Menu_32px.png" />
             </ImageView>
          </graphic>
          <padding>
@@ -192,24 +192,7 @@
          </ImageView>
       </Pane>
       <Pane fx:id="pnlRecords" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/RecordsScreenStyle.css">
-         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="793.0" spacing="85.75" styleClass="HBox" stylesheets="@../css/RecordsScreenStyle.css">
-            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Add Record">
-               <HBox.margin>
-                  <Insets left="85.75" />
-               </HBox.margin>
-            </Button>
-            <Button layoutX="10.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Edit Record">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Button>
-            <Button layoutX="110.0" layoutY="36.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="150.0" text="Add Record">
-               <HBox.margin>
-                  <Insets right="85.75" />
-               </HBox.margin>
-            </Button>
-         </HBox>
-         <AnchorPane fx:id="pnlRecordsManagement" layoutY="100.0" prefHeight="476.0" prefWidth="793.0" />
+         <AnchorPane fx:id="pnlRecordsManagement" prefHeight="576.0" prefWidth="793.0" />
       </Pane>
    </StackPane>
 </AnchorPane>

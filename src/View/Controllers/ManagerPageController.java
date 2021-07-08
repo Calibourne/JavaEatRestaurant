@@ -1,5 +1,6 @@
 package View.Controllers;
 
+import Model.Delivery;
 import Model.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +18,11 @@ import java.io.IOException;
 
 public class ManagerPageController {
     // region FXML comps
+
     @FXML
     private Label lblGreeting;
 
+    // region buttons
     @FXML
     private Button btnOverview;
 
@@ -40,7 +43,8 @@ public class ManagerPageController {
 
     @FXML
     private Button btnSignout;
-
+    // endregion
+    // region panels
     @FXML
     private Pane pnlCustomer;
 
@@ -58,7 +62,8 @@ public class ManagerPageController {
 
     @FXML
     private AnchorPane pnlRecordsManagement;
-
+    // endregion
+    // region labels
     @FXML
     private Label numOfDeliveries_lbl;
 
@@ -71,25 +76,11 @@ public class ManagerPageController {
     @FXML
     private Label numOfBlacklisted_lbl;
     // endregion
+
+    // endregion
     public void initialize(){
-
-        Restaurant res = Restaurant.getInstance();
-        numOfDeliveries_lbl.setText(String.format("%d",res.getDeliveries().size()));
-        numOfDelivered_lbl.setText(String.format("%d",res.getDeliveries().values()
-                .stream().filter(d->d.isDelivered()).toList().size()));
-        numOfCustomers_lbl.setText(String.format("%d",res.getCustomers().size()));
-        numOfBlacklisted_lbl.setText(String.format("%d",res.getBlacklist().size()));
-
-        pnlOverview.setStyle("-fx-background-color: #1F4591");
-        pnlOverview.toFront();
-
-        try {
-            Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/Records.fxml"));
-            pnlRecordsManagement.getChildren().add(recordsM);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        initOverview();
+        initRecords();
     }
     public void handleButtonClick(ActionEvent e) {
         if(e.getSource() == btnOverview) {
@@ -115,6 +106,26 @@ public class ManagerPageController {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+        }
+    }
+    private void initOverview() {
+        Restaurant res = Restaurant.getInstance();
+        numOfDeliveries_lbl.setText(String.format("%d",res.getDeliveries().size()));
+        numOfDelivered_lbl.setText(String.format("%d",res.getDeliveries().values()
+                .stream().filter(Delivery::isDelivered).toList().size()));
+        numOfCustomers_lbl.setText(String.format("%d",res.getCustomers().size()));
+        numOfBlacklisted_lbl.setText(String.format("%d",res.getBlacklist().size()));
+
+        pnlOverview.setStyle("-fx-background-color: #1F4591");
+        pnlOverview.toFront();
+    }
+    private void initRecords(){
+        try {
+            Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/Records.fxml"));
+            pnlRecordsManagement.getChildren().add(recordsM);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

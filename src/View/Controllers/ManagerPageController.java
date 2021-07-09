@@ -15,10 +15,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class ManagerPageController {
     // region FXML comps
-
     @FXML
     private Label lblGreeting;
 
@@ -81,6 +81,7 @@ public class ManagerPageController {
     public void initialize(){
         initOverview();
         initRecords();
+        initQueries();
     }
     public void handleButtonClick(ActionEvent e) {
         if(e.getSource() == btnOverview) {
@@ -119,12 +120,21 @@ public class ManagerPageController {
         pnlOverview.setStyle("-fx-background-color: #1F4591");
         pnlOverview.toFront();
     }
-    private void initRecords(){
+    private void initRecords() {
         try {
             Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
             pnlRecordsManagement.getChildren().add(recordsM);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (IOException e) {
+    }
+
+    public void initQueries(){
+        try{
+            Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/Queries.fxml"));
+            pnlQueries.getChildren().add(recordsM);
+        }
+        catch(IOException e){
             e.printStackTrace();
         }
     }

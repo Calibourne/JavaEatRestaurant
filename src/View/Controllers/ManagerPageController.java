@@ -121,7 +121,7 @@ public class ManagerPageController {
     }
     private void initRecords(){
         try {
-            Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/Records.fxml"));
+            Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
             pnlRecordsManagement.getChildren().add(recordsM);
         }
         catch (IOException e) {

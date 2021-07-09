@@ -7,11 +7,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.Pane;
 import org.controlsfx.control.CheckComboBox;
 
+
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ControllerUtils {
+
+    private Pane viewl;
+
     public static void editListableNode(Tuple[] list){
         for (Tuple t: list) {
             ObservableList<Node> children = t.getParent().getChildrenUnmodifiable();

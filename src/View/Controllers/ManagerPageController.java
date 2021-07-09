@@ -27,38 +27,38 @@ public class ManagerPageController {
     private Button btnOverview;
 
     @FXML
-    private Button btnOrders;
+    private Button btnAddRecords;
 
     @FXML
-    private Button btnCustomers;
+    private Button btnEditRecords;
 
     @FXML
-    private Button btnMenus;
+    private Button btnRemoveRecords;
 
     @FXML
-    private Button btnRecords;
+    private Button btnQueries;
 
     @FXML
     private Button btnSettings;
 
     @FXML
-    private Button btnSignout;
+    private Button btnSignOut;
     // endregion
     // region panels
-    @FXML
-    private Pane pnlCustomer;
-
-    @FXML
-    private Pane pnlOrders;
-
     @FXML
     private Pane pnlOverview;
 
     @FXML
-    private Pane pnlMenus;
+    private Pane pnlAddRecords;
 
     @FXML
-    private Pane pnlRecords;
+    private Pane pnlEditRecords;
+
+    @FXML
+    private Pane pnlRemoveRecords;
+
+    @FXML
+    private Pane pnlQueries;
 
     @FXML
     private AnchorPane pnlRecordsManagement;
@@ -87,17 +87,17 @@ public class ManagerPageController {
             pnlOverview.setStyle("-fx-background-color: #1F4591");
             pnlOverview.toFront();
         }
-        if(e.getSource() == btnRecords) {
-            pnlRecords.setStyle("-fx-background-color: #1F4591");
-            pnlRecords.toFront();
+        if(e.getSource() == btnAddRecords) {
+            pnlAddRecords.setStyle("-fx-background-color: #1F4591");
+            pnlAddRecords.toFront();
         }
-        if(e.getSource() == btnOrders) {
-            pnlOrders.setStyle("-fx-background-color: #13194c");
-            pnlOrders.toFront();
+        if(e.getSource() == btnQueries) {
+            pnlQueries.setStyle("-fx-background-color: #13194c");
+            pnlQueries.toFront();
         }
-        if(e.getSource() == btnSignout) {
+        if(e.getSource() == btnSignOut) {
             try {
-                Stage s = (Stage) btnSignout.getScene().getWindow();
+                Stage s = (Stage) btnSignOut.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("../fxmls/LoginPage.fxml"));
                 s.hide();
                 s.setScene(new Scene(p));

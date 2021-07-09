@@ -89,8 +89,15 @@ public class ManagerPageController {
             pnlOverview.toFront();
         }
         if(e.getSource() == btnAddRecords) {
-            pnlAddRecords.setStyle("-fx-background-color: #1F4591");
-            pnlAddRecords.toFront();
+            //pnlAddRecords.setStyle("-fx-background-color: #1F4591");
+            //pnlAddRecords.toFront();
+            try{
+                Stage s = (Stage) btnAddRecords.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
+                s.setScene(new Scene(root));
+            }catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }
         }
         if(e.getSource() == btnQueries) {
             pnlQueries.setStyle("-fx-background-color: #13194c");

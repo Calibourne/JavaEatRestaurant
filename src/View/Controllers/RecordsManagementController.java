@@ -55,6 +55,8 @@ public class RecordsManagementController {
     private Group addToBlacklist_sctn;
     @FXML
     private ComboBox<String> selectionBox;
+    @FXML
+    private Button return_btn;
     //endregion
     @FXML
     private VBox rd_vbox;
@@ -115,14 +117,33 @@ public class RecordsManagementController {
         if(e.getSource() instanceof Button)
         {
             Button btn = (Button) e.getSource();
-            Group group = (Group) btn.getParent();
-            switch (group.getId())
+            switch (btn.getId())
             {
-                case "addCook_sctn":
+                case "return_btn": {
+                    try{
+                        Stage s = (Stage) return_btn.getScene().getWindow();
+                        Parent root = FXMLLoader.load(getClass().getResource("../fxmls/managerPage.fxml"));
+                        s.setScene(new Scene(root));
+                    }
+                    catch(IOException ex){
+                        System.out.println(ex.getMessage());
+                    }
                     break;
-                default:
-                    System.out.println("unknown group");
-                    break;
+                }
+            }
+            try{
+                if(btn != return_btn) {
+                    Group group = (Group) btn.getParent();
+                    switch (group.getId()) {
+                        case "addCook_sctn":
+                            break;
+                        default:
+                            System.out.println("unknown group");
+                            break;
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println(ex.getClass());
             }
             //addRecordSelectionGroup(selectionBox);
             //Stage s = (Stage) btn.getScene().getWindow();

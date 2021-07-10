@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class QueriesController {
-    @FXML
-    private GridPane query_menu;
 
     @FXML
     private Button relevant_dish_list_button;
@@ -48,20 +46,22 @@ public class QueriesController {
     void handleButtonClick(ActionEvent event) {
 
     }
-    public void initialize(){
-        initAiMacine();
-    }
 
-
-    // This makes the query button clickable
-    public void initAiMacine(){
-        try{
-            Node aiMacinePage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/createAIMacine.fxml")));
-            query_pane.getChildren().add(aiMacinePage);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-    }
+    // not working ,need to fix (button functions)
+//    public void initialize(){
+//        initAiMacine();
+//    }
+//
+//
+//
+//    public void initAiMacine(){
+//        try{
+//            Node aiMacinePage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/createAIMacine.fxml")));
+//            query_pane.getChildren().add(aiMacinePage);
+//        }
+//        catch(IOException e){
+//            e.printStackTrace();
+//        }
+//    }
 
 }

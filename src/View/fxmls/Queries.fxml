@@ -17,7 +17,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <GridPane fx:id="query_menu" styleClass="HBox">
+            <GridPane styleClass="HBox">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                 </columnConstraints>

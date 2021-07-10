@@ -57,6 +57,25 @@ public class RecordsManagementController {
     private ComboBox<String> selectionBox;
     @FXML
     private Button return_btn;
+    @FXML
+    private Button addCooks_btn;
+    @FXML
+    private Button addAreas_btn;
+    @FXML
+    private Button addDeliPersons_btn;
+    @FXML
+    private Button addCustomers_btn;
+    @FXML
+    private Button addComponents_btn;
+    @FXML
+    private Button addDishes_btn;
+    @FXML
+    private Button addOrders_btn;
+    @FXML
+    private Button addDeliveries_btn;
+    @FXML
+    private Button addToBlacklist_btn;
+
     //endregion
     @FXML
     private VBox rd_vbox;
@@ -66,73 +85,79 @@ public class RecordsManagementController {
     private RadioButton ed_RB;
     @FXML
     private RadioButton rd_RB;
+
     private Restaurant restaurant;
+    HashSet<String> menuButtons;
+    HashMap<String, Group> groups;
     //endregion
 
+
     public void initialize(){
-        HashMap<String,Group> groups = new HashMap<>();
-
+        groups = new HashMap<>();
+        menuButtons = new HashSet<>();
         restaurant = Restaurant.getInstance();
-        addCook_sctn.setVisible(false);
-        addDeliPerson_sctn.setVisible(false);
-        addCustomer_sctn.setVisible(false);
-        addComponent_sctn.setVisible(false);
-        addCook_sctn.setVisible(false);
 
-        groups.put("Cook",addCook_sctn);
-        groups.put("Delivery person",addDeliPerson_sctn);
-        groups.put("Customer",addCustomer_sctn);
-        groups.put("Ingredient",addComponent_sctn);
-        groups.put("Dish", addDish_sctn);
-        groups.put("Order", addOrder_sctn);
-        groups.put("Delivery", addDelivery_sctn);
-        groups.put("Delivery Area", addArea_sctn);
-        groups.put("Blacklisted customer", addToBlacklist_sctn);
+        menuButtons.add(addCooks_btn.getId());
+        menuButtons.add(addAreas_btn.getId());
+        menuButtons.add(addDeliPersons_btn.getId());
+        menuButtons.add(addCustomers_btn.getId());
+        menuButtons.add(addComponents_btn.getId());
+        menuButtons.add(addDishes_btn.getId());
+        menuButtons.add(addOrders_btn.getId());
+        menuButtons.add(addDeliveries_btn.getId());
+        menuButtons.add(addToBlacklist_btn.getId());
+        menuButtons.add(return_btn.getId());
 
-        //addRecordSelectionGroup(selectionBox);
+        groups.put(addCooks_btn.getId(),addCook_sctn);
+        groups.put(addAreas_btn.getId(), addArea_sctn);
+        groups.put(addDeliPersons_btn.getId(),addDeliPerson_sctn);
+        groups.put(addCustomers_btn.getId(),addCustomer_sctn);
+        groups.put(addComponents_btn.getId(),addComponent_sctn);
+        groups.put(addDishes_btn.getId(), addDish_sctn);
+        groups.put(addOrders_btn.getId(), addOrder_sctn);
+        groups.put(addDeliveries_btn.getId(), addDelivery_sctn);
+        groups.put(addToBlacklist_btn.getId(), addToBlacklist_sctn);
 
-        editListableNode(new Tuple[]{
-                new Tuple(selectionBox.getParent(),1,groups.keySet().stream().toList())
-        });
-        selectionBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-                String chosen = selectionBox.getItems().get((Integer) number2).toString();
-                groups.values().forEach(i -> i.setVisible(false));
-                try {
-                    groups.get(chosen).setVisible(true);
-                } catch (NullPointerException e) {
-                    System.out.println("Unsupported yet feature!");
-                }
-                Group group = groups.get(chosen);
-                createSections(group);
-            }
-        });
-
-        //List<String> al = Arrays.stream(ar).toList();
-
+        groups.values().forEach(g->createSections(g));;
     }
 
     public void handleButtonClick(ActionEvent e) {
         if(e.getSource() instanceof Button)
         {
             Button btn = (Button) e.getSource();
-            switch (btn.getId())
-            {
-                case "return_btn": {
-                    try{
-                        Stage s = (Stage) return_btn.getScene().getWindow();
-                        Parent root = FXMLLoader.load(getClass().getResource("../fxmls/managerPage.fxml"));
-                        s.setScene(new Scene(root));
+            if(menuButtons.contains(btn.getId())) {
+                switch(btn.getId()){
+                    case "addCooks_btn":
+                    case "addAreas_btn":
+                    case "addDeliPersons_btn":
+                    case "addCustomers_btn":
+                    case "addComponents_btn":
+                    case "addDishes_btn":
+                    case "addOrders_btn":
+                    case "addDeliveries_btn":
+                    case "addToBlacklist_btn": {
+                        for (Group g: groups.values()) {
+                            g.setVisible(false);
+                        }
+                        groups.get(btn.getId()).setVisible(true);
+                        break;
                     }
-                    catch(IOException ex){
-                        System.out.println(ex.getMessage());
+                    case "return_btn":{
+                        try {
+                            Stage primaryStage = (Stage) return_btn.getScene().getWindow();
+                            Parent root = FXMLLoader.load(getClass().getResource("../fxmls/managerPage.fxml"));
+                            primaryStage.setScene(new Scene(root));
+                        }
+                        catch (IOException ex){
+                            System.out.println(ex.getMessage());
+                        }
+                        break;
                     }
-                    break;
                 }
             }
+            /*
             try{
-                if(btn != return_btn) {
+                if(!menuButtons.contains(btn)) {
                     Group group = (Group) btn.getParent();
                     switch (group.getId()) {
                         case "addCook_sctn":
@@ -144,10 +169,7 @@ public class RecordsManagementController {
                 }
             } catch (Exception ex) {
                 System.out.println(ex.getClass());
-            }
-            //addRecordSelectionGroup(selectionBox);
-            //Stage s = (Stage) btn.getScene().getWindow();
-            //s.close();
+            }*/
         }
         if (e.getSource() == ed_RB)
         {

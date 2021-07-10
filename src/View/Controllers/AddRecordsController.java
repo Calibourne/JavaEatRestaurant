@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.util.*;
 import static View.Controllers.ControllerUtils.*;
 
-public class RecordsManagementController {
+public class AddRecordsController {
 
     //region Properties
     //region Sections

@@ -1,335 +1,293 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="375.0" prefWidth="793.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.RecordsManagementController">
-   <VBox prefHeight="375.0" prefWidth="793.0" styleClass="VBox">
-      <VBox fx:id="addRecord_sctn" alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
-         <Label text="Select which record to add" />
-         <ComboBox fx:id="selectionBox" prefHeight="25.0" prefWidth="200.0" />
-      </VBox>
-      <VBox prefHeight="288.0" prefWidth="600.0">
-         <Separator prefWidth="200.0" />
-         <Pane prefHeight="312.0" prefWidth="716.0">
-            <Group fx:id="addCook_sctn" layoutX="153.0" visible="false">
-               <GridPane fx:id="CookInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="First name" />
-                        <TextField />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Last name" />
-                        <TextField />
-                     </VBox>
-                     <VBox prefHeight="42.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="2">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Birthdate" />
-                        <DatePicker prefHeight="40.0" prefWidth="210.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Gender" />
-                        <ComboBox prefHeight="25.0" prefWidth="280.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Expertise" />
-                        <ComboBox layoutX="10.0" layoutY="27.0" prefHeight="25.0" prefWidth="280.0" />
-                     </VBox>
-                     <VBox alignment="CENTER" prefHeight="1.0" prefWidth="100.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                        <CheckBox alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="Is Chef" />
-                     </VBox>
-                  </children>
-               </GridPane>
-               <Button fx:id="addCook_btn" layoutX="210.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Cook" />
-            </Group>
-            <Group fx:id="addDeliPerson_sctn" layoutX="153.0" visible="false">
-               <GridPane fx:id="DeliPersonInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="First name" />
-                        <TextField />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Last name" />
-                        <TextField />
-                     </VBox>
-                     <VBox prefHeight="42.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="2">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Birthdate" />
-                        <DatePicker prefHeight="40.0" prefWidth="210.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Gender" />
-                        <ComboBox prefHeight="25.0" prefWidth="485.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Vehicle" />
-                        <ComboBox prefHeight="25.0" prefWidth="409.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery Area" />
-                        <ComboBox prefHeight="25.0" prefWidth="566.0" />
-                     </VBox>
-                  </children>
-               </GridPane>
-               <Button fx:id="addDeliPerson_btn" layoutX="182.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery person" />
-            </Group>
-            <Group fx:id="addCustomer_sctn" layoutX="153.0" layoutY="6.0" visible="false">
-               <GridPane fx:id="CustomerInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="First name" />
-                        <TextField />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Last name" />
-                        <TextField />
-                     </VBox>
-                     <VBox prefHeight="42.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="2">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="42.0" prefWidth="194.0" text="Birthdate" />
-                        <DatePicker prefHeight="40.0" prefWidth="210.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Gender" />
-                        <ComboBox prefHeight="25.0" prefWidth="488.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Neighborhood" />
-                        <ComboBox prefHeight="25.0" prefWidth="443.0" />
-                     </VBox>
-                     <VBox alignment="CENTER" prefHeight="42.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Sensitivities" underline="true" />
-                        <CheckBox alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="17.0" prefWidth="125.0" text="Sensitive to Gluten" />
-                        <CheckBox alignment="TOP_LEFT" contentDisplay="TOP" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="125.0" text="Sensitive to Lactose" />
-                     </VBox>
-                  </children>
-               </GridPane>
-               <Button fx:id="addCustomer_btn" layoutX="198.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Customer" />
-            </Group>
-            <Group fx:id="addComponent_sctn" layoutX="198.0" layoutY="48.0" visible="false">
-               <GridPane fx:id="ComponentInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Ingredient name" />
-                        <TextField />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Price" />
-                        <Spinner editable="true" prefHeight="25.0" prefWidth="231.0" />
-                     </VBox>
-                     <VBox alignment="CENTER" prefHeight="51.0" prefWidth="119.0" styleClass="Container" GridPane.columnIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Sensitivities" underline="true" />
-                        <CheckBox alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Has Gluten" />
-                        <CheckBox alignment="TOP_LEFT" contentDisplay="TOP" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Has Lactose" />
-                     </VBox>
-                     <Button fx:id="addComponent_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Ingredient" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  </children>
-               </GridPane>
-            </Group>
-            <Group fx:id="addDish_sctn" layoutX="153.0" layoutY="54.0" visible="false">
-               <GridPane hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Dish name" />
-                        <TextField />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Dish Type" />
-                        <ComboBox prefHeight="25.0" prefWidth="367.0" />
-                     </VBox>
-                     <VBox prefHeight="32.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="0.0" prefWidth="210.0" text="Ingredients" />
-                        <CheckComboBox prefHeight="25.0" prefWidth="438.0" />
-                     </VBox>
-                     <Button mnemonicParsing="false" onAction="#handleButtonClick" text="Add Dish" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  </children>
-               </GridPane>
-            </Group>
-            <Group fx:id="addOrder_sctn" layoutX="153.0" layoutY="54.0" visible="false">
-               <GridPane fx:id="OrderInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Customer" />
-                        <ComboBox prefHeight="25.0" prefWidth="386.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Dish list" />
-                        <CheckComboBox prefHeight="25.0" prefWidth="286.0" />
-                     </VBox>
-                     <VBox prefHeight="32.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="0.0" prefWidth="210.0" text="Optional: delivery" />
-                        <ComboBox prefHeight="25.0" prefWidth="367.0" />
-                     </VBox>
-                     <Button fx:id="addOrder_btn" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Order" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  </children>
-               </GridPane>
-            </Group>
-            <Group fx:id="addDelivery_sctn" layoutX="153.0" layoutY="4.0" visible="false">
-               <GridPane fx:id="DeliveryInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="107.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery person" />
-                        <ComboBox prefHeight="25.0" prefWidth="386.0" />
-                     </VBox>
-                     <Pane GridPane.columnIndex="1">
-                        <children>
-                           <VBox fx:id="rd_vbox" prefHeight="143.0" prefWidth="210.0" styleClass="Container">
-                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Orders list" />
-                              <CheckComboBox prefHeight="25.0" prefWidth="407.0" showCheckedCount="true" />
-                           </VBox>
-                           <VBox fx:id="ed_vbox" prefHeight="40.0" prefWidth="210.0" spacing="10.0" styleClass="Container" visible="false">
-                              <VBox styleClass="Container">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Order" />
-                                    <ComboBox prefHeight="25.0" prefWidth="311.0" />
-                                 </children>
-                              </VBox>
-                              <VBox styleClass="Container">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="17.0" prefWidth="379.0" text="Postage fee" />
-                                    <TextField />
-                                 </children>
-                              </VBox>
-                           </VBox>
-                        </children>
-                     </Pane>
-                     <VBox prefHeight="51.0" prefWidth="120.0" spacing="5.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="0.0" prefWidth="210.0" text="Delivery Type" />
-                        <RadioButton fx:id="rd_RB" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="17.0" prefWidth="272.0" selected="true" text="Regular Delivery">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="deliveryType" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="ed_RB" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="17.0" prefWidth="198.0" text="Express Delivery" toggleGroup="$deliveryType" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Date of delivery" />
-                        <DatePicker prefHeight="25.0" prefWidth="293.0" />
-                     </VBox>
-                  </children>
-               </GridPane>
-               <Button fx:id="addDelivery_btn" layoutX="202.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery" />
-            </Group>
-            <Group fx:id="addArea_sctn" layoutX="153.0" layoutY="54.0" visible="false">
-               <GridPane fx:id="AreaInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery area name" />
-                        <TextField />
-                     </VBox>
-                     <VBox fx:id="rd_vbox1" prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Neighbourhoods list" />
-                        <CheckComboBox prefHeight="25.0" prefWidth="224.0" />
-                     </VBox>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery time" />
-                        <TextField />
-                     </VBox>
-                     <Button fx:id="addArea_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Area" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  </children>
-               </GridPane>
-            </Group>
-            <Group fx:id="addToBlacklist_sctn" layoutX="97.0" layoutY="48.0" visible="false">
-               <GridPane fx:id="BlacklistInfo_grid" layoutX="195.0" layoutY="14.0" vgap="10.0">
-                  <columnConstraints>
-                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                     <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Customer" />
-                        <ComboBox prefHeight="25.0" prefWidth="353.0" />
-                     </VBox>
-                     <Button fx:id="addToBlacklist_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Add to blackList" GridPane.rowIndex="1" />
-                  </children>
-               </GridPane>
-            </Group>
-         </Pane>
-      </VBox>
-   </VBox>
+<AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.RemoveRecordsController">
+   <children>
+      <GridPane prefHeight="576.0" prefWidth="813.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="520.0" minWidth="10.0" prefWidth="196.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="967.0" minWidth="10.0" prefWidth="617.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <GridPane prefHeight="558.0" prefWidth="0.0" styleClass="HBox">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="removeCooks_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Remove Cooks">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-cook-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="12.5" right="12.5" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="removeAreas_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Remove Delivery Areas" GridPane.rowIndex="1">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-area-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="12.5" right="12.5" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="removeDeliPersons_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Remove Deliverymen" GridPane.rowIndex="2">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-delivery-boy-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="12.5" right="12.5" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="removeCustomers_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Remove Customers" GridPane.rowIndex="3">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8_Person_32px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="12.5" right="12.5" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="removeComponents_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Remove Ingredients" GridPane.rowIndex="4">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-ingredient-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="12.5" right="12.5" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="removeDishes_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Remove Dishes" GridPane.rowIndex="5">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-dish-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="12.5" right="12.5" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="removeOrders_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Remove Orders" GridPane.rowIndex="6">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-order-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="12.5" right="12.5" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="removeDeliveries_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Remove Deliveries" GridPane.rowIndex="7">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8_Delivery_32px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="12.5" right="12.5" />
+                     </padding>
+                  </Button>
+               </children>
+            </GridPane>
+            <GridPane styleClass="VBox" GridPane.columnIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Group fx:id="removeCook_sctn" visible="false">
+                     <children>
+                        <GridPane fx:id="Cook_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ComboBox prefHeight="25.0" prefWidth="252.0" />
+                              <Button fx:id="removeCook_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Cook" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Group>
+                  <Group fx:id="removeDeliPerson_sctn" visible="false">
+                     <children>
+                        <GridPane fx:id="DeliPerson_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ComboBox prefHeight="25.0" prefWidth="252.0" />
+                              <Button fx:id="removeDeliPerson_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Delivery Person" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Group>
+                  <Group fx:id="removeCustomer_sctn" visible="false">
+                     <children>
+                        <GridPane fx:id="Customer_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ComboBox prefHeight="25.0" prefWidth="252.0" />
+                              <Button fx:id="removeCustomer_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Customer" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Group>
+                  <Group fx:id="removeComponent_sctn" visible="false">
+                     <children>
+                        <GridPane fx:id="Component_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ComboBox prefHeight="25.0" prefWidth="252.0" />
+                              <Button fx:id="removeComponent_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Ingredient" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Group>
+                  <Group fx:id="removeDish_sctn">
+                     <children>
+                        <GridPane fx:id="Dish_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ComboBox prefHeight="25.0" prefWidth="252.0" />
+                              <Button fx:id="removeDish_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Dish" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Group>
+                  <Group fx:id="removeOrder_sctn" visible="false">
+                     <children>
+                        <GridPane fx:id="Order_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ComboBox prefHeight="25.0" prefWidth="252.0" />
+                              <Button fx:id="removeOrder_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Order" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Group>
+                  <Group fx:id="removeDelivery_sctn" visible="false">
+                     <children>
+                        <GridPane fx:id="Delivery_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ComboBox prefHeight="25.0" prefWidth="252.0" />
+                              <Button fx:id="removeDelivery_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Delivery" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Group>
+                  <Group fx:id="removeArea_sctn" visible="false">
+                     <children>
+                        <GridPane fx:id="Area_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ComboBox prefHeight="25.0" prefWidth="252.0" />
+                              <Button fx:id="removeArea_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Delivery Area" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Group>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
 </AnchorPane>

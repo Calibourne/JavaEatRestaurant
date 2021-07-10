@@ -92,14 +92,12 @@ public class ManagerPageController {
         if(e.getSource() == btnAddRecords) {
             pnlAddRecords.setStyle("-fx-background-color: #1F4591");
             pnlAddRecords.toFront();
-            /*try{
-                Stage s = (Stage) btnAddRecords.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
-                s.setScene(new Scene(root));
-            }catch (IOException ex){
-                System.out.println(ex.getMessage());
-            }*/
         }
+        if(e.getSource() == btnRemoveRecords){
+            pnlRemoveRecords.setStyle("-fx-background-color: #1F4591");
+            pnlRemovAddedRecords.toFront();
+        }
+
         if(e.getSource() == btnQueries) {
             pnlQueries.setStyle("-fx-background-color: #13194c");
             pnlQueries.toFront();
@@ -130,8 +128,11 @@ public class ManagerPageController {
     }
     private void initRecords() {
         try {
-            Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
-            pnlRecordsManagement.getChildren().add(recordsM);
+            Node recordsA = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
+            Node recordsR = FXMLLoader.load(getClass().getResource("../fxmls/removeRecords.fxml"));;
+            pnlAddRecords.getChildren().add(recordsA);
+            pnlRemoveRecords.getChildren().add(recordsR);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

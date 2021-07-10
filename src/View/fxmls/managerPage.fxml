@@ -192,7 +192,7 @@
          <AnchorPane fx:id="pnlRecordsManagement" prefHeight="576.0" prefWidth="793.0" />
       </Pane>
       <Pane fx:id="pnlEditRecords" prefHeight="200.0" prefWidth="200.0" />
-      <Pane fx:id="pnlRemoveRecord" prefHeight="200.0" prefWidth="200.0" />
+      <Pane fx:id="pnlRemoveRecords" prefHeight="200.0" prefWidth="200.0" />
       <Pane fx:id="pnlQueries" prefHeight="576.0" prefWidth="823.0" />
    </StackPane>
 </AnchorPane>

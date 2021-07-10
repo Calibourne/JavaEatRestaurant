@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class ManagerPageController {
     // region FXML comps
@@ -136,9 +137,10 @@ public class ManagerPageController {
         }
     }
 
+    // This makes the query button clickable
     public void initQueries(){
         try{
-            Node recordsM = FXMLLoader.load(getClass().getResource("../fxmls/Queries.fxml"));
+            Node recordsM = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/Queries.fxml")));
             pnlQueries.getChildren().add(recordsM);
         }
         catch(IOException e){

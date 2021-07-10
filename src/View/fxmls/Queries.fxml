@@ -5,7 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
 <AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.QueriesController">
     <GridPane prefHeight="576.0" prefWidth="813.0">
@@ -93,6 +95,21 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                 </rowConstraints>
+            <children>
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <Pane fx:id="paneRelevantDish" prefHeight="200.0" prefWidth="200.0" />
+                     <Pane fx:id="paneCooksExpertise" prefHeight="200.0" prefWidth="200.0" />
+                     <Pane fx:id="panePopIngredients" prefHeight="200.0" prefWidth="200.0" />
+                     <Pane fx:id="paneOrderWaitingTime" prefHeight="200.0" prefWidth="200.0" />
+                     <Pane fx:id="paneDelisByDP" prefHeight="200.0" prefWidth="200.0" />
+                     <Pane fx:id="paneDelisByType" prefHeight="200.0" prefWidth="200.0" />
+                     <Pane fx:id="paneRevenueExpress" prefHeight="200.0" prefWidth="200.0" />
+                     <Pane fx:id="paneProfitRelation" prefHeight="200.0" prefWidth="200.0" />
+                     <Pane fx:id="paneAiMacine" prefHeight="200.0" prefWidth="200.0" />
+                  </children>
+               </StackPane>
+            </children>
             </GridPane>
         </children>
     </GridPane>

@@ -8,6 +8,7 @@ import Model.Exceptions.ConvertToExpressException;
 import Model.Exceptions.IllegalCustomerException;
 import Model.Exceptions.NoComponentsException;
 import Model.Exceptions.SensitiveException;
+import Utils.Expertise;
 import Utils.MyFileLogWriter;
 import Utils.Neighberhood;
 
@@ -589,7 +590,7 @@ public class Restaurant implements Serializable {
 	}
 
 	// unused methods
-	
+
 	/*
 	@SuppressWarnings("unchecked")
 	public Collection<Dish> getReleventDishList(Customer c){
@@ -626,7 +627,7 @@ public class Restaurant implements Serializable {
 			MyFileLogWriter.println(o+" had reached to Customer "+o.getCustomer());
 		}
 	}
-	
+	*/
 	public HashMap<Integer,Cook> GetCooksByExpertise(Expertise e){
 		HashMap<Integer,Cook> cooks = new HashMap<>();
 		for(Cook c : getCooks().values()) {
@@ -635,8 +636,7 @@ public class Restaurant implements Serializable {
 		}
 		return cooks;
 	}
-	 */
-	
+
 	/**
 	 * Adds a customer to a blacklist
 	 * @param c

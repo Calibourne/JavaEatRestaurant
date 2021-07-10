@@ -15,12 +15,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.ManagerPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1013.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.ManagerPageController">
    <effect>
       <DropShadow color="#1b1eeb" />
    </effect>
-   <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="260.0" styleClass="MenuBar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <ImageView fitHeight="73.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+   <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="200.0" styleClass="MenuBar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
          <VBox.margin>
             <Insets bottom="10.0" top="50.0" />
          </VBox.margin>
@@ -31,9 +31,9 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </Label>
-      <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Homepage" textFill="#e7e5e5">
+      <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="199.0" text="Homepage" textFill="#e7e5e5">
          <graphic>
-            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Home_32px.png" />
             </ImageView>
          </graphic>
@@ -44,71 +44,71 @@
             <Insets />
          </VBox.margin>
          <padding>
-            <Insets left="50.0" />
+            <Insets left="25.0" right="25.0" />
          </padding>
       </Button>
-      <Button fx:id="btnAddRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="260.0" text="Add Records">
+      <Button fx:id="btnAddRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Add Records">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Plus_32px.png" />
             </ImageView>
          </graphic>
          <padding>
-            <Insets left="50.0" />
+            <Insets left="25.0" right="25.0" />
          </padding>
       </Button>
-      <Button fx:id="btnEditRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Edit Records">
+      <Button fx:id="btnEditRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Edit Records">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Edit_32px.png" />
             </ImageView>
          </graphic>
          <padding>
-            <Insets left="50.0" />
+            <Insets left="25.0" right="25.0" />
          </padding>
       </Button>
-      <Button fx:id="btnRemoveRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Remove Records">
+      <Button fx:id="btnRemoveRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Remove Records">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Minus_32px.png" />
             </ImageView>
          </graphic>
          <padding>
-            <Insets left="50.0" />
+            <Insets left="25.0" right="25.0" />
          </padding>
       </Button>
-      <Button fx:id="btnQueries" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Perform Queries">
+      <Button fx:id="btnQueries" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Perform Queries">
          <graphic>
-            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Search_52px.png" />
             </ImageView>
          </graphic>
          <padding>
-            <Insets left="50.0" />
+            <Insets left="25.0" right="25.0" />
          </padding>
       </Button>
-      <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" text="Settings">
+      <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" text="Settings">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Slider__32px.png" />
             </ImageView>
          </graphic>
          <padding>
-            <Insets left="50.0" />
+            <Insets left="25.0" right="25.0" />
          </padding>
       </Button>
-      <Button fx:id="btnSignOut" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="259.0" text="Sign Out">
+      <Button fx:id="btnSignOut" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Sign Out">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Sign_Out_32px.png" />
             </ImageView>
          </graphic>
          <padding>
-            <Insets left="50.0" />
+            <Insets left="25.0" right="25.0" />
          </padding>
       </Button>
    </VBox>
-   <StackPane layoutX="258.0" prefHeight="576.0" prefWidth="793.0" styleClass="StackPane">
+   <StackPane layoutX="200.0" prefHeight="576.0" prefWidth="813.0" styleClass="StackPane">
       <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
          <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" styleClass="SearchBar" />
          <Label layoutX="57.0" layoutY="25.0" text="Restaurant Overview" textFill="#e7e5e5">
@@ -193,6 +193,6 @@
       </Pane>
       <Pane fx:id="pnlEditRecords" prefHeight="200.0" prefWidth="200.0" />
       <Pane fx:id="pnlRemoveRecord" prefHeight="200.0" prefWidth="200.0" />
-      <Pane fx:id="pnlQueries" prefHeight="200.0" prefWidth="200.0" />
+      <Pane fx:id="pnlQueries" prefHeight="576.0" prefWidth="823.0" />
    </StackPane>
 </AnchorPane>

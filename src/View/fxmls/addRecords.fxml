@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -20,17 +21,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="576.0" prefWidth="713.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.RecordsManagementController">
-   <GridPane prefHeight="576.0" prefWidth="713.0">
+<AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.RecordsManagementController">
+   <GridPane prefHeight="576.0" prefWidth="813.0">
      <columnConstraints>
-       <ColumnConstraints hgrow="SOMETIMES" maxWidth="520.0" minWidth="10.0" prefWidth="164.0" />
-       <ColumnConstraints hgrow="SOMETIMES" maxWidth="967.0" minWidth="10.0" prefWidth="549.0" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="520.0" minWidth="10.0" prefWidth="196.0" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="967.0" minWidth="10.0" prefWidth="617.0" />
      </columnConstraints>
      <rowConstraints>
        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
-         <GridPane styleClass="HBox">
+         <GridPane prefHeight="558.0" prefWidth="0.0" styleClass="HBox">
             <columnConstraints>
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
             </columnConstraints>
@@ -46,7 +47,7 @@
                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-               <Button fx:id="addCooks_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Cooks">
+               <Button fx:id="addCooks_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Cooks">
                   <graphic>
                      <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -54,8 +55,11 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
-               <Button fx:id="addAreas_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Delivery Areas" GridPane.rowIndex="1">
+               <Button fx:id="addAreas_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Delivery Areas" GridPane.rowIndex="1">
                   <graphic>
                      <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -63,8 +67,14 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <GridPane.margin>
+                     <Insets />
+                  </GridPane.margin>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
-               <Button fx:id="addDeliPersons_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Delivery Persons" GridPane.rowIndex="2">
+               <Button fx:id="addDeliPersons_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Deliverymen" GridPane.rowIndex="2">
                   <graphic>
                      <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -72,8 +82,14 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <GridPane.margin>
+                     <Insets />
+                  </GridPane.margin>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
-               <Button fx:id="addCustomers_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Customers" GridPane.rowIndex="3">
+               <Button fx:id="addCustomers_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Customers" GridPane.rowIndex="3">
                   <graphic>
                      <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -81,8 +97,11 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
-               <Button fx:id="addComponents_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Ingredients" GridPane.rowIndex="4">
+               <Button fx:id="addComponents_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Ingredients" GridPane.rowIndex="4">
                   <graphic>
                      <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -90,8 +109,11 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
-               <Button fx:id="addDishes_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Dishes" GridPane.rowIndex="5">
+               <Button fx:id="addDishes_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Dishes" GridPane.rowIndex="5">
                   <graphic>
                      <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -99,8 +121,11 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
-               <Button fx:id="addOrders_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Orders" GridPane.rowIndex="6">
+               <Button fx:id="addOrders_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Orders" GridPane.rowIndex="6">
                   <graphic>
                      <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -108,8 +133,11 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
-               <Button fx:id="addToBlacklist_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add to Blacklist" GridPane.rowIndex="8">
+               <Button fx:id="addToBlacklist_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add to Blacklist" GridPane.rowIndex="8">
                   <graphic>
                      <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -117,8 +145,11 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
-               <Button fx:id="addDeliveries_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Delivery" GridPane.rowIndex="7">
+               <Button fx:id="addDeliveries_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Add Delivery" GridPane.rowIndex="7">
                   <graphic>
                      <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -126,6 +157,9 @@
                         </image>
                      </ImageView>
                   </graphic>
+                  <padding>
+                     <Insets left="25.0" right="25.0" />
+                  </padding>
                </Button>
             </children>
          </GridPane>

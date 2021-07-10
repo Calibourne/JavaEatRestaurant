@@ -7,7 +7,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -22,7 +21,6 @@
 <?import org.controlsfx.control.CheckComboBox?>
 
 <AnchorPane prefHeight="576.0" prefWidth="713.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.RecordsManagementController">
-   <Separator layoutX="-3.0" orientation="VERTICAL" prefHeight="576.0" />
    <GridPane prefHeight="576.0" prefWidth="713.0">
      <columnConstraints>
        <ColumnConstraints hgrow="SOMETIMES" maxWidth="520.0" minWidth="10.0" prefWidth="164.0" />

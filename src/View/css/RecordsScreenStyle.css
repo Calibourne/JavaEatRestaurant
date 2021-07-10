@@ -2,38 +2,18 @@
     -fx-background-color: #1F4591;
 }
 .HBox{
-    -fx-background-color :  #061E47;
+    -fx-background-color : #0b235e;
 } /* horizontal box */
-
-.HBox .combo-box{
-    -fx-background-color: #1F4591;
+.HBox .button{
+    -fx-background-color: #0b235e;
+    -fx-text-fill: white;
 }
-.HBox .combo-box .arrow-button{
-    -fx-background-color: #1F4591;
-}
-.HBox .combo-box .arrow{
-    -fx-background-color: #061E47;
-}
-.HBox .combo-box:hover,
-.HBox .combo-box .arrow-button:hover{
+.HBox .button:hover{
     -fx-background-color: #2B6AD0;
 }
-.HBox .combo-box:pressed,
-.HBox .combo-box .arrow-button:pressed{
+.HBox .button:pressed{
     -fx-background-color: #68A4F1;
 }
-
-.HBox .combo-box .combo-box-popup .list-view,
-.HBox .combo-box .combo-box-popup .list-cell,
-.HBox .combo-box .list-cell{
-    -fx-background-color: #1F4591;
-    -fx-text-fill: white ;
-}
-.HBox .combo-box .combo-box-popup .list-cell:hover {
-    -fx-text-fill: gold;
-    -fx-background-color: #2B6AD0;
-}
-
 .button{
     -fx-background-color: #061E47;
     -fx-text-fill: white;

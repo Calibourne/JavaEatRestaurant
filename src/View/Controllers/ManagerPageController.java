@@ -95,7 +95,7 @@ public class ManagerPageController {
         }
         if(e.getSource() == btnRemoveRecords){
             pnlRemoveRecords.setStyle("-fx-background-color: #1F4591");
-            pnlRemovAddedRecords.toFront();
+            pnlRemoveRecords.toFront();
         }
 
         if(e.getSource() == btnQueries) {

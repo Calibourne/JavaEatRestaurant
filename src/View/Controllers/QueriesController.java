@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -43,17 +44,49 @@ public class QueriesController {
     private GridPane query_pane;
 
     @FXML
-    void handleButtonClick(ActionEvent event) {
+    private Pane paneRelevantDish;
+
+    @FXML
+    private Pane paneCooksExpertise;
+
+    @FXML
+    private Pane panePopIngredients;
+
+    @FXML
+    private Pane paneOrderWaitingTime;
+
+    @FXML
+    private Pane paneDelisByDP;
+
+    @FXML
+    private Pane paneDelisByType;
+
+    @FXML
+    private Pane paneRevenueExpress;
+
+    @FXML
+    private Pane paneProfitRelation;
+
+    @FXML
+    private Pane paneAiMacine;
+
+
+    public void initialize(){
+//        initAiMacine(); not working atm
+    }
+
+
+    public void handleButtonClick(ActionEvent event) {
+        if(event.getSource()== ai_macine_button){
+            paneAiMacine.setStyle("-fx-background-color: #1F4591");
+            paneAiMacine.toFront();
+
+        }
 
     }
 
-    // not working ,need to fix (button functions)
-//    public void initialize(){
-//        initAiMacine();
-//    }
-//
-//
-//
+
+
 //    public void initAiMacine(){
 //        try{
 //            Node aiMacinePage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/createAIMacine.fxml")));
@@ -62,6 +95,6 @@ public class QueriesController {
 //        catch(IOException e){
 //            e.printStackTrace();
 //        }
-//    }
+//    } not working atm
 
 }

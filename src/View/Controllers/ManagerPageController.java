@@ -140,8 +140,8 @@ public class ManagerPageController {
     // This makes the query button clickable
     public void initQueries(){
         try{
-            Node recordsM = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/Queries.fxml")));
-            pnlQueries.getChildren().add(recordsM);
+            Node queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/Queries.fxml")));
+            pnlQueries.getChildren().add(queryPage);
         }
         catch(IOException e){
             e.printStackTrace();

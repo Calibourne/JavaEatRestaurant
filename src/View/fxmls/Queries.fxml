@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="793.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.QueriesController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="793.0" styleClass="VBox">
-        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
+        <VBox alignment="CENTER" maxHeight="-Infinity" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
             <Label text="Select a query" textAlignment="CENTER">
             <padding>
                <Insets bottom="10.0" />
@@ -45,39 +45,39 @@
             <Insets left="30.0" top="50.0" />
          </VBox.margin>
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Get relevant dish list" textAlignment="CENTER">
+            <Button fx:id="relevant_dish_list_button" contentDisplay="CENTER" mnemonicParsing="false" text="Get relevant dish list" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="Get cooks by expertise" GridPane.rowIndex="1">
+            <Button fx:id="cooks_by_expertise_button" mnemonicParsing="false" text="Get cooks by expertise" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Get popular ingredients" textAlignment="CENTER" GridPane.rowIndex="2">
+            <Button fx:id="popular_ingredients_button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Get popular ingredients" textAlignment="CENTER" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Calculate an order's waiting time" GridPane.rowIndex="3">
+            <Button fx:id="order_waiting_time_button" contentDisplay="CENTER" mnemonicParsing="false" text="Calculate an order's waiting time" GridPane.rowIndex="3">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="Get deliveries by delivery person" GridPane.rowIndex="4">
+            <Button fx:id="deliveries_by_dp_button" mnemonicParsing="false" text="Get deliveries by delivery person" GridPane.rowIndex="4">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="Get number of deliveries by type" GridPane.rowIndex="5">
+            <Button fx:id="delis_by_type_button" mnemonicParsing="false" text="Get number of deliveries by type" GridPane.rowIndex="5">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="Revenue from express deliveries" GridPane.rowIndex="6">
+            <Button fx:id="express_revenue_button" mnemonicParsing="false" text="Revenue from express deliveries" GridPane.rowIndex="6">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="Get profit relation" GridPane.rowIndex="7">
+            <Button fx:id="profit_relation_button" mnemonicParsing="false" text="Get profit relation" GridPane.rowIndex="7">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="Create AI macine" GridPane.rowIndex="8">
+            <Button fx:id="ai_macine_button" mnemonicParsing="false" text="Create AI macine" GridPane.rowIndex="8">
                <font>
                   <Font size="15.0" />
                </font></Button>

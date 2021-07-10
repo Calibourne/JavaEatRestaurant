@@ -116,7 +116,7 @@
     /*-fx-padding: 0 -50 0 0;*/
 }
 .separator *.line{
-    -fx-border-color: #061E47;
+    -fx-border-color: #000000;
 }
 
 .date-picker{

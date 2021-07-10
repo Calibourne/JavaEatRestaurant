@@ -56,8 +56,6 @@ public class RecordsManagementController {
     @FXML
     private ComboBox<String> selectionBox;
     @FXML
-    private Button return_btn;
-    @FXML
     private Button addCooks_btn;
     @FXML
     private Button addAreas_btn;
@@ -106,7 +104,6 @@ public class RecordsManagementController {
         menuButtons.add(addOrders_btn.getId());
         menuButtons.add(addDeliveries_btn.getId());
         menuButtons.add(addToBlacklist_btn.getId());
-        menuButtons.add(return_btn.getId());
 
         groups.put(addCooks_btn.getId(),addCook_sctn);
         groups.put(addAreas_btn.getId(), addArea_sctn);
@@ -122,39 +119,15 @@ public class RecordsManagementController {
     }
 
     public void handleButtonClick(ActionEvent e) {
-        if(e.getSource() instanceof Button)
-        {
+        if(e.getSource() instanceof Button) {
             Button btn = (Button) e.getSource();
             if(menuButtons.contains(btn.getId())) {
-                switch(btn.getId()){
-                    case "addCooks_btn":
-                    case "addAreas_btn":
-                    case "addDeliPersons_btn":
-                    case "addCustomers_btn":
-                    case "addComponents_btn":
-                    case "addDishes_btn":
-                    case "addOrders_btn":
-                    case "addDeliveries_btn":
-                    case "addToBlacklist_btn": {
-                        for (Group g: groups.values()) {
-                            g.setVisible(false);
-                        }
-                        groups.get(btn.getId()).setVisible(true);
-                        break;
-                    }
-                    case "return_btn":{
-                        try {
-                            Stage primaryStage = (Stage) return_btn.getScene().getWindow();
-                            Parent root = FXMLLoader.load(getClass().getResource("../fxmls/managerPage.fxml"));
-                            primaryStage.setScene(new Scene(root));
-                        }
-                        catch (IOException ex){
-                            System.out.println(ex.getMessage());
-                        }
-                        break;
-                    }
+                for (Group g: groups.values()) {
+                    g.setVisible(false);
                 }
+                groups.get(btn.getId()).setVisible(true);
             }
+        }
             /*
             try{
                 if(!menuButtons.contains(btn)) {
@@ -170,7 +143,6 @@ public class RecordsManagementController {
             } catch (Exception ex) {
                 System.out.println(ex.getClass());
             }*/
-        }
         if (e.getSource() == ed_RB)
         {
             ed_vbox.setVisible(true);

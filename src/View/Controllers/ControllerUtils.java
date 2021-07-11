@@ -12,11 +12,9 @@ import org.controlsfx.control.CheckComboBox;
 
 
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.*;
 
 public class ControllerUtils {
-
-    private Pane viewl;
 
     public static void editListableNode(Tuple[] list){
         for (Tuple t: list) {

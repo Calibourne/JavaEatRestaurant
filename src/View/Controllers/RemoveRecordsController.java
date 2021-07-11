@@ -20,39 +20,34 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static View.Controllers.ControllerUtils.editListableNode;
 
-public class RemoveRecordsController {
+public class RemoveRecordsController extends RecordManagementController{
 
     //region Properties
     //region Sections
     @FXML
     private VBox removeRecord_sctn;
     @FXML
-    private Group removeCook_sctn;
+    private Group removeCooks_sctn;
     @FXML
-    private Group removeDeliPerson_sctn;
+    private Group removeDeliPersons_sctn;
     @FXML
-    private Group removeCustomer_sctn;
+    private Group removeCustomers_sctn;
     @FXML
-    private Group removeComponent_sctn;
+    private Group removeComponents_sctn;
     @FXML
-    private Group removeDish_sctn;
+    private Group removeDishes_sctn;
     @FXML
-    private Group removeOrder_sctn;
+    private Group removeOrders_sctn;
     @FXML
-    private Group removeDelivery_sctn;
+    private Group removeDeliveries_sctn;
     @FXML
-    private Group removeArea_sctn;
-    @FXML
-    private Group removeToBlacklist_sctn;
-    @FXML
-    private ComboBox<String> selectionBox;
+    private Group removeAreas_sctn;
     @FXML
     private Button removeCooks_btn;
-    @FXML
-    private Button removeAreas_btn;
     @FXML
     private Button removeDeliPersons_btn;
     @FXML
@@ -66,60 +61,42 @@ public class RemoveRecordsController {
     @FXML
     private Button removeDeliveries_btn;
     @FXML
-    private Button removeToBlacklist_btn;
+    private Button removeAreas_btn;
 
-    //endregion
-    @FXML
-    private VBox rd_vbox;
-    @FXML
-    private VBox ed_vbox;
-    @FXML
-    private RadioButton ed_RB;
-    @FXML
-    private RadioButton rd_RB;
-
-    private Restaurant restaurant;
-    HashSet<String> menuButtons;
-    HashMap<String, Group> groups;
     //endregion
 
 
     public void initialize(){
-        groups = new HashMap<>();
-
-        menuButtons = new HashSet<>();
-        restaurant = Restaurant.getInstance();
-
-        menuButtons.add(removeCooks_btn.getId());
-        menuButtons.add(removeAreas_btn.getId());
-        menuButtons.add(removeDeliPersons_btn.getId());
-        menuButtons.add(removeCustomers_btn.getId());
-        menuButtons.add(removeComponents_btn.getId());
-        menuButtons.add(removeDishes_btn.getId());
-        menuButtons.add(removeOrders_btn.getId());
-        menuButtons.add(removeDeliveries_btn.getId());
-
-        groups.put(removeCooks_btn.getId(),removeCook_sctn);
-        groups.put(removeAreas_btn.getId(), removeArea_sctn);
-        groups.put(removeDeliPersons_btn.getId(),removeDeliPerson_sctn);
-        groups.put(removeCustomers_btn.getId(),removeCustomer_sctn);
-        groups.put(removeComponents_btn.getId(),removeComponent_sctn);
-        groups.put(removeDishes_btn.getId(), removeDish_sctn);
-        groups.put(removeOrders_btn.getId(), removeOrder_sctn);
-        groups.put(removeDeliveries_btn.getId(), removeDelivery_sctn);
-
-        groups.values().forEach(System.out::println);
-        groups.values().forEach(g->createSections(g));
+        super.initialize(Arrays.stream(new Group[]{
+                        removeCooks_sctn,
+                        removeDeliPersons_sctn,
+                        removeCustomers_sctn,
+                        removeComponents_sctn,
+                        removeDishes_sctn,
+                        removeOrders_sctn,
+                        removeDeliveries_sctn,
+                        removeAreas_sctn
+                }).collect(Collectors.toList()),
+                Arrays.stream(new Button[]{
+                        removeCooks_btn,
+                        removeDeliPersons_btn,
+                        removeCustomers_btn,
+                        removeComponents_btn,
+                        removeDishes_btn,
+                        removeOrders_btn,
+                        removeDeliveries_btn,
+                        removeAreas_btn
+                }).collect(Collectors.toList()));
     }
 
     public void handleButtonClick(ActionEvent e) {
         if(e.getSource() instanceof Button) {
             Button btn = (Button) e.getSource();
-            if(menuButtons.contains(btn.getId())) {
-                for (Group g: groups.values()) {
+            if(getMenuButtons().contains(btn.getId())) {
+                for (Group g: getGroups().values()) {
                     g.setVisible(false);
                 }
-                groups.get(btn.getId()).setVisible(true);
+                getGroups().get(btn.getId()).setVisible(true);
             }
         }
             /*
@@ -137,81 +114,72 @@ public class RemoveRecordsController {
             } catch (Exception ex) {
                 System.out.println(ex.getClass());
             }*/
-        if (e.getSource() == ed_RB)
-        {
-            ed_vbox.setVisible(true);
-            rd_vbox.setVisible(false);
-        }
-        if (e.getSource() == rd_RB)
-        {
-            ed_vbox.setVisible(false);
-            rd_vbox.setVisible(true);
-        }
     }
-    private void createSections(Group group) {
+    @Override
+    protected void createSections(Group group) {
         try{
             GridPane grid = (GridPane) group.getChildren().get(0);
             switch (group.getId()) {
-                case "removeCook_sctn": {
+                case "removeCooks_sctn": {
                     editListableNode(new Tuple[]{
                             new Tuple<Cook>(grid, 0,
-                                    restaurant.getCooks().values().stream().toList(),
+                                    getRestaurant().getCooks().values().stream().toList(),
                                     "Select Cook to Remove")
                     });
                     break;
                 }
-                case "removeDeliPerson_sctn": {
+                case "removeDeliPersons_sctn": {
                     editListableNode(new Tuple[]{
                             new Tuple<DeliveryPerson>(grid, 0,
-                                    restaurant.getDeliveryPersons().values().stream().toList(),
+                                    getRestaurant().getDeliveryPersons().values().stream().toList(),
                                     "Select Delivery Person to Remove")
                     });
                     break;
                 }
-                case "removeCustomer_sctn": {
+                case "removeCustomers_sctn": {
                     editListableNode(new Tuple[]{
                             new Tuple<Customer>(grid, 0,
-                                    restaurant.getCustomers().values().stream().toList(),
+                                    getRestaurant().getCustomers().values().stream().toList(),
                                     "Select Customer to Remove")
                     });
                     break;
                 }
-                case "removeComponent_sctn": {
+                case "removeComponents_sctn": {
                     editListableNode(new Tuple[]{
                             new Tuple<Component>(grid, 0,
-                                    restaurant.getComponents().values().stream().toList(),
+                                    getRestaurant().getComponents().values().stream().toList(),
                                     "Select Ingredient to Remove")
                     });
                     break;
                 }
-                case "removeDish_sctn": {
+                case "removeDishes_sctn": {
                     editListableNode(new Tuple[]{
                             new Tuple<Dish>(grid, 0,
-                                    restaurant.getDishes().values().stream().toList(),
+                                    getRestaurant().getDishes().values().stream().toList(),
                                     "Select Dish to Remove")
                     });
                     break;
                 }
-                case "removeOrder_sctn": {
+                case "removeOrders_sctn": {
                     editListableNode(new Tuple[]{
                             new Tuple<Order>(grid, 0,
-                                    restaurant.getOrders().values().stream().toList(),
+                                    getRestaurant().getOrders().values().stream().toList(),
                                     "Select Order to Remove")
                     });
                     break;
                 }
-                case "removeDelivery_sctn": {
+                case "removeDeliveries_sctn": {
                     editListableNode(new Tuple[]{
                             new Tuple<Delivery>(grid, 0,
-                                    restaurant.getDeliveries().values().stream().toList(),
+                                    getRestaurant().getDeliveries().values().stream().toList(),
                                     "Select Delivery to Remove")
                     });
                     break;
                 }
-                case "removeArea_sctn":{
+                case "removeAreas_sctn":{
                     editListableNode(new Tuple[]{
                             new Tuple<DeliveryArea>(grid, 0,
-                                    restaurant.getAreas().values().stream().toList(),
+                                    getRestaurant().getAreas().values().stream().toList(),
                                     "Select Delivery Area to Remove")
                     });
                     break;
@@ -229,7 +197,7 @@ public class RemoveRecordsController {
             System.err.println(e.getMessage());
         }
     }
-    private void addRecordSelectionGroup(ComboBox cb) {
+    /*private void addRecordSelectionGroup(ComboBox cb) {
         String[] startOptions = {
                 "Delivery Area",
                 "Cook",
@@ -256,5 +224,5 @@ public class RemoveRecordsController {
         }
 
         cb.getItems().addAll(FXCollections.observableList(set.stream().sorted().toList()));
-    }
+    }*/
 }

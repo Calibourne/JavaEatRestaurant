@@ -27,30 +27,32 @@ import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import static View.Controllers.ControllerUtils.*;
 
-public class AddRecordsController {
+public class AddRecordsController extends RecordManagementController{
 
     //region Properties
     //region Sections
     @FXML
     private VBox addRecord_sctn;
     @FXML
-    private Group addCook_sctn;
+    private Group addCooks_sctn;
     @FXML
-    private Group addDeliPerson_sctn;
+    private Group addDeliPersons_sctn;
     @FXML
-    private Group addCustomer_sctn;
+    private Group addCustomers_sctn;
     @FXML
-    private Group addComponent_sctn;
+    private Group addComponents_sctn;
     @FXML
-    private Group addDish_sctn;
+    private Group addDishes_sctn;
     @FXML
-    private Group addOrder_sctn;
+    private Group addOrders_sctn;
     @FXML
-    private Group addDelivery_sctn;
+    private Group addDeliveries_sctn;
     @FXML
-    private Group addArea_sctn;
+    private Group addAreas_sctn;
     @FXML
     private Group addToBlacklist_sctn;
     @FXML
@@ -84,14 +86,32 @@ public class AddRecordsController {
     @FXML
     private RadioButton rd_RB;
 
-    private Restaurant restaurant;
-    HashSet<String> menuButtons;
-    HashMap<String, Group> groups;
     //endregion
 
-
     public void initialize(){
-        groups = new HashMap<>();
+        super.initialize(Arrays.stream(new Group[]{
+                addCooks_sctn,
+                addDeliPersons_sctn,
+                addCustomers_sctn,
+                addComponents_sctn,
+                addDishes_sctn,
+                addOrders_sctn,
+                addDeliveries_sctn,
+                addAreas_sctn,
+                addToBlacklist_sctn
+        }).collect(Collectors.toList()),
+                Arrays.stream(new Button[]{
+                addCooks_btn,
+                addDeliPersons_btn,
+                addCustomers_btn,
+                addComponents_btn,
+                addDishes_btn,
+                addOrders_btn,
+                addDeliveries_btn,
+                addAreas_btn,
+                addToBlacklist_btn
+        }).collect(Collectors.toList()));
+        /*groups = new HashMap<>();
         menuButtons = new HashSet<>();
         restaurant = Restaurant.getInstance();
 
@@ -115,17 +135,16 @@ public class AddRecordsController {
         groups.put(addDeliveries_btn.getId(), addDelivery_sctn);
         groups.put(addToBlacklist_btn.getId(), addToBlacklist_sctn);
 
-        groups.values().forEach(g->createSections(g));;
+        */
     }
 
     public void handleButtonClick(ActionEvent e) {
         if(e.getSource() instanceof Button) {
             Button btn = (Button) e.getSource();
-            if(menuButtons.contains(btn.getId())) {
-                for (Group g: groups.values()) {
+            if(getMenuButtons().contains(btn.getId())) {
+                for (Group g: getGroups().values()) {
                     g.setVisible(false);
                 }
-                groups.get(btn.getId()).setVisible(true);
             }
         }
             /*
@@ -137,7 +156,7 @@ public class AddRecordsController {
                             break;
                         default:
                             System.out.println("unknown group");
-                            break;
+                            brea
                     }
                 }
             } catch (Exception ex) {
@@ -154,10 +173,14 @@ public class AddRecordsController {
             rd_vbox.setVisible(true);
         }
     }
-    private void createSections(Group group) {
+
+    @Override
+    protected void createSections(Group group) {
         try{
             GridPane grid = (GridPane) group.getChildren().get(0);
-            if (group.getId().equals("addCook_sctn") || group.getId().equals("addCustomer_sctn") || group.getId().equals("addDeliPerson_sctn")) {
+            if (group.getId().equals(addCooks_sctn.getId()) ||
+                group.getId().equals(addCustomers_sctn.getId()) ||
+                group.getId().equals(addDeliPersons_sctn.getId())) {
                 VBox genderContainer = (VBox) grid.getChildren().get(3);
                 editListableNode(new Tuple[]{
                             new Tuple<Gender>(genderContainer, 1,
@@ -167,7 +190,7 @@ public class AddRecordsController {
             }
 
             switch (group.getId()) {
-                case "addCook_sctn": {
+                case "addCooks_sctn": {
                     VBox expertiseContainer = (VBox) grid.getChildren().get(4);
                     editListableNode(new Tuple[]{
                             new Tuple<Expertise>(expertiseContainer, 1,
@@ -176,7 +199,7 @@ public class AddRecordsController {
                     });
                     break;
                 }
-                case "addDeliPerson_sctn": {
+                case "addDeliPersons_sctn": {
                     VBox vehicleContainer = (VBox) grid.getChildren().get(4),
                             deliveryAreaContainer = (VBox) grid.getChildren().get(5);
                     editListableNode(new Tuple[]{
@@ -184,12 +207,12 @@ public class AddRecordsController {
                                     Arrays.stream(Vehicle.values()).toList(),
                                     "Select vehicle type"),
                             new Tuple<DeliveryArea>(deliveryAreaContainer, 1,
-                                    restaurant.getAreas().values().stream().toList(),
+                                    getRestaurant().getAreas().values().stream().toList(),
                                     "Assign to delivery area")
                     });
                     break;
                 }
-                case "addCustomer_sctn": {
+                case "addCustomers_sctn": {
                     VBox neighborhoodContainer = (VBox) grid.getChildren().get(4);
                     editListableNode(new Tuple[]{
                             new Tuple<Neighberhood>(neighborhoodContainer, 1,
@@ -198,11 +221,11 @@ public class AddRecordsController {
                     });
                     break;
                 }
-                case "addComponent_sctn": {
+                case "addComponents_sctn": {
                     // TODO fill in (if necessary)
                     break;
                 }
-                case "addDish_sctn": {
+                case "addDishes_sctn": {
                     VBox dishTypeContainer = (VBox) grid.getChildren().get(1),
                             ingredientsContainer = (VBox) grid.getChildren().get(2);
                     editListableNode(new Tuple[]{
@@ -210,47 +233,47 @@ public class AddRecordsController {
                                     Arrays.stream(DishType.values()).toList(),
                                     "Select dish type"),
                             new Tuple<Component>(ingredientsContainer, 1,
-                                    restaurant.getComponents().values().stream().toList(),
+                                    getRestaurant().getComponents().values().stream().toList(),
                                     "Selected ingredients")
                     });
                     break;
                 }
-                case "addOrder_sctn": {
+                case "addOrders_sctn": {
                     VBox customerContainer = (VBox) grid.getChildren().get(0),
                             dishesContainer = (VBox) grid.getChildren().get(1),
                             deliveryContainer = (VBox) grid.getChildren().get(2);
                     editListableNode(new Tuple[]{
                             new Tuple<Customer>(customerContainer, 1,
-                                    restaurant.getCustomers().values().stream().toList(),
+                                    getRestaurant().getCustomers().values().stream().toList(),
                                     "Select customer"),
                             new Tuple<Dish>(dishesContainer, 1,
-                                    restaurant.getDishes().values().stream().toList(),
+                                    getRestaurant().getDishes().values().stream().toList(),
                                     "Selected dishes"),
                             new Tuple<Delivery>(deliveryContainer, 1,
-                                    restaurant.getDeliveries().values().stream()
+                                    getRestaurant().getDeliveries().values().stream()
                                             .filter(d -> d instanceof RegularDelivery).toList(),
                                     "(*Optional) Select Delivery")
                     });
                     break;
                 }
-                case "addDelivery_sctn": {
+                case "addDeliveries_sctn": {
                     VBox deliveryPersonContainer = (VBox) grid.getChildren().get(0);
                     editListableNode(new Tuple[]{
                             new Tuple<DeliveryPerson>(deliveryPersonContainer, 1,
-                                    restaurant.getDeliveryPersons().values().stream().toList(),
+                                    getRestaurant().getDeliveryPersons().values().stream().toList(),
                                     "Assign delivery person"),
                             new Tuple<Order>((Parent) ed_vbox.getChildren().get(0), 1,
-                                    restaurant.getOrders().values().stream()
+                                    getRestaurant().getOrders().values().stream()
                                             .filter(o -> o.getDelivery() == null).toList(),
                                     "Select Express order"),
                             new Tuple<Order>(rd_vbox, 1,
-                                    restaurant.getOrders().values().stream()
+                                    getRestaurant().getOrders().values().stream()
                                             .filter(o -> o.getDelivery() == null).toList(),
                                     "Selected orders")
                     });
                     break;
                 }
-                case "addArea_sctn":{
+                case "addAreas_sctn":{
                     VBox neighbourhoodContainer = (VBox) grid.getChildren().get(1);
                     editListableNode(new Tuple[]{
                           new Tuple<Neighberhood>(neighbourhoodContainer, 1,
@@ -263,7 +286,7 @@ public class AddRecordsController {
                     VBox customerContainer = (VBox) grid.getChildren().get(0);
                     editListableNode(new Tuple[]{
                             new Tuple<Customer>(customerContainer,1,
-                                    restaurant.getCustomers().values().stream().filter(c->!restaurant.getBlacklist().contains(c)).toList(),
+                                    getRestaurant().getCustomers().values().stream().filter(c->!getRestaurant().getBlacklist().contains(c)).toList(),
                             "Select a customer to blacklist")
                     });
                     break;
@@ -281,6 +304,7 @@ public class AddRecordsController {
             System.err.println(e.getMessage());
         }
     }
+
     private void addRecordSelectionGroup(ComboBox cb) {
         String[] startOptions = {
                 "Delivery Area",
@@ -289,21 +313,21 @@ public class AddRecordsController {
                 "Ingredient"
         };
         Set<String> set = (Set<String>) new HashSet<String>(Arrays.stream(startOptions).toList());
-        if(restaurant.getAreas().size() > 0) {
+        if(getRestaurant().getAreas().size() > 0) {
             set.add("Delivery Person");
         }
-        if (restaurant.getCustomers().size() > 0){
+        if (getRestaurant().getCustomers().size() > 0){
             set.add("Blacklisted Customer");
         }
-        if(restaurant.getComponents().size() > 0) {
+        if(getRestaurant().getComponents().size() > 0) {
             set.add("Dish");
         }
-        if(restaurant.getDishes().size() > 0 &&
-                restaurant.getCustomers().values().stream()
-                        .filter(c->!restaurant.getBlacklist().contains(c)).toList().size()>0) {
+        if(getRestaurant().getDishes().size() > 0 &&
+                getRestaurant().getCustomers().values().stream()
+                        .filter(c->!getRestaurant().getBlacklist().contains(c)).toList().size()>0) {
             set.add("Order");
         }
-        if(restaurant.getOrders().size()>0 && restaurant.getDeliveryPersons().size()>0){
+        if(getRestaurant().getOrders().size()>0 && getRestaurant().getDeliveryPersons().size()>0){
             set.add("Delivery");
         }
 

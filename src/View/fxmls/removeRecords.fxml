@@ -149,7 +149,7 @@
                   <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Group fx:id="removeCook_sctn" visible="false">
+                  <Group fx:id="removeCooks_sctn" visible="false">
                      <children>
                         <GridPane fx:id="Cook_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
                            <columnConstraints>
@@ -166,7 +166,7 @@
                         </GridPane>
                      </children>
                   </Group>
-                  <Group fx:id="removeDeliPerson_sctn" visible="false">
+                  <Group fx:id="removeDeliPersons_sctn" visible="false">
                      <children>
                         <GridPane fx:id="DeliPerson_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
                            <columnConstraints>
@@ -183,7 +183,7 @@
                         </GridPane>
                      </children>
                   </Group>
-                  <Group fx:id="removeCustomer_sctn" visible="false">
+                  <Group fx:id="removeCustomers_sctn" visible="false">
                      <children>
                         <GridPane fx:id="Customer_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
                            <columnConstraints>
@@ -200,7 +200,7 @@
                         </GridPane>
                      </children>
                   </Group>
-                  <Group fx:id="removeComponent_sctn" visible="false">
+                  <Group fx:id="removeComponents_sctn" visible="false">
                      <children>
                         <GridPane fx:id="Component_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
                            <columnConstraints>
@@ -217,7 +217,7 @@
                         </GridPane>
                      </children>
                   </Group>
-                  <Group fx:id="removeDish_sctn">
+                  <Group fx:id="removeDishes_sctn" visible="false">
                      <children>
                         <GridPane fx:id="Dish_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
                            <columnConstraints>
@@ -234,7 +234,7 @@
                         </GridPane>
                      </children>
                   </Group>
-                  <Group fx:id="removeOrder_sctn" visible="false">
+                  <Group fx:id="removeOrders_sctn" visible="false">
                      <children>
                         <GridPane fx:id="Order_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
                            <columnConstraints>
@@ -251,7 +251,7 @@
                         </GridPane>
                      </children>
                   </Group>
-                  <Group fx:id="removeDelivery_sctn" visible="false">
+                  <Group fx:id="removeDeliveries_sctn" visible="false">
                      <children>
                         <GridPane fx:id="Delivery_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
                            <columnConstraints>
@@ -268,7 +268,7 @@
                         </GridPane>
                      </children>
                   </Group>
-                  <Group fx:id="removeArea_sctn" visible="false">
+                  <Group fx:id="removeAreas_sctn" visible="false">
                      <children>
                         <GridPane fx:id="Area_grid" hgap="40.0" prefHeight="123.0" prefWidth="283.0" vgap="10.0">
                            <columnConstraints>

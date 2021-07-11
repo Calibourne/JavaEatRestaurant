@@ -171,7 +171,7 @@
                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-               <Group fx:id="addCook_sctn" visible="false">
+               <Group fx:id="addCooks_sctn" visible="false">
                   <children>
                      <GridPane fx:id="CookInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -224,7 +224,7 @@
                      <Button fx:id="addCook_btn" layoutX="210.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Cook" />
                   </children>
                </Group>
-               <Group fx:id="addDeliPerson_sctn" visible="false">
+               <Group fx:id="addDeliPersons_sctn" visible="false">
                   <children>
                      <GridPane fx:id="DeliPersonInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -278,7 +278,7 @@
                      <Button fx:id="addDeliPerson_btn" layoutX="182.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery person" />
                   </children>
                </Group>
-               <Group fx:id="addCustomer_sctn" visible="false">
+               <Group fx:id="addCustomers_sctn" visible="false">
                   <children>
                      <GridPane fx:id="CustomerInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -333,7 +333,7 @@
                      <Button fx:id="addCustomer_btn" layoutX="198.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Customer" />
                   </children>
                </Group>
-               <Group fx:id="addComponent_sctn" visible="false">
+               <Group fx:id="addComponents_sctn" visible="false">
                   <children>
                      <GridPane fx:id="ComponentInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -369,7 +369,7 @@
                      </GridPane>
                   </children>
                </Group>
-               <Group fx:id="addDish_sctn" visible="false">
+               <Group fx:id="addDishes_sctn" visible="false">
                   <children>
                      <GridPane hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -404,7 +404,7 @@
                      </GridPane>
                   </children>
                </Group>
-               <Group fx:id="addOrder_sctn" visible="false">
+               <Group fx:id="addOrders_sctn" visible="false">
                   <children>
                      <GridPane fx:id="OrderInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -439,7 +439,7 @@
                      </GridPane>
                   </children>
                </Group>
-               <Group fx:id="addDelivery_sctn" visible="false">
+               <Group fx:id="addDeliveries_sctn" visible="false">
                   <children>
                      <GridPane fx:id="DeliveryInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -505,7 +505,7 @@
                      <Button fx:id="addDelivery_btn" layoutX="202.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery" />
                   </children>
                </Group>
-               <Group fx:id="addArea_sctn" visible="false">
+               <Group fx:id="addAreas_sctn" visible="false">
                   <children>
                      <GridPane fx:id="AreaInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -557,7 +557,7 @@
                                  <ComboBox prefHeight="25.0" prefWidth="352.0" />
                               </children>
                            </VBox>
-                           <Button fx:id="addToBlacklist_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Add to blackList" GridPane.rowIndex="1" />
+                           <Button mnemonicParsing="false" onAction="#handleButtonClick" text="Add to blackList" GridPane.rowIndex="1" />
                         </children>
                      </GridPane>
                   </children>

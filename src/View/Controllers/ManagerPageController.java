@@ -81,24 +81,26 @@ public class ManagerPageController {
     // endregion
     public void initialize(){
         initOverview();
-        initRecords();
-        initQueries();
     }
     public void handleButtonClick(ActionEvent e) {
         if(e.getSource() == btnOverview) {
+            initOverview();
             pnlOverview.setStyle("-fx-background-color: #1F4591");
             pnlOverview.toFront();
         }
         if(e.getSource() == btnAddRecords) {
+            initRecords();
             pnlAddRecords.setStyle("-fx-background-color: #1F4591");
             pnlAddRecords.toFront();
         }
         if(e.getSource() == btnRemoveRecords){
+            initRecords();
             pnlRemoveRecords.setStyle("-fx-background-color: #1F4591");
             pnlRemoveRecords.toFront();
         }
 
         if(e.getSource() == btnQueries) {
+            initQueries();
             pnlQueries.setStyle("-fx-background-color: #13194c");
             pnlQueries.toFront();
         }
@@ -127,15 +129,18 @@ public class ManagerPageController {
         pnlOverview.toFront();
     }
     private void initRecords() {
-        try {
-            Node recordsA = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
-            Node recordsR = FXMLLoader.load(getClass().getResource("../fxmls/removeRecords.fxml"));;
-            pnlAddRecords.getChildren().add(recordsA);
-            pnlRemoveRecords.getChildren().add(recordsR);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                Node recordsA = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
+                pnlAddRecords.getChildren().add(recordsA);
+            } catch(IOException e){
+                System.out.println(e.getMessage());
+            }
+            try{
+                Node recordsR = FXMLLoader.load(getClass().getResource("../fxmls/removeRecords.fxml"));;
+                pnlRemoveRecords.getChildren().add(recordsR);
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     // This makes the query button clickable

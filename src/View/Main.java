@@ -1,5 +1,6 @@
 package View;
 
+import Model.DeliveryArea;
 import Model.Restaurant;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

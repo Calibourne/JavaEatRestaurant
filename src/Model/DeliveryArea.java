@@ -13,7 +13,7 @@ import Utils.Neighberhood;
  * A class that represents a delivery area object
  * @author Eddie Kanevsky
  */
-public class DeliveryArea implements Serializable {
+public class DeliveryArea extends Record {
 	private static int idCounter = 1;
 	private int id;
 	private String areaName;

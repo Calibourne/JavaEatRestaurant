@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * An abstract class that represents a delivery object
  * @author Eddie Kanevsky
  */
-public abstract class Delivery implements Serializable {
+public abstract class Delivery extends Record {
 	private static int idCounter = 1;
 	private int id;
 	private DeliveryPerson deliveryPerson;

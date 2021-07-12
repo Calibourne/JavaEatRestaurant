@@ -13,7 +13,7 @@ import Utils.MyFileLogWriter;
  * A class that represents a dish object
  * @author Eddie Kanevsky
  */
-public class Dish implements Serializable {
+public class Dish extends Record {
 	private static int idCounter = 1;
 	private int id;
 	private String dishName;
@@ -26,7 +26,7 @@ public class Dish implements Serializable {
 	 * A "full" constructor for a dish 
 	 * @param dishName
 	 * The dish name
-	 * @param dishType
+	 * @param type
 	 * The dish type
 	 * @param components
 	 * The dish components

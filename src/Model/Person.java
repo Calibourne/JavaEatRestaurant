@@ -8,7 +8,7 @@ import Utils.Gender;
  * An abstrat class that represents a person object
  * @author Eddie Kanevsky
  */
-public abstract class Person implements Serializable {
+public abstract class Person extends Record {
 	
 	private int id;
 	private String firstName;

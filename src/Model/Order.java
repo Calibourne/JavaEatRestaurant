@@ -11,7 +11,7 @@ import Utils.MyFileLogWriter;
  * A class that represents an order object
  * @author Eddie Kanevsky
  */
-public class Order implements Comparable<Order>, Serializable {
+public class Order extends Record implements Comparable<Order> {
 	
 	private static int idCounter = 1;
 	private int id;

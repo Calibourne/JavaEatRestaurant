@@ -32,6 +32,7 @@ public class Restaurant implements Serializable {
 	private HashMap<Customer, TreeSet<Order>> orderByCustomer;
 	private HashMap<DeliveryArea, HashSet<Order>> orderByDeliveryArea;
 	private HashSet<Customer> blackList;
+	private HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory;//keeps track of added record history
 
 	private boolean firstRun;
 
@@ -118,6 +119,12 @@ public class Restaurant implements Serializable {
 	}
 	public void setOrderByDeliveryArea(HashMap<DeliveryArea, HashSet<Order>> orderByDeliveryArea) {
 		this.orderByDeliveryArea = orderByDeliveryArea;
+	}
+	public HashMap<String, TreeSet<AddRecordRequest>> getAddRecordHistory() {
+		return addRecordHistory;
+	}
+	public void setAddRecordHistory(HashMap<String,TreeSet<AddRecordRequest>> AddRecordHistory){
+		this.addRecordHistory = addRecordHistory;
 	}
 	public HashSet<Customer> getBlacklist() {
 		return blackList;

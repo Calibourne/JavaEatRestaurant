@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A class that represents a dish component object
  * @author Eddie Kanevsky
  */
-public class Component implements Comparable<Component>, Serializable {
+public class Component extends Record implements Comparable<Component> {
 	private static int idCounter = 1;
 	private int id;
 	private String componentName;

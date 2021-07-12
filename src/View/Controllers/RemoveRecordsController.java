@@ -90,30 +90,7 @@ public class RemoveRecordsController extends RecordManagementController{
     }
 
     public void handleButtonClick(ActionEvent e) {
-        if(e.getSource() instanceof Button) {
-            Button btn = (Button) e.getSource();
-            if(getMenuButtons().contains(btn.getId())) {
-                for (Group g: getGroups().values()) {
-                    g.setVisible(false);
-                }
-                getGroups().get(btn.getId()).setVisible(true);
-            }
-        }
-            /*
-            try{
-                if(!menuButtons.contains(btn)) {
-                    Group group = (Group) btn.getParent();
-                    switch (group.getId()) {
-                        case "addCook_sctn":
-                            break;
-                        default:
-                            System.out.println("unknown group");
-                            break;
-                    }
-                }
-            } catch (Exception ex) {
-                System.out.println(ex.getClass());
-            }*/
+        super.handleButtonClick(e);
     }
     @Override
     protected void createSections(Group group) {

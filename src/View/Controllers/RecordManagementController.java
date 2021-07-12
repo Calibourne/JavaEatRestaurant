@@ -1,6 +1,7 @@
 package View.Controllers;
 
 import Model.Restaurant;
+import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 
@@ -31,6 +32,17 @@ public abstract class RecordManagementController {
                 .get(g.getId().replace("sctn","btn")).getId(),g));
         buttons.forEach(b->menuButtons.add(b.getId()));
         groups.values().forEach(this::createSections);
+    }
+    public void handleButtonClick(ActionEvent e){
+        if(e.getSource() instanceof Button) {
+            Button btn = (Button) e.getSource();
+            if(getMenuButtons().contains(btn.getId())) {
+                for (Group g: getGroups().values()) {
+                    g.setVisible(false);
+                }
+                getGroups().get(btn.getId()).setVisible(true);
+            }
+        }
     }
     protected HashMap<String, Group> getGroups(){
         return this.groups;

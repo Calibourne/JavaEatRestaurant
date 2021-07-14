@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 

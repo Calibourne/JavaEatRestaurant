@@ -184,7 +184,10 @@ public class RemoveRecordsController extends RecordManagementController{
                     editListableNode(new Tuple[]{
                             new Tuple<DeliveryArea>(grid, 0,
                                     getRestaurant().getAreas().values().stream().toList(),
-                                    "Select Delivery Area to Remove")
+                                    "Select Delivery Area to Remove"),
+                            new Tuple<DeliveryArea>(grid, 1,
+                                    getRestaurant().getAreas().values().stream().toList(),
+                                    "Select Delivery Area to Replace with")
                     });
                     break;
                 }

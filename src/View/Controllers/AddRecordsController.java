@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 //import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -35,8 +36,6 @@ public class AddRecordsController extends RecordManagementController{
 
     //region Properties
     //region Sections
-    @FXML
-    private VBox addRecord_sctn;
     @FXML
     private Group addCooks_sctn;
     @FXML
@@ -111,35 +110,27 @@ public class AddRecordsController extends RecordManagementController{
                 addAreas_btn,
                 addToBlacklist_btn
         }).collect(Collectors.toList()));
-        /*groups = new HashMap<>();
-        menuButtons = new HashSet<>();
-        restaurant = Restaurant.getInstance();
-
-        menuButtons.add(addCooks_btn.getId());
-        menuButtons.add(addAreas_btn.getId());
-        menuButtons.add(addDeliPersons_btn.getId());
-        menuButtons.add(addCustomers_btn.getId());
-        menuButtons.add(addComponents_btn.getId());
-        menuButtons.add(addDishes_btn.getId());
-        menuButtons.add(addOrders_btn.getId());
-        menuButtons.add(addDeliveries_btn.getId());
-        menuButtons.add(addToBlacklist_btn.getId());
-
-        groups.put(addCooks_btn.getId(),addCook_sctn);
-        groups.put(addAreas_btn.getId(), addArea_sctn);
-        groups.put(addDeliPersons_btn.getId(),addDeliPerson_sctn);
-        groups.put(addCustomers_btn.getId(),addCustomer_sctn);
-        groups.put(addComponents_btn.getId(),addComponent_sctn);
-        groups.put(addDishes_btn.getId(), addDish_sctn);
-        groups.put(addOrders_btn.getId(), addOrder_sctn);
-        groups.put(addDeliveries_btn.getId(), addDelivery_sctn);
-        groups.put(addToBlacklist_btn.getId(), addToBlacklist_sctn);
-
-        */
     }
 
     public void handleButtonClick(ActionEvent e) {
-        super.handleButtonClick(e);
+        if(e.getSource() == addDeliPersons_btn && getRestaurant().getAreas().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"Please add some delivery areas first");
+        }
+        else if(e.getSource() == addToBlacklist_btn && getRestaurant().getCustomers().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"Please add some customers first");
+        }
+        else if(e.getSource() == addDishes_btn && getRestaurant().getComponents().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"Please add some ingredients first");
+        }
+        else if(e.getSource() == addOrders_btn && getRestaurant().getDishes().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"Please add some dishes first");
+        }
+        else if(e.getSource() == addDeliveries_btn && getRestaurant().getOrders().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn, "Please add some orders first");
+        }
+        else {
+            super.handleButtonClick(e);
+        }
         if (e.getSource() == ed_RB)
         {
             ed_vbox.setVisible(true);

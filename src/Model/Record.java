@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Requests.RecordRequest;
+
 import java.io.Serializable;
 
 /**

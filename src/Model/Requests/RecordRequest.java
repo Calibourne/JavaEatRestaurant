@@ -1,9 +1,10 @@
-package Model;
+package Model.Requests;
+
+import Model.Record;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Comparator;
 
 /**
  * This class will be responsible for adding/removing/editing records from the database

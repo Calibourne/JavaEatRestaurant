@@ -8,6 +8,7 @@ import Model.Exceptions.ConvertToExpressException;
 import Model.Exceptions.IllegalCustomerException;
 import Model.Exceptions.NoComponentsException;
 import Model.Exceptions.SensitiveException;
+import Model.Requests.AddRecordRequest;
 import Utils.Expertise;
 import Utils.MyFileLogWriter;
 import Utils.Neighberhood;

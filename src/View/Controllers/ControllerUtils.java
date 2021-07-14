@@ -3,10 +3,13 @@ package View.Controllers;
 import View.Tuple;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import org.controlsfx.control.CheckComboBox;
 
@@ -33,4 +36,15 @@ public class ControllerUtils {
             }
         }
     }
+    public static void showAlertMessage(Collection<Group> groups, Group section,String prompt){
+        groups.forEach(g->g.setVisible(false));
+        Pane grid = (Pane) section.getChildren().get(0);
+        ((Label) grid.getChildren().get(1)).setText(prompt);
+        section.setVisible(true);
+    }
+    public static void showAlertMessage(Collection<Group> groups, Group section,Group visible_section,String prompt){
+        showAlertMessage(groups, section, prompt);
+        visible_section.setVisible(false);
+    }
+
 }

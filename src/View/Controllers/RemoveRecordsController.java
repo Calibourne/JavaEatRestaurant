@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -90,7 +91,33 @@ public class RemoveRecordsController extends RecordManagementController{
     }
 
     public void handleButtonClick(ActionEvent e) {
-        super.handleButtonClick(e);
+        if(e.getSource() == removeCooks_btn && getRestaurant().getCooks().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn,welcome_sctn, "You don't have any cooks to remove");
+        }
+        else if(e.getSource() == removeDeliPersons_btn && getRestaurant().getDeliveryPersons().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You don't have any deliverymen to remove");
+        }
+        else if(e.getSource() == removeCustomers_btn && getRestaurant().getCustomers().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn,welcome_sctn, "You don't have any customers to remove");
+        }
+        else if(e.getSource() == removeComponents_btn && getRestaurant().getComponents().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"Tou don't have any ingredients to remove");
+        }
+        else if(e.getSource() == removeDishes_btn && getRestaurant().getDishes().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You don't have any dishes to remove");
+        }
+        else if(e.getSource() == removeOrders_btn && getRestaurant().getOrders().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You don't have any orders to remove");
+        }
+        else if(e.getSource() == removeDeliveries_btn && getRestaurant().getDeliveries().size()==0){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You don't have any deliveries to remove");
+        }
+        else if(e.getSource() == removeAreas_btn && getRestaurant().getAreas().size()<=1){
+            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You should have at least 2 delivery areas to be able to remove one");
+        }
+        else {
+            super.handleButtonClick(e);
+        }
     }
     @Override
     protected void createSections(Group group) {

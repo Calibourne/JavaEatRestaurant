@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,15 +17,15 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.SignupPageController">
+<BorderPane styleClass="VBox" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.SignupPageController">
    <left>
-      <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #263F73;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="407.0" prefWidth="228.0" styleClass="HBox" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="59.0" layoutY="200.0" prefHeight="69.0" prefWidth="109.0" text="Sign Up" textFill="WHITE">
                <font>
@@ -57,12 +60,18 @@
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane prefHeight="407.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <GridPane styleClass="VBox" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <GridPane hgap="20.0" layoutX="33.0" layoutY="34.0" vgap="10.0">
+            <GridPane hgap="20.0" vgap="10.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
@@ -71,7 +80,7 @@
                <children>
                   <GridPane vgap="5.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -94,22 +103,22 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <VBox>
+                              <VBox styleClass="Container">
                                  <children>
-                                    <Label text="First name:" />
-                                    <TextField />
+                                    <Label text="First name:" underline="true" />
+                                    <TextField fx:id="fnameInput" onKeyTyped="#generateUsername" />
                                  </children>
                               </VBox>
-                              <VBox GridPane.rowIndex="1">
+                              <VBox styleClass="Container" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="Last name:" />
-                                    <TextField />
+                                    <Label text="Last name:" underline="true" />
+                                    <TextField fx:id="lnameInput" onKeyTyped="#generateUsername" />
                                  </children>
                               </VBox>
                               <VBox GridPane.rowIndex="2">
                                  <children>
                                     <Label text="Gender:" />
-                                    <ComboBox prefHeight="25.0" prefWidth="175.0" />
+                                    <ComboBox fx:id="genderCb" prefHeight="25.0" prefWidth="175.0" />
                                  </children>
                               </VBox>
                               <VBox GridPane.rowIndex="3">
@@ -177,22 +186,38 @@
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <VBox>
+                                    <VBox styleClass="Container">
                                        <children>
-                                          <Label text="Generated username:" />
-                                          <TextField editable="false" />
+                                          <Label text="Generated username:" underline="true" />
+                                          <TextField fx:id="usernameField" editable="false" text="Enter your full name first" />
                                        </children>
                                     </VBox>
-                                    <VBox GridPane.rowIndex="1">
+                                    <VBox styleClass="Container" GridPane.rowIndex="1">
                                        <children>
-                                          <Label text="Password:" />
-                                          <TextField />
+                                          <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="10.0">
+                                             <children>
+                                                <Label text="Password:" underline="true" />
+                                                <ToggleButton fx:id="toggleHidePassword" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" />
+                                             </children>
+                                          </HBox>
+                                          <GridPane>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <TextField fx:id="visiblePassField" visible="false" />
+                                                <PasswordField fx:id="passwordField" />
+                                             </children>
+                                          </GridPane>
                                        </children>
                                     </VBox>
-                                    <VBox GridPane.rowIndex="2">
+                                    <VBox styleClass="Container" GridPane.rowIndex="2">
                                        <children>
-                                          <Label text="Repeat Password:" />
-                                          <TextField />
+                                          <Label text="Repeat Password:" underline="true" />
+                                          <PasswordField />
                                        </children>
                                     </VBox>
                                  </children>
@@ -201,10 +226,13 @@
                         </GridPane>
                      </children>
                   </Group>
+                  <Button mnemonicParsing="false" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button layoutX="178.0" layoutY="356.0" mnemonicParsing="false" text="Register" />
          </children>
-      </AnchorPane>
+         <BorderPane.margin>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </BorderPane.margin>
+      </GridPane>
    </center>
 </BorderPane>

@@ -108,3 +108,11 @@
     -fx-padding: 0.5em;
     -fx-border-color: white;
 }
+
+.toggle-button{
+    -fx-background-color: none;
+    -fx-background-image: url("../images/icons8-show-password-25.png");
+}
+.toggle-button:selected{
+    -fx-background-image: url("../images/icons8-hide-25.png");
+}

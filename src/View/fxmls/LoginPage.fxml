@@ -23,9 +23,9 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" stylesheets="@../css/RecordsScreenStyle.css">
           <left>
-              <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #263F73;" BorderPane.alignment="CENTER">
+              <AnchorPane prefHeight="407.0" prefWidth="228.0" styleClass="HBox" BorderPane.alignment="CENTER">
                   <children>
                       <Label alignment="CENTER" layoutX="59.0" layoutY="200.0" prefHeight="69.0" prefWidth="109.0" text="Welcome" textFill="WHITE">
                           <font>
@@ -60,7 +60,7 @@
               </AnchorPane>
           </left>
          <center>
-              <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
+              <AnchorPane prefHeight="400.0" prefWidth="332.0" styleClass="VBox" BorderPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="14.0" prefHeight="69.0" prefWidth="109.0" text="Login" textAlignment="CENTER">
                      <font>

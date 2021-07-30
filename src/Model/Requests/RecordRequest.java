@@ -13,12 +13,12 @@ import java.time.LocalTime;
 public abstract class RecordRequest implements Serializable, Comparable<RecordRequest> {
     protected final LocalDate dateOfRequest;
     protected final LocalTime timeOfRequest;
-    protected final Record record;
-    public RecordRequest(Record record){
-        this.record = record;
+    protected Record record;
+    public RecordRequest(){
         this.dateOfRequest = LocalDate.now();
         this.timeOfRequest = LocalTime.now();
     }
+
     public abstract boolean saveRequest();
 
     @Override

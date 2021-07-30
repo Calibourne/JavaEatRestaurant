@@ -1,18 +1,123 @@
 package Model.Requests;
 
 import Model.*;
+import Model.Exceptions.ConvertToExpressException;
 import Model.Record;
+import Utils.DishType;
+import Utils.Expertise;
+import Utils.Gender;
+import Utils.Neighberhood;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.TreeSet;
 
 public class AddRecordRequest extends RecordRequest {
     private boolean toBlacklist;
-    public AddRecordRequest(Record record) {
-        super(record);
-    }
-    public AddRecordRequest(Customer customer, boolean toBlacklist){
-        super(customer);
-        this.toBlacklist = toBlacklist;
+    public AddRecordRequest(Record record, Object... args) throws Exception {
+        if(Arrays.stream(args).anyMatch(a->a.equals(null)))
+            throw new Exception();
+        if (record instanceof DeliveryArea) {
+            this.record = new DeliveryArea(
+                    (String) args[0],
+                    (HashSet<Neighberhood>) args[1],
+                    (int) args[2]
+            );
+        }
+        if (record instanceof Cook) {
+            this.record = new Cook(
+                    (String) args[0],
+                    (String) args[1],
+                    (LocalDate) args[2],
+                    (Gender) args[3],
+                    (Expertise) args[4],
+                    (boolean) args[5]
+            );
+        }
+        if (record instanceof DeliveryPerson) {
+            this.record = new Cook(
+                    (String) args[0],
+                    (String) args[1],
+                    (LocalDate) args[2],
+                    (Gender) args[3],
+                    (Expertise) args[4],
+                    (boolean) args[5]
+            );
+        }
+        if (record instanceof Customer) {
+            if(args.length>1) {
+                this.record = new Customer(
+                        (String) args[0],
+                        (String) args[1],
+                        (LocalDate) args[2],
+                        (Gender) args[3],
+                        (Neighberhood) args[4],
+                        (boolean) args[5],
+                        (boolean) args[6]
+                );
+            }
+            else{
+                toBlacklist = true;
+                this.record = record;
+            }
+        }
+        if (record instanceof Component) {
+            this.record = new Component(
+                    (String) args[0],
+                    (boolean) args[1],
+                    (boolean) args[2],
+                    (int) args[3]
+            );
+        }
+        if (record instanceof Dish) {
+            this.record = new Dish(
+                    (String) args[0],
+                    (DishType) args[1],
+                    (ArrayList<Component>) args[2],
+                    (int) args[3]
+            );
+        }
+        if (record instanceof Order) {
+            this.record = new Order(
+                    (Customer) args[0],
+                    (ArrayList<Dish>) args[1],
+                    (Delivery) args[2]
+            );
+        }
+        if (record instanceof Delivery) {
+            if (record instanceof RegularDelivery) {
+                try {
+                    if (((TreeSet<Order>) args[0]).size() == 1)
+                        throw new ConvertToExpressException();
+                    this.record = new RegularDelivery(
+                            (TreeSet<Order>) args[0],
+                            (DeliveryPerson) args[1],
+                            (DeliveryArea) args[2],
+                            (boolean) args[3],
+                            (LocalDate) args[4]
+                    );
+                } catch (ConvertToExpressException e) {
+                    this.record = new ExpressDelivery(
+                            (DeliveryPerson) args[1],
+                            (DeliveryArea) args[2],
+                            (boolean) args[3],
+                            ((TreeSet<Order>) args[0]).first(),
+                            (LocalDate) args[4]
+                    );
+                }
+            }
+            else {
+                this.record = new ExpressDelivery(
+                        (DeliveryPerson) args[0],
+                        (DeliveryArea) args[1],
+                        (boolean) args[2],
+                        (Order) args[3],
+                        (LocalDate) args[4]
+                );
+            }
+        }
     }
 
     @Override

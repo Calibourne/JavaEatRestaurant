@@ -15,6 +15,7 @@ public class Customer extends Person{
 	private Neighberhood neighberhood;
 	private boolean isSensitiveToLactose;
 	private boolean isSensitiveToGluten;
+	private String username, password;
 	
 	/**
 	 * A "full" constructor for a customer
@@ -39,6 +40,8 @@ public class Customer extends Person{
 		this.neighberhood = neighberhood;
 		this.isSensitiveToLactose = isSensitiveToLactose;
 		this.isSensitiveToGluten = isSensitiveToGluten;
+		this.username = String.format("%d", getId());
+		this.password = "123456";
 	}
 	
 	/**
@@ -94,7 +97,7 @@ public class Customer extends Person{
 	}
 
 	/**
-	 * @return is sensitive to gluten 
+	 * @return is sensitive to gluten
 	 */
 	public boolean isSensitiveToGluten() {
 		return isSensitiveToGluten;
@@ -107,12 +110,21 @@ public class Customer extends Person{
 		this.isSensitiveToGluten = isSensitiveToGluten;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
 		return super.toString()+" Customer [isSensitiveToLactose=" + isSensitiveToLactose + ", isSensitiveToGluten=" + isSensitiveToGluten
 				+ "]";
 	}
-	
-	
-	
 }

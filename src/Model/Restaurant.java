@@ -34,6 +34,7 @@ public class Restaurant implements Serializable {
 	private HashMap<DeliveryArea, HashSet<Order>> orderByDeliveryArea;
 	private HashSet<Customer> blackList;
 	private HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory;//keeps track of added record history
+	private HashMap<String, Customer> usersList;
 
 	private boolean firstRun;
 
@@ -57,6 +58,7 @@ public class Restaurant implements Serializable {
 			blackList = new HashSet<>();
 			orderByCustomer = new HashMap<>();
 			orderByDeliveryArea = new HashMap<>();
+			usersList = new HashMap<>();
 		}
 	}
 
@@ -124,8 +126,11 @@ public class Restaurant implements Serializable {
 	public HashMap<String, TreeSet<AddRecordRequest>> getAddRecordHistory() {
 		return addRecordHistory;
 	}
-	public void setAddRecordHistory(HashMap<String,TreeSet<AddRecordRequest>> AddRecordHistory){
+	public void setAddRecordHistory(HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory){
 		this.addRecordHistory = addRecordHistory;
+	}
+	public HashMap<String, Customer> getUsersList() {
+		return usersList;
 	}
 	public HashSet<Customer> getBlacklist() {
 		return blackList;
@@ -169,7 +174,7 @@ public class Restaurant implements Serializable {
 
 		return getDeliveryPersons().put(dp.getId(),dp) == null && da.addDelPerson(dp);
 	}
-	
+
 	/**
 	 * Tries to add a new customer to the restaurant
 	 * @param cust
@@ -178,9 +183,10 @@ public class Restaurant implements Serializable {
 	 * Success / Failure of the insertion
 	 */
 	public boolean addCustomer(Customer cust) {
-		if(cust == null || getCustomers().containsValue(cust))
+		if (cust == null || getCustomers().containsValue(cust))
 			return false;
-		return getCustomers().put(cust.getId(),cust) == null;
+		getUsersList().put(cust.getUsername(),cust);
+		return getCustomers().put(cust.getId(), cust) == null;
 	}
 
 	/**
@@ -198,7 +204,7 @@ public class Restaurant implements Serializable {
 				return false;
 			}
 		}
-		
+
 		return getDishes().put(dish.getId(),dish) == null;
 	}
 
@@ -229,7 +235,7 @@ public class Restaurant implements Serializable {
 			Customer customer = order.getCustomer();
 			if(blackList.contains(customer))
 				throw new IllegalCustomerException();
-			
+
 			for(Dish d : order.getDishes()){
 				if(!getDishes().containsValue(d))
 					return false;
@@ -278,7 +284,7 @@ public class Restaurant implements Serializable {
 			catch(ConvertToExpressException e)
 			{
 				MyFileLogWriter.println(e.getMessage());
-				ExpressDelivery eDelivery = new ExpressDelivery(delivery.getDeliveryPerson(), delivery.getArea(), delivery.isDelivered(), 
+				ExpressDelivery eDelivery = new ExpressDelivery(delivery.getDeliveryPerson(), delivery.getArea(), delivery.isDelivered(),
 						((RegularDelivery) delivery).getOrders().first(), delivery.getDeliveryDate());
 				eDelivery.getArea().getDeliveries().put(eDelivery.getId(), eDelivery);
 				TreeSet<Order> ordersOfCustomer = getOrderByCustomer().get(eDelivery.getOrder().getCustomer());
@@ -290,7 +296,7 @@ public class Restaurant implements Serializable {
 			}
 			return delivery.getArea().addDelivery(delivery) && getDeliveries().put(delivery.getId(), delivery) == null;
 		}
-		
+
 		if(delivery instanceof ExpressDelivery)
 		{
 			ExpressDelivery eDelivery = (ExpressDelivery)delivery;
@@ -301,8 +307,8 @@ public class Restaurant implements Serializable {
 				ordersOfCustomer = new TreeSet<>();
 			ordersOfCustomer.add(eDelivery.getOrder());
 			getOrderByCustomer().put(eDelivery.getOrder().getCustomer(), ordersOfCustomer);
-			
-			return delivery.getArea().addDelivery(eDelivery) && getDeliveries().put(eDelivery.getId(),eDelivery) == null; 
+
+			return delivery.getArea().addDelivery(eDelivery) && getDeliveries().put(eDelivery.getId(),eDelivery) == null;
 		}
 		return false;
 	}
@@ -662,7 +668,7 @@ public class Restaurant implements Serializable {
 	//region Queries
 	/**
 	 * Finds all of the deliveries done by a specific delivery person
-	 * in specific month 
+	 * in specific month
 	 * @param dp
 	 * the delivery person
 	 * @param month
@@ -721,9 +727,9 @@ public class Restaurant implements Serializable {
 		}
 		return query;
 	}
-	
+
 	/**
-	 * Finds the amount of done regular and express deliveries during the last year 
+	 * Finds the amount of done regular and express deliveries during the last year
 	 * @return
 	 * map with amount of reg. deliveries and exp. deliveries
 	 */
@@ -734,7 +740,7 @@ public class Restaurant implements Serializable {
 		HashMap<String, Integer> query = new HashMap<>();
 		query.put(key1, 0);
 		query.put(key2, 0);
-		
+
 		Comparator<Delivery> comp = (d1, d2) -> d1.getDeliveryDate().compareTo(d2.getDeliveryDate());
 		TreeSet<Delivery> tree = new TreeSet<>(comp);
 		tree.addAll(deliveries.values());
@@ -754,7 +760,7 @@ public class Restaurant implements Serializable {
 		}
 		return query;
 	}
-	
+
 	/**
 	 * Calculates the revenue of the Express deliveries
 	 * @return
@@ -774,17 +780,17 @@ public class Restaurant implements Serializable {
 			if(!exp_c.contains(d.getOrder().getCustomer()))
 			{
 				exp_c.add(d.getOrder().getCustomer());
-				revenue += firstExpressD; 
+				revenue += firstExpressD;
 			}
 			revenue += d.getPostage();
-		}	
+		}
 		return revenue;
 	}
-	
+
 	/**
 	 * Ranks the components by used popularity in the dishes
 	 * @return
-	 * the ranked list of components (without components that do not appear in any dish) 
+	 * the ranked list of components (without components that do not appear in any dish)
 	 */
 	public LinkedList<Component> getPopularComponents()
 	{
@@ -798,8 +804,8 @@ public class Restaurant implements Serializable {
 				else
 					comps.put(c, comps.get(c)+1);
 			}
-				
-			
+
+
 		}
 		Comparator<Component> comp = (c1, c2) -> {
 			int res = comps.get(c2).compareTo(comps.get(c1));
@@ -811,7 +817,7 @@ public class Restaurant implements Serializable {
 		Collections.sort(query,comp);
 		return query;
 	}
-	
+
 	/**
 	 * Ranks the dishes served by profit relation
 	 * @return
@@ -825,13 +831,13 @@ public class Restaurant implements Serializable {
 			int result = rel2.compareTo(rel1);
 			if(result == 0)
 				return ((Integer)d2.getId()).compareTo(d1.getId());
-			return result; 
+			return result;
 		};
 		TreeSet<Dish> query = new TreeSet<>(comp);
 		query.addAll(dishes.values());
 		return query;
 	}
-	
+
 	/**
 	 * An AI machine that decides how to create deliveries
 	 * @param dp
@@ -845,7 +851,7 @@ public class Restaurant implements Serializable {
 	 */
 	public TreeSet<Delivery> createAIMacine(DeliveryPerson dp, DeliveryArea da, TreeSet<Order> orders)
 	{
-		TreeSet<Delivery> AIdeliveries = new TreeSet<>((d1,d2)->{			 
+		TreeSet<Delivery> AIdeliveries = new TreeSet<>((d1,d2)->{
 			int result = d1.getClass().getSimpleName().compareTo(d2.getClass().getSimpleName());
 			if(result == 0)
 				return ((Integer)d1.getId()).compareTo(d2.getId());

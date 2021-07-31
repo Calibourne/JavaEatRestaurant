@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<GridPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.LoginPageController">
+<GridPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.LoginPageController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
@@ -89,8 +89,8 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="31.0" prefWidth="149.0" text="Log in" textFill="WHITE" GridPane.rowIndex="1" />
-                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="31.0" prefWidth="149.0" text="Cancel" textFill="WHITE" GridPane.rowIndex="2" />
+                        <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="31.0" prefWidth="149.0" text="Log in" textFill="WHITE" GridPane.rowIndex="1" />
+                        <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="31.0" prefWidth="149.0" text="Cancel" textFill="WHITE" GridPane.rowIndex="2" />
                         <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="31.0" prefWidth="149.0" text="Sign up" />
                      </children>
                   </GridPane>

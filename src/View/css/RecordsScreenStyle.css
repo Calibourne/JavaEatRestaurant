@@ -116,3 +116,11 @@
 .toggle-button:selected{
     -fx-background-image: url("../images/icons8-hide-25.png");
 }
+
+.progress-bar { -fx-box-border: goldenrod; }
+
+.green-bar  { -fx-accent: green;  }
+.yellow-bar { -fx-accent: yellow; }
+.orange-bar { -fx-accent: orange; }
+.red-bar    { -fx-accent: red;    }
+.darkred-bar { -fx-accent: darkred;}

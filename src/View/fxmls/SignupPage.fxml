@@ -8,6 +8,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
@@ -184,6 +185,7 @@
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
                                     <VBox styleClass="Container">
@@ -209,7 +211,7 @@
                                              </rowConstraints>
                                              <children>
                                                 <TextField fx:id="visiblePassField" visible="false" />
-                                                <PasswordField fx:id="passwordField" />
+                                                <PasswordField fx:id="passwordField" onKeyTyped="#determinePasswordStrength" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -218,6 +220,25 @@
                                        <children>
                                           <Label text="Repeat Password:" underline="true" />
                                           <PasswordField />
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                             <children>
+                                                <Label text="Password Strength:" />
+                                                <Label fx:id="passStrengthLbl">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <Group>
+                                             <children>
+                                                <ProgressBar fx:id="passwordStrengthInd" prefHeight="18.0" prefWidth="180.0" progress="0.0" />
+                                             </children>
+                                          </Group>
                                        </children>
                                     </VBox>
                                  </children>

@@ -40,7 +40,7 @@ public class Customer extends Person{
 		this.neighberhood = neighberhood;
 		this.isSensitiveToLactose = isSensitiveToLactose;
 		this.isSensitiveToGluten = isSensitiveToGluten;
-		this.username = String.format("%d", getId());
+		this.username = String.format("%s%s%d",  firstName, lastName, getId());
 		this.password = "123456";
 	}
 	

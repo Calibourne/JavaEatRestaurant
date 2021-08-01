@@ -36,6 +36,17 @@ public class Restaurant implements Serializable {
 	private HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory;//keeps track of added record history
 	private HashMap<String, Customer> usersList;
 
+	protected int runningCooks;
+	protected int runningDelipersons;
+	protected int runningCustomers;
+	protected int runningComponents;
+	protected int runningDishes;
+	protected int runningOrders;
+	protected int runningDeliveries;
+	protected int runningAreas;
+
+
+
 	private boolean firstRun;
 
 	public static Restaurant getInstance()
@@ -59,6 +70,7 @@ public class Restaurant implements Serializable {
 			orderByCustomer = new HashMap<>();
 			orderByDeliveryArea = new HashMap<>();
 			usersList = new HashMap<>();
+			addRecordHistory = new HashMap<>();
 		}
 	}
 
@@ -898,11 +910,18 @@ public class Restaurant implements Serializable {
 			//Saving of object in a file
 			FileOutputStream file = new FileOutputStream(filename);
 			ObjectOutputStream out = new ObjectOutputStream(file);
+			runningCustomers 	= Customer.getIdCounter();
+			runningCooks 		= Cook.getIdCounter();
+			runningDelipersons 	= DeliveryPerson.getIdCounter();
+			runningComponents 	= Component.getIdCounter();
+			runningDishes 		= Dish.getIdCounter();
+			runningOrders 		= Order.getIdCounter();
+			runningDeliveries 	= Delivery.getIdCounter();
+			runningAreas 		= DeliveryArea.getIdCounter();
 			out.writeObject(this);
 
 			out.close();
 			file.close();
-
 			return true;
 
 		}
@@ -940,6 +959,16 @@ public class Restaurant implements Serializable {
 				this.orders = res.orders;
 				this.orderByCustomer = res.orderByCustomer;
 				this.orderByDeliveryArea = res.orderByDeliveryArea;
+				this.usersList = res.usersList;
+				this.addRecordHistory = res.addRecordHistory;
+				Customer.setIdCounter(res.runningCustomers);
+				Cook.setIdCounter(res.runningCooks);
+				DeliveryPerson.setIdCounter(res.runningDelipersons);
+				DeliveryArea.setIdCounter(res.runningAreas);
+				Component.setIdCounter(res.runningComponents);
+				Dish.setIdCounter(res.runningDishes);
+				Order.setIdCounter(res.runningOrders);
+				Delivery.setIdCounter(res.runningDeliveries);
 				setFirstRun(false);
 				return true;
 			}

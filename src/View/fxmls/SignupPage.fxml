@@ -93,11 +93,41 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
+                              <GridPane vgap="5.0" GridPane.rowIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Alergenic Info" underline="true">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane vgap="10.0" GridPane.rowIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <CheckBox fx:id="glutenCheckbox" mnemonicParsing="false" prefHeight="17.0" prefWidth="122.0" text="Gluten intolerant" />
+                                          <CheckBox fx:id="lactoseCheckbox" mnemonicParsing="false" prefHeight="17.0" prefWidth="120.0" text="Lactose intolerant" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
                               <GridPane vgap="10.0">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                                  </columnConstraints>
                                  <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -171,7 +201,7 @@
                                                             <ToggleButton fx:id="toggleHidePassword1" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" />
                                                          </children>
                                                       </HBox>
-                                                      <PasswordField />
+                                                      <PasswordField fx:id="confirmPasswordField" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -216,40 +246,21 @@
                                           <VBox prefWidth="175.0">
                                              <children>
                                                 <Label text="Birth Date:" />
-                                                <DatePicker />
+                                                <DatePicker fx:id="birthdateDP" />
                                              </children>
                                           </VBox>
                                        </children>
                                     </Group>
-                                 </children>
-                              </GridPane>
-                              <GridPane vgap="5.0" GridPane.rowIndex="1">
-                                 <columnConstraints>
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Label text="Alergenic Info" underline="true">
-                                       <font>
-                                          <Font size="17.0" />
-                                       </font>
-                                    </Label>
-                                    <GridPane vgap="10.0" GridPane.rowIndex="1">
-                                       <columnConstraints>
-                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
+                                    <Group GridPane.rowIndex="6">
                                        <children>
-                                          <CheckBox mnemonicParsing="false" prefHeight="17.0" prefWidth="122.0" text="Gluten intolerant" />
-                                          <CheckBox mnemonicParsing="false" prefHeight="17.0" prefWidth="120.0" text="Lactose intolerant" GridPane.rowIndex="1" />
+                                          <VBox>
+                                             <children>
+                                                <Label text="Neighbourhood:" />
+                                                <ComboBox fx:id="neighbourhoodCb" prefHeight="25.0" prefWidth="175.0" />
+                                             </children>
+                                          </VBox>
                                        </children>
-                                    </GridPane>
+                                    </Group>
                                  </children>
                               </GridPane>
                            </children>
@@ -261,7 +272,7 @@
                   </AnchorPane>
                </content>
             </ScrollPane>
-            <Button mnemonicParsing="false" text="Register" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#registerButtonOnAction" text="Register" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="15.0" top="5.0" />
                </GridPane.margin>

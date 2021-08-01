@@ -27,4 +27,8 @@ public abstract class RecordRequest implements Serializable, Comparable<RecordRe
                 timeOfRequest.compareTo(o.timeOfRequest) :
                 dateOfRequest.compareTo(o.dateOfRequest);
     }
+
+    public Record getRecord() {
+        return record;
+    }
 }

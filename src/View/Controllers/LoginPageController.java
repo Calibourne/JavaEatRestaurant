@@ -1,5 +1,7 @@
 package View.Controllers;
 
+import Model.Customer;
+import Model.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +30,14 @@ public class LoginPageController {
     @FXML
     private PasswordField passwordField;
 
+    private Restaurant rest;
+
+    @FXML
+    private void initialize(){
+        rest = Restaurant.getInstance();
+        rest.getUsersList().forEach((k,v)-> System.out.printf("%s : %s\n", k, v));
+        System.out.println(Customer.getIdCounter());
+    }
 
     @FXML
     private void LoginButtonOnAction(ActionEvent e){
@@ -41,7 +51,8 @@ public class LoginPageController {
             }
         }
 
-        if (usernameField.getText().equals("customer") && passwordField.getText().equals("customer")){
+        if (rest.getUsersList().containsKey(usernameField.getText())
+                && passwordField.getText().equals(rest.getUsersList().get(usernameField.getText()).getPassword())){
             loginMessageLabel.setText("Placeholder for correct login credentials"); // need to change to a main page prompt
         }
         else

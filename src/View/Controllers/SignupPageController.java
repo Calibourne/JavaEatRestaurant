@@ -1,6 +1,10 @@
 package View.Controllers;
 
 import Model.Customer;
+import Model.Requests.AddRecordRequest;
+import Model.Restaurant;
+import Utils.Gender;
+import Utils.Neighberhood;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.css.StyleClass;
@@ -15,6 +19,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Locale;
 
 
 public class SignupPageController {
@@ -24,6 +31,16 @@ public class SignupPageController {
     private TextField lnameInput;
     @FXML
     private TextField usernameField;
+    @FXML
+    private ComboBox genderCb;
+    @FXML
+    private ComboBox neighbourhoodCb;
+    @FXML
+    private DatePicker birthdateDP;
+    @FXML
+    private CheckBox glutenCheckbox;
+    @FXML
+    private CheckBox lactoseCheckbox;
     @FXML
     private ToggleButton toggleHidePassword;
     @FXML
@@ -50,6 +67,11 @@ public class SignupPageController {
         visiblePassField.textProperty().bind(passwordField.textProperty());
         visiblePassField.visibleProperty().bind(toggleHidePassword.selectedProperty());
         passwordField.visibleProperty().bind(toggleHidePassword.selectedProperty().not());
+
+        genderCb.getItems().addAll(Arrays.stream(Gender.values()).toList());
+        genderCb.getSelectionModel().selectFirst();
+        neighbourhoodCb.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
+        neighbourhoodCb.getSelectionModel().selectFirst();
 
         passwordStrengthInd.progressProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -78,11 +100,42 @@ public class SignupPageController {
     @FXML
     private void generateUsername(KeyEvent e){
         if(fnameInput.getText().length() > 0 && lnameInput.getText().length() > 0)
-            usernameField.setText(fnameInput.getText() + lnameInput.getText() + Customer.getIdCounter()+1);
+            usernameField.setText(String.format("%s%s%d",fnameInput.getText() , lnameInput.getText() , Customer.getIdCounter()));
         else
             usernameField.setText("Enter your full name first");
     }
 
+    @FXML
+    private void registerButtonOnAction(ActionEvent e){
+        try{
+           if(!passwordField.getText().equals(confirmPasswordField.getText()))
+               throw new Exception();
+           String fname = fnameInput.getText();
+           String lname = lnameInput.getText();
+           Gender gender = (Gender) genderCb.getValue();
+           Neighberhood neighborhood = (Neighberhood) neighbourhoodCb.getValue();
+           boolean glutenIntolerant = glutenCheckbox.isSelected(),
+                   lactoseIntolerant = lactoseCheckbox.isSelected();
+           LocalDate ld = birthdateDP.getValue();
+           AddRecordRequest request = new AddRecordRequest(
+                   new Customer(-1),
+                   fname,
+                   lname,
+                   ld,
+                   gender,
+                   neighborhood,
+                   glutenIntolerant,
+                   lactoseIntolerant
+           );
+           ((Customer)request.getRecord()).setPassword(passwordField.getText());
+            request.saveRequest();
+        }catch(Exception ex){
+            System.out.println("Try again!");
+            return;
+        }
+        Restaurant.getInstance().saveDatabase("Rest.ser");
+        System.out.println("Success!");
+    }
 
     @FXML
     private void cancelButtonOnAction(ActionEvent e){

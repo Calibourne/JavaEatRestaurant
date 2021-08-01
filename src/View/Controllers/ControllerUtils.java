@@ -6,14 +6,17 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -45,6 +48,21 @@ public class ControllerUtils {
     public static void showAlertMessage(Collection<Group> groups, Group section,Group visible_section,String prompt){
         showAlertMessage(groups, section, prompt);
         visible_section.setVisible(false);
+    }
+
+    /**
+     * Helper function to organize the code
+     * @param s
+     * The window we want to affect
+     * @param p
+     * The new window we want to replace with
+     * @throws IOException
+     */
+    protected static void changeScreen(Stage s, Parent p) throws IOException{
+        s.hide();
+        s.setScene(new Scene(p));
+        s.centerOnScreen();
+        s.show();
     }
 
 }

@@ -35,7 +35,7 @@ public class LoginPageController {
             try {
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("../fxmls/managerPage.fxml"));
-                changeScreen(s, p);
+                ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -59,7 +59,7 @@ public class LoginPageController {
         try{
             Stage s = (Stage) registerButton.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("../fxmls/SignupPage.fxml"));
-            changeScreen(s, p);
+            ControllerUtils.changeScreen(s, p);
         }catch (IOException ioException){
             ioException.printStackTrace();
         }
@@ -74,20 +74,7 @@ public class LoginPageController {
         }
     }
 
-    /**
-     * Helper function to organize the code
-     * @param s
-     * The window we want to affect
-     * @param p
-     * The new window we want to replace with
-     * @throws IOException
-     */
-    private void changeScreen(Stage s, Parent p) throws IOException{
-        s.hide();
-        s.setScene(new Scene(p));
-        s.centerOnScreen();
-        s.show();
-    }
+
 
 //    @FXML
 //    private Text actiontarget;

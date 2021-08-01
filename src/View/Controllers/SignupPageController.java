@@ -6,10 +6,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.css.StyleClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.AccessibleRole;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class SignupPageController {
@@ -31,6 +36,8 @@ public class SignupPageController {
     private Label passStrengthLbl;
     @FXML
     private ProgressBar passwordStrengthInd;
+    @FXML
+    private Button cancelButton;
 
     private static final String DARKRED_BAR    = "darkred-bar";
     private static final String RED_BAR    = "red-bar";
@@ -74,6 +81,18 @@ public class SignupPageController {
             usernameField.setText(fnameInput.getText() + lnameInput.getText() + Customer.getIdCounter()+1);
         else
             usernameField.setText("Enter your full name first");
+    }
+
+
+    @FXML
+    private void cancelButtonOnAction(ActionEvent e){
+        try {
+            Stage s = (Stage) cancelButton.getScene().getWindow();
+            Parent p = FXMLLoader.load(getClass().getResource("../fxmls/LoginPage.fxml"));
+            ControllerUtils.changeScreen(s, p);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
     /**

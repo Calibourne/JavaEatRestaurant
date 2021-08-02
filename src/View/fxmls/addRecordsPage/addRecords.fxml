@@ -172,6 +172,14 @@
                <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
+               <GridPane fx:id="addWindow">
+                 <columnConstraints>
+                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                 </rowConstraints>
+               </GridPane>
                <Group fx:id="welcome_sctn">
                   <children>
                      <GridPane>
@@ -191,7 +199,7 @@
                      </GridPane>
                   </children>
                </Group>
-               <Group fx:id="addCooks_sctn" visible="false">
+               <Group fx:id="addCooks_sctn" disable="true" visible="false">
                   <children>
                      <GridPane fx:id="CookInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -244,7 +252,7 @@
                      <Button fx:id="addCook_btn" layoutX="210.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Cook" />
                   </children>
                </Group>
-               <Group fx:id="addDeliPersons_sctn" visible="false">
+               <Group fx:id="addDeliPersons_sctn" disable="true" visible="false">
                   <children>
                      <GridPane fx:id="DeliPersonInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -298,7 +306,7 @@
                      <Button fx:id="addDeliPerson_btn" layoutX="182.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery person" />
                   </children>
                </Group>
-               <Group fx:id="addCustomers_sctn" visible="false">
+               <Group fx:id="addCustomers_sctn" disable="true" visible="false">
                   <children>
                      <GridPane fx:id="CustomerInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -353,7 +361,7 @@
                      <Button fx:id="addCustomer_btn" layoutX="198.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Customer" />
                   </children>
                </Group>
-               <Group fx:id="addComponents_sctn" visible="false">
+               <Group fx:id="addComponents_sctn" disable="true" visible="false">
                   <children>
                      <GridPane fx:id="ComponentInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -389,7 +397,7 @@
                      </GridPane>
                   </children>
                </Group>
-               <Group fx:id="addDishes_sctn" visible="false">
+               <Group fx:id="addDishes_sctn" disable="true" visible="false">
                   <children>
                      <GridPane hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -424,7 +432,7 @@
                      </GridPane>
                   </children>
                </Group>
-               <Group fx:id="addOrders_sctn" visible="false">
+               <Group fx:id="addOrders_sctn" disable="true" visible="false">
                   <children>
                      <GridPane fx:id="OrderInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -459,7 +467,7 @@
                      </GridPane>
                   </children>
                </Group>
-               <Group fx:id="addDeliveries_sctn" visible="false">
+               <Group fx:id="addDeliveries_sctn" disable="true" visible="false">
                   <children>
                      <GridPane fx:id="DeliveryInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -525,7 +533,7 @@
                      <Button fx:id="addDelivery_btn" layoutX="202.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery" />
                   </children>
                </Group>
-               <Group fx:id="addAreas_sctn" visible="false">
+               <Group fx:id="addAreas_sctn" disable="true" visible="false">
                   <children>
                      <GridPane fx:id="AreaInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
                         <columnConstraints>
@@ -560,7 +568,7 @@
                      </GridPane>
                   </children>
                </Group>
-               <Group fx:id="addToBlacklist_sctn" visible="false">
+               <Group fx:id="addToBlacklist_sctn" disable="true" visible="false">
                   <children>
                      <GridPane fx:id="BlacklistInfo_grid" layoutX="195.0" layoutY="14.0" prefHeight="93.0" prefWidth="280.0" vgap="10.0">
                         <columnConstraints>

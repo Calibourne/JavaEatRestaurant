@@ -84,6 +84,8 @@ public class AddRecordsPageController extends RecordManagementController{
     private RadioButton ed_RB;
     @FXML
     private RadioButton rd_RB;
+    @FXML
+    private GridPane addWindow;
 
     //endregion
 
@@ -129,7 +131,53 @@ public class AddRecordsPageController extends RecordManagementController{
             ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn, "Please add some orders first");
         }
         else {
-            super.handleButtonClick(e);
+            try {
+                welcome_sctn.setVisible(false);
+                alert_sctn.setVisible(false);
+                addWindow.setVisible(false);
+                addWindow.getChildren().removeAll(addWindow.getChildren());
+                if (e.getSource() == addCooks_btn) {
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addCooks.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                if (e.getSource() == addCustomers_btn) {
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addCustomers.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                if (e.getSource() == addDeliPersons_btn) {
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addDeliveryPersons.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                if (e.getSource() == addComponents_btn) {
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addIngredients.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                if (e.getSource() == addDishes_btn) {
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addDishes.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                if (e.getSource() == addOrders_btn) {
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addOrders.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                if (e.getSource() == addDeliveries_btn) {
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addDeliveries.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                if(e.getSource()== addAreas_btn){
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addDeliveryAreas.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                if (e.getSource() == addToBlacklist_btn){
+                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addToBlacklist.fxml"));
+                    addWindow.getChildren().add(node);
+                }
+                addWindow.setVisible(true);
+            }
+            catch (IOException ex){
+                ex.printStackTrace();
+            }
+            //super.handleButtonClick(e);
         }
         if (e.getSource() == ed_RB)
         {

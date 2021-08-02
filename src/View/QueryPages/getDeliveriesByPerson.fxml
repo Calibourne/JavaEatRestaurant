@@ -13,8 +13,8 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="793.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.QueryPages.getDeliveriesByPersonController">
-    <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="793.0" styleClass="VBox">
+<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.QueryPages.getDeliveriesByPersonController">
+    <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
             <Label alignment="CENTER" text="Create a new delivery using AI" textAlignment="CENTER">
                 <font>
@@ -93,14 +93,6 @@
             </font>
             <VBox.margin>
                 <Insets top="40.0" />
-            </VBox.margin>
-        </Button>
-        <Button mnemonicParsing="false" text="Back">
-            <font>
-                <Font size="15.0" />
-            </font>
-            <VBox.margin>
-                <Insets top="20.0" />
             </VBox.margin>
         </Button>
     </VBox>

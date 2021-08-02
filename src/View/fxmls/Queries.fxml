@@ -5,9 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 
 <AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.QueriesController">
     <GridPane prefHeight="576.0" prefWidth="813.0">
@@ -35,12 +33,12 @@
                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <children>
-                    <Button fx:id="relevant_dish_list_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Get relevant dish list">
+                    <Button fx:id="relevant_dish_list_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Get relevant dish list">
                   <padding>
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="cooks_by_expertise_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Get cooks by expertise" GridPane.rowIndex="1">
+                    <Button fx:id="cooks_by_expertise_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Get cooks by expertise" GridPane.rowIndex="1">
                         <GridPane.margin>
                             <Insets />
                         </GridPane.margin>
@@ -48,7 +46,7 @@
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="popular_ingredients_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Get popular ingredients" GridPane.rowIndex="2">
+                    <Button fx:id="popular_ingredients_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Get popular ingredients" GridPane.rowIndex="2">
                         <GridPane.margin>
                             <Insets />
                         </GridPane.margin>
@@ -56,32 +54,32 @@
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="order_waiting_time_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Calculate an order's waiting time" GridPane.rowIndex="3">
+                    <Button fx:id="order_waiting_time_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Calculate an order's waiting time" GridPane.rowIndex="3">
                   <padding>
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="delis_by_dp_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Get deliveries by delivery person" GridPane.rowIndex="4">
+                    <Button fx:id="delis_by_dp_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Get deliveries by delivery person" GridPane.rowIndex="4">
                   <padding>
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="delis_by_type_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Get number of deliveries by type" GridPane.rowIndex="5">
+                    <Button fx:id="delis_by_type_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Get number of deliveries by type" GridPane.rowIndex="5">
                   <padding>
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="express_revenue_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Revenue from express deliveries" GridPane.rowIndex="6">
+                    <Button fx:id="express_revenue_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Revenue from express deliveries" GridPane.rowIndex="6">
                   <padding>
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="profit_relation_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Get profit relation" GridPane.rowIndex="7">
+                    <Button fx:id="profit_relation_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Get profit relation" GridPane.rowIndex="7">
                   <padding>
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="ai_macine_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#aiMacineButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Create AI macine" GridPane.rowIndex="8">
+                    <Button fx:id="ai_macine_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Create AI macine" GridPane.rowIndex="8">
                   <padding>
                      <Insets left="15.0" />
                   </padding>
@@ -95,21 +93,6 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                 </rowConstraints>
-            <children>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <Pane fx:id="paneRelevantDish" prefHeight="200.0" prefWidth="200.0" />
-                     <Pane fx:id="paneCooksExpertise" prefHeight="200.0" prefWidth="200.0" />
-                     <Pane fx:id="panePopIngredients" prefHeight="200.0" prefWidth="200.0" />
-                     <Pane fx:id="paneOrderWaitingTime" prefHeight="200.0" prefWidth="200.0" />
-                     <Pane fx:id="paneDelisByDP" prefHeight="200.0" prefWidth="200.0" />
-                     <Pane fx:id="paneDelisByType" prefHeight="200.0" prefWidth="200.0" />
-                     <Pane fx:id="paneRevenueExpress" prefHeight="200.0" prefWidth="200.0" />
-                     <Pane fx:id="paneProfitRelation" prefHeight="200.0" prefWidth="200.0" />
-                     <Pane fx:id="paneAiMacine" prefHeight="200.0" prefWidth="200.0" />
-                  </children>
-               </StackPane>
-            </children>
             </GridPane>
         </children>
     </GridPane>

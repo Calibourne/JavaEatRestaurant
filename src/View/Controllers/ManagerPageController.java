@@ -149,7 +149,7 @@ public class ManagerPageController {
             pnlQueries.getChildren().add(queryPage);
         }
         catch(IOException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

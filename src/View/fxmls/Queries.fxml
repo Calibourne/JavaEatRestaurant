@@ -81,7 +81,7 @@
                      <Insets left="15.0" />
                   </padding>
                     </Button>
-                    <Button fx:id="ai_macine_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="250.0" text="Create AI macine" GridPane.rowIndex="8">
+                    <Button fx:id="ai_macine_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#aiMacineButtonPushed" prefHeight="40.0" prefWidth="250.0" text="Create AI macine" GridPane.rowIndex="8">
                   <padding>
                      <Insets left="15.0" />
                   </padding>

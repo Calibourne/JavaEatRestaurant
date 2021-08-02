@@ -4,14 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
-
 import java.io.IOException;
 import java.util.Objects;
 
@@ -76,7 +71,7 @@ public class QueriesController {
 
 
     public void initialize(){
-//        initAiMacine(); not working atm
+
     }
 
 
@@ -84,35 +79,59 @@ public class QueriesController {
         if(event.getSource()== ai_macine_button){
             paneAiMacine.setStyle("-fx-background-color: #1F4591");
             paneAiMacine.toFront();
-
         }
-
     }
 
-    // (currently non-functional) method(s) used to switch between scenes within a stage
-    public void aiMacineButtonPushed(ActionEvent event) {
-        try {
-            Parent aiMacineParent = FXMLLoader.load(getClass().getResource("../QueryPages/createAIMacine.fxml"));
-            Scene aiMacineScene = new Scene(aiMacineParent);
+    // method(s) used to switch between scenes within a stage
 
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(aiMacineScene);
-            window.show();
-        }catch(Exception e){
+
+    public void queryButtonPushed(ActionEvent event) {
+        try{
+            Node queryPage;
+            switch(((Node)event.getSource()).getId()){
+                case "profit_relation_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getProfitRelation.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+                case "ai_macine_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/createAIMacine.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+                case "express_revenue_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/revenueFromExpressDeliveries.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+                case "delis_by_type_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getNumberOfDeliveriesPerType.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+                case "delis_by_dp_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getDeliveriesByPerson.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+                case "order_waiting_time_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/orderWaitingTime.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+                case "popular_ingredients_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getPopularComponent.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+                case "cooks_by_expertise_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getCooksByExpertise.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+                case "relevant_dish_list_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getRelevantDishList.fxml")));
+                    query_pane.getChildren().add(queryPage);
+                    break;
+
+            }
+        }
+        catch(IOException e){
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
     }
 
-
-//    public void initAiMacine(){
-//        try{
-//            Node aiMacinePage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/createAIMacine.fxml")));
-//            query_pane.getChildren().add(aiMacinePage);
-//        }
-//        catch(IOException e){
-//            e.printStackTrace();
-//        }
-//    } not working atm
 
 }

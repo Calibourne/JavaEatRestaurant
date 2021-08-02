@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 
 import static View.Controllers.ControllerUtils.*;
 
-public class AddRecordsController extends RecordManagementController{
+public class AddRecordsPageController extends RecordManagementController{
 
     //region Properties
     //region Sections

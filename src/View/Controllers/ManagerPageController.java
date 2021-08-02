@@ -15,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
 
 public class ManagerPageController {
@@ -130,7 +129,7 @@ public class ManagerPageController {
     }
     private void initRecords() {
             try {
-                Node recordsA = FXMLLoader.load(getClass().getResource("../fxmls/addRecords.fxml"));
+                Node recordsA = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addRecords.fxml"));
                 pnlAddRecords.getChildren().add(recordsA);
             } catch(IOException e){
                 System.out.println(e.getMessage());

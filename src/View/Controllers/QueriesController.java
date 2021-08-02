@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -89,13 +90,18 @@ public class QueriesController {
     }
 
     // (currently non-functional) method(s) used to switch between scenes within a stage
-    public void aiMacineButtonPushed(ActionEvent event) throws IOException {
-        Parent aiMacineParent = FXMLLoader.load(getClass().getResource("createAIMacine.fxml)"));
-        Scene aiMacineScene = new Scene(aiMacineParent);
+    public void aiMacineButtonPushed(ActionEvent event) {
+        try {
+            Parent aiMacineParent = FXMLLoader.load(getClass().getResource("../QueryPages/createAIMacine.fxml"));
+            Scene aiMacineScene = new Scene(aiMacineParent);
 
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(aiMacineScene);
-        window.show();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(aiMacineScene);
+            window.show();
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
     }
 
 

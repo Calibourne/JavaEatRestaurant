@@ -23,7 +23,7 @@ public class AddRecordRequest extends RecordRequest {
             this.record = new DeliveryArea(
                     (String) args[0],
                     (HashSet<Neighberhood>) args[1],
-                    (int) args[2]
+                    Integer.parseInt((String) args[2])
             );
         }
         if (record instanceof Cook) {

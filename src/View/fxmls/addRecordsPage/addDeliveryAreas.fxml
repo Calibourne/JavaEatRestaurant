@@ -25,7 +25,7 @@
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery area name" />
-                  <TextField />
+                  <TextField fx:id="areaName_field" />
                </children>
             </VBox>
             <VBox fx:id="rd_vbox1" prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
@@ -37,10 +37,10 @@
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery time" />
-                  <TextField />
+                  <TextField fx:id="deliveryTime_field" />
                </children>
             </VBox>
-            <Button fx:id="addArea_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Area" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Area" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

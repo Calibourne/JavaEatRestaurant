@@ -1,7 +1,10 @@
 package View.Controllers;
 
 import Model.*;
+import Model.Record;
+import Model.Requests.AddRecordRequest;
 import Utils.*;
+import impl.org.controlsfx.collections.ReadOnlyUnbackedObservableList;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -11,6 +14,7 @@ import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class addRecordsController {
     // region Properties
@@ -197,6 +201,34 @@ public class addRecordsController {
         {
             ed_vbox.setVisible(false);
             rd_vbox.setVisible(true);
+        }
+        if(e.getSource() == submit){
+            addRecord();
+        }
+    }
+    private void addRecord(){
+        try {
+            AddRecordRequest request = new AddRecordRequest(new Record() {
+                @Override
+                public String description() {
+                    return null;
+                }
+            });
+            // The code for selecting the checked items is taken from the following site:
+            // https://www.tabnine.com/code/java/classes/org.controlsfx.control.CheckComboBox
+            if (addAreas_sctn != null) {
+                ReadOnlyUnbackedObservableList<Neighberhood> selectedItems =
+                        (ReadOnlyUnbackedObservableList<Neighberhood>) neighbourhoods_checkedCombo.getCheckModel().getCheckedItems();
+                HashSet<Neighberhood> selectedNeighbourhoods = new HashSet<>(selectedItems.stream().toList());
+                selectedNeighbourhoods = (selectedNeighbourhoods.size()>0)?selectedNeighbourhoods:null;
+                String areaName = areaName_field.getText().length()>0?areaName_field.getText():null;
+                String deliveryTime = deliveryTime_field.getText().length()>0?deliveryTime_field.getText():null;
+                request = new AddRecordRequest(new DeliveryArea(-1), areaName, selectedNeighbourhoods, deliveryTime);
+            }
+            request.saveRequest();
+            Restaurant.getInstance().saveDatabase("Rest.ser");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }

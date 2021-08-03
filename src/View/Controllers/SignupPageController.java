@@ -32,9 +32,9 @@ public class SignupPageController {
     @FXML
     private TextField usernameField;
     @FXML
-    private ComboBox genderCb;
+    private ComboBox<Gender> genderCb;
     @FXML
-    private ComboBox neighbourhoodCb;
+    private ComboBox<Neighberhood> neighbourhoodCb;
     @FXML
     private DatePicker birthdateDP;
     @FXML

@@ -252,21 +252,21 @@ successfully added Component Jam
 successfully added Component Caramel
 successfully added Component Hummus
 
-Cake - Dessert, price: 0.000000 Price is 30.0
+Cake - Dessert, price: 0.00₪, contains gluten Price is 30.0
 successfully added Dish Cake
-Brule Cream - Dessert, price: 0.000000 Price is 83.7
+Brule Cream - Dessert, price: 0.00₪, contains lactose Price is 83.7
 successfully added Dish Brule Cream
-Krep - Dessert, price: 0.000000 Price is 48.0
+Krep - Dessert, price: 0.00₪, contains gluten Price is 48.0
 successfully added Dish Krep
-Belgian Waffle - Dessert, price: 0.000000 Price is 54.0
+Belgian Waffle - Dessert, price: 0.00₪ Price is 54.0
 successfully added Dish Belgian Waffle
-Arancini - Starter, price: 0.000000 Price is 37.5
+Arancini - Starter, price: 0.00₪, contains gluten and lactose Price is 37.5
 successfully added Dish Arancini
-Stuffed Mushrooms - Starter, price: 0.000000 Price is 60.0
+Stuffed Mushrooms - Starter, price: 0.00₪, contains gluten and lactose Price is 60.0
 successfully added Dish Stuffed Mushrooms
-Chips - Starter, price: 0.000000 Price is 46.8
+Chips - Starter, price: 0.00₪, contains gluten Price is 46.8
 successfully added Dish Chips
-Onion Rings - Starter, price: 0.000000 Price is 59.099999999999994
+Onion Rings - Starter, price: 0.00₪, contains lactose Price is 59.099999999999994
 successfully added Dish Onion Rings
 
 successfully added customer to blackList 100

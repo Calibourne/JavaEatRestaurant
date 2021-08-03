@@ -208,6 +208,11 @@ public class DeliveryArea extends Record {
 
 	@Override
 	public String toString() {
+		return String.format("Area: \"%s\", delivery time: %d minutes", areaName, deliverTime);
+	}
+
+	@Override
+	public String description() {
 		return "DeliveryArea [id=" + id + ", areaName=" + areaName + ", neighberhoods=" + neighberhoods
 				+ ", deliverTime=" + deliverTime + "]";
 	}

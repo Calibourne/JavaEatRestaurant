@@ -139,6 +139,11 @@ public class Order extends Record implements Comparable<Order> {
 	
 	@Override
 	public String toString() {
+		return String.format("Order No%d for %s, price: %.2f₪", id, customer, dishes.stream().map(Dish::getPrice).reduce(0.0, Double::sum));
+	}
+
+	@Override
+	public String description() {
 		return "Order [id=" + id + ", customer=" + customer + "]";
 	}
 

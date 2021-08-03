@@ -20,13 +20,13 @@ public class DeliveryPerson extends Person {
 	 * The first name of the delivery person
 	 * @param lastName
 	 * The last name of the delivery person
-	 * @param birthDate
+	 * @param birthDay
 	 * The birth date of the delivery person
 	 * @param gender
 	 * The gender of the delivery person
 	 * @param vehicle
 	 * The vehicle of the delivery person
-	 * @param deliveryArea
+	 * @param area
 	 * The delivery area of the delivery person
 	 */
 	public DeliveryPerson(String firstName, String lastName, LocalDate birthDay, Gender gender, Vehicle vehicle,
@@ -90,6 +90,11 @@ public class DeliveryPerson extends Person {
 	
 	@Override
 	public String toString() {
-		return super.toString()+" DeliveryPerson [vehicle=" + vehicle + "]";
+		return String.format("%s, vehicle: %s",super.toString(), vehicle);
+	}
+
+	@Override
+	public String description() {
+		return super.description()+" DeliveryPerson [vehicle=" + vehicle + "]";
 	}
 }

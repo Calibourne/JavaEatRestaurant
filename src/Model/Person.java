@@ -142,6 +142,11 @@ public abstract class Person extends Record {
 	
 	@Override
 	public String toString() {
+		return String.format("%s %s", firstName, lastName);
+	}
+
+	@Override
+	public String description() {
 		return "[firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 }

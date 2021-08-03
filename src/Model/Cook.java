@@ -91,13 +91,11 @@ public class Cook extends Person{
 
 	@Override
 	public String toString() {
-		return super.toString()+" Cook [expert=" + expert + "]";
+		return String.format("%s, expert at %s cuisine", super.toString(), getExpert());
 	}
 
-
-	
-	
-	
-	
-	
+	@Override
+	public String description() {
+		return super.description()+" Cook [expert=" + expert + "]";
+	}
 }

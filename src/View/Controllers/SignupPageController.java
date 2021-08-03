@@ -73,9 +73,7 @@ public class SignupPageController {
         passwordField.visibleProperty().bind(toggleHidePassword.selectedProperty().not());
 
         genderCb.getItems().addAll(Arrays.stream(Gender.values()).toList());
-        genderCb.getSelectionModel().selectFirst();
         neighbourhoodCb.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
-        neighbourhoodCb.getSelectionModel().selectFirst();
 
         passwordStrengthInd.progressProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {

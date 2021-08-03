@@ -72,4 +72,9 @@ public class RegularDelivery extends Delivery {
 			return orders.remove(o);
 		return false;
 	}
+
+	@Override
+	public String description() {
+		return String.format("Regular delivery No%d", getId());
+	}
 }

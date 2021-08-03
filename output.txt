@@ -252,21 +252,21 @@ successfully added Component Jam
 successfully added Component Caramel
 successfully added Component Hummus
 
-Dish [id=1, dishName=Cake, type=Dessert, price=0.0, timeToMake=15] Price is 30.0
+Cake - Dessert, price: 0.000000 Price is 30.0
 successfully added Dish Cake
-Dish [id=2, dishName=Brule Cream, type=Dessert, price=0.0, timeToMake=18] Price is 83.7
+Brule Cream - Dessert, price: 0.000000 Price is 83.7
 successfully added Dish Brule Cream
-Dish [id=3, dishName=Krep, type=Dessert, price=0.0, timeToMake=15] Price is 48.0
+Krep - Dessert, price: 0.000000 Price is 48.0
 successfully added Dish Krep
-Dish [id=4, dishName=Belgian Waffle, type=Dessert, price=0.0, timeToMake=20] Price is 54.0
+Belgian Waffle - Dessert, price: 0.000000 Price is 54.0
 successfully added Dish Belgian Waffle
-Dish [id=5, dishName=Arancini, type=Starter, price=0.0, timeToMake=25] Price is 37.5
+Arancini - Starter, price: 0.000000 Price is 37.5
 successfully added Dish Arancini
-Dish [id=6, dishName=Stuffed Mushrooms, type=Starter, price=0.0, timeToMake=10] Price is 60.0
+Stuffed Mushrooms - Starter, price: 0.000000 Price is 60.0
 successfully added Dish Stuffed Mushrooms
-Dish [id=7, dishName=Chips, type=Starter, price=0.0, timeToMake=15] Price is 46.8
+Chips - Starter, price: 0.000000 Price is 46.8
 successfully added Dish Chips
-Dish [id=8, dishName=Onion Rings, type=Starter, price=0.0, timeToMake=18] Price is 59.099999999999994
+Onion Rings - Starter, price: 0.000000 Price is 59.099999999999994
 successfully added Dish Onion Rings
 
 successfully added customer to blackList 100

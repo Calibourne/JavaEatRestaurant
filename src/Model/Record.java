@@ -9,5 +9,5 @@ import java.io.Serializable;
  * is used in {@link RecordRequest} class
  */
 public abstract class Record implements Serializable {
-
+    public abstract String description();
 }

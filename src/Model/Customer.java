@@ -123,7 +123,7 @@ public class Customer extends Person{
 	}
 
 	@Override
-	public String toString() {
+	public String description() {
 		return super.toString()+" Customer [isSensitiveToLactose=" + isSensitiveToLactose + ", isSensitiveToGluten=" + isSensitiveToGluten
 				+ "]";
 	}

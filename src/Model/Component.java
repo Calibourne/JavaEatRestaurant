@@ -134,7 +134,17 @@ public class Component extends Record implements Comparable<Component> {
 	
 	@Override
 	public String toString() {
-		return "Component [id=" + id + ", componentName=" + componentName + ", price=" + price + "]";
+		String allergens = "";
+		if(hasGluten || hasLactose)
+			allergens+=", contains ";
+		if(hasGluten) {
+			allergens+="gluten";
+			if(hasLactose)
+				allergens += " and ";
+		}
+		if(hasLactose)
+			allergens += "lactose";
+		return String.format("%s, price: %.2f₪", componentName, price) + allergens;
 	}
 
 	@Override
@@ -166,8 +176,9 @@ public class Component extends Record implements Comparable<Component> {
 			return ((Integer)getId()).compareTo(other.getId());
 		return priceCompare;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String description() {
+		return "Component [id=" + id + ", componentName=" + componentName + ", price=" + price + "]";
+	}
 }

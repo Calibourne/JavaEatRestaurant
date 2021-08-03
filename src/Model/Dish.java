@@ -193,6 +193,20 @@ public class Dish extends Record {
 
 	@Override
 	public String toString() {
+		String allergens = "";
+		if(getComponents().stream().anyMatch(Component::isHasGluten)){
+			allergens += ", contains gluten";
+			if(getComponents().stream().anyMatch(Component::isHasLactose))
+				allergens += " and lactose";
+		}
+		else if(getComponents().stream().anyMatch(Component::isHasLactose))
+			allergens += ", contains lactose";
+
+		return String.format("%s - %s, price: %.2f₪", dishName, type, price) + allergens;
+	}
+
+	@Override
+	public String description() {
 		return "Dish [id=" + id + ", dishName=" + dishName + ", type=" + type + ", price=" + price + ", timeToMake="
 				+ timeToMake + "]";
 	}

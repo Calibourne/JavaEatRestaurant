@@ -17,7 +17,7 @@
 
 <Group fx:id="addDeliveries_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.addRecordsController">
    <children>
-      <GridPane fx:id="DeliveryInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
+      <GridPane fx:id="DeliveryInfo_grid" hgap="40.0" layoutY="1.0" vgap="10.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -30,7 +30,7 @@
             <VBox prefHeight="107.0" prefWidth="210.0" styleClass="Container">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery person" />
-                  <ComboBox prefHeight="25.0" prefWidth="386.0" />
+                  <ComboBox fx:id="deliveryPersons_combo" prefHeight="25.0" prefWidth="386.0" />
                </children>
             </VBox>
             <Pane GridPane.columnIndex="1">
@@ -38,7 +38,7 @@
                   <VBox fx:id="rd_vbox" prefHeight="143.0" prefWidth="210.0" styleClass="Container">
                      <children>
                         <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Orders list" />
-                        <CheckComboBox prefHeight="25.0" prefWidth="407.0" showCheckedCount="true" />
+                        <CheckComboBox fx:id="orders_checkedCombo" prefHeight="25.0" prefWidth="407.0" showCheckedCount="true" title="" />
                      </children>
                   </VBox>
                   <VBox fx:id="ed_vbox" prefHeight="40.0" prefWidth="210.0" spacing="10.0" styleClass="Container" visible="false">
@@ -46,7 +46,7 @@
                         <VBox styleClass="Container">
                            <children>
                               <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Order" />
-                              <ComboBox prefHeight="25.0" prefWidth="311.0" />
+                              <ComboBox fx:id="orders_combo" prefHeight="25.0" prefWidth="311.0" />
                            </children>
                         </VBox>
                         <VBox styleClass="Container">
@@ -78,6 +78,6 @@
             </VBox>
          </children>
       </GridPane>
-      <Button fx:id="addDelivery_btn" layoutX="202.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery" />
+      <Button fx:id="addDelivery_btn" layoutX="188.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery" />
    </children>
 </Group>

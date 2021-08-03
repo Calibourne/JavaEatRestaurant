@@ -13,7 +13,7 @@
 
 <Group fx:id="addDeliPersons_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.addRecordsController">
    <children>
-      <GridPane fx:id="DeliPersonInfo_grid" hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
+      <GridPane fx:id="DeliPersonInfo_grid" hgap="40.0" layoutY="1.0" vgap="10.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -45,23 +45,23 @@
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Gender" />
-                  <ComboBox prefHeight="25.0" prefWidth="485.0" />
+                  <ComboBox fx:id="genders_combo" prefHeight="25.0" prefWidth="485.0" />
                </children>
             </VBox>
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Vehicle" />
-                  <ComboBox prefHeight="25.0" prefWidth="409.0" />
+                  <ComboBox fx:id="vehicles_combo" prefHeight="25.0" prefWidth="409.0" />
                </children>
             </VBox>
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery Area" />
-                  <ComboBox prefHeight="25.0" prefWidth="566.0" />
+                  <ComboBox fx:id="deliveryAreas_combo" prefHeight="25.0" prefWidth="566.0" />
                </children>
             </VBox>
          </children>
       </GridPane>
-      <Button fx:id="addDeliPerson_btn" layoutX="182.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery person" />
+      <Button fx:id="addDeliPerson_btn" layoutX="168.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery person" />
    </children>
 </Group>

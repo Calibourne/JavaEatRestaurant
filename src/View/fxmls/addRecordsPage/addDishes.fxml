@@ -13,7 +13,7 @@
 
 <Group fx:id="addDishes_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.addRecordsController">
    <children>
-      <GridPane hgap="40.0" layoutX="14.0" layoutY="14.0" vgap="10.0">
+      <GridPane hgap="40.0" layoutY="1.0" vgap="10.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.0" minWidth="10.0" prefWidth="210.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
@@ -32,16 +32,16 @@
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Dish Type" />
-                  <ComboBox prefHeight="25.0" prefWidth="367.0" />
+                  <ComboBox fx:id="dishType_combo" prefHeight="25.0" prefWidth="367.0" />
                </children>
             </VBox>
             <VBox prefHeight="32.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="0.0" prefWidth="210.0" text="Ingredients" />
-                  <CheckComboBox prefHeight="25.0" prefWidth="438.0" />
+                  <CheckComboBox fx:id="components_checkedCombo" prefHeight="25.0" prefWidth="438.0" />
                </children>
             </VBox>
-            <Button mnemonicParsing="false" onAction="#handleButtonClick" text="Add Dish" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Dish" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

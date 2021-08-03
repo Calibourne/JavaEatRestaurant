@@ -55,6 +55,10 @@ public class SignupPageController {
     private ProgressBar passwordStrengthInd;
     @FXML
     private Button cancelButton;
+    @FXML
+    private Button signUpButton;
+    @FXML
+    private ScrollPane scrlPane;
 
     private static final String DARKRED_BAR    = "darkred-bar";
     private static final String RED_BAR    = "red-bar";
@@ -95,6 +99,9 @@ public class SignupPageController {
                 bar.getStyleClass().add(barStyleClass);
             }
         });
+        fnameInput.requestFocus();
+        //scrlPane.setVvalue(1);
+
     }
 
     @FXML

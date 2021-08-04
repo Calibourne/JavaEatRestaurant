@@ -65,7 +65,7 @@ public class AddRecordRequest extends RecordRequest {
                     (String) args[0],
                     (boolean) args[1],
                     (boolean) args[2],
-                    (int) args[3]
+                    Integer.parseInt((String) args[3])
             );
         }
         if (record instanceof Dish) {

@@ -324,7 +324,13 @@ public class addRecordsController {
                 String ingredientPrice = ingredientPrice_field.getText().length()>0?ingredientPrice_field.getText():null;
                 boolean hasGluten = hasGluten_check.isSelected();
                 boolean hasLactose = hasLactose_check.isSelected();
-                request = new AddRecordRequest(new Component(-1), ingredientName, ingredientPrice, hasGluten, hasLactose);
+                request = new AddRecordRequest(
+                        new Component(-1),
+                        ingredientName,
+                        hasGluten,
+                        hasLactose,
+                        ingredientPrice
+                );
                 ingredientName_field.clear();
                 ingredientPrice_field.clear();
                 hasGluten_check.setSelected(false);

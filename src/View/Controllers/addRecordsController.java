@@ -21,6 +21,7 @@ import org.controlsfx.control.CheckComboBox;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -321,7 +322,24 @@ public class addRecordsController {
             if (addComponents_sctn != null) {
                 String ingredientName = ingredientName_field.getText().length()>0?ingredientName_field.getText():null;
                 String ingredientPrice = ingredientPrice_field.getText().length()>0?ingredientPrice_field.getText():null;
-                //boolean
+                boolean hasGluten = hasGluten_check.isSelected();
+                boolean hasLactose = hasLactose_check.isSelected();
+                request = new AddRecordRequest(new Component(-1), ingredientName, ingredientPrice, hasGluten, hasLactose);
+                ingredientName_field.clear();
+                ingredientPrice_field.clear();
+                hasGluten_check.setSelected(false);
+                hasLactose_check.setSelected(false);
+            }
+            if (addDishes_sctn != null) {
+                String dishName = dishName_field.getText().length()>0?dishName_field.getText():null;
+                DishType dishType = dishType_combo.getValue();
+                ReadOnlyUnbackedObservableList<Component> selectedItems =
+                        (ReadOnlyUnbackedObservableList<Component>) components_checkedCombo.getCheckModel().getCheckedItems();
+                ArrayList<Component> selectedComponents = (ArrayList<Component>) selectedItems.stream().toList();
+                request = new AddRecordRequest(new Dish(-1), dishName, dishType, selectedComponents);
+                dishType_combo.getSelectionModel().clearSelection();
+                selectedItems.clear();
+                dishName_field.clear();
             }
             request.saveRequest();
             Restaurant.getInstance().saveDatabase("Rest.ser");

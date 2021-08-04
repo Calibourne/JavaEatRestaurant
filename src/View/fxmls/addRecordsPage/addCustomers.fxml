@@ -58,8 +58,8 @@
             <VBox alignment="CENTER" prefHeight="42.0" prefWidth="210.0" spacing="4.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Sensitivities" underline="true" />
-                  <CheckBox alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="17.0" prefWidth="125.0" text="Sensitive to Gluten" />
-                  <CheckBox alignment="TOP_LEFT" contentDisplay="TOP" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="125.0" text="Sensitive to Lactose" />
+                  <CheckBox fx:id="glutenIntolerant_check" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="17.0" prefWidth="125.0" text="Sensitive to Gluten" />
+                  <CheckBox fx:id="lactoseIntolerant_check" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="125.0" text="Sensitive to Lactose" />
                </children>
             </VBox>
          </children>

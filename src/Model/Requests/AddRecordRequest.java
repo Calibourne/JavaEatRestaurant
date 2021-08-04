@@ -3,10 +3,7 @@ package Model.Requests;
 import Model.*;
 import Model.Exceptions.ConvertToExpressException;
 import Model.Record;
-import Utils.DishType;
-import Utils.Expertise;
-import Utils.Gender;
-import Utils.Neighberhood;
+import Utils.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,13 +34,13 @@ public class AddRecordRequest extends RecordRequest {
             );
         }
         if (record instanceof DeliveryPerson) {
-            this.record = new Cook(
+            this.record = new DeliveryPerson(
                     (String) args[0],
                     (String) args[1],
                     (LocalDate) args[2],
                     (Gender) args[3],
-                    (Expertise) args[4],
-                    (boolean) args[5]
+                    (Vehicle) args[4],
+                    (DeliveryArea) args[5]
             );
         }
         if (record instanceof Customer) {

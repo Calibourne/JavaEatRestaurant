@@ -27,19 +27,19 @@
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="First name" />
-                  <TextField />
+                  <TextField fx:id="fname_field" />
                </children>
             </VBox>
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Last name" />
-                  <TextField />
+                  <TextField fx:id="lname_field" />
                </children>
             </VBox>
             <VBox prefHeight="42.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="2">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Birthdate" />
-                  <DatePicker prefHeight="40.0" prefWidth="210.0" />
+                  <DatePicker fx:id="birthDate_dp" prefHeight="40.0" prefWidth="210.0" />
                </children>
             </VBox>
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
@@ -62,6 +62,6 @@
             </VBox>
          </children>
       </GridPane>
-      <Button fx:id="addDeliPerson_btn" layoutX="168.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery person" />
+      <Button fx:id="submit" layoutX="168.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery person" />
    </children>
 </Group>

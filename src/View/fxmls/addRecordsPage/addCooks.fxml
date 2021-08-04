@@ -28,19 +28,19 @@
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="First name" />
-                  <TextField />
+                  <TextField fx:id="fname_field" />
                </children>
             </VBox>
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Last name" />
-                  <TextField />
+                  <TextField fx:id="lname_field" />
                </children>
             </VBox>
             <VBox prefHeight="42.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="2">
                <children>
                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Birthdate" />
-                  <DatePicker prefHeight="40.0" prefWidth="210.0" />
+                  <DatePicker fx:id="birthDate_dp" prefHeight="40.0" prefWidth="210.0" />
                </children>
             </VBox>
             <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1">
@@ -57,11 +57,11 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="1.0" prefWidth="100.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <CheckBox alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="Is Chef" />
+                  <CheckBox fx:id="isChef_check" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="Is Chef" />
                </children>
             </VBox>
          </children>
       </GridPane>
-      <Button fx:id="addCook_btn" layoutX="196.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Cook" />
+      <Button fx:id="submit" layoutX="196.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Cook" />
    </children>
 </Group>

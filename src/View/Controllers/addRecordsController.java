@@ -5,14 +5,22 @@ import Model.Record;
 import Model.Requests.AddRecordRequest;
 import Utils.*;
 import impl.org.controlsfx.collections.ReadOnlyUnbackedObservableList;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -138,6 +146,31 @@ public class addRecordsController {
             if(addCooks_sctn!=null || addDeliPersons_sctn!=null || addCustomers_sctn!=null) {
                 genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
                 genders_combo.setPromptText("Choose gender:");
+
+                // the following code is taken from
+                // https://stackoverflow.com/questions/32346893/javafx-datepicker-not-updating-value
+                birthDate_dp.setConverter(new StringConverter<LocalDate>() {
+                    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    @Override
+                    public String toString(LocalDate localDate) {
+                        if(localDate==null)
+                            return "";
+                        return dateTimeFormatter.format(localDate);
+                    }
+                    @Override
+                    public LocalDate fromString(String dateString) {
+                        if(dateString==null || dateString.trim().isEmpty())
+                            return null;
+                        try{
+                            return LocalDate.parse(dateString,dateTimeFormatter);
+                        }
+                        catch(Exception e){
+                            //Bad date value entered
+                            return null;
+                        }
+                    }
+                });
+                birthDate_dp.setPromptText("dd/mm/yyyy");
             }
             if(addCooks_sctn!=null){
                 expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
@@ -224,10 +257,77 @@ public class addRecordsController {
                 String areaName = areaName_field.getText().length()>0?areaName_field.getText():null;
                 String deliveryTime = deliveryTime_field.getText().length()>0?deliveryTime_field.getText():null;
                 request = new AddRecordRequest(new DeliveryArea(-1), areaName, selectedNeighbourhoods, deliveryTime);
+                neighbourhoods_checkedCombo.getCheckModel().clearChecks();
+                areaName_field.clear();
+                deliveryTime_field.clear();
+            }
+            if (addCooks_sctn != null || addCustomers_sctn != null || addDeliPersons_sctn != null){
+                String fname = fname_field.getText().length()>0?fname_field.getText():null;
+                String lname = lname_field.getText().length()>0?lname_field.getText():null;
+                Gender gender = genders_combo.getValue();
+                LocalDate birthdate = birthDate_dp.getValue();
+                if (addCooks_sctn != null) {
+                    Expertise expertise = expertises_combo.getValue();
+                    boolean isChef = isChef_check.isSelected();
+                    request = new AddRecordRequest(
+                            new Cook(-1),
+                            fname,
+                            lname,
+                            birthdate,
+                            gender,
+                            expertise,
+                            isChef
+                    );
+                    expertises_combo.getSelectionModel().clearSelection();
+                    isChef_check.setSelected(false);
+                }
+                if (addDeliPersons_sctn != null) {
+                    Vehicle vehicle = vehicles_combo.getValue();
+                    DeliveryArea area = deliveryAreas_combo.getValue();
+                    request = new AddRecordRequest(
+                            new DeliveryPerson(-1),
+                            fname,
+                            lname,
+                            birthdate,
+                            gender,
+                            vehicle,
+                            area
+                    );
+                    vehicles_combo.getSelectionModel().clearSelection();
+                    deliveryAreas_combo.getSelectionModel().clearSelection();
+                }
+                if (addCustomers_sctn != null) {
+                    Neighberhood neighbourhood = neighbourhoods_combo.getValue();
+                    boolean isGlutenIntolerant = glutenIntolerant_check.isSelected();
+                    boolean isLactoseIntolerant = lactoseIntolerant_check.isSelected();
+                    request = new AddRecordRequest(
+                            new Customer(-1),
+                            fname,
+                            lname,
+                            birthdate,
+                            neighbourhood,
+                            isGlutenIntolerant,
+                            isLactoseIntolerant
+                    );
+                    neighbourhoods_combo.getSelectionModel().clearSelection();
+                    glutenIntolerant_check.setSelected(false);
+                    lactoseIntolerant_check.setSelected(false);
+                }
+                fname_field.clear();
+                lname_field.clear();
+                genders_combo.getSelectionModel().clearSelection();
+                birthDate_dp.setValue(null);
+            }
+            if (addComponents_sctn != null) {
+                String ingredientName = ingredientName_field.getText().length()>0?ingredientName_field.getText():null;
+                String ingredientPrice = ingredientPrice_field.getText().length()>0?ingredientPrice_field.getText():null;
+                //boolean
             }
             request.saveRequest();
             Restaurant.getInstance().saveDatabase("Rest.ser");
+            System.out.printf("%s was added successfully", request.getRecord());
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println(e.getMessage());
         }
     }

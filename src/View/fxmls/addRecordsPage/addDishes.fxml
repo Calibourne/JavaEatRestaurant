@@ -53,7 +53,7 @@
                   <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Dish preparing time" />
-                        <TextField fx:id="dishPreparingTime_field" />
+                        <TextField fx:id="dishPrepareTime_field" />
                      </children>
                   </VBox>
                </children>

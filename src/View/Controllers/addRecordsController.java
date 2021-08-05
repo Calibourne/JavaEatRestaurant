@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
@@ -21,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class addRecordsController {
     // region Properties
@@ -146,10 +149,14 @@ public class addRecordsController {
         try{
             Restaurant rest = Restaurant.getInstance();
             Pattern intPattern = Pattern.compile("([0-9]+)?");
-            Pattern doublePattern = Pattern.compile("((0|([1-9]\\d*))((\\.)?(\\d*))|\\d*)?");
+            Pattern doublePattern = Pattern.compile("((([1-9])(\\d*)|0)(\\.\\d*)?)?");
+            Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ -]?)([a-zA-Z]*))*");
             if(addCooks_sctn!=null || addDeliPersons_sctn!=null || addCustomers_sctn!=null) {
+                /** see {@link ControllerUtils} for more details*/
+                fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+                lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                 genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
-                genders_combo.setPromptText("Choose gender:");
+                genders_combo.setAccessibleText("Choose gender:");
 
                 // the following code is taken from
                 // https://stackoverflow.com/questions/32346893/javafx-datepicker-not-updating-value
@@ -175,29 +182,40 @@ public class addRecordsController {
                     }
                 });
                 birthDate_dp.setPromptText("dd/mm/yyyy");
-            }
-            if(addCooks_sctn!=null){
-                expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
-                expertises_combo.setPromptText("Choose expertise:");
-            }
-            if(addDeliPersons_sctn!=null){
-                vehicles_combo.getItems().addAll(Arrays.stream(Vehicle.values()).toList());
-                vehicles_combo.setPromptText("Choose vehicle:");
-                deliveryAreas_combo.getItems().addAll(rest.getAreas().values());
-                deliveryAreas_combo.setPromptText("Choose delivery area:");
-            }
-            if(addCustomers_sctn!=null){
-                neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
-                neighbourhoods_combo.setPromptText("Choose neighbourhood:");
+                if(addCooks_sctn!=null){
+                    expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
+                    expertises_combo.setPromptText("Choose expertise:");
+                }
+                if(addDeliPersons_sctn!=null){
+                    vehicles_combo.getItems().addAll(Arrays.stream(Vehicle.values()).toList());
+                    vehicles_combo.setPromptText("Choose vehicle:");
+                    deliveryAreas_combo.getItems().addAll(rest.getAreas().values());
+                    deliveryAreas_combo.setPromptText("Choose delivery area:");
+                }
+                if(addCustomers_sctn!=null){
+                    neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
+                    neighbourhoods_combo.setPromptText("Choose neighbourhood:");
+                }
             }
             if(addComponents_sctn!=null){
+                ingredientName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                 ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
+                ingredientPrice_field.setOnKeyTyped(ke->{
+                    Pattern err = Pattern.compile("((([1-9])(\\d*)|0)(\\.))");
+                    if(err.matcher(ingredientPrice_field.getText()).matches()){
+                        ingredientPrice_field.setStyle("-fx-text-fill: goldenrod");
+                    }
+                    else{
+                        ingredientPrice_field.setStyle("-fx-text-fill: white");
+                    }
+                });
             }
             if(addDishes_sctn!=null){
                 dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
                 dishType_combo.setPromptText("Choose dish type:");
                 components_checkedCombo.getItems().addAll(rest.getComponents().values());
                 components_checkedCombo.setTitle("Choose ingredients:");
+                dishName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                 dishPrepareTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
             }
             if(addOrders_sctn!=null){
@@ -219,6 +237,12 @@ public class addRecordsController {
             if(addAreas_sctn!=null){
                 neighbourhoods_checkedCombo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
                 neighbourhoods_checkedCombo.setTitle("Choose neighbourhoods:");
+                areaName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+                areaName_field.textProperty().addListener((ov, oldValue, newValue)->{
+                    if(oldValue.length()>0){
+                        oldValue.substring(0,1).toUpperCase();
+                    }
+                });
                 deliveryTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
             }
             if(addToBlacklist_sctn!=null){
@@ -264,7 +288,7 @@ public class addRecordsController {
                 HashSet<Neighberhood> selectedNeighbourhoods = new HashSet<>(selectedItems.stream().toList());
                 selectedNeighbourhoods = (selectedNeighbourhoods.size()>0)?selectedNeighbourhoods:null;
                 String areaName = areaName_field.getText().length()>0?areaName_field.getText():null;
-                String deliveryTime = deliveryTime_field.getText().length()>0?deliveryTime_field.getText():null;
+                Integer deliveryTime = deliveryTime_field.getText().length()>0? Integer.parseInt(deliveryTime_field.getText()) :null;
                 request = new AddRecordRequest(
                         new DeliveryArea(-1),
                         areaName,
@@ -319,6 +343,7 @@ public class addRecordsController {
                             fname,
                             lname,
                             birthdate,
+                            gender,
                             neighbourhood,
                             isGlutenIntolerant,
                             isLactoseIntolerant
@@ -355,10 +380,10 @@ public class addRecordsController {
                 DishType dishType = dishType_combo.getValue();
                 ReadOnlyUnbackedObservableList<Component> selectedItems =
                         (ReadOnlyUnbackedObservableList<Component>) components_checkedCombo.getCheckModel().getCheckedItems();
-                ArrayList<Component> selectedComponents = (ArrayList<Component>) selectedItems.stream().toList();
+                ArrayList<Component> selectedComponents = new ArrayList<>(selectedItems.stream().toList());
                 request = new AddRecordRequest(new Dish(-1), dishName, dishType, selectedComponents, dishPrepareTime);
                 dishType_combo.getSelectionModel().clearSelection();
-                selectedItems.clear();
+                components_checkedCombo.getCheckModel().clearChecks();
                 dishName_field.clear();
             }
             if (addOrders_sctn != null) {
@@ -366,7 +391,7 @@ public class addRecordsController {
                 Delivery delivery = deliveries_combo.getValue();
                 ReadOnlyUnbackedObservableList<Dish> selectedItems =
                         (ReadOnlyUnbackedObservableList<Dish>) dishes_checkedCombo.getCheckModel().getCheckedItems();
-                ArrayList<Dish> selectedDishes = (ArrayList<Dish>) selectedItems.stream().toList();
+                ArrayList<Dish> selectedDishes = new ArrayList<>(selectedItems.stream().toList());
                 if (delivery!= null)
                     request = new AddRecordRequest(new Order(-1), customer, selectedDishes, delivery);
                 else
@@ -377,7 +402,7 @@ public class addRecordsController {
                     );
                 customers_combo.getSelectionModel().clearSelection();
                 deliveries_combo.getSelectionModel().clearSelection();
-                selectedItems.clear();
+                dishes_checkedCombo.getCheckModel().clearChecks();
             }
             if (addDeliveries_sctn != null) {
                 DeliveryPerson deliveryPerson = deliveryPersons_combo.getValue();
@@ -387,7 +412,7 @@ public class addRecordsController {
                 if(rd_RB.isSelected()) {
                     ReadOnlyUnbackedObservableList<Order> selectedItems =
                             (ReadOnlyUnbackedObservableList<Order>) orders_checkedCombo.getCheckModel().getCheckedItems();
-                    TreeSet<Order> selectedOrders = (TreeSet<Order>) new TreeSet<>(selectedItems);
+                    TreeSet<Order> selectedOrders = new TreeSet<>(selectedItems.stream().toList());
                     request = new AddRecordRequest(
                             new RegularDelivery(-1),
                             selectedOrders,
@@ -396,7 +421,7 @@ public class addRecordsController {
                             isDelivered,
                             deliveryDate
                     );
-                    selectedItems.clear();
+                    orders_checkedCombo.getCheckModel().clearChecks();
                 }
                 else {
                     Order order = orders_combo.getValue();
@@ -409,6 +434,8 @@ public class addRecordsController {
                             isDelivered,
                             deliveryDate
                     );
+                    orders_combo.getSelectionModel().clearSelection();
+                    expressFee_field.clear();
                 }
             }
             if (addToBlacklist_sctn != null) {
@@ -419,12 +446,12 @@ public class addRecordsController {
                 customersToBlacklist_combo.getSelectionModel().clearSelection();
                 customersToBlacklist_combo.setValue(null);
                 customersToBlacklist_combo.setPromptText("Choose customer to blacklist");
-                System.out.printf("%s added to blacklist", toBlacklist);
+                System.out.printf("%s added to blacklist\n", toBlacklist);
                 return;
             }
             request.saveRequest();
             Restaurant.getInstance().saveDatabase("Rest.ser");
-            System.out.printf("%s was added successfully", request.getRecord());
+            System.out.printf("%s was added successfully\n", request.getRecord());
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());

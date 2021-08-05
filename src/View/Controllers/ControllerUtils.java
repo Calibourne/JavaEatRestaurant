@@ -66,6 +66,12 @@ public class ControllerUtils {
         s.centerOnScreen();
         s.show();
     }
+
+    /**
+     * makes a text input restriction manager based on certain pattern
+     * @param pattern
+     * @return
+     */
     protected static TextFormatter<String> textFormatter(Pattern pattern){
         return new TextFormatter<String>(
                 change-> {

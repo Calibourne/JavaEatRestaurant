@@ -243,7 +243,6 @@ public class Dish extends Record {
 			price += c.getPrice();
 		}
 		price = price*3;
-		MyFileLogWriter.println(this+" Price is "+price);
 		return price;
 	}
 }

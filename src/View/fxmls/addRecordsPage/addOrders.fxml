@@ -40,7 +40,7 @@
                   <ComboBox fx:id="deliveries_combo" prefHeight="25.0" prefWidth="367.0" />
                </children>
             </VBox>
-            <Button fx:id="addOrder_btn" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Order" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="submit" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Order" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

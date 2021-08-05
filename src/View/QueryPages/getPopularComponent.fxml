@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.QueryPages.createAIMacineController">
+<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.QueryPages.getPopularComponentController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
-            <Label alignment="CENTER" text="Get popular ingredients" textAlignment="CENTER">
+            <Label alignment="CENTER" text="Popular Ingredients" textAlignment="CENTER">
                 <font>
                     <Font size="30.0" />
                 </font>
@@ -22,7 +22,7 @@
                     <Insets />
                 </VBox.margin>
             </Label>
-         <Label alignment="CENTER" text="Press 'Generate' to see which ingredients are the most popular in the menu" textAlignment="CENTER">
+         <Label alignment="CENTER" text="A list of the menu's ingredients sorted by popularity" textAlignment="CENTER">
             <font>
                <Font size="14.0" />
             </font>
@@ -31,24 +31,10 @@
             </effect>
          </Label>
         </VBox>
-        <Button mnemonicParsing="false" text="Generate">
-            <font>
-                <Font size="22.0" />
-            </font>
-            <VBox.margin>
-                <Insets top="150.0" />
-            </VBox.margin>
-        </Button>
-        <Label text="Placeholder for the query's result">
-            <effect>
-                <DropShadow />
-            </effect>
-            <font>
-                <Font size="17.0" />
-            </font>
+      <ListView fx:id="popular_ingredient_list" prefHeight="282.0" prefWidth="485.0" styleClass="HBox">
          <VBox.margin>
-            <Insets top="150.0" />
+            <Insets left="65.0" right="65.0" top="70.0" />
          </VBox.margin>
-        </Label>
+      </ListView>
     </VBox>
 </AnchorPane>

@@ -62,7 +62,7 @@
                         <DropShadow />
                     </effect>
                 </Label>
-                <ComboBox prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <ComboBox fx:id="expertise_combobox" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             </children>
         </GridPane>
       <Label text="Placeholder for the query's result">

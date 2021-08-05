@@ -1,9 +1,5 @@
 package Model;
 
-import java.io.*;
-import java.time.LocalDate;
-import java.util.*;
-
 import Model.Exceptions.ConvertToExpressException;
 import Model.Exceptions.IllegalCustomerException;
 import Model.Exceptions.NoComponentsException;
@@ -12,6 +8,10 @@ import Model.Requests.AddRecordRequest;
 import Utils.Expertise;
 import Utils.MyFileLogWriter;
 import Utils.Neighberhood;
+
+import java.io.*;
+import java.time.LocalDate;
+import java.util.*;
 
 /**
  * A class that represents a restaurant object
@@ -615,10 +615,37 @@ public class Restaurant implements Serializable {
 		return getAreas().get(id);
 	}
 
-	// unused methods
 
-	/*
 	@SuppressWarnings("unchecked")
+	// Daniel's attempt at fixing the query so it works with a hashmap customer structure. The original method is below this one
+	public Collection<Dish> getReleventDishList(Customer c){
+		HashMap<Integer,Dish> dishList = new HashMap<>();
+		if(!c.isSensitiveToGluten() && !c.isSensitiveToLactose())
+			return (Collection<Dish>) getDishes().values();
+		for(Dish d : getDishes().values()) {
+			boolean isValid = true;
+			for(Component comp : d.getComponents()) {
+				if(c.isSensitiveToGluten() && c.isSensitiveToLactose()) {
+					if(comp.isHasGluten() || comp.isHasLactose()) {
+						isValid = false;
+						break;
+					}
+				}
+				else if(c.isSensitiveToGluten() && comp.isHasGluten()) {
+					isValid = false;
+					break;
+				}
+				else if(c.isSensitiveToLactose() && comp.isHasLactose()) {
+					isValid = false;
+					break;
+				}
+			}
+			if(isValid)
+				dishList.put(d.getId() , d);
+		}
+		return dishList.values();
+	}
+/* original method
 	public Collection<Dish> getReleventDishList(Customer c){
 		HashMap<Integer,Dish> dishList = new HashMap<>();
 		if(!c.isSensitiveToGluten() && !c.isSensitiveToLactose())
@@ -646,14 +673,18 @@ public class Restaurant implements Serializable {
 		}
 		return dishList;
 	}
+ */
 
+	/* unused method
 	public void deliver(Delivery d) {
 		d.setDelivered(true);
 		for(Order o : d.getOrders()) {
 			MyFileLogWriter.println(o+" had reached to Customer "+o.getCustomer());
 		}
 	}
-	*/
+
+	 */
+
 	public HashMap<Integer,Cook> GetCooksByExpertise(Expertise e){
 		HashMap<Integer,Cook> cooks = new HashMap<>();
 		for(Cook c : getCooks().values()) {

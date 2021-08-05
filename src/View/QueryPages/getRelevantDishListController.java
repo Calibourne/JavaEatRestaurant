@@ -40,7 +40,7 @@ public class getRelevantDishListController {
             Restaurant rest = Restaurant.getInstance();
 
             if(rest.getCustomers().containsValue(customer_combobox.getSelectionModel().getSelectedItem())){
-                //query_result.setText(rest.getReleventDishList(customer_combobox.getSelectionModel().getSelectedItem());
+                //query_result.setText(rest.getRelevantDishList(customer_combobox.getSelectionModel().getSelectedItem());
                 query_result.getItems().addAll(rest.getReleventDishList(customer_combobox.getSelectionModel().getSelectedItem()).toString());
                 System.out.println("test");
             }

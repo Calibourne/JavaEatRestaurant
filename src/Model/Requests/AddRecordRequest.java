@@ -20,7 +20,7 @@ public class AddRecordRequest extends RecordRequest {
             this.record = new DeliveryArea(
                     (String) args[0],
                     (HashSet<Neighberhood>) args[1],
-                    Integer.parseInt((String) args[2])
+                    (int) args[2]
             );
         }
         if (record instanceof Cook) {
@@ -65,7 +65,7 @@ public class AddRecordRequest extends RecordRequest {
                     (String) args[0],
                     (boolean) args[1],
                     (boolean) args[2],
-                    Integer.parseInt((String) args[3])
+                    (int) args[3]
             );
         }
         if (record instanceof Dish) {
@@ -77,11 +77,20 @@ public class AddRecordRequest extends RecordRequest {
             );
         }
         if (record instanceof Order) {
-            this.record = new Order(
-                    (Customer) args[0],
-                    (ArrayList<Dish>) args[1],
-                    (Delivery) args[2]
-            );
+            if(args.length == 3) {
+                this.record = new Order(
+                        (Customer) args[0],
+                        (ArrayList<Dish>) args[1],
+                        (Delivery) args[2]
+                );
+            }
+            else {
+                this.record = new Order(
+                        (Customer) args[0],
+                        (ArrayList<Dish>) args[1],
+                        null
+                );
+            }
         }
         if (record instanceof Delivery) {
             if (record instanceof RegularDelivery) {

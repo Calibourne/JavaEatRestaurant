@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class ControllerUtils {
 
@@ -64,5 +66,17 @@ public class ControllerUtils {
         s.centerOnScreen();
         s.show();
     }
-
+    protected static TextFormatter<String> textFormatter(Pattern pattern){
+        return new TextFormatter<String>(
+                change-> {
+                    if (pattern.matcher(change.getControlNewText()).matches()) {
+                        // todo: remove error message/markup
+                        return change; // allow this change to happen
+                    } else {
+                        // todo: add error message/markup
+                        return null; // prevent change
+                    }
+                }
+        );
+    }
 }

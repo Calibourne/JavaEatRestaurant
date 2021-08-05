@@ -1,13 +1,12 @@
 package Model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import Model.Exceptions.NoComponentsException;
 import Utils.DishType;
 import Utils.MyFileLogWriter;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A class that represents a dish object
@@ -205,6 +204,7 @@ public class Dish extends Record {
 		return String.format("%s - %s, price: %.2f₪", dishName, type, price) + allergens;
 	}
 
+	// A backup of the original ToString so we can clean up the ToString to our liking
 	@Override
 	public String description() {
 		return "Dish [id=" + id + ", dishName=" + dishName + ", type=" + type + ", price=" + price + ", timeToMake="

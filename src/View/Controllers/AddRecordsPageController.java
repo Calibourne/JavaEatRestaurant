@@ -76,7 +76,7 @@ public class AddRecordsPageController extends RecordManagementController {
                 welcome_sctn.setVisible(false);
                 alert_sctn.setVisible(false);
                 addWindow.setVisible(false);
-                addWindow.getChildren().removeAll(addWindow.getChildren());
+                addWindow.getChildren().clear();
                 if (e.getSource() == addCooks_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addCooks.fxml"));
                     addWindow.getChildren().add(node);

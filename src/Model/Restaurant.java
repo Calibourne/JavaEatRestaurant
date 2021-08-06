@@ -5,6 +5,7 @@ import Model.Exceptions.IllegalCustomerException;
 import Model.Exceptions.NoComponentsException;
 import Model.Exceptions.SensitiveException;
 import Model.Requests.AddRecordRequest;
+import Model.Requests.RemoveRecordRequest;
 import Utils.Expertise;
 import Utils.MyFileLogWriter;
 import Utils.Neighberhood;
@@ -33,7 +34,8 @@ public class Restaurant implements Serializable {
 	private HashMap<Customer, TreeSet<Order>> orderByCustomer;
 	private HashMap<DeliveryArea, HashSet<Order>> orderByDeliveryArea;
 	private HashSet<Customer> blackList;
-	private HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory;//keeps track of added record history
+	private HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory; //keeps track of added records history
+	private HashMap<String,TreeSet<RemoveRecordRequest>> removeRecordHistory; //keeps track of removed records history
 	private HashMap<String, Customer> usersList;
 
 	protected int runningCooks;
@@ -71,6 +73,7 @@ public class Restaurant implements Serializable {
 			orderByDeliveryArea = new HashMap<>();
 			usersList = new HashMap<>();
 			addRecordHistory = new HashMap<>();
+			removeRecordHistory = new HashMap<>();
 		}
 	}
 
@@ -138,8 +141,8 @@ public class Restaurant implements Serializable {
 	public HashMap<String, TreeSet<AddRecordRequest>> getAddRecordHistory() {
 		return addRecordHistory;
 	}
-	public void setAddRecordHistory(HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory){
-		this.addRecordHistory = addRecordHistory;
+	public HashMap<String, TreeSet<RemoveRecordRequest>> getRemoveRecordHistory() {
+		return removeRecordHistory;
 	}
 	public HashMap<String, Customer> getUsersList() {
 		return usersList;
@@ -448,23 +451,17 @@ public class Restaurant implements Serializable {
 	 * Success / Failure of the removal
 	 */
 	public boolean removeOrder(Order order) {
-		if(order == null || !getOrders().containsValue(order) || order.getDelivery().isDelivered())
+		if (order == null || !getOrders().containsKey(order.getId()))
 			return false;
-		TreeSet<Order> ordersOfCustomer = getOrderByCustomer().get(order.getCustomer());
-		ordersOfCustomer.remove(order);
-		if(ordersOfCustomer.size() == 0)
-			ordersOfCustomer = null;
-		getOrderByCustomer().put(order.getCustomer(), ordersOfCustomer);
-		if(order.getDelivery() instanceof RegularDelivery)
-		{
-			RegularDelivery rD = (RegularDelivery) order.getDelivery();
-			return getOrders().remove(order.getId(),order) && rD.removeOrder(order);
-		}
-		if(order.getDelivery() instanceof ExpressDelivery)
-		{
-			ExpressDelivery eD = (ExpressDelivery) order.getDelivery();
-			eD.setOrder(null);
-			return getOrders().remove(order.getId(),order);
+		if (getOrders().remove(order.getId()) != null) {
+			if (order.getDelivery() instanceof RegularDelivery) {
+				RegularDelivery rd = (RegularDelivery) order.getDelivery();
+				return rd.removeOrder(order);
+			} else {
+				ExpressDelivery ed = (ExpressDelivery) order.getDelivery();
+				ed.setOrder(null);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -992,6 +989,7 @@ public class Restaurant implements Serializable {
 				this.orderByDeliveryArea = res.orderByDeliveryArea;
 				this.usersList = res.usersList;
 				this.addRecordHistory = res.addRecordHistory;
+				this.removeRecordHistory = res.removeRecordHistory;
 				Customer.setIdCounter(res.runningCustomers);
 				Cook.setIdCounter(res.runningCooks);
 				DeliveryPerson.setIdCounter(res.runningDelipersons);

@@ -238,11 +238,11 @@ public class addRecordsController {
                 neighbourhoods_checkedCombo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
                 neighbourhoods_checkedCombo.setTitle("Choose neighbourhoods:");
                 areaName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                areaName_field.textProperty().addListener((ov, oldValue, newValue)->{
+                /*areaName_field.textProperty().addListener((ov, oldValue, newValue)->{
                     if(oldValue.length()>0){
                         oldValue.substring(0,1).toUpperCase();
                     }
-                });
+                });*/
                 deliveryTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
             }
             if(addToBlacklist_sctn!=null){
@@ -274,12 +274,7 @@ public class addRecordsController {
     }
     private void addRecord(){
         try {
-            AddRecordRequest request = new AddRecordRequest(new Record() {
-                @Override
-                public String description() {
-                    return null;
-                }
-            });
+            AddRecordRequest request = new AddRecordRequest(null);
             // The code for selecting the checked items is taken from the following site:
             // https://www.tabnine.com/code/java/classes/org.controlsfx.control.CheckComboBox
             if (addAreas_sctn != null) {

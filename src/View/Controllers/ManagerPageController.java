@@ -135,10 +135,10 @@ public class ManagerPageController {
                 System.out.println(e.getMessage());
             }
             try{
-                Node recordsR = FXMLLoader.load(getClass().getResource("../fxmls/removeRecords.fxml"));;
+                Node recordsR = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeRecords.fxml"));;
                 pnlRemoveRecords.getChildren().add(recordsR);
             }catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
     }
 

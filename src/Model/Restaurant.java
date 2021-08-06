@@ -205,25 +205,6 @@ public class Restaurant implements Serializable {
 	}
 
 	/**
-	 * Tries to add a new dish to the restaurant
-	 * @param dish
-	 * the cook
-	 * @return
-	 * Success / Failure of the insertion
-	 */
-	public boolean addDish(Dish dish) {
-		if(dish == null || getDishes().containsValue(dish))
-			return false;
-		for(Component c : dish.getComponents()) {
-			if(!getComponents().containsValue(c)){
-				return false;
-			}
-		}
-
-		return getDishes().put(dish.getId(),dish) == null;
-	}
-
-	/**
 	 * Tries to add a new component to the restaurant
 	 * @param comp
 	 * the component
@@ -231,9 +212,28 @@ public class Restaurant implements Serializable {
 	 * Success / Failure of the insertion
 	 */
 	public boolean addComponent(Component comp) {
-		if(comp == null || getComponents().containsValue(comp))
+		if(comp == null || getComponents().containsKey(comp.getId()))
 			return false;
-		return getComponents().put(comp.getId(),comp) == null;
+
+		return getComponents().put(comp.getId(), comp) ==null;
+	}
+
+	/**
+	 * Tries to add a new dish to the restaurant
+	 * @param dish
+	 * the cook
+	 * @return
+	 * Success / Failure of the insertion
+	 */
+	public boolean addDish(Dish dish) {
+		if(dish == null || getDishes().containsKey(dish.getId()))
+			return false;
+		for(Component c : dish.getComponents()) {
+			if(!getComponents().containsKey(c.getId()))
+				return false;
+		}
+
+		return getDishes().put(dish.getId(), dish) ==null;
 	}
 
 	/**
@@ -244,29 +244,31 @@ public class Restaurant implements Serializable {
 	 * Success / Failure of the insertion
 	 */
 	public boolean addOrder(Order order) {
-		if(order == null || getOrders().containsValue(order) || !getCustomers().containsValue(order.getCustomer()))
-			return false;
 		try {
-			Customer customer = order.getCustomer();
-			if(blackList.contains(customer))
+			if(order == null || getOrders().containsKey(order.getId()))
+				return false;
+			if(order.getCustomer() == null || !getCustomers().containsKey(order.getCustomer().getId()))
+				return false;
+			if(getBlacklist().contains(order.getCustomer())) {
 				throw new IllegalCustomerException();
-
+			}
 			for(Dish d : order.getDishes()){
-				if(!getDishes().containsValue(d))
+				if(!getDishes().containsKey(d.getId()))
 					return false;
-				for(Component c : d.getComponents())
-				{
-					if(customer.isSensitiveToGluten() && c.isHasGluten() || customer.isSensitiveToLactose() && c.isHasLactose())
-						throw new SensitiveException(customer.getFirstName() + " " + customer.getLastName(), d.getDishName());
+				for(Component c: d.getComponents()) {
+					if(order.getCustomer().isSensitiveToGluten() && c.isHasGluten()) {
+						throw new SensitiveException(order.getCustomer().getFirstName() + " " +order.getCustomer().getLastName(), d.getDishName());
+					}
+					else if(order.getCustomer().isSensitiveToLactose() && c.isHasLactose()) {
+						throw new SensitiveException(order.getCustomer().getFirstName() + " " + order.getCustomer().getLastName(), d.getDishName());
+					}
 				}
 			}
-		}
-		catch(IllegalCustomerException | SensitiveException e)
-		{
-			MyFileLogWriter.println(e.getMessage());
+			return getOrders().put(order.getId(), order) == null;
+		}catch(SensitiveException | IllegalCustomerException e) {
+			System.out.println(e.getMessage());
 			return false;
 		}
-		return getOrders().put(order.getId(),order) == null;
 	}
 
 	/**
@@ -301,7 +303,7 @@ public class Restaurant implements Serializable {
 				MyFileLogWriter.println(e.getMessage());
 				ExpressDelivery eDelivery = new ExpressDelivery(delivery.getDeliveryPerson(), delivery.getArea(), delivery.isDelivered(),
 						((RegularDelivery) delivery).getOrders().first(), delivery.getDeliveryDate());
-				eDelivery.getArea().getDeliveries().put(eDelivery.getId(), eDelivery);
+				eDelivery.getArea().addDelivery(eDelivery);
 				TreeSet<Order> ordersOfCustomer = getOrderByCustomer().get(eDelivery.getOrder().getCustomer());
 				if(ordersOfCustomer == null)
 					ordersOfCustomer = new TreeSet<>();
@@ -402,7 +404,7 @@ public class Restaurant implements Serializable {
 				{
 					RegularDelivery rD = (RegularDelivery)d;
 					for(Order o : rD.getOrders()) {
-						if(o.getDishes().contains(dish) && !o.getDishes().remove(dish))
+						if(o.getDishes().contains(dish) && !o.removeDish(dish))
 							return false;
 					}
 				}
@@ -428,7 +430,7 @@ public class Restaurant implements Serializable {
 	public boolean removeComponent(Component comp) {
 		if(comp == null || !getComponents().containsValue(comp))
 			return false;
-		for(Dish d : getDishes().values()) {
+		for(Dish d : getDishes().values().stream().toList()) {
 			try {
 				if(d.getComponents().contains(comp)) {
 					d.removeComponent(comp);
@@ -459,7 +461,8 @@ public class Restaurant implements Serializable {
 				return rd.removeOrder(order);
 			} else {
 				ExpressDelivery ed = (ExpressDelivery) order.getDelivery();
-				ed.setOrder(null);
+				if(ed != null)
+					ed.setOrder(null);
 				return true;
 			}
 		}

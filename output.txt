@@ -252,6 +252,16 @@ successfully added Component Jam
 successfully added Component Caramel
 successfully added Component Hummus
 
+successfully added Dish Pizza
+successfully added Dish Pasta
+successfully added Dish Schnitzel
+successfully added Dish Steak
+successfully added Dish Hamburger
+successfully added Dish Sandwich
+successfully added Dish Salad
+successfully added Dish Empanadas
+successfully added Dish Roast
+successfully added Dish Toast
 successfully added Dish Cake
 successfully added Dish Brule Cream
 successfully added Dish Krep
@@ -264,160 +274,136 @@ successfully added Dish Onion Rings
 successfully added customer to blackList 100
 successfully added customer to blackList 101
 
-failed to add Order 1
-failed to add Order 2
-failed to add Order 3
-failed to add Order 4
-failed to add Order 5
-failed to add Order 6
-failed to add Order 7
-failed to add Order 8
-failed to add Order 9
-failed to add Order 10
-failed to add Order 11
-failed to add Order 12
-failed to add Order 13
-failed to add Order 14
-failed to add Order 15
+successfully added Order 1
+successfully added Order 2
+successfully added Order 3
+successfully added Order 4
+successfully added Order 5
+successfully added Order 6
+successfully added Order 7
+successfully added Order 8
+successfully added Order 9
+successfully added Order 10
+successfully added Order 11
+successfully added Order 12
+successfully added Order 13
+successfully added Order 14
+successfully added Order 15
 successfully added Order 16
-failed to add Order 17
-failed to add Order 18
-failed to add Order 19
-failed to add Order 20
-failed to add Order 21
-failed to add Order 22
-failed to add Order 23
-failed to add Order 24
-failed to add Order 25
-failed to add Order 26
-failed to add Order 27
-failed to add Order 28
-failed to add Order 29
-failed to add Order 30
-failed to add Order 31
-failed to add Order 32
-failed to add Order 33
-failed to add Order 34
-failed to add Order 35
-failed to add Order 36
-failed to add Order 37
+successfully added Order 17
+successfully added Order 18
+successfully added Order 19
+successfully added Order 20
+successfully added Order 21
+successfully added Order 22
+successfully added Order 23
+successfully added Order 24
+successfully added Order 25
+successfully added Order 26
+successfully added Order 27
+successfully added Order 28
+successfully added Order 29
+successfully added Order 30
+successfully added Order 31
+successfully added Order 32
+successfully added Order 33
+successfully added Order 34
+successfully added Order 35
+successfully added Order 36
+successfully added Order 37
 successfully added Order 38
-failed to add Order 39
-failed to add Order 40
+successfully added Order 39
+successfully added Order 40
 successfully added Order 41
-failed to add Order 42
-failed to add Order 43
-failed to add Order 44
-failed to add Order 45
-Customer Sunny Gogarty is sensitive to one of the components in the dish Arancini!
+successfully added Order 42
+successfully added Order 43
+successfully added Order 44
+successfully added Order 45
 failed to add Order 46
 failed to add Order 47
 failed to add Order 48
-Customer Rhianna Greep is sensitive to one of the components in the dish Stuffed Mushrooms!
 failed to add Order 49
 failed to add Order 50
-Customer Trudie Milsom is sensitive to one of the components in the dish Stuffed Mushrooms!
 failed to add Order 51
 failed to add Order 52
-failed to add Order 53
-failed to add Order 54
-Customer Waterworth Upton is sensitive to one of the components in the dish Chips!
+successfully added Order 53
+successfully added Order 54
 failed to add Order 55
-failed to add Order 56
+successfully added Order 56
 successfully added Order 57
 failed to add Order 58
-Customer Eugine Skatesa is sensitive to one of the components in the dish Chips!
 failed to add Order 59
-failed to add Order 60
+successfully added Order 60
 failed to add Order 61
-failed to add Order 62
-failed to add Order 63
-Customer Lenka Necolds is sensitive to one of the components in the dish Stuffed Mushrooms!
+successfully added Order 62
+successfully added Order 63
 failed to add Order 64
-Customer Lenka Necolds is sensitive to one of the components in the dish Chips!
 failed to add Order 65
-Customer Tirrell Leyninye is sensitive to one of the components in the dish Cake!
 failed to add Order 66
-Customer Waterworth Upton is sensitive to one of the components in the dish Stuffed Mushrooms!
 failed to add Order 67
-Customer Chicky Showte is sensitive to one of the components in the dish Stuffed Mushrooms!
 failed to add Order 68
-failed to add Order 69
+successfully added Order 69
 failed to add Order 70
-failed to add Order 71
-failed to add Order 72
+successfully added Order 71
+successfully added Order 72
 failed to add Order 73
-failed to add Order 74
-failed to add Order 75
+successfully added Order 74
+successfully added Order 75
 failed to add Order 76
-Customer Sunny Gogarti is sensitive to one of the components in the dish Krep!
 failed to add Order 77
-Customer Doria Soles is sensitive to one of the components in the dish Arancini!
 failed to add Order 78
-failed to add Order 79
+successfully added Order 79
 failed to add Order 80
 failed to add Order 81
 failed to add Order 82
-failed to add Order 83
-failed to add Order 84
+successfully added Order 83
+successfully added Order 84
 failed to add Order 85
 failed to add Order 86
 failed to add Order 87
-The restaurant is in conflict with this customer so this customer does not will order a new order!
 failed to add Order 88
-failed to add Order 89
-failed to add Order 90
-failed to add Order 91
-failed to add Order 92
-Customer Orlyna Dosset is sensitive to one of the components in the dish Cake!
+successfully added Order 89
+successfully added Order 90
+successfully added Order 91
+successfully added Order 92
 failed to add Order 93
 successfully added Order 94
-failed to add Order 95
-Customer Edin Harburtson is sensitive to one of the components in the dish Cake!
+successfully added Order 95
 failed to add Order 96
 failed to add Order 97
-Customer Frederigo Harbard is sensitive to one of the components in the dish Chips!
 failed to add Order 98
 failed to add Order 99
-failed to add Order 100
+successfully added Order 100
 failed to add Order 101
-failed to add Order 102
-Customer Syd Trime is sensitive to one of the components in the dish Krep!
+successfully added Order 102
 failed to add Order 103
-failed to add Order 104
+successfully added Order 104
 failed to add Order 105
 failed to add Order 106
-Customer Adelaida Naismith is sensitive to one of the components in the dish Krep!
 failed to add Order 107
-Customer Jacenta Durber is sensitive to one of the components in the dish Brule Cream!
 failed to add Order 108
-failed to add Order 109
-failed to add Order 110
+successfully added Order 109
+successfully added Order 110
 failed to add Order 111
 successfully added Order 112
-Customer Perl Wraighter is sensitive to one of the components in the dish Stuffed Mushrooms!
-failed to add Order 113
-failed to add Order 114
+successfully added Order 113
+successfully added Order 114
 successfully added Order 115
 failed to add Order 116
 failed to add Order 117
-failed to add Order 118
-failed to add Order 119
+successfully added Order 118
+successfully added Order 119
 failed to add Order 120
 failed to add Order 121
-Customer Gustav Freemantle is sensitive to one of the components in the dish Arancini!
-failed to add Order 122
+successfully added Order 122
 successfully added Order 123
-Customer Corby Minchinden is sensitive to one of the components in the dish Arancini!
-failed to add Order 124
-failed to add Order 125
+successfully added Order 124
+successfully added Order 125
 failed to add Order 126
-failed to add Order 127
-Customer Wendell Kilmary is sensitive to one of the components in the dish Arancini!
+successfully added Order 127
 failed to add Order 128
-failed to add Order 129
+successfully added Order 129
 failed to add Order 130
-Customer Katharyn Havock is sensitive to one of the components in the dish Arancini!
 failed to add Order 131
 
 successfully added Delivery 1
@@ -441,10 +427,28 @@ successfully added Delivery 18
 successfully added Delivery 19
 successfully added Delivery 20
 successfully added Delivery 21
-This regular delivery contains one order, please replace it with an express delivery
+successfully added Delivery 22
 
+successfully added Delivery 23
 successfully added Delivery 24
 successfully added Delivery 25
+successfully added Delivery 26
+successfully added Delivery 27
+successfully added Delivery 28
+successfully added Delivery 29
+successfully added Delivery 30
+successfully added Delivery 31
+successfully added Delivery 32
+successfully added Delivery 33
+successfully added Delivery 34
+successfully added Delivery 35
+successfully added Delivery 36
+successfully added Delivery 37
+successfully added Delivery 38
+successfully added Delivery 39
+successfully added Delivery 40
+successfully added Delivery 41
+successfully added Delivery 42
 
 successfully removed DeliveryArea 7
 
@@ -456,16 +460,106 @@ successfully removed Cook 7
 successfully removed Delivery Person 28
 failed to remove Delivery Person 405
 
-failed to remove Delivery 35
+successfully removed Delivery 35
 failed to remove Delivery 653
 
 successfully removed Component 4
 failed to remove Component 4
 successfully removed Component 13
 
-failed to remove Dish 17
-failed to remove Dish 18
+successfully removed Dish 17
+successfully removed Dish 18
 failed to remove Dish 17
 
 failed to remove Order 50
 failed to remove Order 51
+
+No deliveries by this delivery person in month 2
+
+No deliveries by this delivery person in month 3
+
+No deliveries by this delivery person in month 4
+
+
+successfully removed Component 1
+successfully removed Component 8
+successfully removed Component 17
+The dish Sandwich - Main, price: 72.90₪ does not include any components!
+successfully removed Component 5
+
+This regular delivery contains one order, please replace it with an express delivery
+successfully added Delivery 43
+This regular delivery contains one order, please replace it with an express delivery
+successfully added Delivery 45
+This regular delivery contains one order, please replace it with an express delivery
+successfully added Delivery 47
+This regular delivery contains one order, please replace it with an express delivery
+successfully added Delivery 49
+
+failed to add Order 132
+failed to add Order 133
+
+failed to add Order 134
+
+Has 3 regular deliveries and 6 express deliveries
+
+
+The revenue from express deliveries is: 732.199450325
+
+
+The popular component is: Lemon, price: 2.90₪
+
+The component by populization:
+Lemon, price: 2.90₪
+Chicken, price: 3.50₪
+Gauda Cheese, price: 5.80₪, contains lactose
+Rice, price: 7.00₪
+Olives, price: 3.10₪
+Dough, price: 0.50₪, contains gluten
+Carrot, price: 9.50₪
+Vanila, price: 3.30₪
+Potatoes, price: 4.80₪
+Caramel, price: 0.70₪
+Chocolate, price: 4.60₪, contains lactose
+
+
+
+The Dish with the best relation is: Toast - Main, price: 73.50₪, contains lactose
+
+The dishes by populization:
+Toast - Main, price: 73.50₪, contains lactose
+Steak - Main, price: 68.10₪
+Stuffed Mushrooms - Starter, price: 60.00₪, contains lactose
+Salad - Main, price: 80.40₪, contains lactose
+Brule Cream - Dessert, price: 83.70₪, contains lactose
+Pasta - Main, price: 72.60₪, contains lactose
+Pizza - Main, price: 53.40₪
+Krep - Dessert, price: 48.00₪, contains gluten
+Belgian Waffle - Dessert, price: 54.00₪
+Hamburger - Main, price: 40.20₪
+Empanadas - Main, price: 49.50₪
+Schnitzel - Main, price: 57.90₪, contains gluten and lactose
+Cake - Dessert, price: 30.00₪, contains gluten
+Roast - Main, price: 45.30₪
+Arancini - Starter, price: 37.50₪, contains gluten and lactose
+
+
+
+The machine Decided:
+Express delivery No51 to Jethro Kernell
+Express delivery No52 to Redford O' Scallan
+
+
+The machine Decided:
+Express delivery No53 to Zacherie Redhole
+
+
+The machine Decided:
+Express delivery No54 to Lemar Tawton
+Express delivery No55 to Patten Dyos
+
+
+The machine Decided:
+Delivery [id=56, deliveryPerson=Nerita Comusso, vehicle: Bicycle, area=Area: "West Haifa", delivery time: 20 minutes, isDelivered=false]
+
+

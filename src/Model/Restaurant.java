@@ -682,7 +682,7 @@ public class Restaurant implements Serializable {
 
 	 */
 
-	public HashMap<Integer,Cook> GetCooksByExpertise(Expertise e){
+	public HashMap<Integer,Cook> getCooksByExpertise(Expertise e){
 		HashMap<Integer,Cook> cooks = new HashMap<>();
 		for(Cook c : getCooks().values()) {
 			if(c.getExpert().equals(e))

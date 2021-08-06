@@ -49,24 +49,4 @@ public class getRelevantDishListController {
         }
     }
 
-    // No more relevant
-    public void buttonPressed(ActionEvent event){
-        try {
-            Restaurant rest = Restaurant.getInstance();
-
-            if(rest.getCustomers().containsValue(customer_combobox.getSelectionModel().getSelectedItem())){
-                //query_result.setText(rest.getRelevantDishList(customer_combobox.getSelectionModel().getSelectedItem());
-                //query_result.getItems().addAll(rest.getReleventDishList(customer_combobox.getSelectionModel().getSelectedItem()).toString());
-                List<String> res = rest.getReleventDishList(customer_combobox.getValue()).stream().map(Dish::toString).toList();
-                res.forEach(r->query_result.getItems().add(r));
-                System.out.println("test");
-            }
-
-
-        }catch (NullPointerException ex){
-            System.out.println(ex.getMessage());
-        }
-
-    }
-
 }

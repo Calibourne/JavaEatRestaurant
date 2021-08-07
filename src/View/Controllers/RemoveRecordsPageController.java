@@ -4,7 +4,6 @@ package View.Controllers;
 
 import Model.*;
 import Utils.*;
-import View.Tuple;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +25,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static View.Controllers.ControllerUtils.editListableNode;
 
 public class RemoveRecordsPageController extends RecordManagementController{
 
@@ -50,10 +48,6 @@ public class RemoveRecordsPageController extends RecordManagementController{
     @FXML
     private GridPane removeWindow;
     //endregion
-
-
-    public void initialize(){
-    }
 
     public void handleButtonClick(ActionEvent e) {
         removeWindow.setVisible(false);
@@ -123,91 +117,6 @@ public class RemoveRecordsPageController extends RecordManagementController{
                 ex.printStackTrace();
             }
             //super.handleButtonClick(e);
-        }
-    }
-    @Override
-    protected void createSections(Group group) {
-        try{
-            GridPane grid = (GridPane) group.getChildren().get(0);
-            switch (group.getId()) {
-                case "removeCooks_sctn": {
-                    editListableNode(new Tuple[]{
-                            new Tuple<Cook>(grid, 0,
-                                    getRestaurant().getCooks().values().stream().toList(),
-                                    "Select Cook to Remove")
-                    });
-                    break;
-                }
-                case "removeDeliPersons_sctn": {
-                    editListableNode(new Tuple[]{
-                            new Tuple<DeliveryPerson>(grid, 0,
-                                    getRestaurant().getDeliveryPersons().values().stream().toList(),
-                                    "Select Delivery Person to Remove")
-                    });
-                    break;
-                }
-                case "removeCustomers_sctn": {
-                    editListableNode(new Tuple[]{
-                            new Tuple<Customer>(grid, 0,
-                                    getRestaurant().getCustomers().values().stream().toList(),
-                                    "Select Customer to Remove")
-                    });
-                    break;
-                }
-                case "removeComponents_sctn": {
-                    editListableNode(new Tuple[]{
-                            new Tuple<Component>(grid, 0,
-                                    getRestaurant().getComponents().values().stream().toList(),
-                                    "Select Ingredient to Remove")
-                    });
-                    break;
-                }
-                case "removeDishes_sctn": {
-                    editListableNode(new Tuple[]{
-                            new Tuple<Dish>(grid, 0,
-                                    getRestaurant().getDishes().values().stream().toList(),
-                                    "Select Dish to Remove")
-                    });
-                    break;
-                }
-                case "removeOrders_sctn": {
-                    editListableNode(new Tuple[]{
-                            new Tuple<Order>(grid, 0,
-                                    getRestaurant().getOrders().values().stream().toList(),
-                                    "Select Order to Remove")
-                    });
-                    break;
-                }
-                case "removeDeliveries_sctn": {
-                    editListableNode(new Tuple[]{
-                            new Tuple<Delivery>(grid, 0,
-                                    getRestaurant().getDeliveries().values().stream().toList(),
-                                    "Select Delivery to Remove")
-                    });
-                    break;
-                }
-                case "removeAreas_sctn":{
-                    editListableNode(new Tuple[]{
-                            new Tuple<DeliveryArea>(grid, 0,
-                                    getRestaurant().getAreas().values().stream().toList(),
-                                    "Select Delivery Area to Remove"),
-                            new Tuple<DeliveryArea>(grid, 1,
-                                    getRestaurant().getAreas().values().stream().toList(),
-                                    "Select Delivery Area to Replace with")
-                    });
-                    break;
-                }
-                default: {
-                    System.out.println("Unsupported/Yet to implement section");
-                    //Optional: throw new IllegalStateException("Unexpected value: " + group.getId());
-                    break;
-                }
-            }
-        }catch(NullPointerException e) {
-            System.err.println(e.getMessage());
-        }
-        catch (ClassCastException e) {
-            System.err.println(e.getMessage());
         }
     }
 }

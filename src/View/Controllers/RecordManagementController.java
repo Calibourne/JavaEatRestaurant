@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 /**
  * A superclass for add/remove/edit records controllers
- * for reference please lookup: prototyping design pattern
+ * for reference please look up: prototyping design pattern
  */
 public abstract class RecordManagementController {
     @FXML
@@ -28,29 +28,13 @@ public abstract class RecordManagementController {
     public RecordManagementController() {
         setRestaurant(Restaurant.getInstance());
         setGroups(new HashMap<>());
-        setMenuButtons(new HashSet<>());
+        //setMenuButtons(new HashSet<>());
     }
-    protected void initialize(Collection<Group> groupList, Collection<Button> buttons){
-        HashMap<String, Button> buttonDict = (HashMap<String, Button>) buttons.stream()
-                .collect(Collectors.toMap(Button::getId,Function.identity()));
-        groupList.forEach(g->groups.put(buttonDict
-                .get(g.getId().replace("sctn","btn")).getId(),g));
-        buttons.forEach(b->menuButtons.add(b.getId()));
-        groups.values().forEach(this::createSections);
-        welcome_sctn.setVisible(true);
+    protected void initialize(){
     }
-    public void handleButtonClick(ActionEvent e){
+    protected void handleButtonClick(ActionEvent e){
         welcome_sctn.setVisible(false);
         alert_sctn.setVisible(false);
-        if(e.getSource() instanceof Button) {
-            Button btn = (Button) e.getSource();
-            if(getMenuButtons().contains(btn.getId())) {
-                for (Group g: getGroups().values()) {
-                    g.setVisible(false);
-                }
-                getGroups().get(btn.getId()).setVisible(true);
-            }
-        }
     }
     protected HashMap<String, Group> getGroups(){
         return this.groups;
@@ -59,17 +43,10 @@ public abstract class RecordManagementController {
         this.groups = groups;
     }
 
-    protected HashSet<String> getMenuButtons() {
-        return menuButtons;
-    }
-    private void setMenuButtons(HashSet<String> menuButtons){
-        this.menuButtons = menuButtons;
-    }
     protected Restaurant getRestaurant(){
         return this.rest;
     }
     private void setRestaurant(Restaurant rest){
         this.rest = rest;
     }
-    protected abstract void createSections(Group g);
 }

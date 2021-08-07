@@ -4,7 +4,6 @@ package View.Controllers;
 import Model.*;
 import Utils.*;
 //import View.Main;
-import View.Tuple;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -57,10 +56,8 @@ public class AddRecordsPageController extends RecordManagementController {
     private GridPane addWindow;
     //endregion
 
-    public void initialize() {
-    }
-
-    public void handleButtonClick(ActionEvent e) {
+    @FXML
+    protected void handleButtonClick(ActionEvent e) {
         if (e.getSource() == addDeliPersons_btn && getRestaurant().getAreas().size() == 0) {
             ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some delivery areas first");
         } else if (e.getSource() == addToBlacklist_btn && getRestaurant().getCustomers().size() == 0) {
@@ -119,10 +116,5 @@ public class AddRecordsPageController extends RecordManagementController {
             }
             //super.handleButtonClick(e);
         }
-    }
-
-    @Override
-    protected void createSections(Group group) {
-
     }
 }

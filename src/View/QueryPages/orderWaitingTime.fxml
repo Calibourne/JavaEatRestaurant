@@ -68,7 +68,7 @@
                 <DropShadow />
             </effect>
             <font>
-                <Font size="20.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
          <VBox.margin>
             <Insets top="30.0" />

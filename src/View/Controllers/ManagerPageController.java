@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.imageio.IIOException;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -97,6 +98,11 @@ public class ManagerPageController {
             pnlRemoveRecords.setStyle("-fx-background-color: #1F4591");
             pnlRemoveRecords.toFront();
         }
+        if (e.getSource() == btnEditRecords){
+            initRecords();
+            pnlEditRecords.setStyle("-fx-background-color: #1F4591");
+            pnlEditRecords.toFront();
+        }
 
         if(e.getSource() == btnQueries) {
             initQueries();
@@ -129,15 +135,24 @@ public class ManagerPageController {
     }
     private void initRecords() {
             try {
+                pnlAddRecords.getChildren().clear();
                 Node recordsA = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addRecords.fxml"));
                 pnlAddRecords.getChildren().add(recordsA);
             } catch(IOException e){
                 System.out.println(e.getMessage());
             }
             try{
+                pnlRemoveRecords.getChildren().clear();
                 Node recordsR = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeRecords.fxml"));;
                 pnlRemoveRecords.getChildren().add(recordsR);
             }catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                pnlEditRecords.getChildren().clear();
+                Node recordsE = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editRecords.fxml"));
+                pnlEditRecords.getChildren().add(recordsE);
+            }catch (IOException e){
                 System.out.println(e.getMessage());
             }
     }

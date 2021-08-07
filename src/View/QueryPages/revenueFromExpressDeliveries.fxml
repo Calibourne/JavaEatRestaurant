@@ -21,11 +21,6 @@
                     <Insets />
                 </VBox.margin>
             </Label>
-            <Label alignment="CENTER" text="Press 'Calculate' to see the total revenue of the restauran's express deliveries" textAlignment="CENTER">
-                <effect>
-                    <DropShadow />
-                </effect>
-            </Label>
         </VBox>
         <Label text="The revenue from the express deliveries is:">
             <effect>
@@ -43,7 +38,7 @@
             <DropShadow />
          </effect>
          <font>
-            <Font size="40.0" />
+            <Font name="System Bold" size="40.0" />
          </font>
          <VBox.margin>
             <Insets top="40.0" />

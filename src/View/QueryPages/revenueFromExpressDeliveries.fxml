@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pnlQueries" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.QueryPages.createAIMacineController">
+<AnchorPane fx:id="pnlQueries" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.QueryPages.revenueFromExpressDeliveriesController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
             <Label alignment="CENTER" text="Revenue from express deliveries" textAlignment="CENTER">
@@ -28,15 +27,7 @@
                 </effect>
             </Label>
         </VBox>
-        <Button mnemonicParsing="false" text="Calculate">
-            <font>
-                <Font size="22.0" />
-            </font>
-            <VBox.margin>
-                <Insets top="90.0" />
-            </VBox.margin>
-        </Button>
-        <Label text="Placeholder for the query's result">
+        <Label text="The revenue from the express deliveries is:">
             <effect>
                 <DropShadow />
             </effect>
@@ -47,5 +38,16 @@
             <Insets top="150.0" />
          </VBox.margin>
         </Label>
+      <Label fx:id="query_result">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="40.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
+      </Label>
     </VBox>
 </AnchorPane>

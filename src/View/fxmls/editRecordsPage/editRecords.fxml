@@ -50,7 +50,7 @@
                         <Insets left="12.5" right="12.5" />
                      </padding>
                   </Button>
-                  <Button fx:id="removeAreas_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Delivery Areas" GridPane.rowIndex="1">
+                  <Button fx:id="editAreas_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Delivery Areas" GridPane.rowIndex="1">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -65,7 +65,7 @@
                         <Insets left="12.5" right="12.5" />
                      </padding>
                   </Button>
-                  <Button fx:id="removeDeliPersons_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Deliverymen" GridPane.rowIndex="2">
+                  <Button fx:id="editDeliPersons_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Deliverymen" GridPane.rowIndex="2">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -80,7 +80,7 @@
                         <Insets left="12.5" right="12.5" />
                      </padding>
                   </Button>
-                  <Button fx:id="removeCustomers_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Customers" GridPane.rowIndex="3">
+                  <Button fx:id="editCustomers_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Customers" GridPane.rowIndex="3">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -92,7 +92,7 @@
                         <Insets left="12.5" right="12.5" />
                      </padding>
                   </Button>
-                  <Button fx:id="removeComponents_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Ingredients" GridPane.rowIndex="4">
+                  <Button fx:id="editComponents_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Ingredients" GridPane.rowIndex="4">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -104,7 +104,7 @@
                         <Insets left="12.5" right="12.5" />
                      </padding>
                   </Button>
-                  <Button fx:id="removeDishes_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Dishes" GridPane.rowIndex="5">
+                  <Button fx:id="editDishes_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Dishes" GridPane.rowIndex="5">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -116,7 +116,7 @@
                         <Insets left="12.5" right="12.5" />
                      </padding>
                   </Button>
-                  <Button fx:id="removeOrders_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Orders" GridPane.rowIndex="6">
+                  <Button fx:id="editOrders_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Orders" GridPane.rowIndex="6">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -128,7 +128,7 @@
                         <Insets left="12.5" right="12.5" />
                      </padding>
                   </Button>
-                  <Button fx:id="removeDeliveries_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Deliveries" GridPane.rowIndex="7">
+                  <Button fx:id="editDeliveries_btn" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="200.0" text="Edit Deliveries" GridPane.rowIndex="7">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>

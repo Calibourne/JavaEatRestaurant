@@ -42,7 +42,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <VBox.margin>
                 <Insets left="30.0" right="30.0" top="60.0" />
@@ -72,26 +71,29 @@
                   <DropShadow />
                </effect>
             </Label>
-            <ComboBox prefWidth="200.0" GridPane.columnIndex="1" />
-            <ComboBox prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <CheckComboBox prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="dp_combobox" prefWidth="200.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="da_combobox" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckComboBox fx:id="order_combobox" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
         </GridPane>
-      <Label text="Placeholder for the query's result">
-         <effect>
-            <DropShadow />
-         </effect>
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Button mnemonicParsing="false" text="Create Delivery">
+      <Button fx:id="query_button" mnemonicParsing="false" onAction="#buttonPressed" text="Activate AI Machine">
          <font>
             <Font size="22.0" />
          </font>
          <VBox.margin>
-            <Insets top="40.0" />
+            <Insets top="50.0" />
          </VBox.margin>
       </Button>
+      <Label fx:id="query_result">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="60.0" />
+         </VBox.margin>
+      </Label>
     </VBox>
 </AnchorPane>

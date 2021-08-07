@@ -25,7 +25,7 @@ import java.util.TreeSet;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class addRecordsController {
+public class AddRecordsController {
     // region Properties
     // region Person attributes
     @FXML

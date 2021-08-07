@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<Group fx:id="addToBlacklist_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.addRecordsController">
+<Group fx:id="addToBlacklist_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <GridPane fx:id="BlacklistInfo_grid" prefHeight="93.0" prefWidth="280.0" vgap="10.0">
          <columnConstraints>

@@ -1,11 +1,10 @@
 package Model;
 
-import java.io.Serializable;
+import Utils.MyFileLogWriter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import Utils.MyFileLogWriter;
 
 /**
  * A class that represents an order object
@@ -199,7 +198,7 @@ public class Order extends Record implements Comparable<Order> {
 		for(Dish d : getDishes()) {
 			time += d.getTimeToMake();
 		}
-		MyFileLogWriter.println("Time for order: "+this+" is "+time+" minutes");
+		//MyFileLogWriter.println("Time for order: "+this+" is "+time+" minutes");
 		return time;
 	}
 

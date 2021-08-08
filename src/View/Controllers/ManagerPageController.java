@@ -114,6 +114,11 @@ public class ManagerPageController {
             pnlQueries.setStyle("-fx-background-color: #13194c");
             pnlQueries.toFront();
         }
+        if(e.getSource() == view_records) {
+            initViewRecords();
+            pnlViewContents.setStyle("-fx-background-color: #13194c");
+            pnlViewContents.toFront();
+        }
         if(e.getSource() == btnSignOut) {
             try {
                 Stage s = (Stage) btnSignOut.getScene().getWindow();
@@ -167,6 +172,17 @@ public class ManagerPageController {
         try{
             Node queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/Queries.fxml")));
             pnlQueries.getChildren().add(queryPage);
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    // This makes the View Records button clickable
+    public void initViewRecords(){
+        try{
+            Node ViewRecordsPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/ViewStructures.fxml")));
+            pnlViewContents.getChildren().add(ViewRecordsPage);
         }
         catch(IOException e){
             System.out.println(e.getMessage());

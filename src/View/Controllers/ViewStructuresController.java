@@ -2,10 +2,14 @@ package View.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ViewStructuresController {
@@ -46,10 +50,6 @@ public class ViewStructuresController {
     @FXML
     private GridPane content_pane;
 
-    @FXML
-    void queryButtonPushed(ActionEvent event) {
-
-    }
 
     @FXML
     void initialize() {
@@ -64,5 +64,55 @@ public class ViewStructuresController {
         assert blacklist_button != null : "fx:id=\"blacklist_button\" was not injected: check your FXML file 'ViewStructures.fxml'.";
         assert content_pane != null : "fx:id=\"content_pane\" was not injected: check your FXML file 'ViewStructures.fxml'.";
 
+    }
+
+    // method(s) used to switch between scenes within a stage
+    @FXML
+    public void queryButtonPushed(ActionEvent event) {
+        try{
+            Node queryPage;
+            switch(((Node)event.getSource()).getId()){
+                case "customers_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/ViewCustomers.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+                case "ingredients_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/createAIMacine.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+                case "cooks_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/revenueFromExpressDeliveries.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+                case "dp_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getNumberOfDeliveriesPerType.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+                case "dishes_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getDeliveriesByPerson.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+                case "orders_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/orderWaitingTime.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+                case "deliveries_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getPopularComponent.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+                case "da_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getCooksByExpertise.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+                case "blacklist_button":
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getRelevantDishList.fxml")));
+                    content_pane.getChildren().add(queryPage);
+                    break;
+
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }

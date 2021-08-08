@@ -40,7 +40,7 @@ public class ViewCustomersController {
 
             Restaurant rest = Restaurant.getInstance();
 
-            if(!(rest.getPopularComponents().isEmpty())){
+            if(!(rest.getCustomers().isEmpty())){
 
                 List<String> results = rest.getCustomers().values().stream().map(Customer::toString).toList();
                 results.forEach(r->query_result.getItems().add(r));

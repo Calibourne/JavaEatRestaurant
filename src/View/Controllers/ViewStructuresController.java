@@ -73,39 +73,39 @@ public class ViewStructuresController {
             Node queryPage;
             switch(((Node)event.getSource()).getId()){
                 case "customers_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/ViewCustomers.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewCustomers.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "ingredients_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/createAIMacine.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewIngredients.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "cooks_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/revenueFromExpressDeliveries.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewCooks.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "dp_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getNumberOfDeliveriesPerType.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDeliveryPersons.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "dishes_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getDeliveriesByPerson.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDishes.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "orders_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/orderWaitingTime.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewOrders.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "deliveries_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getPopularComponent.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDeliveries.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "da_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getCooksByExpertise.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDeliveryAreas.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "blacklist_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getRelevantDishList.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewBlacklist.fxml")));
                     content_pane.getChildren().add(queryPage);
                     break;
 

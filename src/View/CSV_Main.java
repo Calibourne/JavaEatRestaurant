@@ -164,10 +164,12 @@ public class CSV_Main {
             comp.add(rest.getRealComponent(Integer.parseInt(args[5])));
             comp.add(rest.getRealComponent(Integer.parseInt(args[6])));
             Dish d = new Dish(args[0], DishType.valueOf(args[1]), comp, Integer.parseInt(args[2]));
+            System.out.println("num of ingredients: "+ comp.size());
             if(rest.addDish(d))
                 MyFileLogWriter.println("successfully added Dish "+args[0]);
             else
                 MyFileLogWriter.println("failed to add Dish "+args[0]);
+            System.out.println(d.getComponents().size()+"");
         });
 
 

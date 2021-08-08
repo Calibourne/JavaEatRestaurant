@@ -32,8 +32,6 @@ public class EditRecordsPageController extends RecordManagementController {
     @FXML
     private Button editDeliveries_btn;
     @FXML
-    private Button editToBlacklist_btn;
-    @FXML
     private GridPane editWindow;
     //endregion
 
@@ -41,8 +39,6 @@ public class EditRecordsPageController extends RecordManagementController {
     protected void handleButtonClick(ActionEvent e) {
         if (e.getSource() == editDeliPersons_btn && getRestaurant().getAreas().size() == 0) {
             ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some delivery areas first");
-        } else if (e.getSource() == editToBlacklist_btn && getRestaurant().getCustomers().size() == 0) {
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some customers first");
         } else if (e.getSource() == editDishes_btn && getRestaurant().getComponents().size() == 0) {
             ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some ingredients first");
         } else if (e.getSource() == editOrders_btn && getRestaurant().getDishes().size() == 0) {
@@ -87,13 +83,10 @@ public class EditRecordsPageController extends RecordManagementController {
                     Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editDeliveryAreas.fxml"));
                     editWindow.getChildren().add(node);
                 }
-                if (e.getSource() == editToBlacklist_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editToBlacklist.fxml"));
-                    editWindow.getChildren().add(node);
-                }
                 editWindow.setVisible(true);
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
+                ex.printStackTrace();
             }
             //super.handleButtonClick(e);
         }

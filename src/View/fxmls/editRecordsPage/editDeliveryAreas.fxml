@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import org.controlsfx.control.CheckListView?>
 
-<Group fx:id="editCook_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsController">
+<Group fx:id="editAreas_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsController">
    <children>
       <GridPane vgap="10.0">
          <columnConstraints>
@@ -87,7 +87,7 @@
                                        <children>
                                           <HBox>
                                              <children>
-                                                <CheckListView fx:id="neighbourhoods_checkedCombo" prefHeight="152.0" prefWidth="252.0" />
+                                                <CheckListView fx:id="neighbourhoods_checkedList" prefHeight="152.0" prefWidth="252.0" />
                                                 <VBox>
                                                    <children>
                                                       <Button fx:id="plus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />

@@ -163,10 +163,12 @@ public class LegacyMain {
 			comp.add(rest.getRealComponent(Integer.parseInt(args[5])));
 			comp.add(rest.getRealComponent(Integer.parseInt(args[6])));
 			Dish d = new Dish(args[0], DishType.valueOf(args[1]), comp, Integer.parseInt(args[2]));
+			MyFileLogWriter.println("num of ingredients: "+ comp.size());
 			if(rest.addDish(d))
 				MyFileLogWriter.println("successfully added Dish "+args[0]);
 			else
 				MyFileLogWriter.println("failed to add Dish "+args[0]);
+			MyFileLogWriter.println(d.getComponents().size()+"");
 		});
 
 		

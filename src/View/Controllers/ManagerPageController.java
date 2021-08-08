@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -22,6 +21,12 @@ public class ManagerPageController {
     // region FXML comps
     @FXML
     private Label lblGreeting;
+
+    @FXML
+    private Pane pnlViewContents;
+
+    @FXML
+    private Button view_records;
 
     // region buttons
     @FXML

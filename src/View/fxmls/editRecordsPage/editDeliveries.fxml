@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import org.controlsfx.control.CheckListView?>
 
 <Group fx:id="editDeliveries_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsController">
@@ -39,7 +38,7 @@
                   <ComboBox fx:id="records_combo" prefWidth="252.0" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <GridPane vgap="20.0" GridPane.rowIndex="1">
+            <GridPane fx:id="info_grid" vgap="20.0" GridPane.rowIndex="1">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
@@ -48,7 +47,7 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <GridPane>
+                  <GridPane vgap="10.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
@@ -100,23 +99,30 @@
                               <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <VBox fx:id="rd_vbox" prefHeight="190.0" prefWidth="252.0" styleClass="Container" visible="false">
+                              <Group>
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="TOP" prefHeight="0.0" prefWidth="252.0" text="Orders" />
-                                    <HBox>
+                                    <VBox fx:id="rd_vbox" fillWidth="false" prefHeight="190.0" prefWidth="268.0" styleClass="Container">
                                        <children>
-                                          <CheckListView fx:id="orders_checkedList" prefHeight="152.0" prefWidth="252.0" />
-                                          <VBox>
+                                          <Label alignment="CENTER" contentDisplay="TOP" prefHeight="0.0" prefWidth="252.0" text="Orders" />
+                                          <Group>
                                              <children>
-                                                <Button fx:id="plus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="+" />
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="112.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
-                                                <Button fx:id="minus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="-" />
+                                                <HBox prefHeight="162.0" prefWidth="263.0">
+                                                   <children>
+                                                      <CheckListView fx:id="orders_checkedList" prefHeight="152.0" prefWidth="252.0" />
+                                                      <VBox prefHeight="162.0" prefWidth="38.0" spacing="112.0" styleClass="HBox">
+                                                         <children>
+                                                            <Button fx:id="plus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" />
+                                                            <Button fx:id="minus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
                                              </children>
-                                          </VBox>
+                                          </Group>
                                        </children>
-                                    </HBox>
+                                    </VBox>
                                  </children>
-                              </VBox>
+                              </Group>
                               <Group>
                                  <children>
                                     <VBox fx:id="ed_vbox" prefHeight="40.0" prefWidth="210.0" spacing="10.0" styleClass="Container">

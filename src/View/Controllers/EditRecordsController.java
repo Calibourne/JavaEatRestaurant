@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
@@ -125,12 +126,19 @@ public class EditRecordsController {
     @FXML
     private ComboBox<Record> records_combo;
     @FXML
+    GridPane info_grid;
+    @FXML
     private Button submit;
     // endregion
 
     @FXML
     private void initialize(){
         Restaurant rest = Restaurant.getInstance();
+        try{
+            info_grid.setVisible(false);
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
         if(editCooks_sctn != null){
             records_combo.getItems().addAll(rest.getCooks().values().stream().toList());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
@@ -164,6 +172,7 @@ public class EditRecordsController {
                             vehicles_combo.getItems().addAll(Arrays.stream(Vehicle.values()).toList());
                             deliveryAreas_combo.setValue(((DeliveryPerson)newValue).getArea());
                             deliveryAreas_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
+                            info_grid.setVisible(true);
                         }
                         catch (NullPointerException e){
                             System.out.println(e.getMessage());
@@ -183,6 +192,7 @@ public class EditRecordsController {
                     neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
                     glutenIntolerant_check.setSelected(((Customer)newValue).isSensitiveToGluten());
                     lactoseIntolerant_check.setSelected(((Customer)newValue).isSensitiveToLactose());
+                    info_grid.setVisible(true);
                 }
                 catch (NullPointerException e){
                     System.out.println(e.getMessage());
@@ -197,6 +207,7 @@ public class EditRecordsController {
                     ingredientPrice_field.setText(String.format("%.2f",((Component)newValue).getPrice()));
                     hasGluten_check.setSelected(((Component)newValue).isHasGluten());
                     hasLactose_check.setSelected(((Component)newValue).isHasLactose());
+                    info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
@@ -213,6 +224,7 @@ public class EditRecordsController {
                     dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
                     components_checkedList.getItems().clear();
                     components_checkedList.getItems().addAll(((Dish)newValue).getComponents());
+                    info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
@@ -231,6 +243,7 @@ public class EditRecordsController {
                     deliveries_combo.setValue(((Order)newValue).getDelivery());
                     dishes_checkedList.getItems().clear();
                     dishes_checkedList.getItems().addAll(((Order)newValue).getDishes());
+                    info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
@@ -239,9 +252,42 @@ public class EditRecordsController {
         }
         if(editDeliveries_sctn != null){
             records_combo.getItems().addAll(Restaurant.getInstance().getDeliveries().values());
+            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+                try{
+                    deliveryPersons_combo.setValue(((Delivery)newValue).getDeliveryPerson());
+                    deliveryPersons_combo.getItems().addAll(rest.getDeliveryPersons().values());
+                    deliveryDate_dp.setValue(((Delivery)newValue).getDeliveryDate());
+                    isDelivered_check.setSelected(((Delivery)newValue).isDelivered());
+                    if(newValue instanceof RegularDelivery){
+                        rd_vbox.setVisible(true);
+                        ed_vbox.setVisible(false);
+                        orders_checkedList.getItems().addAll(((RegularDelivery) newValue).getOrders());
+                    }
+                    else{
+                        ed_vbox.setVisible(true);
+                        rd_vbox.setVisible(false);
+                        orders_combo.setValue(((ExpressDelivery)newValue).getOrder());
+                        orders_combo.getItems().addAll(rest.getOrders().values());
+                        expressFee_field.setText(String.format("%.2f",((ExpressDelivery)newValue).getPostage()));
+                    }
+                    info_grid.setVisible(true);
+                }
+                catch (NullPointerException | ClassCastException e){
+                    System.out.println(e.getMessage());
+                }
+            });
         }
         if(editAreas_sctn != null){
             records_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
+            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+                try{
+
+                    info_grid.setVisible(true);
+                }
+                catch (NullPointerException | ClassCastException e){
+                    System.out.println(e.getMessage());
+                }
+            });
         }
     }
 

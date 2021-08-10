@@ -149,3 +149,28 @@
 .orange-bar { -fx-accent: orange; }
 .red-bar    { -fx-accent: red;    }
 .darkred-bar { -fx-accent: darkred;}
+
+.list-view {
+    -fx-background-color: #1f4591;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #2b6ad0;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #68a4f1;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #0b235e;
+    -fx-text-fill: white;
+}
+
+.list-view .label {
+    -fx-text-fill: white;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #061e47;
+}

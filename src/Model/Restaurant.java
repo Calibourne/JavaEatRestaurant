@@ -36,8 +36,11 @@ public class Restaurant implements Serializable {
 	private HashSet<Customer> blackList;
 	private HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory; //keeps track of added records history
 	private HashMap<String,TreeSet<RemoveRecordRequest>> removeRecordHistory; //keeps track of removed records history
+
+	// hashmap to allow us to work on each customer by his username
 	private HashMap<String, Customer> usersList;
 
+	// used to protect ID counters after each serialization
 	protected int runningCooks;
 	protected int runningDelipersons;
 	protected int runningCustomers;

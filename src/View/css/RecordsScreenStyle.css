@@ -66,7 +66,7 @@
 }
 
 .check-box .box {
-    -fx-background-color: #061E47;
+    -fx-background-color: #68a4f1;
 }
 
 .check-box:selected .mark {
@@ -173,4 +173,7 @@
 
 .list-view .list-cell:even {
     -fx-background-color: #061e47;
+}
+.list-view .list-cell:even:hover {
+    -fx-background-color: #2b6ad0;
 }

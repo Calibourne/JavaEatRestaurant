@@ -1,9 +1,9 @@
 package Model;
 
-import java.time.LocalDate;
-
 import Utils.Gender;
 import Utils.Vehicle;
+
+import java.time.LocalDate;
 
 /**
  * A class that represents a delivery person object
@@ -89,12 +89,12 @@ public class DeliveryPerson extends Person {
 	}
 	
 	@Override
-	public String toString() {
-		return String.format("%s, vehicle: %s",super.toString(), vehicle);
+	public String description() {
+		return String.format("%s, Vehicle: %s",super.toString(), vehicle);
 	}
 
-	@Override
-	public String description() {
-		return super.description()+" DeliveryPerson [vehicle=" + vehicle + "]";
-	}
+//	@Override
+//	public String description() {
+//		return super.description()+" DeliveryPerson [vehicle=" + vehicle + "]";
+//	}
 }

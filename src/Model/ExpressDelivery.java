@@ -92,7 +92,7 @@ public class ExpressDelivery extends Delivery {
 
 	@Override
 	public String toString() {
-		return String.format("Express delivery No%d to %s", getId(),getOrder().getCustomer());
+		return String.format("Express delivery #%d, delivered by %s to %s", getId(), getDeliveryPerson(), getOrder().getCustomer());
 	}
 
 	@Override

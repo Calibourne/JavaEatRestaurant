@@ -41,7 +41,7 @@ public class ViewDeliveryPersonsController {
 
             if(!(rest.getDeliveryPersons().isEmpty())){
 
-                List<String> results = rest.getDeliveryPersons().values().stream().map(DeliveryPerson::toString).toList();
+                List<String> results = rest.getDeliveryPersons().values().stream().map(DeliveryPerson::description).toList();
                 results.forEach(r->query_result.getItems().add(r));
 
             }

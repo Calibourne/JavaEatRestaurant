@@ -72,6 +72,10 @@ public class RegularDelivery extends Delivery {
 			return orders.remove(o);
 		return false;
 	}
+	@Override
+	public String toString() {
+		return String.format("Regular delivery #%d delivered by %s", getId(), getDeliveryPerson());
+	}
 
 	@Override
 	public String description() {

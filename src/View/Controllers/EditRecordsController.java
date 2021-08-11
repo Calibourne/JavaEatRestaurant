@@ -127,9 +127,13 @@ public class EditRecordsController {
     @FXML
     private ComboBox<Record> records_combo;
     @FXML
-    GridPane info_grid;
+    private GridPane info_grid;
+    @FXML
+    private ComboBox addComponents_combo;
     @FXML
     private Button minus_btn;
+    @FXML
+    private Button plus_btn;
     @FXML
     private Button submit;
     // endregion
@@ -139,6 +143,15 @@ public class EditRecordsController {
         Restaurant rest = Restaurant.getInstance();
         try{
             info_grid.setVisible(false);
+            addComponents_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+                if(!newValue.equals(oldValue)){
+                    try{
+                    }
+                    catch (NullPointerException e){
+
+                    }
+                }
+            });
         }catch (NullPointerException e){
             System.out.println(e.getMessage());
         }
@@ -302,7 +315,7 @@ public class EditRecordsController {
 
     @FXML
     private void handleButtonClick(ActionEvent e){
-        if(e.getSource() == minus_btn){
+        if(e.getSource() == minus_btn) {
             if(components_checkedList != null){
                 ObservableList<ListedRecord> selectedItems = components_checkedList.getCheckModel().getCheckedItems();
                 if(selectedItems.size() > 0) {
@@ -330,6 +343,35 @@ public class EditRecordsController {
                     neighbourhoods_checkedList.getItems().removeAll(selectedItems);
                     neighbourhoods_checkedList.getCheckModel().clearChecks();
                 }
+            }
+        }
+        if(e.getSource() == plus_btn) {
+            Restaurant rest = Restaurant.getInstance();
+            if (components_checkedList != null) {
+                addComponents_combo.getItems().clear();
+                addComponents_combo.getItems().addAll(rest.getComponents().values());
+                addComponents_combo.setVisible(true);
+            }
+            if (dishes_checkedList != null) {
+                addComponents_combo.getItems().clear();
+                addComponents_combo.getItems().addAll(rest.getDishes().values());
+                addComponents_combo.setVisible(true);
+            }
+            if (orders_checkedList != null) {
+                addComponents_combo.getItems().clear();
+                addComponents_combo.getItems().addAll(rest.getOrders().values()
+                        .stream().filter(o->!orders_checkedList.getItems().contains(o))
+                        .toList()
+                );
+                addComponents_combo.setVisible(true);
+            }
+            if (neighbourhoods_checkedList != null) {
+                addComponents_combo.getItems().clear();
+                addComponents_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList()
+                        .stream().filter(n->!neighbourhoods_checkedList.getItems().contains(n))
+                        .toList()
+                );
+                addComponents_combo.setVisible(true);
             }
         }
     }

@@ -98,7 +98,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="162.0" prefWidth="30.0" spacing="112.0" styleClass="HBox">
                                                    <children>
-                                                      <Button fx:id="plus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="+" />
+                                                      <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="+" />
                                                       <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="33.0" text="-" />
                                                    </children>
                                                 </VBox>

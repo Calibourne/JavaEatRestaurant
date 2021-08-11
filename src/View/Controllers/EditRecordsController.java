@@ -146,6 +146,22 @@ public class EditRecordsController {
             addComponents_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 if(!newValue.equals(oldValue)){
                     try{
+                        if(!oldValue.equals(newValue)) {
+                            if (components_checkedList != null) {
+                                components_checkedList.getItems().add(new ListedRecord((Record) newValue));
+                            }
+                            if (dishes_checkedList != null) {
+                                dishes_checkedList.getItems().add(new ListedRecord((Record) newValue));
+                            }
+                            if (orders_checkedList != null) {
+                                orders_checkedList.getItems().add(new ListedRecord((Record) newValue));
+                            }
+                            if (neighbourhoods_checkedList != null) {
+                                neighbourhoods_checkedList.getItems().add((Neighberhood) newValue);
+                            }
+                            addComponents_combo.setValue(null);
+                            addComponents_combo.setVisible(false);
+                        }
                     }
                     catch (NullPointerException e){
 

@@ -77,7 +77,7 @@ public class EditRecordsController {
     @FXML
     private ComboBox<DishType> dishType_combo;
     @FXML
-    private CheckListView<Component> components_checkedList;
+    private CheckListView<ListedRecord> components_checkedList;
     // endregion
     // region Order attributes
     @FXML
@@ -87,7 +87,7 @@ public class EditRecordsController {
     @FXML
     private ComboBox<Delivery> deliveries_combo;
     @FXML
-    private CheckListView<Dish> dishes_checkedList;
+    private CheckListView<ListedRecord> dishes_checkedList;
     // endregion
     // region Delivery attributes
     @FXML
@@ -102,7 +102,7 @@ public class EditRecordsController {
     @FXML
     private VBox rd_vbox;
     @FXML
-    private CheckListView<Order> orders_checkedList;
+    private CheckListView<ListedRecord> orders_checkedList;
     // endregion
     // region Express Delivery attributes
     @FXML
@@ -223,7 +223,8 @@ public class EditRecordsController {
                     dishType_combo.setValue(((Dish)newValue).getType());
                     dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
                     components_checkedList.getItems().clear();
-                    components_checkedList.getItems().addAll(((Dish)newValue).getComponents());
+                    components_checkedList.getItems().addAll(((Dish)newValue).getComponents()
+                            .stream().map(ListedRecord::new).toList());
                     info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
@@ -242,7 +243,8 @@ public class EditRecordsController {
                     );
                     deliveries_combo.setValue(((Order)newValue).getDelivery());
                     dishes_checkedList.getItems().clear();
-                    dishes_checkedList.getItems().addAll(((Order)newValue).getDishes());
+                    dishes_checkedList.getItems().addAll(((Order)newValue).getDishes()
+                            .stream().map(ListedRecord::new).toList());
                     info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
@@ -261,7 +263,8 @@ public class EditRecordsController {
                     if(newValue instanceof RegularDelivery){
                         rd_vbox.setVisible(true);
                         ed_vbox.setVisible(false);
-                        orders_checkedList.getItems().addAll(((RegularDelivery) newValue).getOrders());
+                        orders_checkedList.getItems().addAll(((RegularDelivery) newValue).getOrders().
+                                stream().map(ListedRecord::new).toList());
                     }
                     else{
                         ed_vbox.setVisible(true);

@@ -1,10 +1,16 @@
 package View.CustomerStage;
 
+import Model.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -48,6 +54,8 @@ public class CustomerHomeController {
 
     }
 
+    Restaurant restaurant = Restaurant.getInstance();
+
     @FXML
     void initialize() {
         assert username_label != null : "fx:id=\"username_label\" was not injected: check your FXML file 'CustomerHome.fxml'.";
@@ -60,5 +68,33 @@ public class CustomerHomeController {
         assert settings_button != null : "fx:id=\"settings_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
         assert signout_button != null : "fx:id=\"signout_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
 
+        // Change label below profile pic to logged-in username / first+last names
+//        try {
+//            if(!(username_label.getText().isEmpty())){
+//
+//                username_label.setText("");
+//            }
+//
+//            username_label.setText();
+//
+//
+//
+//        }catch (NullPointerException ex){
+//            System.out.println(ex.getMessage());
+//        }
+
+    }
+
+    public void signout(){
+        try {
+            Stage s = (Stage) signout_button.getScene().getWindow();
+            Parent p = FXMLLoader.load(getClass().getResource("../fxmls/LoginPage.fxml"));
+            s.hide();
+            s.setScene(new Scene(p));
+            s.centerOnScreen();
+            s.show();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 }

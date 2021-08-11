@@ -1,12 +1,10 @@
 package View.Controllers;
 
-import Model.Customer;
 import Model.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -51,7 +49,13 @@ public class LoginPageController {
 
         if (rest.getUsersList().containsKey(usernameField.getText())
                 && passwordField.getText().equals(rest.getUsersList().get(usernameField.getText()).getPassword())){
-            loginMessageLabel.setText("Placeholder for correct login credentials"); // need to change to a main page prompt
+            try {
+                Stage s = (Stage) loginButton.getScene().getWindow();
+                Parent p = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerHome.fxml"));
+                ControllerUtils.changeScreen(s, p);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
         else
             loginMessageLabel.setText("Username/Password is incorrect. Please try again.");

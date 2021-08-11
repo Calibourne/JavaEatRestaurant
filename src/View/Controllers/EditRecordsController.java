@@ -5,6 +5,7 @@ import Model.Record;
 import Utils.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -127,6 +128,8 @@ public class EditRecordsController {
     private ComboBox<Record> records_combo;
     @FXML
     GridPane info_grid;
+    @FXML
+    private Button minus_btn;
     @FXML
     private Button submit;
     // endregion
@@ -284,7 +287,10 @@ public class EditRecordsController {
             records_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
-
+                    areaName_field.setText(((DeliveryArea)newValue).getAreaName());
+                    deliveryTime_field.setText(String.format("%d",((DeliveryArea)newValue).getDeliverTime()));
+                    neighbourhoods_checkedList.getItems().addAll(((DeliveryArea)newValue).getNeighberhoods());
+                    deliveryTime_field.setEditable(false);
                     info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
@@ -296,6 +302,35 @@ public class EditRecordsController {
 
     @FXML
     private void handleButtonClick(ActionEvent e){
-
+        if(e.getSource() == minus_btn){
+            if(components_checkedList != null){
+                ObservableList<ListedRecord> selectedItems = components_checkedList.getCheckModel().getCheckedItems();
+                if(selectedItems.size() > 0) {
+                    components_checkedList.getItems().removeAll(selectedItems);
+                    components_checkedList.getCheckModel().clearChecks();
+                }
+            }
+            if(dishes_checkedList != null){
+                ObservableList<ListedRecord> selectedItems = dishes_checkedList.getCheckModel().getCheckedItems();
+                if(selectedItems.size() > 0) {
+                    dishes_checkedList.getItems().removeAll(selectedItems);
+                    dishes_checkedList.getCheckModel().clearChecks();
+                }
+            }
+            if(orders_checkedList != null){
+                ObservableList<ListedRecord> selectedItems = orders_checkedList.getCheckModel().getCheckedItems();
+                if(selectedItems.size() > 0) {
+                    orders_checkedList.getItems().removeAll(selectedItems);
+                    orders_checkedList.getCheckModel().clearChecks();
+                }
+            }
+            if(neighbourhoods_checkedList != null){
+                ObservableList<Neighberhood> selectedItems = neighbourhoods_checkedList.getCheckModel().getCheckedItems();
+                if(selectedItems.size() > 0) {
+                    neighbourhoods_checkedList.getItems().removeAll(selectedItems);
+                    neighbourhoods_checkedList.getCheckModel().clearChecks();
+                }
+            }
+        }
     }
 }

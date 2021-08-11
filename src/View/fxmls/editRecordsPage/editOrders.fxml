@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import org.controlsfx.control.CheckListView?>
 
 <Group fx:id="editOrders_sctn" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsController">
@@ -79,21 +78,33 @@
                         </GridPane>
                         <Group GridPane.rowIndex="1">
                            <children>
-                              <VBox prefHeight="190.0" prefWidth="252.0" styleClass="Container">
+                              <VBox prefHeight="172.0" prefWidth="277.0" styleClass="Container">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="TOP" prefHeight="0.0" prefWidth="252.0" text="Dishes" />
-                                    <HBox>
+                                    <Group>
                                        <children>
-                                          <CheckListView fx:id="dishes_checkedList" prefHeight="152.0" prefWidth="252.0" />
-                                          <VBox>
+                                          <HBox prefWidth="282.0">
                                              <children>
-                                                <Button fx:id="plus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="+" />
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" height="112.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
-                                                <Button fx:id="minus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="-" />
+                                                <VBox prefHeight="162.0">
+                                                   <children>
+                                                      <Group>
+                                                         <children>
+                                                            <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="252.0" visible="false" />
+                                                         </children>
+                                                      </Group>
+                                                      <CheckListView fx:id="dishes_checkedList" prefHeight="162.0" prefWidth="252.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="162.0" prefWidth="30.0" spacing="112.0" styleClass="HBox">
+                                                   <children>
+                                                      <Button fx:id="plus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="+" />
+                                                      <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="37.0" text="-" />
+                                                   </children>
+                                                </VBox>
                                              </children>
-                                          </VBox>
+                                          </HBox>
                                        </children>
-                                    </HBox>
+                                    </Group>
                                  </children>
                               </VBox>
                            </children>

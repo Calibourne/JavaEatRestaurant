@@ -1,5 +1,6 @@
 package View.Controllers;
 
+import Model.Customer;
 import Model.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,10 +31,17 @@ public class LoginPageController {
 
     private Restaurant rest;
 
+    private static Customer customer;
     @FXML
     private void initialize(){
         rest = Restaurant.getInstance();
+
     }
+
+    public static Customer getCustomer(){
+        return customer;
+    }
+
 
     @FXML
     private void LoginButtonOnAction(ActionEvent e){
@@ -50,8 +58,10 @@ public class LoginPageController {
         if (rest.getUsersList().containsKey(usernameField.getText())
                 && passwordField.getText().equals(rest.getUsersList().get(usernameField.getText()).getPassword())){
             try {
+                customer = rest.getUsersList().get(usernameField.getText());
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerHome.fxml"));
+               //rest.getUsersList().forEach((k ,v) -> System.out.println(k +":" + v));
                 ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {
                 ioException.printStackTrace();

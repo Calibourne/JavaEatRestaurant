@@ -1,6 +1,8 @@
 package View.CustomerStage;
 
+import Model.Customer;
 import Model.Restaurant;
+import View.Controllers.LoginPageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,9 +57,11 @@ public class CustomerHomeController {
     }
 
     Restaurant restaurant = Restaurant.getInstance();
+    private Customer customer;
 
     @FXML
     void initialize() {
+        try{
         assert username_label != null : "fx:id=\"username_label\" was not injected: check your FXML file 'CustomerHome.fxml'.";
         assert homepage_button != null : "fx:id=\"homepage_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
         assert new_order_button != null : "fx:id=\"new_order_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
@@ -67,6 +71,16 @@ public class CustomerHomeController {
         assert view_menu_button != null : "fx:id=\"view_menu_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
         assert settings_button != null : "fx:id=\"settings_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
         assert signout_button != null : "fx:id=\"signout_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
+
+        customer = LoginPageController.getCustomer();
+
+
+
+
+        }catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
 
         // Change label below profile pic to logged-in username / first+last names
 //        try {

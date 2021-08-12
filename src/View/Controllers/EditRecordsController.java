@@ -2,6 +2,7 @@ package View.Controllers;
 
 import Model.*;
 import Model.Record;
+import Model.Requests.EditRecordRequest;
 import Utils.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,6 +17,7 @@ import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class EditRecordsController {
 
@@ -143,31 +145,34 @@ public class EditRecordsController {
         Restaurant rest = Restaurant.getInstance();
         try{
             info_grid.setVisible(false);
-            addComponents_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                if(!newValue.equals(oldValue)){
+            addComponents_combo.setOnAction(action->{
+                if(addComponents_combo.getSelectionModel().getSelectedItem() != null){
                     try{
-                        if(!oldValue.equals(newValue)) {
+                        System.out.println("test");
                             if (components_checkedList != null) {
-                                components_checkedList.getItems().add(new ListedRecord((Record) newValue));
+                                Record r = (Record) addComponents_combo.getSelectionModel().getSelectedItem();
+                                components_checkedList.getItems().add(new ListedRecord(r));
                             }
                             if (dishes_checkedList != null) {
-                                dishes_checkedList.getItems().add(new ListedRecord((Record) newValue));
+                                Record r = (Record) addComponents_combo.getSelectionModel().getSelectedItem();
+                                dishes_checkedList.getItems().add(new ListedRecord(r));
                             }
                             if (orders_checkedList != null) {
-                                orders_checkedList.getItems().add(new ListedRecord((Record) newValue));
+                                Record r = (Record) addComponents_combo.getSelectionModel().getSelectedItem();
+                                orders_checkedList.getItems().add(new ListedRecord(r));
                             }
                             if (neighbourhoods_checkedList != null) {
-                                neighbourhoods_checkedList.getItems().add((Neighberhood) newValue);
+                                Neighberhood n = (Neighberhood) addComponents_combo.getSelectionModel().getSelectedItem();
+                                neighbourhoods_checkedList.getItems().add(n);
                             }
-                            addComponents_combo.setValue(null);
                             addComponents_combo.setVisible(false);
-                        }
                     }
                     catch (NullPointerException e){
 
                     }
                 }
             });
+            records_combo.getSelectionModel().clearSelection();
         }catch (NullPointerException e){
             System.out.println(e.getMessage());
         }
@@ -257,6 +262,7 @@ public class EditRecordsController {
                     components_checkedList.getItems().clear();
                     components_checkedList.getItems().addAll(((Dish)newValue).getComponents()
                             .stream().map(ListedRecord::new).toList());
+                    addComponents_combo.setVisible(false);
                     info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
@@ -277,6 +283,7 @@ public class EditRecordsController {
                     dishes_checkedList.getItems().clear();
                     dishes_checkedList.getItems().addAll(((Order)newValue).getDishes()
                             .stream().map(ListedRecord::new).toList());
+                    addComponents_combo.setVisible(false);
                     info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
@@ -295,8 +302,10 @@ public class EditRecordsController {
                     if(newValue instanceof RegularDelivery){
                         rd_vbox.setVisible(true);
                         ed_vbox.setVisible(false);
+                        orders_checkedList.getItems().clear();
                         orders_checkedList.getItems().addAll(((RegularDelivery) newValue).getOrders().
                                 stream().map(ListedRecord::new).toList());
+                        addComponents_combo.setVisible(false);
                     }
                     else{
                         ed_vbox.setVisible(true);
@@ -318,8 +327,10 @@ public class EditRecordsController {
                 try{
                     areaName_field.setText(((DeliveryArea)newValue).getAreaName());
                     deliveryTime_field.setText(String.format("%d",((DeliveryArea)newValue).getDeliverTime()));
+                    neighbourhoods_checkedList.getItems().clear();
                     neighbourhoods_checkedList.getItems().addAll(((DeliveryArea)newValue).getNeighberhoods());
                     deliveryTime_field.setEditable(false);
+                    addComponents_combo.setVisible(false);
                     info_grid.setVisible(true);
                 }
                 catch (NullPointerException | ClassCastException e){
@@ -375,19 +386,32 @@ public class EditRecordsController {
             }
             if (orders_checkedList != null) {
                 addComponents_combo.getItems().clear();
+                List<Record> list = orders_checkedList.getItems().stream().map(ListedRecord::getRecord).toList();
                 addComponents_combo.getItems().addAll(rest.getOrders().values()
-                        .stream().filter(o->!orders_checkedList.getItems().contains(o))
+                        .stream().filter(o->!list.contains(o))
                         .toList()
                 );
                 addComponents_combo.setVisible(true);
             }
             if (neighbourhoods_checkedList != null) {
                 addComponents_combo.getItems().clear();
+                List<Neighberhood> list = neighbourhoods_checkedList.getItems().stream().toList();
                 addComponents_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList()
-                        .stream().filter(n->!neighbourhoods_checkedList.getItems().contains(n))
+                        .stream().filter(n->!list.contains(n))
                         .toList()
                 );
                 addComponents_combo.setVisible(true);
+            }
+        }
+        if(e.getSource() == submit) {
+            if(editAreas_sctn != null){
+                try{
+                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(), areaName_field.getText(), neighbourhoods_checkedList.getItems());
+                    request.saveRequest();
+                    initialize();
+                }catch (IllegalArgumentException ex){
+                    System.out.println(ex.getMessage());
+                }
             }
         }
     }

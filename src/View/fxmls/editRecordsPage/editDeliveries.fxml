@@ -121,31 +121,31 @@
                               </Group>
                               <Group>
                                  <children>
-                                    <VBox prefHeight="172.0" prefWidth="277.0" styleClass="Container">
+                                    <VBox fx:id="rd_vbox" alignment="CENTER" prefHeight="172.0" prefWidth="277.0" styleClass="Container">
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="TOP" prefHeight="0.0" prefWidth="252.0" text="orders" />
+                                          <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="88.0" text="orders" />
                                           <Group>
                                              <children>
-                                                <HBox prefWidth="282.0">
+                                                <Group layoutX="64.0">
                                                    <children>
-                                                      <VBox prefHeight="162.0">
+                                                      <VBox alignment="CENTER" prefHeight="198.0" prefWidth="360.0">
                                                          <children>
                                                             <Group>
                                                                <children>
-                                                                  <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="252.0" visible="false" />
+                                                                  <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="360.0" visible="false" />
                                                                </children>
                                                             </Group>
-                                                            <CheckListView fx:id="orders_checkedList" prefHeight="162.0" prefWidth="252.0" />
-                                                         </children>
-                                                      </VBox>
-                                                      <VBox prefHeight="162.0" prefWidth="30.0" spacing="112.0" styleClass="HBox">
-                                                         <children>
-                                                            <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="60.0" text="+" />
-                                                            <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="37.0" text="-" />
+                                                            <CheckListView fx:id="orders_checkedList" prefHeight="200.0" prefWidth="360.0" />
+                                                            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="25.0" styleClass="HBox">
+                                                               <children>
+                                                                  <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                                                  <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
+                                                               </children>
+                                                            </HBox>
                                                          </children>
                                                       </VBox>
                                                    </children>
-                                                </HBox>
+                                                </Group>
                                              </children>
                                           </Group>
                                        </children>

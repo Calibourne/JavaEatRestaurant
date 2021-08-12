@@ -56,7 +56,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnEditRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Show Cooks By Expertise">
+      <Button fx:id="cooks_expertise_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Show Cooks By Expertise">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../images/icons8_Edit_32px.png" />
@@ -92,7 +92,7 @@
          </graphic>
       </Button>
    </VBox>
-   <StackPane fx:id="query_pane" layoutX="200.0" prefHeight="576.0" prefWidth="585.0" styleClass="StackPane" />
+   <StackPane fx:id="content_pane" layoutX="200.0" prefHeight="576.0" prefWidth="585.0" styleClass="StackPane" />
    <stylesheets>
       <URL value="@../css/style.css" />
       <URL value="@../css/style.css" />

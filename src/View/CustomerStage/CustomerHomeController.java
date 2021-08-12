@@ -83,7 +83,7 @@ public class CustomerHomeController {
         }
     }
         @FXML
-        public void handleButtonClick(ActionEvent event) {
+        public void handleButtonClick(ActionEvent event) { //WIP
             try{
                 Node loadedPage;
                 switch(((Node)event.getSource()).getId()){

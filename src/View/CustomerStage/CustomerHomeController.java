@@ -73,6 +73,9 @@ public class CustomerHomeController {
         assert signout_button != null : "fx:id=\"signout_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
 
         customer = LoginPageController.getCustomer();
+//        username_label.setText("Welcome, \n"+customer.getFirstName()+" "+customer.getLastName()); This makes the label span on two lines
+            username_label.setText("Welcome, "+customer.getFirstName()+" "+customer.getLastName());
+
 
 
 

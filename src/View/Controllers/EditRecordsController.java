@@ -18,6 +18,7 @@ import org.controlsfx.control.CheckListView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EditRecordsController {
 
@@ -148,7 +149,6 @@ public class EditRecordsController {
             addComponents_combo.setOnAction(action->{
                 if(addComponents_combo.getSelectionModel().getSelectedItem() != null){
                     try{
-                        System.out.println("test");
                             if (components_checkedList != null) {
                                 Record r = (Record) addComponents_combo.getSelectionModel().getSelectedItem();
                                 components_checkedList.getItems().add(new ListedRecord(r));
@@ -172,27 +172,33 @@ public class EditRecordsController {
                     }
                 }
             });
-            records_combo.getSelectionModel().clearSelection();
         }catch (NullPointerException e){
             System.out.println(e.getMessage());
         }
         if(editCooks_sctn != null){
             records_combo.getItems().addAll(rest.getCooks().values().stream().toList());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                if(!newValue.equals(oldValue)){
-                    try{
-                        fname_field.setText(((Person)newValue).getFirstName());
-                        lname_field.setText(((Person)newValue).getLastName());
-                        genders_combo.setValue(((Person)newValue).getGender());
-                        genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
-                        birthDate_dp.setValue(((Person)newValue).getBirthDay());
-                        expertises_combo.setValue(((Cook)newValue).getExpert());
-                        expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
-                        isChef_check.setSelected(((Cook)newValue).isChef());
+                try {
+                    if (!newValue.equals(oldValue)) {
+                        try {
+                            fname_field.setText(((Person) newValue).getFirstName());
+                            lname_field.setText(((Person) newValue).getLastName());
+                            genders_combo.getItems().clear();
+                            genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
+                            genders_combo.setValue(((Person) newValue).getGender());
+                            birthDate_dp.setValue(((Person) newValue).getBirthDay());
+                            expertises_combo.getItems().clear();
+                            expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
+                            expertises_combo.setValue(((Cook) newValue).getExpert());
+                            isChef_check.setSelected(((Cook) newValue).isChef());
+                            info_grid.setVisible(true);
+                        } catch (NullPointerException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
-                    catch (NullPointerException e){
-                        System.out.println(e.getMessage());
-                    }
+                }
+                catch (NullPointerException e){
+                    System.out.println("It's normal keep going!");
                 }
             });
         }
@@ -205,8 +211,10 @@ public class EditRecordsController {
                             genders_combo.setValue(((Person)newValue).getGender());
                             genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
                             birthDate_dp.setValue(((Person)newValue).getBirthDay());
+                            vehicles_combo.getItems().clear();
                             vehicles_combo.setValue(((DeliveryPerson)newValue).getVehicle());
                             vehicles_combo.getItems().addAll(Arrays.stream(Vehicle.values()).toList());
+                            deliveryAreas_combo.getItems().clear();
                             deliveryAreas_combo.setValue(((DeliveryPerson)newValue).getArea());
                             deliveryAreas_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
                             info_grid.setVisible(true);
@@ -223,9 +231,11 @@ public class EditRecordsController {
                     fname_field.setText(((Person)newValue).getFirstName());
                     lname_field.setText(((Person)newValue).getLastName());
                     genders_combo.setValue(((Person)newValue).getGender());
+                    genders_combo.getItems().clear();
                     genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
                     birthDate_dp.setValue(((Person)newValue).getBirthDay());
                     neighbourhoods_combo.setValue(((Customer)newValue).getNeighberhood());
+                    neighbourhoods_combo.getItems().clear();
                     neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
                     glutenIntolerant_check.setSelected(((Customer)newValue).isSensitiveToGluten());
                     lactoseIntolerant_check.setSelected(((Customer)newValue).isSensitiveToLactose());
@@ -257,8 +267,9 @@ public class EditRecordsController {
                 try{
                     dishName_field.setText(((Dish)newValue).getDishName());
                     dishPrepareTime_field.setText(String.format("%d",((Dish)newValue).getTimeToMake()));
-                    dishType_combo.setValue(((Dish)newValue).getType());
+                    dishType_combo.getItems().clear();
                     dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
+                    dishType_combo.setValue(((Dish)newValue).getType());
                     components_checkedList.getItems().clear();
                     components_checkedList.getItems().addAll(((Dish)newValue).getComponents()
                             .stream().map(ListedRecord::new).toList());
@@ -295,6 +306,7 @@ public class EditRecordsController {
             records_combo.getItems().addAll(Restaurant.getInstance().getDeliveries().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
+                    deliveryPersons_combo.getItems().clear();
                     deliveryPersons_combo.setValue(((Delivery)newValue).getDeliveryPerson());
                     deliveryPersons_combo.getItems().addAll(rest.getDeliveryPersons().values());
                     deliveryDate_dp.setValue(((Delivery)newValue).getDeliveryDate());
@@ -310,6 +322,7 @@ public class EditRecordsController {
                     else{
                         ed_vbox.setVisible(true);
                         rd_vbox.setVisible(false);
+                        orders_combo.getItems().clear();
                         orders_combo.setValue(((ExpressDelivery)newValue).getOrder());
                         orders_combo.getItems().addAll(rest.getOrders().values());
                         expressFee_field.setText(String.format("%.2f",((ExpressDelivery)newValue).getPostage()));
@@ -406,8 +419,110 @@ public class EditRecordsController {
         if(e.getSource() == submit) {
             if(editAreas_sctn != null){
                 try{
-                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(), areaName_field.getText(), neighbourhoods_checkedList.getItems());
+                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(), areaName_field.getText(),
+                            neighbourhoods_checkedList.getItems().stream().collect(Collectors.toSet()));
                     request.saveRequest();
+                    records_combo.getItems().clear();
+                    initialize();
+                }catch (IllegalArgumentException ex){
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if(editCooks_sctn != null) {
+                try{
+                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                            fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                            expertises_combo.getValue(),isChef_check.isSelected());
+                    request.saveRequest();
+                    records_combo.getItems().clear();
+                    initialize();
+                }catch (IllegalArgumentException ex){
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if(editDeliPersons_sctn != null) {
+                try{
+                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                            fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                            vehicles_combo.getValue(), deliveryAreas_combo.getValue());
+                    request.saveRequest();
+                    records_combo.getItems().clear();
+                    initialize();
+                }catch (IllegalArgumentException ex){
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if(editCustomers_sctn != null) {
+                try{
+                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                            fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                            neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected());
+                    request.saveRequest();
+                    records_combo.getItems().clear();
+                    initialize();
+                }catch (IllegalArgumentException ex){
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if(editComponents_sctn != null) {
+                try{
+                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                            ingredientName_field.getText(), Double.parseDouble(ingredientPrice_field.getText()),
+                            hasGluten_check.isSelected(), hasLactose_check.isSelected());
+                    request.saveRequest();
+                    records_combo.getItems().clear();
+                    initialize();
+                }catch (IllegalArgumentException ex){
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if(editDishes_sctn != null) {
+                try{
+                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                            dishName_field.getText(), dishType_combo.getValue(), Integer.parseInt(dishPrepareTime_field.getText()),
+                            components_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
+                    request.saveRequest();
+                    records_combo.getItems().clear();
+                    initialize();
+                }catch (IllegalArgumentException ex){
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if(editOrders_sctn != null) {
+                try{
+                    EditRecordRequest request = null;
+                    if(deliveries_combo.getValue() == null)
+                        request = new EditRecordRequest(records_combo.getValue(),
+                                customers_combo.getValue(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
+                    else
+                        request = new EditRecordRequest(records_combo.getValue(),
+                                customers_combo.getValue(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList(),
+                                deliveries_combo.getValue());
+                    request.saveRequest();
+                    records_combo.getItems().clear();
+                    initialize();
+                }catch (IllegalArgumentException ex){
+                    System.out.println(ex.getMessage());
+                }
+            }
+            if(editDeliveries_sctn != null) {
+                try{
+                    EditRecordRequest request = null;
+                    Delivery d = (Delivery) records_combo.getValue();
+                    if(d instanceof RegularDelivery){
+                        request = new EditRecordRequest(d,
+                                deliveryPersons_combo.getValue(),
+                                deliveryDate_dp.getValue(), isDelivered_check.isSelected(),
+                                orders_checkedList.getItems().stream().map(ListedRecord::getRecord).collect(Collectors.toSet()));
+                    }
+                    else{
+                        request = new EditRecordRequest(d,
+                                deliveryAreas_combo.getValue() ,deliveryPersons_combo.getValue(),
+                                deliveryDate_dp.getValue(), isDelivered_check.isSelected(),
+                                orders_combo.getValue(), Double.parseDouble(expressFee_field.getText()));
+                    }
+                    request.saveRequest();
+                    records_combo.getItems().clear();
                     initialize();
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());

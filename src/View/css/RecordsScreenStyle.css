@@ -158,9 +158,6 @@
     -fx-background-color: #2b6ad0;
 }
 
-.list-view .list-cell:selected {
-    -fx-background-color: #68a4f1;
-}
 
 .list-view .list-cell {
     -fx-background-color: #0b235e;

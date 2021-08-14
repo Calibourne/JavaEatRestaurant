@@ -22,7 +22,7 @@
                     <Insets />
                 </VBox.margin>
             </Label>
-            <Label alignment="CENTER" text="Here are all the dishes that are currently available in the menu of the restaurant" textAlignment="CENTER">
+            <Label alignment="CENTER" text="Here are all the dishes that are currently available in the restaurant's menu" textAlignment="CENTER">
                 <font>
                     <Font size="14.0" />
                 </font>

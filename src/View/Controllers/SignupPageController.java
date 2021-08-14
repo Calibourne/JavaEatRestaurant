@@ -58,7 +58,9 @@ public class SignupPageController {
     @FXML
     private Button signUpButton;
     @FXML
-    private ScrollPane scrlPane;
+    private Label username_alert;
+    @FXML
+    private Label suggested_lbl;
 
     private static final String DARKRED_BAR    = "darkred-bar";
     private static final String RED_BAR    = "red-bar";
@@ -71,6 +73,24 @@ public class SignupPageController {
         visiblePassField.textProperty().bind(passwordField.textProperty());
         visiblePassField.visibleProperty().bind(toggleHidePassword.selectedProperty());
         passwordField.visibleProperty().bind(toggleHidePassword.selectedProperty().not());
+
+        usernameField.textProperty().addListener(c->{
+            if(usernameField.getText().length()==0) {
+                username_alert.setVisible(false);
+            }
+            else{
+                Restaurant rest = Restaurant.getInstance();
+                if(rest.getUsersList().get(usernameField.getText())!=null){
+                    username_alert.setText("This Username is already taken, please try again!");
+                    username_alert.setStyle("-fx-text-fill: red");
+                }
+                else{
+                    username_alert.setText("This username still available, Hooray!");
+                    username_alert.setStyle("-fx-text-fill: #00ff00");
+                }
+                username_alert.setVisible(true);
+            }
+        });
 
         genderCb.getItems().addAll(Arrays.stream(Gender.values()).toList());
         neighbourhoodCb.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
@@ -97,18 +117,17 @@ public class SignupPageController {
                 bar.getStyleClass().add(barStyleClass);
             }
         });
-        fnameInput.requestFocus();
-        //scrlPane.setVvalue(1);
-
     }
+
 
     @FXML
     private void generateUsername(KeyEvent e){
-        if(fnameInput.getText().length() > 0 && lnameInput.getText().length() > 0)
-            usernameField.setText(String.format("%s%s%d",fnameInput.getText() , lnameInput.getText() , Customer.getIdCounter()));
-        else
-            usernameField.setText("Enter your full name first");
+    if (fnameInput.getText().length() > 0 && lnameInput.getText().length() > 0)
+        suggested_lbl.setText(String.format("%s%s%d",fnameInput.getText(),lnameInput.getText(), Customer.getIdCounter()));
+    else
+        suggested_lbl.setText("Enter your full name first");
     }
+
 
     @FXML
     private void registerButtonOnAction(ActionEvent e){
@@ -117,8 +136,8 @@ public class SignupPageController {
                throw new Exception();
            String fname = fnameInput.getText();
            String lname = lnameInput.getText();
-           Gender gender = (Gender) genderCb.getValue();
-           Neighberhood neighborhood = (Neighberhood) neighbourhoodCb.getValue();
+           Gender gender = genderCb.getValue();
+           Neighberhood neighborhood = neighbourhoodCb.getValue();
            boolean glutenIntolerant = glutenCheckbox.isSelected(),
                    lactoseIntolerant = lactoseCheckbox.isSelected();
            LocalDate ld = birthdateDP.getValue();
@@ -133,7 +152,9 @@ public class SignupPageController {
                    lactoseIntolerant
            );
            ((Customer)request.getRecord()).setPassword(passwordField.getText());
-            request.saveRequest();
+           if(usernameField.getText().length()>0)
+               ((Customer) request.getRecord()).setUsername(usernameField.getText());
+               request.saveRequest();
         }catch(Exception ex){
             System.out.println("Try again!");
             return;

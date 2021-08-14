@@ -511,6 +511,7 @@ public class EditRecordsController {
                     Delivery d = (Delivery) records_combo.getValue();
                     if(d instanceof RegularDelivery){
                         request = new EditRecordRequest(d,
+
                                 deliveryPersons_combo.getValue(),
                                 deliveryDate_dp.getValue(), isDelivered_check.isSelected(),
                                 orders_checkedList.getItems().stream().map(ListedRecord::getRecord).collect(Collectors.toSet()));

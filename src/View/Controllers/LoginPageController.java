@@ -35,6 +35,7 @@ public class LoginPageController {
     @FXML
     private void initialize(){
         rest = Restaurant.getInstance();
+        rest.getUsersList().forEach((k,v)-> System.out.printf("%s : %s\n", k, v));
 
     }
 

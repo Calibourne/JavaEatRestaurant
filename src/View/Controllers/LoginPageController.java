@@ -34,15 +34,20 @@ public class LoginPageController {
     private static Customer customer;
     @FXML
     private void initialize(){
+        if(customer!=null){
+            usernameField.setText(customer.getUsername());
+            passwordField.setText(customer.getPassword());
+        }
         rest = Restaurant.getInstance();
-        rest.getUsersList().forEach((k,v)-> System.out.printf("%s : %s\n", k, v));
-
     }
 
     public static Customer getCustomer(){
         return customer;
     }
 
+    public static void setCustomer(Customer customer) {
+        LoginPageController.customer = customer;
+    }
 
     @FXML
     private void LoginButtonOnAction(ActionEvent e){
@@ -62,7 +67,6 @@ public class LoginPageController {
                 customer = rest.getUsersList().get(usernameField.getText());
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerHome.fxml"));
-               //rest.getUsersList().forEach((k ,v) -> System.out.println(k +":" + v));
                 ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {
                 ioException.printStackTrace();

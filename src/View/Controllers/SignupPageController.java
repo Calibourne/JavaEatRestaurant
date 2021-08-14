@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,6 +26,10 @@ import java.util.Locale;
 
 
 public class SignupPageController {
+    @FXML
+    private GridPane signup_grid;
+    @FXML
+    private GridPane return_grid;
     @FXML
     private TextField fnameInput;
     @FXML
@@ -56,6 +61,8 @@ public class SignupPageController {
     @FXML
     private Button cancelButton;
     @FXML
+    private Button returnButton;
+    @FXML
     private Button signUpButton;
     @FXML
     private Label username_alert;
@@ -70,9 +77,22 @@ public class SignupPageController {
     private static final String[] barColorStyleClasses = {DARKRED_BAR, RED_BAR, ORANGE_BAR, YELLOW_BAR, GREEN_BAR };
 
     public void initialize() {
-        visiblePassField.textProperty().bind(passwordField.textProperty());
+        signup_grid.setVisible(true);
+        signup_grid.setDisable(false);
+        return_grid.setDisable(true);
+        return_grid.setVisible(false);
         visiblePassField.visibleProperty().bind(toggleHidePassword.selectedProperty());
         passwordField.visibleProperty().bind(toggleHidePassword.selectedProperty().not());
+        visiblePassField.visibleProperty().addListener((opt,oldValue, newValue)->{
+            if(newValue){
+                visiblePassField.textProperty().unbind();
+                passwordField.textProperty().bind(visiblePassField.textProperty());
+            }
+            else{
+                passwordField.textProperty().unbind();
+                visiblePassField.textProperty().bind(passwordField.textProperty());
+            }
+        });
 
         usernameField.textProperty().addListener(c->{
             if(usernameField.getText().length()==0) {
@@ -161,10 +181,19 @@ public class SignupPageController {
         }
         Restaurant.getInstance().saveDatabase("Rest.ser");
         System.out.println("Success!");
+        signup_grid.setVisible(false);
+        signup_grid.setDisable(true);
+        return_grid.setDisable(false);
+        return_grid.setVisible(true);
+
     }
 
     @FXML
-    private void cancelButtonOnAction(ActionEvent e){
+    private void exitButtonOnAction(ActionEvent e){
+        if(e.getSource() == returnButton) {
+            Restaurant rest = Restaurant.getInstance();
+            LoginPageController.setCustomer(rest.getUsersList().get(usernameField.getText()));
+        }
         try {
             Stage s = (Stage) cancelButton.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("../fxmls/LoginPage.fxml"));

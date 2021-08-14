@@ -150,6 +150,7 @@
 .red-bar    { -fx-accent: red;    }
 .darkred-bar { -fx-accent: darkred;}
 
+/* List view styling */
 .list-view {
     -fx-background-color: #1f4591;
 }
@@ -158,9 +159,6 @@
     -fx-background-color: #2b6ad0;
 }
 
-.list-view .list-cell:selected {
-    -fx-background-color: #68a4f1;
-}
 
 .list-view .list-cell {
     -fx-background-color: #0b235e;
@@ -176,4 +174,25 @@
 }
 .list-view .list-cell:even:hover {
     -fx-background-color: #2b6ad0;
+}
+
+/* Tab pane styling */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+.tab-pane .tab {
+    -fx-background-color: #0b235e;
+}
+.tab-pane .tab:selected {
+    -fx-background-color: #2B6AD0;
+}
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #ffffff;
 }

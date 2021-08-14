@@ -83,7 +83,7 @@ public class CustomerHomeController {
         }
     }
         @FXML
-        public void handleButtonClick(ActionEvent event) { //WIP
+        public void handleButtonClick(ActionEvent event) {
             try{
                 Node loadedPage;
                 switch(((Node)event.getSource()).getId()){
@@ -108,7 +108,7 @@ public class CustomerHomeController {
 //                        content_pane.getChildren().add(loadedPage);
 //                        break;
                     case "view_menu_button":
-                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDishes.fxml")));
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerMenu.fxml")));
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "popular_ingredients_button":
@@ -119,10 +119,10 @@ public class CustomerHomeController {
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getCooksByExpertise.fxml")));
                         content_pane.getChildren().add(loadedPage);
                         break;
-//                    case "relevant_dish_list_button":
-//                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getRelevantDishList.fxml")));
-//                        content_pane.getChildren().add(loadedPage);
-//                        break;
+                    case "relevant_dish_menu_button":
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/getRelevantDishList.fxml")));
+                        content_pane.getChildren().add(loadedPage);
+                        break;
 
                 }
             }

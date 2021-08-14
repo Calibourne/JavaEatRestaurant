@@ -119,10 +119,10 @@ public class CustomerHomeController {
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getCooksByExpertise.fxml")));
                         content_pane.getChildren().add(loadedPage);
                         break;
-//                    case "relevant_dish_list_button":
-//                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getRelevantDishList.fxml")));
-//                        content_pane.getChildren().add(loadedPage);
-//                        break;
+                    case "relevant_dish_menu_button":
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/getRelevantDishList.fxml")));
+                        content_pane.getChildren().add(loadedPage);
+                        break;
 
                 }
             }

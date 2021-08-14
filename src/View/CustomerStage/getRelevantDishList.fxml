@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.getRelevantDishListController">
+    <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
+        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
+            <Label alignment="CENTER" text="Customer's Relevant dishes" textAlignment="CENTER">
+                <font>
+                    <Font size="30.0" />
+                </font>
+                <effect>
+                    <DropShadow />
+                </effect>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" text="Select a customer to see which dishes they can eat safely" textAlignment="CENTER">
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Label>
+        </VBox>
+      <ListView fx:id="query_result" prefHeight="569.0" prefWidth="485.0" styleClass="HBox">
+         <VBox.margin>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </VBox.margin>
+      </ListView>
+    </VBox>
+</AnchorPane>

@@ -94,7 +94,7 @@
    </VBox>
    <StackPane fx:id="content_pane" layoutX="200.0" prefHeight="576.0" prefWidth="585.0" styleClass="StackPane" />
    <stylesheets>
-      <URL value="@../css/style.css" />
-      <URL value="@../css/style.css" />
+      <URL value="@../css/oldStyle.css" />
+      <URL value="@../css/oldStyle.css" />
    </stylesheets>
 </AnchorPane>

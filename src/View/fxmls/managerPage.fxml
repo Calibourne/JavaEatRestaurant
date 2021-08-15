@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1013.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.ManagerPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1013.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.ManagerPageController">
    <effect>
       <DropShadow color="#1b1eeb" />
    </effect>
-   <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="200.0" styleClass="MenuBar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="200.0" styleClass="OuterMenuBar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
       <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
          <VBox.margin>
             <Insets bottom="10.0" top="50.0" />
@@ -50,7 +50,7 @@
       <Button fx:id="view_records" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="199.0" text="View Records" textFill="#e7e5e5">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../images/icons8_Box_32px.png"/>
+               <Image url="@../images/icons8_Box_32px.png" />
             </ImageView>
          </graphic>
          <opaqueInsets>
@@ -122,7 +122,7 @@
       </Button>
    </VBox>
    <StackPane layoutX="200.0" prefHeight="576.0" prefWidth="813.0" styleClass="StackPane">
-      <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
+      <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" styleClass="Overview">
          <TextField layoutX="590.0" layoutY="47.0" prefHeight="27.0" prefWidth="183.0" promptText="search" styleClass="SearchBar" />
          <Label layoutX="57.0" layoutY="25.0" text="Restaurant Overview" textFill="#e7e5e5">
             <font>
@@ -190,7 +190,7 @@
                </HBox.margin>
             </Label>
          </HBox>
-         <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../css/style.css">
+         <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="746.0" stylesheets="@../css/oldStyle.css">
             <VBox fx:id="pnItems" prefHeight="318.0" prefWidth="744.0" spacing="5.0" styleClass="Overview">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

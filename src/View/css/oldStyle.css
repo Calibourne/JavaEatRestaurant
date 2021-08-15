@@ -1,0 +1,33 @@
+.button {
+/*-fx-background-color : #05071F;*/
+    -fx-background-color: #061E47;
+    -fx-text-fill : #e7e5e5;
+}
+.button:hover{
+    -fx-background-color : #2B6AD0;
+}
+.button:pressed {
+-fx-background-color : #68A4F1;
+}
+.scroll-pane {
+    -fx-background-color: #02030A;
+}
+.MenuBar {
+    /*-fx-background-color: #0F4C75;*/
+    -fx-background-color: #061E47;
+}
+.SearchBar{
+    -fx-background-color: #1F4591;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+    -fx-border-radius: 2em;
+}
+.StackPane{
+    -fx-background-color: #1F4591;
+}
+.HBox{
+    -fx-background-color: #1F4591;
+}
+.Overview{
+    -fx-background-color: #1F4591;
+}

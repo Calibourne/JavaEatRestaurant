@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -18,6 +19,8 @@ import org.controlsfx.control.CheckListView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class EditRecordsController {
@@ -143,6 +146,9 @@ public class EditRecordsController {
 
     @FXML
     private void initialize(){
+        Pattern intPattern = Pattern.compile("([0-9]+)?");
+        Pattern doublePattern = Pattern.compile("((([1-9])(\\d*)|0)(\\.\\d*)?)?");
+        Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ -]?)([a-zA-Z]*))*");
         Restaurant rest = Restaurant.getInstance();
         try{
             info_grid.setVisible(false);
@@ -182,7 +188,24 @@ public class EditRecordsController {
                     if (!newValue.equals(oldValue)) {
                         try {
                             fname_field.setText(((Person) newValue).getFirstName());
+                            fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+                            fname_field.setOnKeyTyped(ke-> {
+                                if(!Objects.equals(ke.getCharacter(), "\b")) {
+                                    String newText = fname_field.getText() + ke.getCharacter();
+                                    if (stringPattern.matcher(newText).matches())
+                                        fname_field.setStyle("-fx-text-fill: white");
+                                    else
+                                        fname_field.setStyle("-fx-text-fill: goldenrod");
+                                }
+                            });
+                            fname_field.textProperty().addListener((obs, o, n)->{
+                                if(n.length()>0)
+                                    fname_field.setStyle("-fx-text-fill: white");
+                                else
+                                    fname_field.setStyle("-fx-text-fill: red");
+                            });
                             lname_field.setText(((Person) newValue).getLastName());
+                            lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                             genders_combo.getItems().clear();
                             genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
                             genders_combo.setValue(((Person) newValue).getGender());
@@ -208,7 +231,9 @@ public class EditRecordsController {
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                         try{
                             fname_field.setText(((Person)newValue).getFirstName());
+                            fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                             lname_field.setText(((Person)newValue).getLastName());
+                            lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                             genders_combo.setValue(((Person)newValue).getGender());
                             genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
                             birthDate_dp.setValue(((Person)newValue).getBirthDay());
@@ -231,7 +256,9 @@ public class EditRecordsController {
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     fname_field.setText(((Person)newValue).getFirstName());
+                    fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                     lname_field.setText(((Person)newValue).getLastName());
+                    lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                     genders_combo.setValue(((Person)newValue).getGender());
                     genders_combo.getItems().clear();
                     genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
@@ -254,7 +281,9 @@ public class EditRecordsController {
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     ingredientName_field.setText(((Component)newValue).getComponentName());
+                    ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                     ingredientPrice_field.setText(String.format("%.2f",((Component)newValue).getPrice()));
+                    ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
                     hasGluten_check.setSelected(((Component)newValue).isHasGluten());
                     hasLactose_check.setSelected(((Component)newValue).isHasLactose());
                     info_grid.setVisible(true);
@@ -270,7 +299,9 @@ public class EditRecordsController {
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     dishName_field.setText(((Dish)newValue).getDishName());
+                    dishName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                     dishPrepareTime_field.setText(String.format("%d",((Dish)newValue).getTimeToMake()));
+                    dishName_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
                     dishType_combo.getItems().clear();
                     dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
                     dishType_combo.setValue(((Dish)newValue).getType());

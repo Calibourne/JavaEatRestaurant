@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsPageController">
+<AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsPageController">
    <children>
-      <GridPane prefHeight="576.0" prefWidth="813.0">
+      <GridPane prefHeight="576.0" prefWidth="813.0" styleClass="InnerMenuBar">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="520.0" minWidth="10.0" prefWidth="196.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="967.0" minWidth="10.0" prefWidth="617.0" />
@@ -142,7 +142,7 @@
                   </Button>
                </children>
             </GridPane>
-            <GridPane styleClass="VBox" GridPane.columnIndex="1">
+            <GridPane styleClass="Content" GridPane.columnIndex="1">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>

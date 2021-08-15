@@ -200,6 +200,7 @@ public class AddRecordsController {
             if(addComponents_sctn!=null){
                 ingredientName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                 ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
+
                 ingredientPrice_field.setOnKeyTyped(ke->{
                     Pattern err = Pattern.compile("((([1-9])(\\d*)|0)(\\.))");
                     if(err.matcher(ingredientPrice_field.getText()).matches()){

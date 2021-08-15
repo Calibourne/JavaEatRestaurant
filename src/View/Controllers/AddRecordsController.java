@@ -448,7 +448,7 @@ public class AddRecordsController {
             Restaurant.getInstance().saveDatabase("Rest.ser");
             System.out.printf("%s was added successfully\n", request.getRecord());
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             System.out.println(e.getMessage());
         }
     }

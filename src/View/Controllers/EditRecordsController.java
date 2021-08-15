@@ -123,14 +123,14 @@ public class EditRecordsController {
     @FXML
     private TextField areaName_field;
     @FXML
-    private TextField deliveryTime_field;
-    @FXML
     private CheckListView<Neighberhood> neighbourhoods_checkedList;
     // endregion
     @FXML
     private ComboBox<Record> records_combo;
     @FXML
     private GridPane info_grid;
+    @FXML
+    private GridPane alert_grid;
     @FXML
     private ComboBox addComponents_combo;
     @FXML
@@ -192,6 +192,7 @@ public class EditRecordsController {
                             expertises_combo.setValue(((Cook) newValue).getExpert());
                             isChef_check.setSelected(((Cook) newValue).isChef());
                             info_grid.setVisible(true);
+                            alert_grid.setVisible(false);
                         } catch (NullPointerException e) {
                             System.out.println(e.getMessage());
                         }
@@ -218,6 +219,7 @@ public class EditRecordsController {
                             deliveryAreas_combo.setValue(((DeliveryPerson)newValue).getArea());
                             deliveryAreas_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
                             info_grid.setVisible(true);
+                            alert_grid.setVisible(false);
                         }
                         catch (NullPointerException e){
                             System.out.println(e.getMessage());
@@ -240,6 +242,7 @@ public class EditRecordsController {
                     glutenIntolerant_check.setSelected(((Customer)newValue).isSensitiveToGluten());
                     lactoseIntolerant_check.setSelected(((Customer)newValue).isSensitiveToLactose());
                     info_grid.setVisible(true);
+                    alert_grid.setVisible(false);
                 }
                 catch (NullPointerException e){
                     System.out.println(e.getMessage());
@@ -255,6 +258,7 @@ public class EditRecordsController {
                     hasGluten_check.setSelected(((Component)newValue).isHasGluten());
                     hasLactose_check.setSelected(((Component)newValue).isHasLactose());
                     info_grid.setVisible(true);
+                    alert_grid.setVisible(false);
                 }
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
@@ -275,6 +279,7 @@ public class EditRecordsController {
                             .stream().map(ListedRecord::new).toList());
                     addComponents_combo.setVisible(false);
                     info_grid.setVisible(true);
+                    alert_grid.setVisible(false);
                 }
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
@@ -296,6 +301,7 @@ public class EditRecordsController {
                             .stream().map(ListedRecord::new).toList());
                     addComponents_combo.setVisible(false);
                     info_grid.setVisible(true);
+                    alert_grid.setVisible(false);
                 }
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
@@ -328,6 +334,7 @@ public class EditRecordsController {
                         expressFee_field.setText(String.format("%.2f",((ExpressDelivery)newValue).getPostage()));
                     }
                     info_grid.setVisible(true);
+                    alert_grid.setVisible(false);
                 }
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
@@ -339,12 +346,11 @@ public class EditRecordsController {
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     areaName_field.setText(((DeliveryArea)newValue).getAreaName());
-                    deliveryTime_field.setText(String.format("%d",((DeliveryArea)newValue).getDeliverTime()));
                     neighbourhoods_checkedList.getItems().clear();
                     neighbourhoods_checkedList.getItems().addAll(((DeliveryArea)newValue).getNeighberhoods());
-                    deliveryTime_field.setEditable(false);
                     addComponents_combo.setVisible(false);
                     info_grid.setVisible(true);
+                    alert_grid.setVisible(false);
                 }
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
@@ -423,7 +429,9 @@ public class EditRecordsController {
                             neighbourhoods_checkedList.getItems().stream().collect(Collectors.toSet()));
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    initialize();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                 }
@@ -435,7 +443,9 @@ public class EditRecordsController {
                             expertises_combo.getValue(),isChef_check.isSelected());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    initialize();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getCooks().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                 }
@@ -447,7 +457,9 @@ public class EditRecordsController {
                             vehicles_combo.getValue(), deliveryAreas_combo.getValue());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    initialize();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getDeliveryPersons().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                 }
@@ -459,7 +471,9 @@ public class EditRecordsController {
                             neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    initialize();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                 }
@@ -471,7 +485,9 @@ public class EditRecordsController {
                             hasGluten_check.isSelected(), hasLactose_check.isSelected());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    initialize();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getComponents().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                 }
@@ -483,7 +499,9 @@ public class EditRecordsController {
                             components_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    initialize();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getDishes().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                 }
@@ -500,7 +518,9 @@ public class EditRecordsController {
                                 deliveries_combo.getValue());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    initialize();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getOrders().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                 }
@@ -524,7 +544,9 @@ public class EditRecordsController {
                     }
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    initialize();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getDeliveries().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                 }

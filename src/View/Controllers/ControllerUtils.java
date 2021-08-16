@@ -11,11 +11,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -64,5 +67,76 @@ public class ControllerUtils {
                     }
                 }
         );
+    }
+
+    public static void setAlerts(TextField field, Pattern pattern) {
+        field.setOnKeyTyped(ke-> {
+            if(!Objects.equals(ke.getCharacter(), "\b")) {
+                String newText = field.getText() + ke.getCharacter();
+                if (pattern.matcher(newText).matches()) {
+                    field.getStyleClass().clear();
+                    field.getStyleClass().add("text-input");
+                    field.getStyleClass().add("text-field");
+                }
+                else {
+                    field.getStyleClass().clear();
+                    field.getStyleClass().add("text-input");
+                    if(field.getText().length()>0)
+                        field.getStyleClass().add("WarningAlert");
+                    else
+                        field.getStyleClass().add("ErrorAlert");
+                }
+            }
+        });
+        field.textProperty().addListener((obs, o, n)->{
+            if(n.length()>0 && o.length()>0){
+                field.getStyleClass().clear();
+                field.getStyleClass().add("text-input");
+                field.getStyleClass().add("text-field");
+            }
+            else {
+                /*field.getStyleClass().removeAll("WarningAlert");
+                field.getStyleClass().removeAll("text-field");*/
+                field.getStyleClass().clear();
+                field.getStyleClass().add("text-input");
+                field.getStyleClass().add("ErrorAlert");
+            }
+
+        });
+        field.focusedProperty().addListener((obs, o, n) -> {
+            if(field.getText().length()>0) {
+                if (!n) {
+                    field.getStyleClass().remove("WarningAlert");
+                }
+            }
+            else{
+                field.getStyleClass().clear();
+                field.getStyleClass().add("text-input");
+                field.getStyleClass().add("ErrorAlert");
+            }
+        });
+    }
+    public static StringConverter<LocalDate> getStringConverter(){
+        return new StringConverter<LocalDate>() {
+            private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            @Override
+            public String toString(LocalDate localDate) {
+                if(localDate==null)
+                    return "";
+                return dateTimeFormatter.format(localDate);
+            }
+            @Override
+            public LocalDate fromString(String dateString) {
+                if(dateString==null || dateString.trim().isEmpty())
+                    return null;
+                try{
+                    return LocalDate.parse(dateString,dateTimeFormatter);
+                }
+                catch(Exception e){
+                    //Bad date value entered
+                    return null;
+                }
+            }
+        };
     }
 }

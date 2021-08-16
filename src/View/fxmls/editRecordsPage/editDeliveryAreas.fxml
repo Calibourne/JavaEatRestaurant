@@ -100,7 +100,7 @@
                                                                </children>
                                                             </Group>
                                                             <CheckListView fx:id="neighbourhoods_checkedList" prefHeight="200.0" prefWidth="360.0" />
-                                                            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="25.0" styleClass="HBox">
+                                                            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="25.0" styleClass="OuterMenuBar">
                                                                <children>
                                                                   <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
                                                                   <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />

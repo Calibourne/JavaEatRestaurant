@@ -1,4 +1,5 @@
 .button {
+  -fx-background-color: #061E47;
   -fx-text-fill: #e7e5e5;
 }
 
@@ -24,7 +25,7 @@
 }
 
 .combo-box:hover, .combo-box .arrow-button:hover {
-  -fx-background-color: #1F4591;
+  -fx-background-color: #2B6AD0;
 }
 
 .combo-box:pressed, .combo-box .arrow-button:pressed {
@@ -37,8 +38,8 @@
 }
 
 .combo-box .combo-box-popup .list-cell:hover {
-  -fx-text-fill: gold;
-  -fx-background-color: #1F4591;
+  -fx-text-fill: #ffd700;
+  -fx-background-color: #2B6AD0;
 }
 
 .combo-box .arrow {
@@ -49,7 +50,7 @@
   -fx-background-color: #061E47;
 }
 
-.text-field {
+.text-field, .text-input {
   -fx-background-color: none;
   -fx-text-fill: #e7e5e5;
   -fx-border-color: #e7e5e5;
@@ -61,7 +62,7 @@
 }
 
 .check-box:selected .mark {
-  -fx-background-color: white;
+  -fx-background-color: #e7e5e5;
 }
 
 .check-box:selected .box {
@@ -69,7 +70,7 @@
 }
 
 .radio-button {
-  -fx-text-fill: white;
+  -fx-text-fill: #e7e5e5;
 }
 
 .radio-button .radio {
@@ -94,6 +95,13 @@
 
 .date-picker {
   -fx-background-color: #061E47;
+}
+
+.Container {
+  -fx-border-radius: 1em;
+  -fx-border-width: 2px;
+  -fx-padding: 0.5em;
+  -fx-border-color: #e7e5e5;
 }
 
 .toggle-button {
@@ -123,7 +131,7 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-  -fx-background-color: #1F4591;
+  -fx-background-color: #0b235e;
   -fx-background-radius: 5em;
 }
 
@@ -133,7 +141,6 @@
 
 .progress-bar {
   -fx-background-color: #1F4591;
-  -fx-box-border: goldenrod;
 }
 
 .green-bar {
@@ -156,12 +163,13 @@
   -fx-accent: darkred;
 }
 
+/* List view styling */
 .list-view {
-  -fx-background-color: #1f4591;
+  -fx-background-color: #1F4591;
 }
 
 .list-view .list-cell:hover {
-  -fx-background-color: #1F4591;
+  -fx-background-color: #2B6AD0;
 }
 
 .list-view .list-cell {
@@ -178,7 +186,7 @@
 }
 
 .list-view .list-cell:even:hover {
-  -fx-background-color: #1F4591;
+  -fx-background-color: #2B6AD0;
 }
 
 /* Tab pane styling */
@@ -191,12 +199,12 @@
 }
 
 .tab-pane .tab:selected {
-  -fx-background-color: #1F4591;
+  -fx-background-color: #2B6AD0;
 }
 
 .tab .tab-label {
   -fx-alignment: CENTER;
-  -fx-text-fill: #ffffff;
+  -fx-text-fill: #e7e5e5;
   -fx-font-size: 12px;
   -fx-font-weight: bold;
 }
@@ -270,4 +278,16 @@
   -fx-border-width: 2px;
   -fx-padding: 0.5em;
   -fx-border-color: white;
+}
+
+.WarningAlert {
+  -fx-text-fill: #daa520;
+  -fx-border-color: #daa520;
+  -fx-border-width: 0 0 1 0;
+}
+
+.ErrorAlert {
+  -fx-text-fill: #ff0000;
+  -fx-border-color: #ff0000;
+  -fx-border-width: 0 0 1 0;
 }

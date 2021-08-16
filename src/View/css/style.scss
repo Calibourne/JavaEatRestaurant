@@ -7,40 +7,33 @@ $background_c:     #1F4591;
 $light_c:          #2B6AD0;
 
 // elements colours
-$outernav_element_colour:  $outer_navbar_c;
-$innerpane_elemt_colour:   $outer_navbar_c;
-$innernav_element_colour:   $inner_navbar_c;
+$outernav_element_colour:    $outer_navbar_c;
+$innerpane_element_colour:   $outer_navbar_c;
+$innernav_element_colour:    $inner_navbar_c;
 
-$element_hover:   #2B6AD0;
+$element_hover:   $light_c;
 $element_pressed: #68A4F1;
 
 $text_colour:     #e7e5e5;
+$text_hover:      #ffd700;
 
 // other colours:
-$warning_alert_colour: goldenrod;
-$error_alert_colour:   red;
-
-$pass_insecure_colour: black;
-$pass_veryweak_colour: darkred;
-$pass_weak_colour:     red;
-$pass_fair_colour:     yellow;
-$pass_strong_colour:   green;
-$pass_secure_colour:   darkgreen;
+$warning_alert_colour: #daa520;
+$error_alert_colour:   #ff0000;
 
 // css classes ssettings
 
 // default item settings
 .button{
-    -fx-text-fill : $text_colour;
+    -fx-background-color: $innerpane_element_colour;
+    -fx-text-fill: $text_colour;
 }
-
 .button:hover{
-    -fx-background-color : $element_hover;
+    -fx-background-color: $element_hover;
 }
-.button:pressed {
-    -fx-background-color : $element_pressed;
+.button:pressed{
+    -fx-background-color: $element_pressed;
 }
-
 .label{
     -fx-text-fill: $text_colour;
 }
@@ -49,32 +42,33 @@ $pass_secure_colour:   darkgreen;
     -fx-text-fill: $text_colour;
 }
 .combo-box{
-    -fx-background-color: $outernav_element_colour;
+    -fx-background-color: $innerpane_element_colour;
 }
 
 .combo-box:hover, .combo-box .arrow-button:hover{
-    -fx-background-color: $background_c;
+    -fx-background-color: $element_hover;
 }
 .combo-box:pressed, .combo-box .arrow-button:pressed{
-    -fx-background-color: $element_pressed;
+    -fx-background-color: $element_pressed
 }
 
 .combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell , .combo-box .list-cell{
-    -fx-background-color: $outernav_element_colour;
+    -fx-background-color: $innerpane_element_colour;
     -fx-text-fill: $text_colour;
 }
 .combo-box .combo-box-popup .list-cell:hover {
-    -fx-text-fill: gold;
-    -fx-background-color: $background_c;
+    -fx-text-fill: $text_hover;
+    -fx-background-color: $element_hover;
 }
 
 .combo-box .arrow{
-    -fx-background-color:#1F4591;
+    -fx-background-color: $background_c;
 }
 .combo-box .arrow-button{
-    -fx-background-color: $outer_navbar_c;
+    -fx-background-color: $innerpane_element_colour;
 }
-.text-field{
+
+.text-field, .text-input{
     -fx-background-color: none;
     -fx-text-fill: $text_colour;
     -fx-border-color: $text_colour;
@@ -86,18 +80,18 @@ $pass_secure_colour:   darkgreen;
 }
 
 .check-box:selected .mark {
-    -fx-background-color: white;
+    -fx-background-color: $text_colour;
 }
 
 .check-box:selected .box {
     -fx-background-color: $element_pressed;
 }
 .radio-button{
-    -fx-text-fill: white;
+    -fx-text-fill: $text_colour;
 }
 
 .radio-button .radio {
-    -fx-background-color: $outer_navbar_c;
+    -fx-background-color: $innerpane_element_colour;
     -fx-background-image: null;
 }
 
@@ -105,25 +99,30 @@ $pass_secure_colour:   darkgreen;
     -fx-mark-highlight-color: $element_pressed;
     -fx-mark-color: $element_pressed;
 }
+
 .separator{
     -fx-border-style: solid;
     -fx-border-width: 0;
     /*-fx-padding: 0 -50 0 0;*/
 }
-
 .separator *.line{
     -fx-border-color: #000000;
 }
 
 .date-picker{
-    -fx-background-color: $outer_navbar_c;
+    -fx-background-color: $innerpane_element_colour;
+}
+.Container{
+    -fx-border-radius: 1em;
+    -fx-border-width: 2px;
+    -fx-padding: 0.5em;
+    -fx-border-color: $text_colour;
 }
 
 .toggle-button{
     -fx-background-color: none;
     -fx-background-image: url("../images/icons8-show-password-25.png");
 }
-
 .toggle-button:selected{
     -fx-background-image: url("../images/icons8-hide-25.png");
 }
@@ -131,32 +130,27 @@ $pass_secure_colour:   darkgreen;
 .scroll-bar:horizontal, .scroll-bar:vertical{
     -fx-background-color:transparent;
 }
-
 .increment-button, .decrement-button {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
-
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
-    -fx-background-color: $inner_navbar_c;
+    -fx-background-color: $innernav_element_colour;
     -fx-border-color: transparent;
     -fx-background-radius: 0em;
 }
-
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #1F4591;
+    -fx-background-color: $innernav_element_colour;
     -fx-background-radius: 5em;
 }
-
 .scroll-pane > .corner {
     -fx-background-color: black;
 }
 
 .progress-bar {
-    -fx-background-color: #1F4591;
-    -fx-box-border: goldenrod;
+    -fx-background-color: $background_c;
 }
 
 .green-bar  { -fx-accent: green;  }
@@ -165,14 +159,13 @@ $pass_secure_colour:   darkgreen;
 .red-bar    { -fx-accent: red;    }
 .darkred-bar { -fx-accent: darkred;}
 
+/* List view styling */
 .list-view {
-    -fx-background-color: #1f4591;
+    -fx-background-color: $background_c;
 }
 
-.list-view {
-    .list-cell:hover {
-        -fx-background-color: $background_c;
-    }
+.list-view .list-cell:hover {
+    -fx-background-color: $element_hover;
 }
 
 
@@ -186,10 +179,10 @@ $pass_secure_colour:   darkgreen;
 }
 
 .list-view .list-cell:even {
-    -fx-background-color: $outernav_element_colour;
+    -fx-background-color: $innerpane_element_colour;
 }
 .list-view .list-cell:even:hover {
-    -fx-background-color: $background_c;
+    -fx-background-color: $light_c;
 }
 
 /* Tab pane styling */
@@ -197,14 +190,14 @@ $pass_secure_colour:   darkgreen;
     -fx-opacity: 0;
 }
 .tab-pane .tab {
-    -fx-background-color: $innernav_element_colour;
+    -fx-background-color: $inner_navbar_c;
 }
 .tab-pane .tab:selected {
-    -fx-background-color: $background_c;
+    -fx-background-color: $element_hover;
 }
 .tab .tab-label {
     -fx-alignment: CENTER;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: $text_colour;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
@@ -215,9 +208,9 @@ $pass_secure_colour:   darkgreen;
 
 // overview page settings
 .Overview{
-    -fx-background-color: #1F4591;
+    -fx-background-color: $background_c;
     .SearchBar{
-        -fx-background-color: #1F4591;
+        -fx-background-color: $background_c;
         -fx-border-color: white;
         -fx-text-fill: white;
         -fx-border-radius: 2em;
@@ -272,4 +265,18 @@ $pass_secure_colour:   darkgreen;
     -fx-border-width: 2px;
     -fx-padding: 0.5em;
     -fx-border-color: white;
+}
+
+
+
+.WarningAlert{
+    -fx-text-fill: $warning_alert_colour;
+    -fx-border-color: $warning_alert_colour;
+    -fx-border-width: 0 0 1 0;
+}
+
+.ErrorAlert{
+    -fx-text-fill: $error_alert_colour;
+    -fx-border-color: $error_alert_colour;
+    -fx-border-width: 0 0 1 0;
 }

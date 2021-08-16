@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckListView?>
+
+<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
+    <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
+        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
+            <Label fx:id="home_page_header" alignment="CENTER" textAlignment="CENTER">
+                <font>
+                    <Font size="30.0" />
+                </font>
+                <effect>
+                    <DropShadow />
+                </effect>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" text="Here you can either complete you order or view your order history" textAlignment="CENTER">
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Label>
+        </VBox>
+      <TabPane prefHeight="395.0" prefWidth="485.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab fx:id="shopping_cart_button" onSelectionChanged="#shoppingCartButtonPressed" text="Shopping Cart">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="485.0">
+                     <children>
+                        <CheckListView fx:id="shopping_cart_list" prefHeight="365.0" prefWidth="485.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="order_history_button" onSelectionChanged="#orderHistoryButtonPressed" text="Order History">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="order_history_list" prefHeight="365.0" prefWidth="485.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+         <VBox.margin>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </VBox.margin>
+      </TabPane>
+    </VBox>
+</AnchorPane>

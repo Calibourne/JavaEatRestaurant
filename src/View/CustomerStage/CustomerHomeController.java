@@ -74,11 +74,15 @@ public class CustomerHomeController {
             assert settings_button != null : "fx:id=\"settings_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
             assert signout_button != null : "fx:id=\"signout_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
 
+            Node loadedPage;
+            loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml")));
+            content_pane.getChildren().add(loadedPage);
+
             customer = LoginPageController.getCustomer();
 //        username_label.setText("Welcome, \n"+customer.getFirstName()+" "+customer.getLastName()); This makes the label span on two lines
             username_label.setText("Welcome, " + customer.getFirstName() + " " + customer.getLastName());
 
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -103,10 +107,10 @@ public class CustomerHomeController {
 //                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getNumberOfDeliveriesPerType.fxml")));
 //                        content_pane.getChildren().add(loadedPage);
 //                        break;
-//                    case "delis_by_dp_button":
-//                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getDeliveriesByPerson.fxml")));
-//                        content_pane.getChildren().add(loadedPage);
-//                        break;
+                    case "homepage_button":
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml")));
+                        content_pane.getChildren().add(loadedPage);
+                        break;
                     case "view_menu_button":
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerMenu.fxml")));
                         content_pane.getChildren().add(loadedPage);
@@ -126,7 +130,7 @@ public class CustomerHomeController {
 
                 }
             }
-            catch(IOException e){
+            catch(NullPointerException | IOException e){
                 e.printStackTrace();
             }
         }

@@ -65,35 +65,82 @@
                         </GridPane>
                         <Group GridPane.rowIndex="1">
                            <children>
-                              <VBox fx:id="rd_vbox" alignment="CENTER" prefHeight="172.0" prefWidth="277.0" styleClass="Container">
+                              <HBox>
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="88.0" text="Dishes:" />
                                     <Group>
                                        <children>
-                                          <Group layoutX="64.0">
+                                          <VBox alignment="CENTER" prefHeight="216.0" prefWidth="246.0" styleClass="Container">
                                              <children>
-                                                <VBox alignment="CENTER" prefHeight="198.0" prefWidth="360.0">
+                                                <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="88.0" text="Dishes:" />
+                                                <Group>
                                                    <children>
-                                                      <Group>
+                                                      <Group layoutX="64.0">
                                                          <children>
-                                                            <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="360.0" visible="false" />
+                                                            <VBox alignment="CENTER" prefHeight="198.0" prefWidth="270.0">
+                                                               <children>
+                                                                  <Group>
+                                                                     <children>
+                                                                        <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="270.0" visible="false" />
+                                                                     </children>
+                                                                  </Group>
+                                                                  <CheckListView fx:id="dishes_checkedList" prefHeight="168.0" prefWidth="270.0" />
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="270.0" spacing="25.0" styleClass="OuterMenuBar">
+                                                                     <children>
+                                                                        <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
+                                                                        <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
                                                          </children>
                                                       </Group>
-                                                      <CheckListView fx:id="dishes_checkedList" prefHeight="200.0" prefWidth="360.0" />
-                                                      <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="25.0" styleClass="OuterMenuBar">
-                                                         <children>
-                                                            <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
-                                                            <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />
-                                                         </children>
-                                                      </HBox>
                                                    </children>
-                                                </VBox>
+                                                </Group>
                                              </children>
-                                          </Group>
+                                          </VBox>
+                                       </children>
+                                    </Group>
+                                    <Group>
+                                       <children>
+                                          <VBox fx:id="ingredients_vbox" alignment="CENTER" prefHeight="216.0" prefWidth="58.0" styleClass="Container" visible="false">
+                                             <children>
+                                                <Label fx:id="dish_name" alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="102.0" text="Dish ingredients:" />
+                                                <Group>
+                                                   <children>
+                                                      <Group layoutX="64.0">
+                                                         <children>
+                                                            <VBox alignment="CENTER" layoutX="-48.0" layoutY="1.0" prefHeight="198.0" prefWidth="155.0">
+                                                               <children>
+                                                                  <Group>
+                                                                     <children>
+                                                                        <Group>
+                                                                           <children>
+                                                                              <Label fx:id="dish_id" text="Label" visible="false" />
+                                                                           </children>
+                                                                        </Group>
+                                                                        <ComboBox fx:id="addSubcomponents_combo" prefHeight="25.0" prefWidth="155.0" visible="false" />
+                                                                     </children>
+                                                                  </Group>
+                                                                  <CheckListView fx:id="dishesIngredients_checkedList" prefHeight="200.0" prefWidth="155.0" />
+                                                                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="5.0" styleClass="OuterMenuBar">
+                                                                     <children>
+                                                                        <Button fx:id="Iminus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
+                                                                        <Button fx:id="addSubcomp_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="73.0" text="Add Dish" />
+                                                                        <Button fx:id="Iplus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </Group>
+                                                   </children>
+                                                </Group>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </Group>
                                  </children>
-                              </VBox>
+                              </HBox>
                            </children>
                         </Group>
                      </children>

@@ -1,7 +1,7 @@
 package View.Controllers;
 
 import Model.*;
-import Model.Record;
+import Model.Exceptions.NoComponentsException;
 import Model.Requests.AddRecordRequest;
 import Utils.*;
 import impl.org.controlsfx.collections.ReadOnlyUnbackedObservableList;
@@ -18,11 +18,14 @@ import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
 
+import java.lang.Record;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AddRecordsController {
     // region Properties
@@ -90,11 +93,27 @@ public class AddRecordsController {
     @FXML
     private Group addOrders_sctn;
     @FXML
+    private VBox ingredients_vbox;
+    @FXML
     private ComboBox<Customer> customers_combo;
     @FXML
     private ComboBox<Delivery> deliveries_combo;
     @FXML
     private CheckListView<ListedRecord> dishes_checkedList;
+    @FXML
+    private CheckListView<ListedRecord> dishesIngredients_checkedList;
+    @FXML
+    private ComboBox<Component> addSubcomponents_combo;
+    @FXML
+    private Button addSubcomp_btn;
+    @FXML
+    private Label dish_id;
+    @FXML
+    private Label dish_name;
+    @FXML
+    private Button Iplus_btn;
+    @FXML
+    private Button Iminus_btn;
     // endregion
     // region Delivery attributes
     @FXML
@@ -161,7 +180,6 @@ public class AddRecordsController {
             Pattern doublePattern = Pattern.compile("((([1-9])(\\d*)|0)(\\.\\d*)?)?");
             Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ -]?)([a-zA-Z]*))*");
             if(addCooks_sctn!=null || addDeliPersons_sctn!=null || addCustomers_sctn!=null) {
-                /** see {@link ControllerUtils} for more details*/
 
                 fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
                 ControllerUtils.setAlerts(fname_field, stringPattern);
@@ -214,12 +232,57 @@ public class AddRecordsController {
             if(addOrders_sctn!=null){
                 customers_combo.getItems().addAll(rest.getCustomers().values());
                 deliveries_combo.getItems().addAll(rest.getDeliveries().values());
+                addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+
                 addComponents_combo.setOnAction(action->{
                     Dish d = (Dish) addComponents_combo.getValue();
                     if(d != null) {
-                        dishes_checkedList.getItems().add(new ListedRecord(d));
+                        dishesIngredients_checkedList.getItems().addAll(
+                                d.getComponents().stream().map(ListedRecord::new).toList()
+                        );
+                        dish_id.setText(""+d.getId());
+                        //dishes_checkedList.getItems().add(new ListedRecord(d));
+                        ingredients_vbox.setVisible(true);
                         addComponents_combo.setVisible(false);
+                        dish_name.setText(d.getDishName()+" ingredients: ");
                     }
+                });
+
+                addSubcomponents_combo.setOnAction(action -> {
+                    Component c = addSubcomponents_combo.getValue();
+                    if(c != null) {
+                        dishesIngredients_checkedList.getItems().add(new ListedRecord(c));
+                        addSubcomponents_combo.setVisible(false);
+                    }
+                });
+                addSubcomp_btn.setOnAction(action -> {
+                    List<Component> selectedList = dishesIngredients_checkedList.getItems()
+                            .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
+                            dishList = rest.getRealDish(Integer.parseInt(dish_id.getText())).getComponents()
+                                    .stream().sorted(Comparator.comparing(Component::getId)).toList();
+                    if(dishList.equals(selectedList)){
+                        dishes_checkedList.getItems().add(
+                                new ListedRecord(rest.getRealDish(Integer.parseInt(dish_id.getText())))
+                        );
+                    }
+                    else {
+                        Dish d = rest.getRealDish(Integer.parseInt(dish_id.getText()));
+                        dishes_checkedList.getItems().add(
+                                new ListedRecord(new Dish("custom made " + d.getDishName() ,d.getType(), new ArrayList<>(dishList), d.getTimeToMake()))
+                        );
+                    }
+                    dishesIngredients_checkedList.getItems().clear();
+                    ingredients_vbox.setVisible(false);
+                });
+                Iplus_btn.setOnAction(action->{
+                    addSubcomponents_combo.getItems().clear();
+                    addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+                    addSubcomponents_combo.setVisible(true);
+                });
+                Iminus_btn.setOnAction(action -> {
+                    Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
+                    dishesIngredients_checkedList.getCheckModel().clearChecks();
+                    dishesIngredients_checkedList.getItems().removeAll(set);
                 });
             }
             if(addDeliveries_sctn!=null){
@@ -284,8 +347,11 @@ public class AddRecordsController {
                 addComponents_combo.getItems().addAll(rest.getComponents().values());
             }
             if(addOrders_sctn!=null){
+                dishesIngredients_checkedList.getItems().clear();
+                ingredients_vbox.setVisible(false);
                 addComponents_combo.getItems().addAll(rest.getDishes().values());
             }
+
             if(addDeliveries_sctn!=null){
                 Set<Order> set = new HashSet<>(orders_checkedList.getItems());
                 addComponents_combo.getItems().addAll(
@@ -415,7 +481,8 @@ public class AddRecordsController {
                 DishType dishType = dishType_combo.getValue();
                 List<Component> selectedItems = components_checkedList.getItems().stream()
                         .map(ListedRecord::getRecord).map(r->(Component)r).toList();
-                request = new AddRecordRequest(new Dish(-1), dishName, dishType, selectedItems, dishPrepareTime);
+                ArrayList<Component> selectedIngredients = new ArrayList<>(selectedItems);
+                request = new AddRecordRequest(new Dish(-1), dishName, dishType, selectedIngredients, dishPrepareTime);
                 dishType_combo.getSelectionModel().clearSelection();
                 components_checkedList.getItems().clear();
                 dishName_field.clear();
@@ -425,13 +492,18 @@ public class AddRecordsController {
                 Delivery delivery = deliveries_combo.getValue();
                 List<Dish> selectedItems = dishes_checkedList.getItems().stream()
                         .map(ListedRecord::getRecord).map(r->(Dish)r).toList();
+                ArrayList<Dish> selectedDishes = new ArrayList<>(selectedItems);
                 if (delivery!= null)
-                    request = new AddRecordRequest(new Order(-1), customer, selectedItems, delivery);
+                    request = new AddRecordRequest(new Order(-1),
+                            customer,
+                            selectedDishes,
+                            delivery
+                    );
                 else
                     request = new AddRecordRequest(
                             new Order(-1),
                             customer,
-                            selectedItems
+                            selectedDishes
                     );
                 customers_combo.getSelectionModel().clearSelection();
                 deliveries_combo.getSelectionModel().clearSelection();
@@ -484,7 +556,7 @@ public class AddRecordsController {
             Restaurant.getInstance().saveDatabase("Rest.ser");
             System.out.printf("%s was added successfully\n", request.getRecord());
         }catch (Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
             System.out.println(e.getMessage());
         }
     }

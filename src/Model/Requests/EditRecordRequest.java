@@ -48,7 +48,8 @@ public class EditRecordRequest extends RecordRequest{
                 ((Customer) record).setSensitiveToGluten((Boolean) args[5]);
                 ((Customer) record).setSensitiveToGluten((Boolean) args[6]);
                 //TODO Add change password attribute in edit customer fxml
-                ((Customer) record).setPassword(((Customer) record).getPassword());
+                if(args.length==8)
+                    ((Customer) record).setPassword((String) args[7]);
             }
             if(record instanceof DeliveryPerson){
                 ((DeliveryPerson) record).setVehicle((Vehicle) args[4]);
@@ -69,7 +70,6 @@ public class EditRecordRequest extends RecordRequest{
                     .collect(Collectors.groupingBy(Function.identity(),Collectors.counting())),
                     selected = ((List<Component>) args[3]).stream()
                             .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
-            // region TODO Check if works:
             Set<Component> intersect = selected.keySet().stream().filter(e->current.keySet().contains(e)).collect(Collectors.toSet());
             Set<Component> unite = Stream.concat(current.keySet().stream(),selected.keySet().stream()).collect(Collectors.toSet());
             Set<Component> notIntersect = unite.stream().filter(e->!intersect.contains(e)).collect(Collectors.toSet());
@@ -113,7 +113,6 @@ public class EditRecordRequest extends RecordRequest{
                 Restaurant rest = Restaurant.getInstance();
                 rest.removeDish((Dish) record);
             }
-            // endregion
         }
         if(record instanceof Order){
 
@@ -122,7 +121,6 @@ public class EditRecordRequest extends RecordRequest{
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())),
                     selected = ((List<Dish>) args[1]).stream()
                             .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
-            //region TODO Figure out how to add/remove dishes from an order
             Set<Dish> intersect = selected.keySet().stream().filter(e->current.keySet().contains(e)).collect(Collectors.toSet());
             Set<Dish> unite = Stream.concat(current.keySet().stream(),selected.keySet().stream()).collect(Collectors.toSet());
             Set<Dish> notIntersect = unite.stream().filter(e->!intersect.contains(e)).collect(Collectors.toSet());
@@ -154,7 +152,6 @@ public class EditRecordRequest extends RecordRequest{
                     }
                 }
             });
-            // endregion
             if(args.length==3)
                 ((Order) record).setDelivery((Delivery) args[2]);
         }

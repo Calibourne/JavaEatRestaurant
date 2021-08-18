@@ -1,8 +1,11 @@
 package Model;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.time.LocalDate;
 
 import Utils.Gender;
+import Utils.ImageManager;
 import Utils.Neighberhood;
 
 /**
@@ -12,6 +15,7 @@ import Utils.Neighberhood;
 public class Customer extends Person{
 	
 	private static int idCounter = 1;
+	private BufferedImage profileImg;
 	private Neighberhood neighberhood;
 	private boolean isSensitiveToLactose;
 	private boolean isSensitiveToGluten;
@@ -124,6 +128,18 @@ public class Customer extends Person{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean setProfileImg() {
+		try{
+			profileImg = ImageManager.getInstance().getImage("Customer"+getId());
+		}catch(IllegalArgumentException | IOException e){
+			return false;
+		}
+		return true;
+	}
+	public void setProfileImg(BufferedImage img){
+		this.profileImg = img;
 	}
 
 	@Override

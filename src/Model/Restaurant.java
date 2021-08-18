@@ -7,6 +7,7 @@ import Model.Exceptions.SensitiveException;
 import Model.Requests.AddRecordRequest;
 import Model.Requests.RemoveRecordRequest;
 import Utils.Expertise;
+import Utils.ImageManager;
 import Utils.MyFileLogWriter;
 import Utils.Neighberhood;
 
@@ -22,7 +23,7 @@ import java.util.*;
 public class Restaurant implements Serializable {
 
 	private static Restaurant restaurant = null;
-
+	private ImageManager manager;
 	private HashMap<Integer,Cook> cooks;
 	private HashMap<Integer,DeliveryPerson> deliveryPersons;
 	private HashMap<Integer,Customer> customers;
@@ -63,6 +64,7 @@ public class Restaurant implements Serializable {
 
 	private Restaurant() {
 		if(!loadDatabase("Rest.ser")) {
+			manager = ImageManager.getInstance();
 			cooks = new HashMap<>();
 			deliveryPersons = new HashMap<>();
 			customers = new HashMap<>();
@@ -962,6 +964,7 @@ public class Restaurant implements Serializable {
 
 		catch(IOException ex)
 		{
+			ex.printStackTrace();
 			System.out.println(ex.getClass());
 			System.out.println("Was unable to save");
 			return false;
@@ -1004,6 +1007,7 @@ public class Restaurant implements Serializable {
 				Dish.setIdCounter(res.runningDishes);
 				Order.setIdCounter(res.runningOrders);
 				Delivery.setIdCounter(res.runningDeliveries);
+				this.manager = res.manager;
 				setFirstRun(false);
 				return true;
 			}

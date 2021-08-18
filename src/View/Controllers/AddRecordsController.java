@@ -6,6 +6,7 @@ import Model.Requests.AddRecordRequest;
 import Utils.*;
 import impl.org.controlsfx.collections.ReadOnlyUnbackedObservableList;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -13,11 +14,19 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.Record;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -64,6 +73,10 @@ public class AddRecordsController {
     private CheckBox glutenIntolerant_check;
     @FXML
     private CheckBox lactoseIntolerant_check;
+    @FXML
+    private Button img_choose;
+    @FXML
+    private ImageView img_source;
     // endregion
     // region Ingredient attributes
     @FXML
@@ -201,6 +214,23 @@ public class AddRecordsController {
                 }
                 if(addCustomers_sctn!=null){
                     neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
+                    img_choose.setOnAction(action->{
+                        FileChooser fileChooser = new FileChooser();
+                        fileChooser.setTitle("Open Resource File");
+                        fileChooser.getExtensionFilters().addAll(
+                                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+                        );
+                        File selectedFile = fileChooser.showOpenDialog(img_choose.getScene().getWindow());
+                        if (selectedFile != null) {
+                            try {
+                                BufferedImage bi = ImageIO.read(selectedFile);
+                                Image img = SwingFXUtils.toFXImage(bi, null);
+                                img_source.setImage(img);
+                            }catch (IOException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                 }
             }
             if(addComponents_sctn!=null){
@@ -553,6 +583,24 @@ public class AddRecordsController {
                 return;
             }
             request.saveRequest();
+            if(addCustomers_sctn != null){
+                Customer c = (Customer)request.getRecord();
+                if(img_source.getImage() != null){
+                    ImageManager manager = ImageManager.getInstance();
+                    int id = ((Customer)request.getRecord()).getId();
+                    String saveS = "Customer"+id;
+                    manager.saveProfileImage(img_source.getImage(), saveS);
+                    img_source.setImage(null);
+                }
+                if(!c.setProfileImg()){
+                    try{
+                        BufferedImage img = ImageIO.read(new File("src\\View\\images\\icon8-customer-32.png"));
+                        c.setProfileImg(img);
+                    }catch (IOException e){
+                        e.getMessage();
+                    }
+                }
+            }
             Restaurant.getInstance().saveDatabase("Rest.ser");
             System.out.printf("%s was added successfully\n", request.getRecord());
         }catch (Exception e){

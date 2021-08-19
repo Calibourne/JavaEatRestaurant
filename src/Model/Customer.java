@@ -15,7 +15,7 @@ import Utils.Neighberhood;
 public class Customer extends Person{
 	
 	private static int idCounter = 1;
-	private BufferedImage profileImg;
+	private String profileImgName;
 	private Neighberhood neighberhood;
 	private boolean isSensitiveToLactose;
 	private boolean isSensitiveToGluten;
@@ -46,6 +46,7 @@ public class Customer extends Person{
 		this.isSensitiveToGluten = isSensitiveToGluten;
 		this.username = String.format("%s%s%d",  firstName, lastName, getId());
 		this.password = "123456";
+		setProfileImg("Default");
 	}
 	
 	/**
@@ -130,16 +131,15 @@ public class Customer extends Person{
 		this.password = password;
 	}
 
-	public boolean setProfileImg() {
+	public BufferedImage getProfileImg() {
 		try{
-			profileImg = ImageManager.getInstance().getImage("Customer"+getId());
+			return ImageManager.getInstance().getImage(profileImgName);
 		}catch(IllegalArgumentException | IOException e){
-			return false;
+			return null;
 		}
-		return true;
 	}
-	public void setProfileImg(BufferedImage img){
-		this.profileImg = img;
+	public void setProfileImg(String img){
+		this.profileImgName = img;
 	}
 
 	@Override

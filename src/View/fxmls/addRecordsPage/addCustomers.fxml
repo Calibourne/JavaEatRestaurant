@@ -7,6 +7,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -85,9 +86,12 @@
                   </GridPane>
                   <Group GridPane.rowIndex="1">
                      <children>
-                        <VBox alignment="CENTER" styleClass="Container">
+                        <VBox alignment="CENTER" spacing="5.0" styleClass="Container">
                            <children>
-                              <ImageView fx:id="img_source" fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" styleClass="Container" />
+                              <ImageView fx:id="img_source" fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" styleClass="Container">
+                                 <image>
+                                    <Image url="@../../images/profile/default.png" />
+                                 </image></ImageView>
                               <Button fx:id="img_choose" mnemonicParsing="false" text="Choose profile image" />
                            </children>
                         </VBox>

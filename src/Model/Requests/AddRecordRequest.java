@@ -4,7 +4,10 @@ import Model.*;
 import Model.Exceptions.ConvertToExpressException;
 import Model.Record;
 import Utils.*;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -179,5 +182,18 @@ public class AddRecordRequest extends RecordRequest {
         toReturn = toReturn && ts.add(this);
         restaurant.getAddRecordHistory().put(record.getClass().getSimpleName(),ts);
         return toReturn;
+    }
+
+    @Override
+    protected void setCustomerImage(Image img) {
+        try {
+            ImageManager manager = ImageManager.getInstance();
+            Image current = SwingFXUtils.toFXImage(manager.getImage("Default"), null);
+            if (!img.equals(current))
+                super.setCustomerImage(img);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -8,12 +8,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.*;
+import java.net.URL;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ImageManager implements Serializable {
     private  final int MAX_DIM = 96;
     private static ImageManager instance;
-    HashMap<String, String> images;
+    transient HashMap<String, URL> images;
     public static ImageManager getInstance() {
         if(instance == null)
             instance = new ImageManager();
@@ -22,27 +25,30 @@ public class ImageManager implements Serializable {
 
     private ImageManager(){
         images = new HashMap<>();
+        images.put("Default", getClass().getResource("/View/images/profile/default.png"));
     }
 
-    public void setImages(HashMap<String, String> images){
+    public void setImages(HashMap<String, URL> images){
         this.images = images;
     }
 
-    public HashMap<String, String> getImages() {
+    public HashMap<String, URL> getImages() {
         return images;
     }
 
     public BufferedImage getImage(String imgName) throws IOException {
-        return ImageIO.read(getClass().getResource(images.get(imgName)));
+        System.out.println(images.get(imgName));
+        return ImageIO.read(images.get(imgName));
     }
 
     public boolean saveProfileImage(Image img, String saveName){
-        String saveNameFormat = "src\\View\\images\\profile\\"+saveName+".png";
+        String saveNameFormat = "src/View/images/profile/"+saveName+".png";
         File output = new File(saveNameFormat);
         try {
             BufferedImage im = SwingFXUtils.fromFXImage(img, null);
+
             if(ImageIO.write(im, "png", output)){
-                images.put(saveName, saveNameFormat);
+                images.put(saveName, output.toURI().toURL());
                 int h = im.getHeight(), w = im.getWidth();
                 if(h > MAX_DIM || w > MAX_DIM){
                     double ratio = 1.0 * w / h;

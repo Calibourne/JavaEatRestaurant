@@ -28,6 +28,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Record;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -214,23 +215,7 @@ public class AddRecordsController {
                 }
                 if(addCustomers_sctn!=null){
                     neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
-                    img_choose.setOnAction(action->{
-                        FileChooser fileChooser = new FileChooser();
-                        fileChooser.setTitle("Open Resource File");
-                        fileChooser.getExtensionFilters().addAll(
-                                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
-                        );
-                        File selectedFile = fileChooser.showOpenDialog(img_choose.getScene().getWindow());
-                        if (selectedFile != null) {
-                            try {
-                                BufferedImage bi = ImageIO.read(selectedFile);
-                                Image img = SwingFXUtils.toFXImage(bi, null);
-                                img_source.setImage(img);
-                            }catch (IOException e){
-                                e.printStackTrace();
-                            }
-                        }
-                    });
+                    ControllerUtils.setFileChooser(img_choose, img_source);
                 }
             }
             if(addComponents_sctn!=null){
@@ -477,7 +462,8 @@ public class AddRecordsController {
                             gender,
                             neighbourhood,
                             isGlutenIntolerant,
-                            isLactoseIntolerant
+                            isLactoseIntolerant,
+                            img_source.getImage()
                     );
                     neighbourhoods_combo.getSelectionModel().clearSelection();
                     glutenIntolerant_check.setSelected(false);
@@ -487,6 +473,8 @@ public class AddRecordsController {
                 lname_field.clear();
                 genders_combo.getSelectionModel().clearSelection();
                 birthDate_dp.setValue(null);
+                Image img = SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"), null);
+                img_source.setImage(img);
             }
             if (addComponents_sctn != null) {
                 String ingredientName = ingredientName_field.getText().length()>0?ingredientName_field.getText():null;
@@ -585,20 +573,15 @@ public class AddRecordsController {
             request.saveRequest();
             if(addCustomers_sctn != null){
                 Customer c = (Customer)request.getRecord();
-                if(img_source.getImage() != null){
+                BufferedImage bi = ImageIO.read(getClass().getResource("/View/images/profile/default.png"));
+                Image def = SwingFXUtils.toFXImage(bi, null);
+                if(!img_source.getImage().equals(def)){
                     ImageManager manager = ImageManager.getInstance();
                     int id = ((Customer)request.getRecord()).getId();
                     String saveS = "Customer"+id;
                     manager.saveProfileImage(img_source.getImage(), saveS);
-                    img_source.setImage(null);
-                }
-                if(!c.setProfileImg()){
-                    try{
-                        BufferedImage img = ImageIO.read(new File("src\\View\\images\\icon8-customer-32.png"));
-                        c.setProfileImg(img);
-                    }catch (IOException e){
-                        e.getMessage();
-                    }
+                    img_source.setImage(def);
+                    c.setProfileImg("Customer"+id);
                 }
             }
             Restaurant.getInstance().saveDatabase("Rest.ser");

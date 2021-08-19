@@ -2,19 +2,26 @@ package View.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -116,6 +123,27 @@ public class ControllerUtils {
             }
         });
     }
+
+    public static void setFileChooser(Button btn, ImageView imgView){
+        btn.setOnAction(action->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+            );
+            File selectedFile = fileChooser.showOpenDialog(btn.getScene().getWindow());
+            if (selectedFile != null) {
+                try {
+                    BufferedImage bi = ImageIO.read(selectedFile);
+                    Image img = SwingFXUtils.toFXImage(bi, null);
+                    imgView.setImage(img);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     public static StringConverter<LocalDate> getStringConverter(){
         return new StringConverter<LocalDate>() {
             private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

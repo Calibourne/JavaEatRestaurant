@@ -7,16 +7,22 @@ import Utils.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -59,6 +65,10 @@ public class EditRecordsController {
     private CheckBox glutenIntolerant_check;
     @FXML
     private CheckBox lactoseIntolerant_check;
+    @FXML
+    private Button img_choose;
+    @FXML
+    private ImageView img_source;
     // endregion
     // region Ingredient attributes
     @FXML
@@ -185,13 +195,7 @@ public class EditRecordsController {
                 try {
                     if (!newValue.equals(oldValue)) {
                         try {
-                            setNames(newValue, stringPattern);
-
-                            genders_combo.getItems().clear();
-                            genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
-                            genders_combo.setValue(((Person) newValue).getGender());
-
-                            birthDate_dp.setValue(((Person) newValue).getBirthDay());
+                            setPersonAttributes(newValue, stringPattern);
 
                             expertises_combo.getItems().clear();
                             expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
@@ -215,12 +219,7 @@ public class EditRecordsController {
             records_combo.getItems().addAll(Restaurant.getInstance().getDeliveryPersons().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                         try{
-                            setNames(newValue, stringPattern);
-
-                            genders_combo.setValue(((Person)newValue).getGender());
-                            genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
-
-                            birthDate_dp.setValue(((Person)newValue).getBirthDay());
+                            setPersonAttributes(newValue, stringPattern);
 
                             vehicles_combo.getItems().clear();
                             vehicles_combo.setValue(((DeliveryPerson)newValue).getVehicle());
@@ -242,25 +241,22 @@ public class EditRecordsController {
             records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
-                    setNames(newValue, stringPattern);
+                    setPersonAttributes(newValue, stringPattern);
 
-                    genders_combo.setValue(((Person)newValue).getGender());
-                    genders_combo.getItems().clear();
-                    genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
-
-                    birthDate_dp.setValue(((Person)newValue).getBirthDay());
-
-                    neighbourhoods_combo.setValue(((Customer)newValue).getNeighberhood());
                     neighbourhoods_combo.getItems().clear();
                     neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
+                    neighbourhoods_combo.setValue(((Customer)newValue).getNeighberhood());
 
                     glutenIntolerant_check.setSelected(((Customer)newValue).isSensitiveToGluten());
                     lactoseIntolerant_check.setSelected(((Customer)newValue).isSensitiveToLactose());
 
+                    img_source.setImage(SwingFXUtils.toFXImage(((Customer)newValue).getProfileImg(), null));
+                    ControllerUtils.setFileChooser(img_choose, img_source);
                     info_grid.setVisible(true);
                     alert_grid.setVisible(false);
                 }
                 catch (NullPointerException e){
+                    e.printStackTrace();
                     System.out.println(e.getMessage());
                 }
             });
@@ -516,7 +512,7 @@ public class EditRecordsController {
                 try{
                     EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
                             fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                            neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected());
+                            neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
                     request.saveRequest();
                     records_combo.getItems().clear();
                     records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
@@ -610,5 +606,16 @@ public class EditRecordsController {
         lname_field.setText(((Person)newValue).getLastName());
         lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
         ControllerUtils.setAlerts(lname_field, stringPattern);
+    }
+
+    private void setPersonAttributes(Record newValue, Pattern stringPattern){
+        setNames(newValue, stringPattern);
+
+        genders_combo.getItems().clear();
+        genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
+        genders_combo.setValue(((Person)newValue).getGender());
+
+        birthDate_dp.setValue(((Person)newValue).getBirthDay());
+
     }
 }

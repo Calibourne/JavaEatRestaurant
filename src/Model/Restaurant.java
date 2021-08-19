@@ -1037,6 +1037,7 @@ public class Restaurant implements Serializable {
 		}
 		catch (Exception ex)
 		{
+			ex.printStackTrace();
 			System.out.println("Failed to load the database");
 			setFirstRun(true);
 			return false;

@@ -103,10 +103,11 @@ public class CustomerHomeController {
 //                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/revenueFromExpressDeliveries.fxml")));
 //                        content_pane.getChildren().add(loadedPage);
 //                        break;
-//                    case "delis_by_type_button":
-//                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getNumberOfDeliveriesPerType.fxml")));
-//                        content_pane.getChildren().add(loadedPage);
-//                        break;
+                    case "new_order_button":
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/AddCustomerOrder.fxml")));
+                        content_pane.getChildren().clear();
+                        content_pane.getChildren().add(loadedPage);
+                        break;
                     case "homepage_button":
                         loadedPage = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml"));
                         content_pane.getChildren().clear();

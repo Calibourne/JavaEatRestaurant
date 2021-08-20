@@ -57,6 +57,7 @@ public class AddRecordRequest extends RecordRequest {
                         (boolean) args[5],
                         (boolean) args[6]
                 );
+                setCustomerImage((Image) args[7]);
             }
             else{
                 toBlacklist = true;

@@ -571,19 +571,6 @@ public class AddRecordsController {
                 return;
             }
             request.saveRequest();
-            if(addCustomers_sctn != null){
-                Customer c = (Customer)request.getRecord();
-                BufferedImage bi = ImageIO.read(getClass().getResource("/View/images/profile/default.png"));
-                Image def = SwingFXUtils.toFXImage(bi, null);
-                if(!img_source.getImage().equals(def)){
-                    ImageManager manager = ImageManager.getInstance();
-                    int id = ((Customer)request.getRecord()).getId();
-                    String saveS = "Customer"+id;
-                    manager.saveProfileImage(img_source.getImage(), saveS);
-                    img_source.setImage(def);
-                    c.setProfileImg("Customer"+id);
-                }
-            }
             Restaurant.getInstance().saveDatabase("Rest.ser");
             System.out.printf("%s was added successfully\n", request.getRecord());
         }catch (Exception e){

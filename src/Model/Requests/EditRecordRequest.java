@@ -3,7 +3,10 @@ import Model.*;
 import Model.Exceptions.NoComponentsException;
 import Model.Record;
 import Utils.*;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Function;
@@ -48,8 +51,9 @@ public class EditRecordRequest extends RecordRequest{
                 ((Customer) record).setSensitiveToGluten((Boolean) args[5]);
                 ((Customer) record).setSensitiveToGluten((Boolean) args[6]);
                 //TODO Add change password attribute in edit customer fxml
-                if(args.length==8)
-                    ((Customer) record).setPassword((String) args[7]);
+                setCustomerImage((Image) args[7]);
+                if(args.length==9)
+                    ((Customer) record).setPassword((String) args[8]);
             }
             if(record instanceof DeliveryPerson){
                 ((DeliveryPerson) record).setVehicle((Vehicle) args[4]);
@@ -180,5 +184,12 @@ public class EditRecordRequest extends RecordRequest{
             }
         }
         return true;
+    }
+
+    @Override
+    protected void setCustomerImage(Image img) {
+        Image current = SwingFXUtils.toFXImage(((Customer)record).getProfileImg(),null);
+        if (!img.equals(current))
+            super.setCustomerImage(img);
     }
 }

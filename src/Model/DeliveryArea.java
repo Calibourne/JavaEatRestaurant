@@ -15,7 +15,6 @@ import Utils.Neighberhood;
  */
 public class DeliveryArea extends Record {
 	private static int idCounter = 1;
-	private int id;
 	private String areaName;
 	private HashMap<Integer,DeliveryPerson> delPersons;
 	private HashMap<Integer,Delivery> deliveries;
@@ -32,8 +31,7 @@ public class DeliveryArea extends Record {
 	 * The delivery time to the delivery area from the restaurant
 	 */
 	public DeliveryArea(String areaName, HashSet<Neighberhood> neighberhoods, int deliverTime) {
-		super();
-		this.id = idCounter++;
+		super(idCounter++);
 		this.areaName = areaName;
 		this.neighberhoods = neighberhoods;
 		this.deliverTime = deliverTime;
@@ -48,7 +46,7 @@ public class DeliveryArea extends Record {
 	 * The id of the delivery area
 	 */
 	public DeliveryArea(int id) {
-		this.id = id;
+		super(id);
 		this.deliverTime = 0;
 	}
 
@@ -64,20 +62,6 @@ public class DeliveryArea extends Record {
 	 */
 	public static void setIdCounter(int idCounter) {
 		DeliveryArea.idCounter = idCounter;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	/**
@@ -213,7 +197,7 @@ public class DeliveryArea extends Record {
 
 	@Override
 	public String description() {
-		return "DeliveryArea [id=" + id + ", areaName=" + areaName + ", neighberhoods=" + neighberhoods
+		return "DeliveryArea [id=" + getId() + ", areaName=" + areaName + ", neighberhoods=" + neighberhoods
 				+ ", deliverTime=" + deliverTime + "]";
 	}
 
@@ -221,7 +205,7 @@ public class DeliveryArea extends Record {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + getId();
 		return result;
 	}
 	
@@ -234,7 +218,7 @@ public class DeliveryArea extends Record {
 		if (getClass() != obj.getClass())
 			return false;
 		DeliveryArea other = (DeliveryArea) obj;
-		if (id != other.id)
+		if (getId() != other.getId())
 			return false;
 		return true;
 	}	

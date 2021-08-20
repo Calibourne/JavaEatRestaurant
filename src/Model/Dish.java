@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class Dish extends Record {
 	private static int idCounter = 1;
-	private int id;
 	private String dishName;
 	private DishType type;
 	private ArrayList<Component> components;
@@ -32,8 +31,7 @@ public class Dish extends Record {
 	 * The dish preparing time
 	 */
 	public Dish(String dishName, DishType type, ArrayList<Component> components, int timeToMake) {
-		super();
-		this.id = idCounter++;
+		super(idCounter++);
 		this.dishName = dishName;
 		this.type = type;
 		this.components = components;
@@ -48,7 +46,7 @@ public class Dish extends Record {
 	 * The id of the dish
 	 */
 	public Dish(int id) {
-		this.id = id;
+		super(id);
 	}
 	
 	/**
@@ -64,21 +62,7 @@ public class Dish extends Record {
 	public static void setIdCounter(int idCounter) {
 		Dish.idCounter = idCounter;
 	}
-	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
 	/**
 	 * @return the dish name
 	 */
@@ -206,7 +190,7 @@ public class Dish extends Record {
 	// A backup of the original ToString so we can clean up the ToString to our liking
 	@Override
 	public String description() {
-		return "Dish [id=" + id + ", dishName=" + dishName + ", type=" + type + ", price=" + price + ", timeToMake="
+		return "Dish [id=" + getId() + ", dishName=" + dishName + ", type=" + type + ", price=" + price + ", timeToMake="
 				+ timeToMake + "]";
 	}
 
@@ -214,7 +198,7 @@ public class Dish extends Record {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + getId();
 		return result;
 	}
 	
@@ -227,7 +211,7 @@ public class Dish extends Record {
 		if (getClass() != obj.getClass())
 			return false;
 		Dish other = (Dish) obj;
-		if (id != other.id)
+		if (!getId().equals(other.getId()))
 			return false;
 		return true;
 	}

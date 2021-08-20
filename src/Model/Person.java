@@ -9,8 +9,7 @@ import Utils.Gender;
  * @author Eddie Kanevsky
  */
 public abstract class Person extends Record {
-	
-	private int id;
+
 	private String firstName;
 	private String lastName;
 	private LocalDate birthDay;
@@ -30,8 +29,7 @@ public abstract class Person extends Record {
 	 * The gender of the person
 	 */
 	public Person(int id, String firstName, String lastName, LocalDate birthDay, Gender gender) {
-		super();
-		this.id = id;
+		super(id);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthDay = birthDay;
@@ -45,21 +43,7 @@ public abstract class Person extends Record {
 	 * The id of a person
 	 */
 	public Person(int id) {
-		this.id = id;
-	}
-	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
+		super(id);
 	}
 	
 	/**
@@ -122,7 +106,7 @@ public abstract class Person extends Record {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + getId();
 		return result;
 	}
 
@@ -135,7 +119,7 @@ public abstract class Person extends Record {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		if (id != other.id)
+		if (!getId().equals(other.getId()))
 			return false;
 		return true;
 	}

@@ -1,6 +1,7 @@
 package View.CustomerStage;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -52,10 +53,11 @@ public class CustomerCartAndHistoryController {
     private void orderHistoryButtonPressed() {
         order_history_list.getItems().clear();
         try {
-            Set<String> s = restaurant.getAddRecordHistory()
+            List<String> s = restaurant.getAddRecordHistory()
                     .get(Order.class.getSimpleName()).stream().filter(r->((Order)r.getRecord()).getCustomer().equals(customer))
-                    .map(RecordRequest::toString).collect(Collectors.toSet());
-
+                    .map(RecordRequest::toString).collect(Collectors.toList());
+            if(s.size()==0)
+                throw new NullPointerException();
             order_history_list.getItems().addAll(s);
         }catch (NullPointerException e){
             order_history_list.getItems().add("You didn't order anything yet");

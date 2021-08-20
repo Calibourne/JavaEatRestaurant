@@ -271,7 +271,8 @@ public class Restaurant implements Serializable {
 			}
 			return getOrders().put(order.getId(), order) == null;
 		}catch(SensitiveException | IllegalCustomerException e) {
-			//System.out.println(e.getMessage());
+			System.out.println(e.getMessage());
+			System.out.println("Failed to add order " + Order.getIdCounter());
 			return false;
 		}
 	}

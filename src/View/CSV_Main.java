@@ -1,6 +1,7 @@
 package View;
 
 import Model.Requests.AddRecordRequest;
+import Model.Requests.RemoveRecordRequest;
 import autopilot.OutputDocument;
 import autopilot.Section;
 import Model.*;
@@ -269,8 +270,8 @@ public class CSV_Main {
                             dp,
                             da,
                             Boolean.parseBoolean(args[2]),
-                            postage,
                             o,
+                            postage,
                             deliveredDate
                     );
                     request.saveRequest();
@@ -387,51 +388,70 @@ public class CSV_Main {
         });
 
         commands.put("removeDish", (section, args) -> {
-            Dish d = rest.getRealDish(Integer.parseInt(args[0]));
-            if(rest.removeDish(d))
-                MyFileLogWriter.println("successfully removed Dish "+args[0]);
-            else
-                MyFileLogWriter.println("failed to remove Dish "+args[0]);
+            try{
+                RemoveRecordRequest request = new RemoveRecordRequest(
+                        rest.getRealDish(Integer.parseInt(args[0]))
+                );
+                request.saveRequest();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         });
 
         commands.put("removeOrder", (section, args) -> {
-            Order o = rest.getRealOrder(Integer.parseInt(args[0]));
-            if(rest.removeOrder(o))
-                MyFileLogWriter.println("successfully removed Order "+args[0]);
-            else
-                MyFileLogWriter.println("failed to remove Order "+args[0]);
+            try{
+                RemoveRecordRequest request = new RemoveRecordRequest(
+                        rest.getRealOrder(Integer.parseInt(args[0]))
+                );
+                request.saveRequest();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         });
 
         commands.put("removeCustomer", (section, args) -> {
-            Customer c = rest.getRealCustomer(Integer.parseInt(args[0]));
-            if(rest.removeCustomer(c))
-                MyFileLogWriter.println("successfully removed Customer "+args[0]);
-            else
-                MyFileLogWriter.println("failed to remove Customer "+args[0]);
+            try{
+                System.out.println(rest.getRealCustomer(Integer.parseInt(args[0])));
+                RemoveRecordRequest request = new RemoveRecordRequest(
+                        rest.getRealCustomer(Integer.parseInt(args[0]))
+                );
+                request.saveRequest();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         });
 
         commands.put("removeCook", (section, args) -> {
-            Cook c = rest.getRealCook(Integer.parseInt(args[0]));
-            if(rest.removeCook(c))
-                MyFileLogWriter.println("successfully removed Cook "+args[0]);
-            else
-                MyFileLogWriter.println("failed to remove Cook "+args[0]);
+            try{
+                RemoveRecordRequest request = new RemoveRecordRequest(
+                        rest.getRealCook(Integer.parseInt(args[0]))
+                );
+                request.saveRequest();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         });
 
         commands.put("removeDeliveryPerson", (section, args) -> {
-            DeliveryPerson dp = rest.getRealDeliveryPerson(Integer.parseInt(args[0]));
-            if(rest.removeDeliveryPerson(dp))
-                MyFileLogWriter.println("successfully removed Delivery Person "+args[0]);
-            else
-                MyFileLogWriter.println("failed to remove Delivery Person "+args[0]);
+            try{
+                RemoveRecordRequest request = new RemoveRecordRequest(
+                        rest.getRealDeliveryPerson(Integer.parseInt(args[0]))
+                );
+                request.saveRequest();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         });
 
         commands.put("removeDelivery", (section, args) -> {
-            Delivery d = rest.getRealDelivery(Integer.parseInt(args[0]));
-            if(rest.removeDelivery(d))
-                MyFileLogWriter.println("successfully removed Delivery "+args[0]);
-            else
-                MyFileLogWriter.println("failed to remove Delivery "+args[0]);
+            try{
+                RemoveRecordRequest request = new RemoveRecordRequest(
+                        rest.getRealDelivery(Integer.parseInt(args[0]))
+                );
+                request.saveRequest();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         });
 
 

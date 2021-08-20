@@ -9,5 +9,15 @@ import java.io.Serializable;
  * is used in {@link RecordRequest} class
  */
 public abstract class Record implements Serializable {
+    private int id;
     public abstract String description();
+    public Record(int id){
+        setId(id);
+    }
+    public Integer getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
 }

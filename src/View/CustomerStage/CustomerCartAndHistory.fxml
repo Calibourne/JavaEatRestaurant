@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
@@ -31,27 +32,31 @@
                 </effect>
             </Label>
         </VBox>
-      <TabPane prefHeight="395.0" prefWidth="485.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
-            <Tab fx:id="shopping_cart_button" onSelectionChanged="#shoppingCartButtonPressed" text="Shopping Cart">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="485.0">
-                     <children>
-                        <CheckListView fx:id="shopping_cart_list" prefHeight="365.0" prefWidth="485.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="order_history_button" onSelectionChanged="#orderHistoryButtonPressed" text="Order History">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ListView fx:id="order_history_list" layoutX="50.0" layoutY="1.0" prefHeight="365.0" prefWidth="485.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
+      <Group>
+         <children>
+            <TabPane prefHeight="395.0" prefWidth="475.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="shopping_cart_button" onSelectionChanged="#shoppingCartButtonPressed" text="Shopping Cart">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="481.0">
+                           <children>
+                              <CheckListView fx:id="shopping_cart_list" prefHeight="365.0" prefWidth="485.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="order_history_button" onSelectionChanged="#orderHistoryButtonPressed" text="Order History">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="410.0">
+                           <children>
+                              <ListView fx:id="order_history_list" layoutX="7.0" layoutY="1.0" prefHeight="365.0" prefWidth="485.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </Group>
     </VBox>
 </AnchorPane>

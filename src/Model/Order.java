@@ -13,7 +13,6 @@ import java.util.List;
 public class Order extends Record implements Comparable<Order> {
 	
 	private static int idCounter = 1;
-	private int id;
 	private Customer customer;
 	private ArrayList<Dish> dishes;
 	private Delivery delivery;
@@ -28,8 +27,7 @@ public class Order extends Record implements Comparable<Order> {
 	 * The linked delivery
 	 */
 	public Order(Customer customer, ArrayList<Dish> dishes, Delivery delivery) {
-		super();
-		this.id = idCounter++;
+		super(idCounter++);
 		this.customer = customer;
 		this.dishes = dishes;
 		this.delivery = delivery;
@@ -42,7 +40,7 @@ public class Order extends Record implements Comparable<Order> {
 	 * The id of the order
 	 */
 	public Order(int id) {
-		this.id = id;
+		super(id);
 	}
 	
 	/**
@@ -57,20 +55,6 @@ public class Order extends Record implements Comparable<Order> {
 	 */
 	public static void setIdCounter(int idCounter) {
 		Order.idCounter = idCounter;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	/**
@@ -138,19 +122,19 @@ public class Order extends Record implements Comparable<Order> {
 	
 	@Override
 	public String toString() {
-		return String.format("Order No%d for %s, price: %.2f₪", id, customer, dishes.stream().map(Dish::getPrice).reduce(0.0, Double::sum));
+		return String.format("Order No%d for %s, price: %.2f₪", getId(), customer, dishes.stream().map(Dish::getPrice).reduce(0.0, Double::sum));
 	}
 
 	@Override
 	public String description() {
-		return "Order [id=" + id + ", customer=" + customer + "]";
+		return "Order [id=" + getId() + ", customer=" + customer + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + getId();
 		return result;
 	}
 	
@@ -163,14 +147,14 @@ public class Order extends Record implements Comparable<Order> {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		if (id != other.id)
+		if (getId() != other.getId())
 			return false;
 		return true;
 	}
 	
 	@Override
 	public int compareTo(Order other) {
-		return ((Integer)id).compareTo((Integer)other.id);
+		return ((Integer)getId()).compareTo((Integer)other.getId());
 	}
 	
 	public double calcOrderRevenue() {

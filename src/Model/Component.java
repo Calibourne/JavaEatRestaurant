@@ -8,7 +8,6 @@ import java.io.Serializable;
  */
 public class Component extends Record implements Comparable<Component> {
 	private static int idCounter = 1;
-	private int id;
 	private String componentName;
 	private boolean hasLactose;
 	private boolean hasGluten;
@@ -26,8 +25,7 @@ public class Component extends Record implements Comparable<Component> {
 	 * The price of the component
 	 */
 	public Component(String componentName, boolean hasLactose, boolean hasGluten, double price) {
-		super();
-		this.id = idCounter++;
+		super(idCounter++);
 		this.componentName = componentName;
 		this.hasLactose = hasLactose;
 		this.hasGluten = hasGluten;
@@ -41,7 +39,7 @@ public class Component extends Record implements Comparable<Component> {
 	 * The id of the dish
 	 */
 	public Component(int id) {
-		this.id = id;
+		super(id);
 	}
 
 	/**
@@ -56,20 +54,6 @@ public class Component extends Record implements Comparable<Component> {
 	 */
 	public static void setIdCounter(int idCounter) {
 		Component.idCounter = idCounter;
-	}
-	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	/**
@@ -151,7 +135,7 @@ public class Component extends Record implements Comparable<Component> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + getId();
 		return result;
 	}
 
@@ -164,7 +148,7 @@ public class Component extends Record implements Comparable<Component> {
 		if (getClass() != obj.getClass())
 			return false;
 		Component other = (Component) obj;
-		if (id != other.id)
+		if (!getId().equals(other.getId()))
 			return false;
 		return true;
 	}
@@ -173,12 +157,12 @@ public class Component extends Record implements Comparable<Component> {
 	public int compareTo(Component other) {
 		int priceCompare = ((Double)getPrice()).compareTo(other.getPrice());
 		if(priceCompare == 0)
-			return ((Integer)getId()).compareTo(other.getId());
+			return getId().compareTo(other.getId());
 		return priceCompare;
 	}
 
 	@Override
 	public String description() {
-		return "Component [id=" + id + ", componentName=" + componentName + ", price=" + price + "]";
+		return "Component [id=" + getId() + ", componentName=" + componentName + ", price=" + price + "]";
 	}
 }

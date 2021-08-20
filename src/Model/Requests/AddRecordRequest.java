@@ -125,7 +125,8 @@ public class AddRecordRequest extends RecordRequest {
                         (DeliveryArea) args[1],
                         (boolean) args[2],
                         (Order) args[3],
-                        (LocalDate) args[4]
+                        (double) args[4],
+                        (LocalDate) args[5]
                 );
             }
         }

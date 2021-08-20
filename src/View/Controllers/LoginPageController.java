@@ -1,6 +1,7 @@
 package View.Controllers;
 
 import Model.Customer;
+import Model.Order;
 import Model.Restaurant;
 import Utils.ImageManager;
 import javafx.event.ActionEvent;
@@ -41,7 +42,7 @@ public class LoginPageController {
         }
         rest = Restaurant.getInstance();
         rest.saveDatabase("Rest.ser");
-        ImageManager.getInstance().getImages().forEach((k,v)-> System.out.printf("%s : %s\n",k, v));
+        rest.getAddRecordHistory().get(Order.class.getSimpleName()).forEach(System.out::println);
     }
 
     public static Customer getCustomer(){

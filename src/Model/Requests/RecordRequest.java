@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This class will be responsible for adding/removing/editing records from the database
@@ -30,9 +31,7 @@ public abstract class RecordRequest implements Serializable, Comparable<RecordRe
 
     @Override
     public int compareTo(RecordRequest o) {
-        return (dateOfRequest.compareTo(o.dateOfRequest) == 0) ?
-                timeOfRequest.compareTo(o.timeOfRequest) :
-                dateOfRequest.compareTo(o.dateOfRequest);
+        return record.getId().compareTo(o.record.getId());
     }
 
     public Record getRecord() {
@@ -50,6 +49,8 @@ public abstract class RecordRequest implements Serializable, Comparable<RecordRe
 
     @Override
     public String toString() {
-        return String.format("%s added at %s at %s", record,  dateOfRequest,timeOfRequest);
+        String date = dateOfRequest.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String time = timeOfRequest.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        return String.format("%s added at %s at %s", record,  date,time);
     }
 }

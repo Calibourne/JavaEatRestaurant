@@ -32,21 +32,25 @@ public class CustomerCartAndHistoryController {
     private Tab shopping_cart_button;
 
     @FXML
-    private CheckListView<?> shopping_cart_list;
+    private CheckListView<String> shopping_cart_list;
 
     @FXML
     private Tab order_history_button;
 
     @FXML
-    private ListView<?> order_history_list;
+    private ListView<String> order_history_list;
 
     @FXML
     void orderHistoryButtonPressed(ActionEvent event) {
+
+
 
     }
 
     @FXML
     void shoppingCartButtonPressed(ActionEvent event) {
+
+
 
     }
 

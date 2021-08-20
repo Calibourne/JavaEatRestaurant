@@ -47,4 +47,9 @@ public abstract class RecordRequest implements Serializable, Comparable<RecordRe
         manager.saveProfileImage(img, saveS);
         c.setProfileImg("Customer" + id);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s added at %s at %s", record,  dateOfRequest,timeOfRequest);
+    }
 }

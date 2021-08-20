@@ -4,16 +4,19 @@ import Model.Customer;
 import Model.Requests.AddRecordRequest;
 import Model.Restaurant;
 import Utils.Gender;
+import Utils.ImageManager;
 import Utils.Neighberhood;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.css.StyleClass;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.AccessibleRole;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -169,7 +172,8 @@ public class SignupPageController {
                    gender,
                    neighborhood,
                    glutenIntolerant,
-                   lactoseIntolerant
+                   lactoseIntolerant,
+                   SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"),null)
            );
            ((Customer)request.getRecord()).setPassword(passwordField.getText());
            if(usernameField.getText().length()>0)

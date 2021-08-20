@@ -1,5 +1,6 @@
 package View;
 
+import Model.Requests.AddRecordRequest;
 import autopilot.OutputDocument;
 import autopilot.Section;
 import Model.*;
@@ -106,54 +107,86 @@ public class CSV_Main {
                 n.add(Neighberhood.valueOf(args[4]));
             if(!args[5].equals("null"))
                 n.add(Neighberhood.valueOf(args[5]));
-            DeliveryArea da = new DeliveryArea(args[0], n, Integer.parseInt(args[1]));
-            if(rest.addDeliveryArea(da)) {
-                MyFileLogWriter.println("successfully added Delivery Area "+args[0]);
+            try{
+                AddRecordRequest request = new AddRecordRequest(
+                        new DeliveryArea(-1),
+                        args[0], n, Integer.parseInt(args[1])
+                );
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            else
-                MyFileLogWriter.println("failed to add Delivery Area "+args[0]);
-
         });
 
 
         commands.put("addCustomer", (section, args) -> {
             LocalDate date = LocalDate.of(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]));
-            Customer c = new Customer(args[0], args[1], date, Gender.valueOf(args[5]), Neighberhood.valueOf(args[6]), Boolean.parseBoolean(args[7]), Boolean.parseBoolean(args[8]));
-            if(rest.addCustomer(c))
-                MyFileLogWriter.println("successfully added Customer "+args[0]+" "+args[1]);
-            else
-                MyFileLogWriter.println("failed to add Customer "+args[0]+" "+args[1]);
+            try{
+                AddRecordRequest request = new AddRecordRequest(
+                        new Customer(-1),
+                        args[0], args[1], date,
+                        Gender.valueOf(args[5]),
+                        Neighberhood.valueOf(args[6]),
+                        Boolean.parseBoolean(args[7]),
+                        Boolean.parseBoolean(args[8])
+                );
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
         commands.put("addCook", (section, args) -> {
             LocalDate date = LocalDate.of(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]));
-            Cook c = new Cook(args[0], args[1], date, Gender.valueOf(args[5]), Expertise.valueOf(args[6]), Boolean.parseBoolean(args[7]));
-            if(rest.addCook(c))
-                MyFileLogWriter.println("successfully added Cook "+args[0]+" "+args[1]);
-            else
-                MyFileLogWriter.println("failed to add Cook "+args[0]+" "+args[1]);
+            try{
+                AddRecordRequest request = new AddRecordRequest(
+                        new Cook(-1),
+                        args[0], args[1], date,
+                        Gender.valueOf(args[5]),
+                        Expertise.valueOf(args[6]),
+                        Boolean.parseBoolean(args[7])
+                );
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
         commands.put("addDeliveryPerson", (section, args) -> {
             LocalDate date = LocalDate.of(Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]));
             DeliveryArea da = rest.getRealDeliveryArea(Integer.parseInt(args[7]));
-            DeliveryPerson dp = new DeliveryPerson(args[0], args[1], date, Gender.valueOf(args[5]), Vehicle.valueOf(args[6]), da);
-
-            if(rest.addDeliveryPerson(dp, da))
-                MyFileLogWriter.println("successfully added Delivery Person "+args[0]+" "+args[1]);
-            else
-                MyFileLogWriter.println("failed to add Delivery Person "+args[0]+" "+args[1]);
+            try{
+                AddRecordRequest request = new AddRecordRequest(
+                        new DeliveryPerson(-1),
+                        args[0],
+                        args[1],
+                        date,
+                        Gender.valueOf(args[5]),
+                        Vehicle.valueOf(args[6]),
+                        da
+                );
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
         commands.put("addComponent", (section, args) -> {
-            Component c = new Component(args[0], Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Double.parseDouble(args[3]));
-            if(rest.addComponent(c))
-                MyFileLogWriter.println("successfully added Component "+args[0]);
-            else
-                MyFileLogWriter.println("failed to add Component "+args[0]);
+            try{
+                AddRecordRequest request = new AddRecordRequest(
+                        new Component(-1),
+                        args[0],
+                        Boolean.parseBoolean(args[1]),
+                        Boolean.parseBoolean(args[2]),
+                        Double.parseDouble(args[3])
+                );
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -163,13 +196,18 @@ public class CSV_Main {
             comp.add(rest.getRealComponent(Integer.parseInt(args[4])));
             comp.add(rest.getRealComponent(Integer.parseInt(args[5])));
             comp.add(rest.getRealComponent(Integer.parseInt(args[6])));
-            Dish d = new Dish(args[0], DishType.valueOf(args[1]), comp, Integer.parseInt(args[2]));
-            System.out.println("num of ingredients: "+ comp.size());
-            if(rest.addDish(d))
-                MyFileLogWriter.println("successfully added Dish "+args[0]);
-            else
-                MyFileLogWriter.println("failed to add Dish "+args[0]);
-            System.out.println(d.getComponents().size()+"");
+            try{
+                AddRecordRequest request = new AddRecordRequest(
+                        new Dish(-1),
+                        args[0],
+                        DishType.valueOf(args[1]),
+                        comp,
+                        Integer.parseInt(args[2])
+                );
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -179,11 +217,15 @@ public class CSV_Main {
             dishes.add(rest.getRealDish(Integer.parseInt(args[1])));
             dishes.add(rest.getRealDish(Integer.parseInt(args[2])));
             dishes.add(rest.getRealDish(Integer.parseInt(args[3])));
-            Order o = new Order(c, dishes, null);
-            if(rest.addOrder(o))
-                MyFileLogWriter.println("successfully added Order "+o.getId());
-            else
-                MyFileLogWriter.println("failed to add Order "+o.getId());
+            try{
+                AddRecordRequest request = new AddRecordRequest(
+                        new Order(-1),
+                        c, dishes
+                );
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -201,11 +243,17 @@ public class CSV_Main {
             if(o!=null)
                 orders.add(o);
             LocalDate deliveredDate = LocalDate.of(Integer.parseInt(args[6]), Integer.parseInt(args[7]), Integer.parseInt(args[8]));
-            Delivery d = new RegularDelivery(orders, dp, da, Boolean.parseBoolean(args[2]), deliveredDate);
-            if(rest.addDelivery(d))
-                MyFileLogWriter.println("successfully added Delivery "+d.getId());
-            else
-                MyFileLogWriter.println("failed to add Delivery "+d.getId());
+            try{
+                AddRecordRequest request = new AddRecordRequest(
+                        new RegularDelivery(-1),
+                        orders, dp, da,
+                        Boolean.parseBoolean(args[2]),
+                        deliveredDate
+                );
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         commands.put("addExpressDelivery", (section, args) -> {
@@ -214,22 +262,33 @@ public class CSV_Main {
             Order o = rest.getRealOrder(Integer.parseInt(args[3]));
             double postage = Double.parseDouble(args[4]);
             LocalDate deliveredDate = LocalDate.of(Integer.parseInt(args[5]), Integer.parseInt(args[6]), Integer.parseInt(args[7]));
-            Delivery d = null;
-            if( o != null)
-                d = new ExpressDelivery(dp, da, Boolean.parseBoolean(args[2]), o,postage, deliveredDate);
-            if(rest.addDelivery(d))
-                MyFileLogWriter.println("successfully added Delivery "+d.getId());
-            else
-                MyFileLogWriter.println("failed to add Delivery "+d.getId());
+            if( o != null) {
+                try {
+                    AddRecordRequest request = new AddRecordRequest(
+                            new ExpressDelivery(-1),
+                            dp,
+                            da,
+                            Boolean.parseBoolean(args[2]),
+                            postage,
+                            o,
+                            deliveredDate
+                    );
+                    request.saveRequest();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
 
         commands.put("addToBlackList", (section, args) -> {
             Customer c = rest.getRealCustomer(Integer.parseInt(args[0]));
-            if(rest.addCustomerToBlackList(c))
-                MyFileLogWriter.println("successfully added customer to blackList "+c.getId());
-            else
-                MyFileLogWriter.println("failed to add customer to blackList "+c.getId());
+            try {
+                AddRecordRequest request = new AddRecordRequest(c);
+                request.saveRequest();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         commands.put("getDeliveriesByPerson", (section, args) -> {

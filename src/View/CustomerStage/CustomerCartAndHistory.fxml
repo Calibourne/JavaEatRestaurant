@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
+<AnchorPane prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
             <Label fx:id="home_page_header" alignment="CENTER" textAlignment="CENTER">
@@ -32,7 +32,7 @@
             </Label>
         </VBox>
       <TabPane prefHeight="395.0" prefWidth="485.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
+         <tabs>
             <Tab fx:id="shopping_cart_button" onSelectionChanged="#shoppingCartButtonPressed" text="Shopping Cart">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="485.0">
@@ -46,15 +46,12 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="order_history_list" prefHeight="365.0" prefWidth="485.0" />
+                        <ListView fx:id="order_history_list" layoutX="50.0" layoutY="1.0" prefHeight="365.0" prefWidth="485.0" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-        </tabs>
-         <VBox.margin>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-         </VBox.margin>
+         </tabs>
       </TabPane>
     </VBox>
 </AnchorPane>

@@ -75,14 +75,14 @@ public class CustomerHomeController {
             assert signout_button != null : "fx:id=\"signout_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
 
             Node loadedPage;
-            loadedPage = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml"));
+            /*loadedPage = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml"));
             content_pane.getChildren().add(loadedPage);
-
+            */
             customer = LoginPageController.getCustomer();
 //        username_label.setText("Welcome, \n"+customer.getFirstName()+" "+customer.getLastName()); This makes the label span on two lines
             username_label.setText("Welcome, " + customer.getFirstName() + " " + customer.getLastName());
 
-        } catch (NullPointerException | IOException e) {
+        } catch (NullPointerException /*| IOException*/ e) {
             System.out.println(e.getMessage());
         }
     }
@@ -109,32 +109,32 @@ public class CustomerHomeController {
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "homepage_button":
-                        loadedPage = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml"));
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "view_menu_button":
-                        loadedPage = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerMenu.fxml"));
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerMenu.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "popular_ingredients_button":
-                        loadedPage = FXMLLoader.load(getClass().getResource("../QueryPages/getPopularComponent.fxml"));
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getPopularComponent.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "cooks_expertise_button":
-                        loadedPage = FXMLLoader.load(getClass().getResource("../QueryPages/getCooksByExpertise.fxml"));
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getCooksByExpertise.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "relevant_dish_menu_button":
-                        loadedPage = FXMLLoader.load(getClass().getResource("../CustomerStage/getRelevantDishList.fxml"));
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/getRelevantDishList.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "settings_button":
-                        loadedPage = FXMLLoader.load(getClass().getResource("../fxmls/editCustomerDetails.fxml"));
+                        loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/editCustomerDetails.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
@@ -149,7 +149,7 @@ public class CustomerHomeController {
     public void signout(){
         try {
             Stage s = (Stage) signout_button.getScene().getWindow();
-            Parent p = FXMLLoader.load(getClass().getResource("../fxmls/LoginPage.fxml"));
+            Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/LoginPage.fxml")));
             s.hide();
             s.setScene(new Scene(p));
             s.centerOnScreen();

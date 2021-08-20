@@ -57,6 +57,7 @@ public class AddRecordRequest extends RecordRequest {
                         (boolean) args[5],
                         (boolean) args[6]
                 );
+                if(args.length==8)
                 setCustomerImage((Image) args[7]);
             }
             else{
@@ -69,7 +70,7 @@ public class AddRecordRequest extends RecordRequest {
                     (String) args[0],
                     (boolean) args[1],
                     (boolean) args[2],
-                    (int) args[3]
+                    (double) args[3]
             );
         }
         if (record instanceof Dish) {

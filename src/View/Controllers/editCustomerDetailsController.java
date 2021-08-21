@@ -4,7 +4,10 @@ import Model.Customer;
 import Model.Requests.EditRecordRequest;
 import Model.Restaurant;
 import Utils.Gender;
+import Utils.ImageManager;
 import Utils.Neighberhood;
+import View.CustomerStage.CustomerHomeController;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -14,7 +17,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class editCustomerDetailsController {
@@ -41,6 +47,11 @@ public class editCustomerDetailsController {
     private CheckBox lactoseIntolerant_check;
 
     @FXML
+    private ImageView img_source;
+    @FXML
+    private Button img_choose;
+
+    @FXML
     private TextField npass_field;
 
     @FXML
@@ -59,9 +70,7 @@ public class editCustomerDetailsController {
 
     @FXML
     private void initialize(){
-        change_lbl.focusedProperty().addListener((obs, o, n) -> {
-            change_lbl.setVisible(n);
-        });
+        ControllerUtils.setFileChooser(img_choose, img_source);
         try{
             user = LoginPageController.getCustomer();
             fname_field.setText(user.getFirstName());
@@ -84,22 +93,19 @@ public class editCustomerDetailsController {
     private void handleButtonClick(ActionEvent e) {
         if(e.getSource() == submit){
             Restaurant rest = Restaurant.getInstance();
-            EditRecordRequest request = new EditRecordRequest(rest.getRealCustomer(user.getId()));
-            if(npass_field.getText().length()>0 && npass_field.getText().equals(rpass_field.getText()))
-                request = new EditRecordRequest(rest.getRealCustomer(user.getId()),
-                    fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                    neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(),
-                    npass_field.getText()
-                );
-            else
+            EditRecordRequest request = null;
+            try{
                 request = new EditRecordRequest(rest.getRealCustomer(user.getId()),
                         fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                        neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected()
-                );
+                        neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
+                request.saveRequest();
+            }catch (IllegalArgumentException ex){
+                System.out.println(ex.getMessage());
+            }
             request.saveRequest();
             Restaurant.getInstance().saveDatabase("Rest.ser");
-            change_lbl.setVisible(true);
-            change_lbl.requestFocus();
+            //change_lbl.setVisible(true);
+            //change_lbl.requestFocus();
         }
     }
 

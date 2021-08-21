@@ -3,6 +3,7 @@ package View.CustomerStage;
 import Model.Customer;
 import Model.Restaurant;
 import View.Controllers.LoginPageController;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -57,6 +59,9 @@ public class CustomerHomeController {
     @FXML
     private Button signout_button;
 
+    @FXML
+    private static ImageView user_img;
+
 
     Restaurant restaurant = Restaurant.getInstance();
     private Customer customer;
@@ -75,14 +80,13 @@ public class CustomerHomeController {
             assert signout_button != null : "fx:id=\"signout_button\" was not injected: check your FXML file 'CustomerHome.fxml'.";
 
             Node loadedPage;
-            /*loadedPage = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml"));
+            loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml")));
             content_pane.getChildren().add(loadedPage);
-            */
             customer = LoginPageController.getCustomer();
 //        username_label.setText("Welcome, \n"+customer.getFirstName()+" "+customer.getLastName()); This makes the label span on two lines
             username_label.setText("Welcome, " + customer.getFirstName() + " " + customer.getLastName());
 
-        } catch (NullPointerException /*| IOException*/ e) {
+        } catch (NullPointerException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -158,4 +162,9 @@ public class CustomerHomeController {
             ioException.printStackTrace();
         }
     }
+
+    /*public static void UpdateDetails(){
+        user_img.setImage(SwingFXUtils.toFXImage(customer.getProfileImg(),null));
+        username_label.setText("Welcome, " + customer.getFirstName() + " " + customer.getLastName());
+    }*/
 }

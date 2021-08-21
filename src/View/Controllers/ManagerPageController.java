@@ -84,10 +84,12 @@ public class ManagerPageController {
     // endregion
 
     // endregion
-    public void initialize(){
+    @FXML
+    private void initialize(){
         initOverview();
     }
-    public void handleButtonClick(ActionEvent e) {
+    @FXML
+    private void handleButtonClick(ActionEvent e) {
         if(e.getSource() == btnOverview) {
             initOverview();
             pnlOverview.setStyle("-fx-background-color: #1F4591");
@@ -168,7 +170,7 @@ public class ManagerPageController {
     }
 
     // This makes the query button clickable
-    public void initQueries(){
+    private void initQueries(){
         try{
             Node queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/Queries.fxml")));
             pnlQueries.getChildren().add(queryPage);
@@ -179,7 +181,7 @@ public class ManagerPageController {
     }
 
     // This makes the View Records button clickable
-    public void initViewRecords(){
+    private void initViewRecords(){
         try{
             Node ViewRecordsPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/ViewStructures.fxml")));
             pnlViewContents.getChildren().add(ViewRecordsPage);
@@ -188,4 +190,6 @@ public class ManagerPageController {
             System.out.println(e.getMessage());
         }
     }
+
+
 }

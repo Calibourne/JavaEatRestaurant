@@ -155,6 +155,20 @@ public class AddCustomerOrderController {
                 dishesIngredients_checkedList.getCheckModel().clearChecks();
                 dishesIngredients_checkedList.getItems().removeAll(set);
             });
+            plus_btn.setOnAction(action->{
+                addComponents_combo.getItems().clear();
+                dishesIngredients_checkedList.getItems().clear();
+                ingredients_vbox.setVisible(false);
+                addComponents_combo.getItems().addAll(rest.getDishes().values());
+                addComponents_combo.setVisible(true);
+            });
+            minus_btn.setOnAction(action->{
+                if(addOrders_sctn!=null){
+                    Set<ListedRecord> set = new HashSet<>(dishes_checkedList.getCheckModel().getCheckedItems());
+                    dishes_checkedList.getCheckModel().clearChecks();
+                    dishes_checkedList.getItems().removeAll(set);
+                }
+            });
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage());
         }

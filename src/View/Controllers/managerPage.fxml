@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1013.0" style="-fx-background-color: #02030A;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.ManagerPageController">
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
+   <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="200.0" styleClass="OuterMenuBar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets bottom="10.0" top="50.0" />
+         </VBox.margin>
+         <Image url="@../images/manager.png" />
+      </ImageView>
+      <Label fx:id="lblGreeting" text="Manager" textFill="#e7e5e5">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </Label>
+      <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="199.0" text="Homepage" textFill="#e7e5e5">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Home_32px.png" />
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </Button>
+      <Button fx:id="view_records" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="199.0" text="View Records" textFill="#e7e5e5">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Box_32px.png" />
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnAddRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Add Records">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Plus_32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnEditRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Edit Records">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Edit_32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnRemoveRecords" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Remove Records">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Minus_32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnQueries" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Perform Queries">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Search_52px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="200.0" text="Settings">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Slider__32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnSignOut" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="200.0" text="Sign Out">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../images/icons8_Sign_Out_32px.png" />
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </Button>
+   </VBox>
+   <StackPane layoutX="200.0" prefHeight="576.0" prefWidth="813.0" styleClass="StackPane">
+      <Pane fx:id="pnlViewContents" prefHeight="576.0" prefWidth="823.0" />
+      <Pane fx:id="pnlAddRecords" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/RecordsScreenStyle.css">
+         <AnchorPane fx:id="pnlRecordsManagement" prefHeight="576.0" prefWidth="793.0" />
+      </Pane>
+      <Pane fx:id="pnlEditRecords" prefHeight="200.0" prefWidth="200.0" />
+      <Pane fx:id="pnlRemoveRecords" prefHeight="200.0" prefWidth="200.0" />
+      <Pane fx:id="pnlQueries" prefHeight="576.0" prefWidth="823.0" />
+      <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" styleClass="Overview">
+         <Label layoutX="57.0" layoutY="25.0" text="Restaurant Overview" textFill="#e7e5e5">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <Label fx:id="numOfDeliveries_lbl" text="22000" textFill="#ffb92b">
+                  <font>
+                     <Font name="System Bold" size="26.0" />
+                  </font>
+               </Label>
+               <Label text="Total Deliveries" textFill="#e7e5e5" />
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <Label fx:id="numOfDelivered_lbl" text="1500" textFill="#3ebd26">
+                  <font>
+                     <Font name="System Bold" size="26.0" />
+                  </font>
+               </Label>
+               <Label text="Total delivered" textFill="#e7e5e5" />
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <Label fx:id="numOfCustomers_lbl" text="1000" textFill="#61bafa">
+                  <font>
+                     <Font name="System Bold" size="26.0" />
+                  </font>
+               </Label>
+               <Label text="Total Customers" textFill="#e7e5e5" />
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <Label fx:id="numOfBlacklisted_lbl" text="780" textFill="#de0000">
+                  <font>
+                     <Font name="System Bold" size="26.0" />
+                  </font>
+               </Label>
+               <Label text="Total Blacklisted" textFill="#e7e5e5" />
+            </VBox>
+         </HBox>
+         <HBox alignment="CENTER" layoutX="45.0" layoutY="178.0" prefHeight="42.0" prefWidth="712.0" spacing="80.0" styleClass="HBox">
+            <Label text="Dashboard" textFill="#e7e5e5">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </HBox>
+         <ScrollPane layoutX="14.0" layoutY="232.0" prefHeight="320.0" prefWidth="784.0" stylesheets="@../css/oldStyle.css">
+            <VBox fx:id="pnItems" prefHeight="318.0" prefWidth="782.0" spacing="5.0" styleClass="Overview">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <TabPane prefHeight="367.0" prefWidth="793.0" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab fx:id="areas_tab" text="Delivery Areas">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="677.0">
+                                 <children>
+                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" styleClass="InnerMenuBar">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfAreas" text="55" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Designated delivery areas" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="areas_history" prefHeight="276.0" prefWidth="755.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="customers_tab" text="Customers">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="250.0" styleClass="InnerMenuBar">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfCustomers" text="20" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Active Customers" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfBlacklisted" text="1" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Blacklisted" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="customers_history" prefHeight="280.0" prefWidth="784.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="delipersons_tab" text="Couriers">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfDeliPersons" text="23" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Active Couriers" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="delipersons_history" prefHeight="280.0" prefWidth="784.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="cooks_tab" text="Cooks">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfCooks" text="43" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Active Cooks" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="cooks_history" prefHeight="280.0" prefWidth="784.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="components_tab" text="Ingredients">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfComponents" text="15" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Avaliable Ingredients" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="components_history" prefHeight="280.0" prefWidth="784.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="dishes_tab" text="Dishes">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfDishes" text="30" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Avaliable Dishes" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="dishes_history" prefHeight="280.0" prefWidth="784.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="orders_tab" text="Orders">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfOrders" text="541" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Performed orders" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="orders_history" prefHeight="280.0" prefWidth="784.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="deliveries_tab" text="Deliveries">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="793.0">
+                                 <children>
+                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="50.0" styleClass="InnerMenuBar">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfDeliveries" text="20" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Total Deliveries" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfRegular" text="1" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Total Regular deliveries" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfExpress" text="20" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Total Express Deliveries" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
+                                                   <children>
+                                                      <Label fx:id="numOfDelivered" text="20" textFill="#ffb92b">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Total Delivered" textFill="#e7e5e5" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <ListView fx:id="deliveries_history" prefHeight="280.0" prefWidth="784.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+               </children>
+            </VBox>
+         </ScrollPane>
+      </Pane>
+   </StackPane>
+</AnchorPane>

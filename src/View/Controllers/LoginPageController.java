@@ -3,7 +3,6 @@ package View.Controllers;
 import Model.Customer;
 import Model.Order;
 import Model.Restaurant;
-import Utils.ImageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +57,7 @@ public class LoginPageController {
         if(usernameField.getText().equals("m") && passwordField.getText().equals("m")){
             try {
                 Stage s = (Stage) loginButton.getScene().getWindow();
-                Parent p = FXMLLoader.load(getClass().getResource("../fxmls/managerPage.fxml"));
+                Parent p = FXMLLoader.load(getClass().getResource("managerPage.fxml"));
                 ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {
                 ioException.printStackTrace();

@@ -1,25 +1,25 @@
 package View.CustomerStage;
 
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import Model.Customer;
+import Model.ListedRecord;
 import Model.Order;
+import Model.Record;
 import Model.Requests.RecordRequest;
 import Model.Restaurant;
 import View.Controllers.LoginPageController;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.CheckListView;
+
+import java.net.URL;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CustomerCartAndHistoryController {
 
@@ -42,10 +42,15 @@ public class CustomerCartAndHistoryController {
     private CheckListView<String> shopping_cart_list;
 
     @FXML
+    private Label cart_empty_message;
+
+    @FXML
     private Tab order_history_button;
 
     @FXML
     private ListView<String> order_history_list;
+
+    public static Set<ListedRecord> order_in_cart;
 
     private Restaurant restaurant;
     private Customer customer;
@@ -55,18 +60,25 @@ public class CustomerCartAndHistoryController {
         order_history_list.getItems().clear();
         try {
             List<String> s = restaurant.getAddRecordHistory()
-                    .get(Order.class.getSimpleName()).stream().filter(r->((Order)r.getRecord()).getCustomer().equals(customer))
+                    .get(Order.class.getSimpleName()).stream().filter(r -> ((Order) r.getRecord()).getCustomer().equals(customer))
                     .map(RecordRequest::toString).collect(Collectors.toList());
-            if(s.size()==0)
+            if (s.size() == 0)
                 throw new NullPointerException();
             order_history_list.getItems().addAll(s);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             order_history_list.getItems().add("You didn't order anything yet");
         }
     }
 
     @FXML
     private void shoppingCartButtonPressed() {
+        try {
+            cart_empty_message.setText("");
+            shopping_cart_list.getItems().clear();
+            shopping_cart_list.getItems().addAll(order_in_cart.stream().map(ListedRecord::getRecord).map(Record::toString).toList());
+        } catch (NullPointerException e) {
+            cart_empty_message.setText("Shopping Cart currently empty, please place a new order");
+        }
 
     }
 
@@ -81,6 +93,10 @@ public class CustomerCartAndHistoryController {
         restaurant = Restaurant.getInstance();
         customer = LoginPageController.getCustomer();
         home_page_header.setText(customer.getFirstName() + "'s Orders");
+
+        if (order_in_cart == null) {
+            order_in_cart = new HashSet<>();
+        }
     }
 }
 

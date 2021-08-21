@@ -139,7 +139,7 @@ public class AddCustomerOrderController {
                 else {
                     Dish d = rest.getRealDish(Integer.parseInt(dish_id.getText()));
                     dishes_checkedList.getItems().add(
-                            new ListedRecord(new Dish("custom made " + d.getDishName() ,d.getType(), new ArrayList<>(dishList), d.getTimeToMake()))
+                            new ListedRecord(new Dish("Custom " + d.getDishName() ,d.getType(), new ArrayList<>(dishList), d.getTimeToMake()))
                     );
                 }
                 dishesIngredients_checkedList.getItems().clear();
@@ -169,6 +169,10 @@ public class AddCustomerOrderController {
                     dishes_checkedList.getItems().removeAll(set);
                 }
             });
+            submit.setOnAction((action->{
+                Set<ListedRecord> dishes_in_order = new HashSet<>(dishes_checkedList.getItems());
+                CustomerCartAndHistoryController.order_in_cart = dishes_in_order;
+            }));
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage());
         }

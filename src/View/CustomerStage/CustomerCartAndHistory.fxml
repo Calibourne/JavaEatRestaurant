@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
+<AnchorPane prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
             <Label fx:id="home_page_header" alignment="CENTER" textAlignment="CENTER">
@@ -34,13 +34,18 @@
         </VBox>
       <Group>
          <children>
-            <TabPane prefHeight="395.0" prefWidth="475.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutY="144.0" prefHeight="395.0" prefWidth="475.0" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab fx:id="shopping_cart_button" onSelectionChanged="#shoppingCartButtonPressed" text="Shopping Cart">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="481.0">
                            <children>
                               <CheckListView fx:id="shopping_cart_list" prefHeight="365.0" prefWidth="485.0" />
+                              <Label fx:id="cart_empty_message" layoutX="43.0" layoutY="158.0" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </content>
@@ -57,6 +62,9 @@
                </tabs>
             </TabPane>
          </children>
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
       </Group>
     </VBox>
 </AnchorPane>

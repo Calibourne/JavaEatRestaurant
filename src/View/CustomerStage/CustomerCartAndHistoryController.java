@@ -95,11 +95,15 @@ public class CustomerCartAndHistoryController {
     }
 
     @FXML
+    //TODO Create a ListedRecord list from the dishes, then turn them back into dishes to form an order upon a button press
     private void shoppingCartButtonPressed() {
         try {
             cart_empty_message.setText("");
             shopping_cart_list.getItems().clear();
             shopping_cart_list.getItems().addAll(order_in_cart.stream().map(ListedRecord::getRecord).map(Record::toString).toList());
+            if(shopping_cart_list.getItems().size()==0){
+                throw new NullPointerException();
+            }
         } catch (NullPointerException e) {
             cart_empty_message.setText("Shopping Cart currently empty, please place a new order");
         }
@@ -112,9 +116,15 @@ public class CustomerCartAndHistoryController {
     }
 
     public void clearCart(){
-        shopping_cart_list.getItems().clear();
-       // cart_empty_message.setText("Shopping Cart currently empty, please place a new order"); Currently not working
-        shopping_cart_list.getItems().add("Shopping Cart currently empty, please place a new order");
+        try {
+            cart_empty_message.setText("");
+            shopping_cart_list.getItems().clear();
+            if (shopping_cart_list.getItems().size() == 0) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            cart_empty_message.setText("Shopping Cart currently empty, please place a new order");
+        }
     }
 }
 

@@ -171,7 +171,7 @@
                <Label text="Total Blacklisted" textFill="#e7e5e5" />
             </VBox>
          </HBox>
-         <HBox alignment="CENTER" layoutX="45.0" layoutY="178.0" prefHeight="42.0" prefWidth="712.0" spacing="80.0" styleClass="HBox">
+         <HBox layoutX="45.0" layoutY="178.0" prefHeight="42.0" prefWidth="712.0" spacing="80.0" styleClass="HBox">
             <Label text="Dashboard" textFill="#e7e5e5">
                <HBox.margin>
                   <Insets />
@@ -189,13 +189,13 @@
                <children>
                   <TabPane prefHeight="367.0" prefWidth="793.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
-                        <Tab fx:id="areas_tab" text="Delivery Areas">
+                        <Tab fx:id="areas_tab" onSelectionChanged="#initDashboard" text="Delivery Areas">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="677.0">
                                  <children>
-                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                    <VBox prefHeight="280.0" prefWidth="783.0">
                                        <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" styleClass="InnerMenuBar">
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="829.0" styleClass="Dashboard">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
                                                    <children>
@@ -216,13 +216,13 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="customers_tab" text="Customers">
+                        <Tab fx:id="customers_tab" onSelectionChanged="#initDashboard" text="Customers">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                    <VBox prefHeight="280.0" prefWidth="784.0">
                                        <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="250.0" styleClass="InnerMenuBar">
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="250.0" styleClass="Dashboard">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
                                                    <children>
@@ -253,13 +253,13 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="delipersons_tab" text="Couriers">
+                        <Tab fx:id="delipersons_tab" onSelectionChanged="#initDashboard" text="Couriers">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                    <VBox prefHeight="280.0" prefWidth="784.0">
                                        <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="Dashboard">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
                                                    <children>
@@ -280,13 +280,13 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="cooks_tab" text="Cooks">
+                        <Tab fx:id="cooks_tab" onSelectionChanged="#initDashboard" text="Cooks">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                    <VBox prefHeight="280.0" prefWidth="784.0">
                                        <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="Dashboard">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
                                                    <children>
@@ -307,13 +307,13 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="components_tab" text="Ingredients">
+                        <Tab fx:id="components_tab" onSelectionChanged="#initDashboard" text="Ingredients">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                    <VBox prefHeight="280.0" prefWidth="784.0">
                                        <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="Dashboard">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
                                                    <children>
@@ -334,13 +334,13 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="dishes_tab" text="Dishes">
+                        <Tab fx:id="dishes_tab" onSelectionChanged="#initDashboard" text="Dishes">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                    <VBox prefHeight="280.0" prefWidth="784.0">
                                        <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="Dashboard">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
                                                    <children>
@@ -361,13 +361,13 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="orders_tab" text="Orders">
+                        <Tab fx:id="orders_tab" onSelectionChanged="#initDashboard" text="Orders">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                    <VBox prefHeight="280.0" prefWidth="784.0">
                                        <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="InnerMenuBar">
+                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="100.0" styleClass="Dashboard">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
                                                    <children>
@@ -388,13 +388,13 @@
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="deliveries_tab" text="Deliveries">
+                        <Tab fx:id="deliveries_tab" onSelectionChanged="#initDashboard" text="Deliveries">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="793.0">
                                  <children>
-                                    <VBox prefHeight="339.0" prefWidth="784.0">
+                                    <VBox prefHeight="280.0" prefWidth="784.0">
                                        <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="784.0" spacing="50.0" styleClass="InnerMenuBar">
+                                          <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="784.0" spacing="50.0" styleClass="Dashboard">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="79.0" prefWidth="153.0">
                                                    <children>
@@ -438,7 +438,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <ListView fx:id="deliveries_history" prefHeight="280.0" prefWidth="784.0" />
+                                          <ListView fx:id="deliveries_history" prefHeight="262.0" prefWidth="784.0" />
                                        </children>
                                     </VBox>
                                  </children>

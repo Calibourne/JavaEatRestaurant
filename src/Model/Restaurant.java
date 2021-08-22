@@ -445,7 +445,12 @@ public class Restaurant implements Serializable {
 			catch(NoComponentsException e)
 			{
 				MyFileLogWriter.println(e.getMessage());
-				removeDish(e.getDish());
+				try{
+					RemoveRecordRequest request = new RemoveRecordRequest(d);
+					request.saveRequest();
+				}catch(Exception E){
+
+				}
 			}
 		}
 		return getComponents().remove(comp.getId(),comp);

@@ -199,4 +199,12 @@ public class AddRecordRequest extends RecordRequest {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        if(!toBlacklist)
+            return String.format("Added %s, %s", record, super.toString());
+        else
+            return String.format("Blacklisted %s, %s",record, super.toString());
+    }
 }

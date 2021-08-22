@@ -63,4 +63,9 @@ public class RemoveRecordRequest extends RecordRequest {
         restaurant.getRemoveRecordHistory().put(record.getClass().getSimpleName(),ts);
         return toReturn;
     }
+
+    @Override
+    public String toString() {
+            return String.format("Removed %s, %s", record, super.toString());
+    }
 }

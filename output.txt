@@ -8,15 +8,11 @@
 
 
 
-successfully removed DeliveryArea 7
 
 
 
 
 
-successfully removed Component 4
-failed to remove Component 4
-successfully removed Component 13
 
 
 
@@ -27,11 +23,7 @@ No deliveries by this delivery person in month 3
 No deliveries by this delivery person in month 4
 
 
-successfully removed Component 1
-successfully removed Component 8
-successfully removed Component 17
 The dish Sandwich - Main, price: 72.90₪ does not include any components!
-successfully removed Component 5
 
 
 

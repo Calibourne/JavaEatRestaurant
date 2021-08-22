@@ -118,6 +118,9 @@ $error_alert_colour:   #ff0000;
     -fx-padding: 0.5em;
     -fx-border-color: $text_colour;
 }
+.Dashboard{
+    -fx-background-color: black;
+}
 
 .toggle-button{
     -fx-background-color: none;
@@ -161,7 +164,7 @@ $error_alert_colour:   #ff0000;
 
 /* List view styling */
 .list-view {
-    -fx-background-color: $background_c;
+    -fx-background-color: $outer_navbar_c;
 }
 
 .list-view .list-cell:hover {

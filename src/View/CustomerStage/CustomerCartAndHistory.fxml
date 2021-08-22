@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
+<AnchorPane prefHeight="375.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
-        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
+        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="OuterMenuBar">
             <Label fx:id="home_page_header" alignment="CENTER" textAlignment="CENTER">
                 <font>
                     <Font size="30.0" />
@@ -49,7 +49,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="410.0">
                            <children>
-                              <ListView fx:id="order_history_list" layoutX="7.0" layoutY="1.0" prefHeight="365.0" prefWidth="485.0" />
+                              <ListView fx:id="order_history_list" prefHeight="365.0" prefWidth="475.0" />
                            </children>
                         </AnchorPane>
                      </content>

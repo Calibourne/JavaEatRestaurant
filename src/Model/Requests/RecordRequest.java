@@ -41,16 +41,24 @@ public abstract class RecordRequest implements Serializable, Comparable<RecordRe
     protected void setCustomerImage(Image img){
         Customer c = (Customer)record;
         ImageManager manager = ImageManager.getInstance();
-        int id = ((Customer) record).getId();
+        int id = c.getId();
         String saveS = "Customer" + id;
         manager.saveProfileImage(img, saveS);
         c.setProfileImg("Customer" + id);
+    }
+
+    public LocalDate getDateOfRequest() {
+        return dateOfRequest;
+    }
+
+    public LocalTime getTimeOfRequest() {
+        return timeOfRequest;
     }
 
     @Override
     public String toString() {
         String date = dateOfRequest.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String time = timeOfRequest.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        return String.format("%s added at %s at %s", record,  date,time);
+        return String.format("at %s at %s", date,time);
     }
 }

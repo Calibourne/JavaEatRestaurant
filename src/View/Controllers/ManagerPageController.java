@@ -275,7 +275,7 @@ public class ManagerPageController {
             areas_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
-                            .thenComparing(RecordRequest::toString)
+                            .thenComparing(rr->rr.getRecord().getId())
             );
         }
 
@@ -304,7 +304,7 @@ public class ManagerPageController {
             customers_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
-                            .thenComparing(RecordRequest::toString)
+                            .thenComparing(rr->rr.getRecord().getId())
             );
         }
 
@@ -325,7 +325,7 @@ public class ManagerPageController {
             delipersons_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
-                            .thenComparing(RecordRequest::toString)
+                            .thenComparing(rr->rr.getRecord().getId())
             );
         }
 
@@ -345,7 +345,7 @@ public class ManagerPageController {
             cooks_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
-                            .thenComparing(RecordRequest::toString)
+                            .thenComparing(rr->rr.getRecord().getId())
             );
         }
 
@@ -366,7 +366,7 @@ public class ManagerPageController {
             components_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
-                            .thenComparing(RecordRequest::toString)
+                            .thenComparing(rr->rr.getRecord().getId())
             );
         }
 
@@ -386,7 +386,7 @@ public class ManagerPageController {
             dishes_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
-                            .thenComparing(RecordRequest::toString)
+                            .thenComparing(rr->rr.getRecord().getId())
             );
         }
 
@@ -406,7 +406,7 @@ public class ManagerPageController {
             orders_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
-                            .thenComparing(RecordRequest::toString)
+                            .thenComparing(rr->rr.getRecord().getId())
             );
         }
 
@@ -439,7 +439,7 @@ public class ManagerPageController {
             deliveries_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
-                            .thenComparing(RecordRequest::toString)
+                            .thenComparing(rr->rr.getRecord().getId())
             );
         }
     }

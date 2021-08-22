@@ -2,8 +2,10 @@ package View.CustomerStage;
 
 import Model.Record;
 import Model.*;
+import Model.Requests.AddRecordRequest;
 import Model.Requests.RecordRequest;
 import View.Controllers.LoginPageController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,10 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.CheckListView;
 
 import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CustomerCartAndHistoryController {
@@ -46,7 +46,7 @@ public class CustomerCartAndHistoryController {
     private Tab shopping_cart_button;
 
     @FXML
-    private CheckListView<String> shopping_cart_list;
+    private CheckListView<ListedRecord> shopping_cart_list;
 
     @FXML
     private Label cart_empty_message;
@@ -73,7 +73,7 @@ public class CustomerCartAndHistoryController {
         restaurant = Restaurant.getInstance();
         customer = LoginPageController.getCustomer();
         home_page_header.setText(customer.getFirstName() + "'s Order");
-
+        place_order_button.setOnAction(this::placeOrder);
         if (order_in_cart == null) {
             order_in_cart = new HashSet<>();
         }
@@ -100,7 +100,7 @@ public class CustomerCartAndHistoryController {
         try {
             cart_empty_message.setText("");
             shopping_cart_list.getItems().clear();
-            shopping_cart_list.getItems().addAll(order_in_cart.stream().map(ListedRecord::getRecord).map(Record::toString).toList());
+            shopping_cart_list.getItems().addAll(order_in_cart);
             if(shopping_cart_list.getItems().size()==0){
                 throw new NullPointerException();
             }
@@ -124,6 +124,39 @@ public class CustomerCartAndHistoryController {
             }
         } catch (NullPointerException e) {
             cart_empty_message.setText("Shopping Cart currently empty, please place a new order");
+        }
+    }
+
+    public void placeOrder(ActionEvent event){
+        try {
+            cart_empty_message.setText("");
+            cart_empty_message.setStyle("-fx-text-fill: white");
+            Random r = new Random();
+            int choice;
+            DeliveryPerson dp = null;
+            do{
+                choice = r.nextInt(DeliveryPerson.getIdCounter());
+                dp = restaurant.getRealDeliveryPerson(choice);
+            }while (dp == null);
+            AddRecordRequest orderRequest = new AddRecordRequest(new Order(-1),
+                    customer,
+                    new ArrayList<>(shopping_cart_list.getItems().stream().map(ListedRecord::getRecord).toList())
+            );
+            TreeSet<Order> order = new TreeSet<>();
+            order.add((Order) orderRequest.getRecord());
+            AddRecordRequest deliveryRequest = new AddRecordRequest(new RegularDelivery(-1),
+                    dp, dp.getArea(), true,order , LocalDate.now()
+            );
+            ((Order)orderRequest.getRecord()).setDelivery((Delivery) deliveryRequest.getRecord());
+            orderRequest.saveRequest();
+            deliveryRequest.saveRequest();
+            Order o = (Order) orderRequest.getRecord();
+            cart_empty_message.setText("Order placed successfully and will arrive within " + o.orderWaitingTime(o.getDelivery().getArea()) + " minutes");
+
+        }catch (Exception e){
+            e.printStackTrace();
+            cart_empty_message.setText("Failed to place an order");
+            cart_empty_message.setStyle("-fx-text-fill: red");
         }
     }
 }

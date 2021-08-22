@@ -1,13 +1,11 @@
 package View.CustomerStage;
 
-import Model.Customer;
-import Model.ListedRecord;
-import Model.Order;
 import Model.Record;
+import Model.*;
 import Model.Requests.RecordRequest;
-import Model.Restaurant;
 import View.Controllers.LoginPageController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
@@ -22,6 +20,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CustomerCartAndHistoryController {
+
+    @FXML
+    private Button place_order_button;
+
+    @FXML
+    private Button empty_cart_button;
+
+    @FXML
+    private Button clear_history_button;
 
     @FXML
     private ResourceBundle resources;
@@ -56,6 +63,23 @@ public class CustomerCartAndHistoryController {
     private Customer customer;
 
     @FXML
+    void initialize() {
+        assert pnlQueries != null : "fx:id=\"pnlQueries\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
+        assert home_page_header != null : "fx:id=\"home_page_header\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
+        assert shopping_cart_button != null : "fx:id=\"shopping_cart_button\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
+        assert shopping_cart_list != null : "fx:id=\"shopping_cart_list\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
+        assert order_history_button != null : "fx:id=\"order_history_button\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
+        assert order_history_list != null : "fx:id=\"order_history_list\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
+        restaurant = Restaurant.getInstance();
+        customer = LoginPageController.getCustomer();
+        home_page_header.setText(customer.getFirstName() + "'s Order");
+
+        if (order_in_cart == null) {
+            order_in_cart = new HashSet<>();
+        }
+    }
+
+    @FXML
     private void orderHistoryButtonPressed() {
         order_history_list.getItems().clear();
         try {
@@ -82,21 +106,15 @@ public class CustomerCartAndHistoryController {
 
     }
 
-    @FXML
-    void initialize() {
-        assert pnlQueries != null : "fx:id=\"pnlQueries\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-        assert home_page_header != null : "fx:id=\"home_page_header\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-        assert shopping_cart_button != null : "fx:id=\"shopping_cart_button\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-        assert shopping_cart_list != null : "fx:id=\"shopping_cart_list\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-        assert order_history_button != null : "fx:id=\"order_history_button\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-        assert order_history_list != null : "fx:id=\"order_history_list\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-        restaurant = Restaurant.getInstance();
-        customer = LoginPageController.getCustomer();
-        home_page_header.setText(customer.getFirstName() + "'s Orders");
+    public void clearHistory(){
+        order_history_list.getItems().clear();
+        orderHistoryButtonPressed();
+    }
 
-        if (order_in_cart == null) {
-            order_in_cart = new HashSet<>();
-        }
+    public void clearCart(){
+        shopping_cart_list.getItems().clear();
+       // cart_empty_message.setText("Shopping Cart currently empty, please place a new order"); Currently not working
+        shopping_cart_list.getItems().add("Shopping Cart currently empty, please place a new order");
     }
 }
 

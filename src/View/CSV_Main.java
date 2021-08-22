@@ -371,20 +371,28 @@ public class CSV_Main {
         });
 
         commands.put("removeDeliverArea", (section, args) -> {
-            DeliveryArea da = rest.getRealDeliveryArea(Integer.parseInt(args[0]));
-            DeliveryArea newDA = rest.getRealDeliveryArea(Integer.parseInt(args[1]));
-            if(rest.removeDeliveryArea(da, newDA))
-                MyFileLogWriter.println("successfully removed DeliveryArea "+args[0]);
-            else
-                MyFileLogWriter.println("failed to remove DeliveryArea "+args[0]);
+            DeliveryArea da;
+            DeliveryArea newDA;
+            try{
+                RemoveRecordRequest request = new RemoveRecordRequest(
+                        rest.getRealDeliveryArea(Integer.parseInt(args[0])),
+                        rest.getRealDeliveryArea(Integer.parseInt(args[1]))
+                );
+                request.saveRequest();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         });
 
         commands.put("removeComponent", (section, args) -> {
-            Component c = rest.getRealComponent(Integer.parseInt(args[0]));
-            if(rest.removeComponent(c))
-                MyFileLogWriter.println("successfully removed Component "+args[0]);
-            else
-                MyFileLogWriter.println("failed to remove Component "+args[0]);
+            try{
+                RemoveRecordRequest request = new RemoveRecordRequest(
+                        rest.getRealComponent(Integer.parseInt(args[0]))
+                );
+                request.saveRequest();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         });
 
         commands.put("removeDish", (section, args) -> {

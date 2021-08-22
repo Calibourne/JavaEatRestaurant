@@ -17,7 +17,7 @@
 
 <AnchorPane maxWidth="585.0" prefHeight="576.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.AddCustomerOrderController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="585.0" styleClass="InnerMenuBar" stylesheets="@../css/style.css">
+      <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="585.0" styleClass="OuterMenuBar" stylesheets="@../css/style.css">
          <children>
             <Label alignment="CENTER" text="Place a new order" textAlignment="CENTER">
                <font>

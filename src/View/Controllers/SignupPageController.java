@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 
 public class SignupPageController {
@@ -50,11 +51,7 @@ public class SignupPageController {
     @FXML
     private CheckBox lactoseCheckbox;
     @FXML
-    private ToggleButton toggleHidePassword;
-    @FXML
     private PasswordField passwordField;
-    @FXML
-    private TextField visiblePassField;
     @FXML
     private PasswordField confirmPasswordField;
     @FXML
@@ -70,7 +67,7 @@ public class SignupPageController {
     @FXML
     private Label username_alert;
     @FXML
-    private Label suggested_lbl;
+    private Label pass_alert;
 
     private static final String DARKRED_BAR    = "darkred-bar";
     private static final String RED_BAR    = "red-bar";
@@ -80,22 +77,23 @@ public class SignupPageController {
     private static final String[] barColorStyleClasses = {DARKRED_BAR, RED_BAR, ORANGE_BAR, YELLOW_BAR, GREEN_BAR };
 
     public void initialize() {
+        Pattern passwordValidChars = Pattern.compile("[A-Za-z0-9!@#$%^&*.\\[\\](){}]*");
+        Pattern wordPattern = Pattern.compile("[A-Za-z]*");
+        Pattern intPattern = Pattern.compile("[0-9]*");
+        Pattern stringPattern = Pattern.compile("[ A-Za-z0-9\\-]*");
+
+
         signup_grid.setVisible(true);
         signup_grid.setDisable(false);
         return_grid.setDisable(true);
         return_grid.setVisible(false);
-        visiblePassField.visibleProperty().bind(toggleHidePassword.selectedProperty());
-        passwordField.visibleProperty().bind(toggleHidePassword.selectedProperty().not());
-        visiblePassField.visibleProperty().addListener((opt,oldValue, newValue)->{
-            if(newValue){
-                visiblePassField.textProperty().unbind();
-                passwordField.textProperty().bind(visiblePassField.textProperty());
-            }
-            else{
-                passwordField.textProperty().unbind();
-                visiblePassField.textProperty().bind(passwordField.textProperty());
-            }
-        });
+
+        usernameField.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+        passwordField.setTextFormatter(ControllerUtils.textFormatter(passwordValidChars));
+        fnameInput.setTextFormatter(ControllerUtils.textFormatter(wordPattern));
+        lnameInput.setTextFormatter(ControllerUtils.textFormatter(wordPattern));
+
+        birthdateDP.setConverter(ControllerUtils.getStringConverter());
 
         usernameField.textProperty().addListener(c->{
             if(usernameField.getText().length()==0) {
@@ -104,21 +102,41 @@ public class SignupPageController {
             else{
                 Restaurant rest = Restaurant.getInstance();
                 if(rest.getUsersList().get(usernameField.getText())!=null){
-                    username_alert.setText("This Username is already taken, please try again!");
+                    username_alert.setText("This Username is already taken!");
                     username_alert.setStyle("-fx-text-fill: red");
                 }
                 else{
-                    username_alert.setText("This username still available, Hooray!");
+                    username_alert.setText("This username is available");
                     username_alert.setStyle("-fx-text-fill: #00ff00");
                 }
                 username_alert.setVisible(true);
+            }
+        });
+        passwordField.textProperty().addListener((obs, o, n)->{
+            if (!n.equals(confirmPasswordField.getText())) {
+                pass_alert.setText("Passwords don't match 😟");
+                pass_alert.setStyle("-fx-text-fill: red");
+            }
+            else {
+                pass_alert.setText("Passwords match 👍");
+                pass_alert.setStyle("-fx-text-fill: #00ff00");
+            }
+        });
+        confirmPasswordField.textProperty().addListener((obs, o, n)->{
+            if (!n.equals(passwordField.getText())) {
+                pass_alert.setText("Passwords don't match 😟");
+                pass_alert.setStyle("-fx-text-fill: red");
+            }
+            else {
+                pass_alert.setText("Passwords match 👍");
+                pass_alert.setStyle("-fx-text-fill: #00ff00");
             }
         });
 
         genderCb.getItems().addAll(Arrays.stream(Gender.values()).toList());
         neighbourhoodCb.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
 
-        passwordStrengthInd.progressProperty().addListener(new ChangeListener<Number>() {
+        passwordStrengthInd.progressProperty().addListener(new ChangeListener<>() {
             @Override public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 double progress = newValue == null ? 0 : newValue.doubleValue();
                 if (progress < 0.2) {
@@ -144,18 +162,9 @@ public class SignupPageController {
 
 
     @FXML
-    private void generateUsername(KeyEvent e){
-    if (fnameInput.getText().length() > 0 && lnameInput.getText().length() > 0)
-        suggested_lbl.setText(String.format("%s%s%d",fnameInput.getText(),lnameInput.getText(), Customer.getIdCounter()));
-    else
-        suggested_lbl.setText("Enter your full name first");
-    }
-
-
-    @FXML
     private void registerButtonOnAction(ActionEvent e){
         try{
-           if(!passwordField.getText().equals(confirmPasswordField.getText()))
+           if(!passwordField.getText().equals(confirmPasswordField.getText()) && passwordField.getText().length()>0)
                throw new Exception();
            String fname = fnameInput.getText();
            String lname = lnameInput.getText();
@@ -176,9 +185,8 @@ public class SignupPageController {
                    SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"),null)
            );
            ((Customer)request.getRecord()).setPassword(passwordField.getText());
-           if(usernameField.getText().length()>0)
-               ((Customer) request.getRecord()).setUsername(usernameField.getText());
-               request.saveRequest();
+           ((Customer) request.getRecord()).setUsername(usernameField.getText());
+           request.saveRequest();
         }catch(Exception ex){
             System.out.println("Try again!");
             return;
@@ -220,12 +228,6 @@ public class SignupPageController {
     @FXML
     private void determinePasswordStrength(KeyEvent e){
         String password = passwordField.getText();
-        if(!password.matches("[A-Za-z0-9!@#$%^&*]*"))
-            try {
-                passwordField.setText(password.substring(0, password.length() - 1));
-            }catch(StringIndexOutOfBoundsException se){
-                passwordField.setText("");
-            }
         if(password.length() == 0){
             passStrengthLbl.setText("");
             passwordStrengthInd.setProgress(0);

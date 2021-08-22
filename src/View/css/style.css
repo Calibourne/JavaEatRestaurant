@@ -104,6 +104,10 @@
   -fx-border-color: #e7e5e5;
 }
 
+.Dashboard {
+  -fx-background-color: black;
+}
+
 .toggle-button {
   -fx-background-color: none;
   -fx-background-image: url("../images/icons8-show-password-25.png");
@@ -165,7 +169,7 @@
 
 /* List view styling */
 .list-view {
-  -fx-background-color: #1F4591;
+  -fx-background-color: #061E47;
 }
 
 .list-view .list-cell:hover {

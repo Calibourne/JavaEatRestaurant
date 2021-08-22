@@ -1,6 +1,7 @@
 package View.Controllers;
 
 import Model.Customer;
+import Model.DeliveryPerson;
 import Model.Order;
 import Model.Restaurant;
 import javafx.event.ActionEvent;
@@ -41,7 +42,7 @@ public class LoginPageController {
         }
         rest = Restaurant.getInstance();
         rest.saveDatabase("Rest.ser");
-        rest.getAddRecordHistory().get(Order.class.getSimpleName()).forEach(System.out::println);
+        //rest.getAddRecordHistory().get(DeliveryPerson.class.getSimpleName()).forEach(System.out::println);
     }
 
     public static Customer getCustomer(){
@@ -89,7 +90,7 @@ public class LoginPageController {
     private void registerButtonOnAction(ActionEvent e){
         try{
             Stage s = (Stage) registerButton.getScene().getWindow();
-            Parent p = FXMLLoader.load(getClass().getResource("../fxmls/SignupPage.fxml"));
+            Parent p = FXMLLoader.load(getClass().getResource("SignupPage.fxml"));
             ControllerUtils.changeScreen(s, p);
         }catch (IOException ioException){
             ioException.printStackTrace();

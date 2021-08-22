@@ -509,18 +509,8 @@ public class EditRecordsController {
                 }
             }
             if(editCustomers_sctn != null) {
-                try{
-                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
-                            fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                            neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException ex){
-                    System.out.println(ex.getMessage());
-                }
+
+
             }
             if(editComponents_sctn != null) {
                 try{

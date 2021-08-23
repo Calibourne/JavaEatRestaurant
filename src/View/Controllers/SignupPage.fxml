@@ -23,7 +23,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="596.0" prefWidth="605.0" styleClass="VBox" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.SignupPageController">
+<BorderPane prefHeight="596.0" prefWidth="605.0" styleClass="VBox" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.SignupPageController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="230.0" styleClass="HBox" BorderPane.alignment="CENTER">
          <children>
@@ -73,6 +73,7 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
                <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -242,17 +243,17 @@
                         </Group>
                      </children>
                   </GridPane>
-                  <GridPane vgap="10.0" GridPane.rowIndex="2">
+                  <GridPane vgap="10.0" GridPane.rowIndex="3">
                      <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="signUpButton" defaultButton="true" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="25.0" prefWidth="86.0" text="Sign Up" />
-                        <Button fx:id="cancelButton" cancelButton="true" graphicTextGap="10.0" mnemonicParsing="false" onAction="#exitButtonOnAction" text="Cancel" GridPane.rowIndex="1">
+                        <Button fx:id="signUpButton" defaultButton="true" minHeight="32.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="32.0" prefWidth="86.0" text="Sign Up" GridPane.columnIndex="1" />
+                        <Button fx:id="cancelButton" cancelButton="true" graphicTextGap="10.0" mnemonicParsing="false" onAction="#exitButtonOnAction" prefHeight="30.0" prefWidth="86.0" text="Cancel">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -263,6 +264,7 @@
                         </Button>
                      </children>
                   </GridPane>
+                  <Label fx:id="error_label" prefHeight="17.0" prefWidth="245.0" style="-fx-text-fill: RED;" textFill="RED" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />

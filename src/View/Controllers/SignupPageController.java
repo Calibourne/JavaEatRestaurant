@@ -8,24 +8,19 @@ import Utils.ImageManager;
 import Utils.Neighberhood;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.css.StyleClass;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.AccessibleRole;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 
@@ -68,6 +63,8 @@ public class SignupPageController {
     private Label username_alert;
     @FXML
     private Label pass_alert;
+    @FXML
+    private Label error_label;
 
     private static final String DARKRED_BAR    = "darkred-bar";
     private static final String RED_BAR    = "red-bar";
@@ -77,6 +74,7 @@ public class SignupPageController {
     private static final String[] barColorStyleClasses = {DARKRED_BAR, RED_BAR, ORANGE_BAR, YELLOW_BAR, GREEN_BAR };
 
     public void initialize() {
+        error_label.setText("");
         Pattern passwordValidChars = Pattern.compile("[A-Za-z0-9!@#$%^&*.\\[\\](){}]*");
         Pattern wordPattern = Pattern.compile("[A-Za-z]*");
         Pattern intPattern = Pattern.compile("[0-9]*");
@@ -164,6 +162,7 @@ public class SignupPageController {
     @FXML
     private void registerButtonOnAction(ActionEvent e){
         try{
+            error_label.setText("");
            if(!passwordField.getText().equals(confirmPasswordField.getText()) && passwordField.getText().length()>0)
                throw new Exception();
            String fname = fnameInput.getText();
@@ -189,6 +188,7 @@ public class SignupPageController {
            request.saveRequest();
         }catch(Exception ex){
             System.out.println("Try again!");
+            error_label.setText("Please fill all the required fields");
             return;
         }
         Restaurant.getInstance().saveDatabase("Rest.ser");

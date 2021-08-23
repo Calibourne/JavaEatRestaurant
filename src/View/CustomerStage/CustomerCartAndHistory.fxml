@@ -11,9 +11,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane prefHeight="375.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
+<AnchorPane prefHeight="375.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="OuterMenuBar">
             <Label fx:id="home_page_header" alignment="CENTER" textAlignment="CENTER">
@@ -41,7 +40,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="475.0">
                            <children>
-                              <CheckListView fx:id="shopping_cart_list" prefHeight="300.0" prefWidth="485.0" />
+                              <ListView fx:id="shopping_cart_list" prefHeight="300.0" prefWidth="485.0" />
                               <Label fx:id="cart_empty_message" layoutX="43.0" layoutY="158.0" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
@@ -59,6 +58,11 @@
                            <children>
                               <ListView fx:id="order_history_list" layoutX="7.0" layoutY="1.0" prefHeight="300.0" prefWidth="485.0" />
                               <Button fx:id="clear_history_button" layoutX="195.0" layoutY="327.0" mnemonicParsing="false" onAction="#clearHistory" text="Clear History" />
+                              <Label fx:id="history_empty_message" layoutX="53.0" layoutY="168.0" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </content>

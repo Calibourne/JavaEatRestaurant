@@ -1,6 +1,5 @@
 package View.CustomerStage;
 
-import Model.Record;
 import Model.*;
 import Model.Requests.AddRecordRequest;
 import Model.Requests.RecordRequest;
@@ -12,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
-import org.controlsfx.control.CheckListView;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -20,6 +18,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CustomerCartAndHistoryController {
+
+    @FXML
+    private Label history_empty_message;
 
     @FXML
     private Button place_order_button;
@@ -46,7 +47,7 @@ public class CustomerCartAndHistoryController {
     private Tab shopping_cart_button;
 
     @FXML
-    private CheckListView<ListedRecord> shopping_cart_list;
+    private ListView<ListedRecord> shopping_cart_list;
 
     @FXML
     private Label cart_empty_message;
@@ -83,6 +84,7 @@ public class CustomerCartAndHistoryController {
     private void orderHistoryButtonPressed() {
         order_history_list.getItems().clear();
         try {
+            history_empty_message.setText("");
             List<String> s = restaurant.getAddRecordHistory()
                     .get(Order.class.getSimpleName()).stream().filter(r -> ((Order) r.getRecord()).getCustomer().equals(customer))
                     .map(RecordRequest::toString).collect(Collectors.toList());
@@ -111,8 +113,15 @@ public class CustomerCartAndHistoryController {
     }
 
     public void clearHistory(){
-        order_history_list.getItems().clear();
-        orderHistoryButtonPressed();
+        try {
+            history_empty_message.setText("");
+            order_history_list.getItems().clear();
+            if (order_history_list.getItems().size() == 0) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            history_empty_message.setText("No orders to show at the moment");
+        }
     }
 
     public void clearCart(){

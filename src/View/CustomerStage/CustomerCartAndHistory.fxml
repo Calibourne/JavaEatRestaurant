@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
+<AnchorPane prefHeight="375.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
-        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
+        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="OuterMenuBar">
             <Label fx:id="home_page_header" alignment="CENTER" textAlignment="CENTER">
                 <font>
                     <Font size="30.0" />

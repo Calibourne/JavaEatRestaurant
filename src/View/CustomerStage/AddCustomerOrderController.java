@@ -4,16 +4,22 @@ import Model.Component;
 import Model.Dish;
 import Model.ListedRecord;
 import Model.Restaurant;
+import View.Controllers.ControllerUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckListView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -24,6 +30,10 @@ public class AddCustomerOrderController {
 
     @FXML
     private URL location;
+
+
+    @FXML
+    private AnchorPane placeOrder_pane;
 
     @FXML
     private Group addOrders_sctn;
@@ -172,6 +182,14 @@ public class AddCustomerOrderController {
             submit.setOnAction((action->{
                 Set<ListedRecord> dishes_in_order = new HashSet<>(dishes_checkedList.getItems());
                 CustomerCartAndHistoryController.order_in_cart = dishes_in_order;
+                StackPane pane = (StackPane)placeOrder_pane.getParent();
+                try {
+                    Node cart = FXMLLoader.load(getClass().getResource("CustomerCartAndHistory.fxml"));
+                    pane.getChildren().remove(placeOrder_pane);
+                    pane.getChildren().add(cart);
+                }catch (IOException | NullPointerException ex){
+                    System.out.println("Error Loading");
+                }
             }));
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage());

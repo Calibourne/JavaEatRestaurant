@@ -145,13 +145,16 @@ public class CustomerCartAndHistoryController {
             TreeSet<Order> order = new TreeSet<>();
             order.add((Order) orderRequest.getRecord());
             AddRecordRequest deliveryRequest = new AddRecordRequest(new RegularDelivery(-1),
-                    dp, dp.getArea(), true,order , LocalDate.now()
+                    order, dp, dp.getArea(), true , LocalDate.now()
             );
             ((Order)orderRequest.getRecord()).setDelivery((Delivery) deliveryRequest.getRecord());
             orderRequest.saveRequest();
             deliveryRequest.saveRequest();
             Order o = (Order) orderRequest.getRecord();
+            clearCart();
+            order_in_cart = new HashSet<>();
             cart_empty_message.setText("Order placed successfully and will arrive within " + o.orderWaitingTime(o.getDelivery().getArea()) + " minutes");
+            restaurant.saveDatabase("Rest.ser");
 
         }catch (Exception e){
             e.printStackTrace();

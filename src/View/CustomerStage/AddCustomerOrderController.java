@@ -4,7 +4,6 @@ import Model.Component;
 import Model.Dish;
 import Model.ListedRecord;
 import Model.Restaurant;
-import View.Controllers.ControllerUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -125,7 +124,7 @@ public class AddCustomerOrderController {
                     //dishes_checkedList.getItems().add(new ListedRecord(d));
                     ingredients_vbox.setVisible(true);
                     addComponents_combo.setVisible(false);
-                    dish_name.setText(d.getDishName()+" ingredients: ");
+                 //   dish_name.setText(d.getDishName()+" ingredients: ");
                 }
             });
 

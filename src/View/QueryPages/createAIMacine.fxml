@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane fx:id="aiMacinePane" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.QueryPages.createAIMacineController">
+<AnchorPane fx:id="aiMacinePane" prefHeight="375.0" prefWidth="585.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.QueryPages.createAIMacineController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="Content">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="InnerMenuBar">
             <Label alignment="CENTER" text="Create a new delivery using AI" textAlignment="CENTER">
@@ -73,7 +74,7 @@
             </Label>
             <ComboBox fx:id="dp_combobox" prefWidth="200.0" GridPane.columnIndex="1" />
             <ComboBox fx:id="da_combobox" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <CheckComboBox fx:id="order_combobox" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckComboBox fx:id="order_combobox" prefWidth="200.0" showCheckedCount="true" title="Selected Orders" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
         </GridPane>
       <Button fx:id="query_button" mnemonicParsing="false" onAction="#buttonPressed" text="Activate AI Machine">
@@ -81,19 +82,29 @@
             <Font size="22.0" />
          </font>
          <VBox.margin>
-            <Insets top="50.0" />
+            <Insets top="20.0" />
          </VBox.margin>
       </Button>
-      <Label fx:id="query_result">
-         <effect>
-            <DropShadow />
-         </effect>
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
+      <ListView fx:id="query_result" maxWidth="500.0" prefHeight="104.0" prefWidth="500.0">
          <VBox.margin>
-            <Insets top="60.0" />
+            <Insets top="20.0" />
          </VBox.margin>
-      </Label>
+      </ListView>
+      <GridPane maxWidth="300.0" prefHeight="30.0" prefWidth="300.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="reject_button" mnemonicParsing="false" text="Reject" GridPane.halignment="CENTER" />
+            <Button fx:id="accept_button" mnemonicParsing="false" text="Accept" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </GridPane>
     </VBox>
 </AnchorPane>

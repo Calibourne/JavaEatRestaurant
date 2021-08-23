@@ -46,7 +46,7 @@ public class getNumberOfDeliveriesPerTypeController {
 //
 //            query_result.setText("");
 //        }
-        query_result.setText(String.format("There have been %d regular deliveries since January", rest.getNumberOfDeliveriesPerType().get("Regular delivery")));
+        query_result.setText(String.format("%d regular deliveries have been delivered since January", rest.getNumberOfDeliveriesPerType().get("Regular delivery")));
 
     }
 
@@ -57,6 +57,6 @@ public class getNumberOfDeliveriesPerTypeController {
 //
 //            query_result.setText("");
 //        }
-        query_result.setText(String.format("There have been %d express deliveries since January", rest.getNumberOfDeliveriesPerType().get("Express delivery")));
+        query_result.setText(String.format("%d express deliveries have been delivered since January", rest.getNumberOfDeliveriesPerType().get("Express delivery")));
     }
 }

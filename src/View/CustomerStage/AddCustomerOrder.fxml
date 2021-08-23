@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane fx:id="placeOrder_pane" maxWidth="585.0" prefHeight="576.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.AddCustomerOrderController">
+<AnchorPane fx:id="placeOrder_pane" maxWidth="585.0" prefHeight="576.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.AddCustomerOrderController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="585.0" styleClass="OuterMenuBar" stylesheets="@../css/style.css">
          <children>
@@ -30,7 +30,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label alignment="CENTER" text="Any dishes selected here will be added to the shopping cart before order confirmation" textAlignment="CENTER">
+            <Label alignment="CENTER" text="Press the '+' button to add dishes to your order, press the button below to jump to the shopping cart" textAlignment="CENTER">
                <effect>
                   <DropShadow />
                </effect>
@@ -113,7 +113,7 @@
                                                    <children>
                                                       <VBox fx:id="ingredients_vbox" alignment="CENTER" prefHeight="216.0" prefWidth="58.0" styleClass="Container" visible="false">
                                                          <children>
-                                                            <Label fx:id="dish_name" alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="102.0" text="Dish ingredients:" />
+                                                            <Label fx:id="dish_name" alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="146.0" text="Ingredients to remove:" />
                                                             <Group>
                                                                <children>
                                                                   <Group layoutX="64.0">

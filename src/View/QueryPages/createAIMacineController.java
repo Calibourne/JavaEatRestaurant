@@ -1,6 +1,7 @@
 package View.QueryPages;
 
 import Model.*;
+import Model.Requests.RecordRequest;
 import impl.org.controlsfx.collections.ReadOnlyUnbackedObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import org.controlsfx.control.CheckComboBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class createAIMacineController {
@@ -45,6 +47,8 @@ public class createAIMacineController {
 
     Restaurant rest = Restaurant.getInstance();
 
+    Set<RecordRequest> requestSet;
+
     @FXML
     void initialize() {
         assert aiMacinePane != null : "fx:id=\"aiMacinePane\" was not injected: check your FXML file 'createAIMacine.fxml'.";
@@ -62,9 +66,8 @@ public class createAIMacineController {
         reject_button.setVisible(false);
 
         accept_button.setOnAction(a -> {
-            query_result.getItems().forEach(rest::addDelivery);
             query_result.getItems().clear();
-            rest.saveDatabase("Rest.ser");
+            requestSet.forEach(RecordRequest::saveRequest);
             initialize();
         });
 
@@ -87,8 +90,8 @@ public class createAIMacineController {
         TreeSet<Order> orders = new TreeSet<>(selectedItems.stream().toList());
 
        // rest.createAIMacine(dp, da, orders).forEach(rest::addDelivery);
-
-        query_result.getItems().addAll(rest.createAIMacine(dp, da, orders));
+        requestSet = rest.createAIMacine(dp, da, orders);
+        query_result.getItems().addAll(requestSet.stream().map(RecordRequest::getRecord).map(r->(Delivery)r).toList());
 
        // query_result.setText("AI Machine has created a delivery beep beep boop boop");
     }

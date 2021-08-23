@@ -5,6 +5,7 @@ import Model.Exceptions.IllegalCustomerException;
 import Model.Exceptions.NoComponentsException;
 import Model.Exceptions.SensitiveException;
 import Model.Requests.AddRecordRequest;
+import Model.Requests.RecordRequest;
 import Model.Requests.RemoveRecordRequest;
 import Utils.Expertise;
 import Utils.ImageManager;
@@ -903,43 +904,52 @@ public class Restaurant implements Serializable {
 	 * @return
 	 * an ordered set of decided deliveries
 	 */
-	public TreeSet<Delivery> createAIMacine(DeliveryPerson dp, DeliveryArea da, TreeSet<Order> orders)
+	public TreeSet<RecordRequest> createAIMacine(DeliveryPerson dp, DeliveryArea da, TreeSet<Order> orders)
 	{
-		TreeSet<Delivery> AIdeliveries = new TreeSet<>((d1,d2)->{
-			int result = d1.getClass().getSimpleName().compareTo(d2.getClass().getSimpleName());
+		TreeSet<RecordRequest> AIdeliveries = new TreeSet<>((r1,r2)->{
+			int result = r1.getRecord().getClass().getSimpleName().compareTo(r2.getRecord().getClass().getSimpleName());
 			if(result == 0)
-				return ((Integer)d1.getId()).compareTo(d2.getId());
+				return r1.getRecord().getId().compareTo(r2.getRecord().getId());
 			return result;
 		});
 		if(orders.size() <= 2)
 		{
-			for (Order order : orders)
-				AIdeliveries.add(new ExpressDelivery(dp,da, false, order, LocalDate.now()));
+			for (Order order : orders) {
+				try {
+					TreeSet<Order> o = new TreeSet<>();
+					o.add(order);
+					AddRecordRequest request = new AddRecordRequest(new RegularDelivery(-1), o, dp, da, false, LocalDate.now());
+					AIdeliveries.add(request);
+				}catch (Exception e){
+					System.out.println(e.getMessage());
+				}
+			}
 		}
 		else
 		{
 			TreeSet<Order> regOrders = new TreeSet<>();
-			try
-			{
-				for (Order order : orders) {
-					if(order.getCustomer().isSensitiveToGluten() || order.getCustomer().isSensitiveToLactose())
-						AIdeliveries.add(new ExpressDelivery(dp, da, false, order, LocalDate.now()));
-					else
-						regOrders.add(order);
+			for (Order order : orders) {
+				if(order.getCustomer().isSensitiveToGluten() || order.getCustomer().isSensitiveToLactose()) {
+					try {
+						TreeSet<Order> o = new TreeSet<>();
+						o.add(order);
+						AddRecordRequest request = new AddRecordRequest(new RegularDelivery(-1), o, dp, da, false, LocalDate.now());
+						AIdeliveries.add(request);
+					} catch (Exception e){
+						System.out.println(e.getMessage());
+					}
 				}
-				if(!regOrders.isEmpty())
-				{
-					if(regOrders.size() == 1)
-						throw new ConvertToExpressException();
-					RegularDelivery regularOrders = new RegularDelivery(regOrders, dp, da, false, LocalDate.now());
-					AIdeliveries.add(regularOrders);
-				}
+				else
+					regOrders.add(order);
 			}
-			catch(ConvertToExpressException e)
+			if(!regOrders.isEmpty())
 			{
-				MyFileLogWriter.println(e.getMessage());
-				ExpressDelivery delivery = new ExpressDelivery(dp, da, false, regOrders.first(), LocalDate.now());
-				AIdeliveries.add(delivery);
+				try {
+					AddRecordRequest request = new AddRecordRequest(new RegularDelivery(-1), regOrders, dp, da, false, LocalDate.now());
+					AIdeliveries.add(request);
+				}catch (Exception e){
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 		return AIdeliveries;

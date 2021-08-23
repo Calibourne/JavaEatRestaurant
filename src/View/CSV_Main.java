@@ -1,6 +1,7 @@
 package View;
 
 import Model.Requests.AddRecordRequest;
+import Model.Requests.RecordRequest;
 import Model.Requests.RemoveRecordRequest;
 import autopilot.OutputDocument;
 import autopilot.Section;
@@ -359,11 +360,11 @@ public class CSV_Main {
             o = rest.getRealOrder(Integer.parseInt(args[5]));
             if(o!=null)
                 orders.add(o);
-            TreeSet<Delivery> result = rest.createAIMacine(dp, da, orders);
+            TreeSet<RecordRequest> result = rest.createAIMacine(dp, da, orders);
             if(result.isEmpty()) {MyFileLogWriter.println("Failed in 'create AI machine' method\n");}
             else {
                 MyFileLogWriter.println("The machine Decided:");
-                for(Delivery d: result) {
+                for(RecordRequest d: result) {
                     MyFileLogWriter.println(d.toString());
                 }
                 MyFileLogWriter.println("\n");

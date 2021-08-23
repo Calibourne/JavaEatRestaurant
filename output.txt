@@ -73,20 +73,20 @@ Arancini - Starter, price: 37.50₪, contains gluten and lactose
 
 
 The machine Decided:
-Express delivery #47, delivered by Errol Bagnall to Jethro Kernell
-Express delivery #48, delivered by Errol Bagnall to Redford O' Scallan
+Added Express delivery #47, delivered by Errol Bagnall to Jethro Kernell, at 23/08/2021 at 19:36:06
+Added Express delivery #48, delivered by Errol Bagnall to Redford O' Scallan, at 23/08/2021 at 19:36:06
 
 
 The machine Decided:
-Express delivery #49, delivered by Dionis Twitchings to Zacherie Redhole
+Added Express delivery #49, delivered by Dionis Twitchings to Zacherie Redhole, at 23/08/2021 at 19:36:06
 
 
 The machine Decided:
-Express delivery #50, delivered by Claus Jaffray to Lemar Tawton
-Express delivery #51, delivered by Claus Jaffray to Patten Dyos
+Added Express delivery #50, delivered by Claus Jaffray to Lemar Tawton, at 23/08/2021 at 19:36:06
+Added Express delivery #51, delivered by Claus Jaffray to Patten Dyos, at 23/08/2021 at 19:36:06
 
 
 The machine Decided:
-Regular delivery #52 delivered by Nerita Comusso
+Added Regular delivery #52 delivered by Nerita Comusso, at 23/08/2021 at 19:36:06
 
 

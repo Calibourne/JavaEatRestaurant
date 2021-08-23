@@ -62,6 +62,9 @@ public class AddCustomerOrderController {
     private Label dish_id;
 
     @FXML
+    private Label alert_lbl;
+
+    @FXML
     private ComboBox<Component> addSubcomponents_combo;
 
     @FXML
@@ -91,26 +94,26 @@ public class AddCustomerOrderController {
     void initialize() {
         try{
 
-        assert addOrders_sctn != null : "fx:id=\"addOrders_sctn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert info_grid != null : "fx:id=\"info_grid\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert addComponents_combo != null : "fx:id=\"addComponents_combo\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert dishes_checkedList != null : "fx:id=\"dishes_checkedList\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert minus_btn != null : "fx:id=\"minus_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert plus_btn != null : "fx:id=\"plus_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert ingredients_vbox != null : "fx:id=\"ingredients_vbox\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert dish_name != null : "fx:id=\"dish_name\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert dish_id != null : "fx:id=\"dish_id\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert addSubcomponents_combo != null : "fx:id=\"addSubcomponents_combo\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert dishesIngredients_checkedList != null : "fx:id=\"dishesIngredients_checkedList\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert Iminus_btn != null : "fx:id=\"Iminus_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert addSubcomp_btn != null : "fx:id=\"addSubcomp_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert Iplus_btn != null : "fx:id=\"Iplus_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert submit != null : "fx:id=\"submit\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
-        assert alert_grid != null : "fx:id=\"alert_grid\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert addOrders_sctn != null : "fx:id=\"addOrders_sctn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert info_grid != null : "fx:id=\"info_grid\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert addComponents_combo != null : "fx:id=\"addComponents_combo\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert dishes_checkedList != null : "fx:id=\"dishes_checkedList\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert minus_btn != null : "fx:id=\"minus_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert plus_btn != null : "fx:id=\"plus_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert ingredients_vbox != null : "fx:id=\"ingredients_vbox\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert dish_name != null : "fx:id=\"dish_name\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert dish_id != null : "fx:id=\"dish_id\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert addSubcomponents_combo != null : "fx:id=\"addSubcomponents_combo\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert dishesIngredients_checkedList != null : "fx:id=\"dishesIngredients_checkedList\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert Iminus_btn != null : "fx:id=\"Iminus_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert addSubcomp_btn != null : "fx:id=\"addSubcomp_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert Iplus_btn != null : "fx:id=\"Iplus_btn\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert submit != null : "fx:id=\"submit\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
+            assert alert_grid != null : "fx:id=\"alert_grid\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
 
 
 
-
+            alert_lbl.setText("");
             Restaurant rest = Restaurant.getInstance();
             addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
 
@@ -179,15 +182,21 @@ public class AddCustomerOrderController {
                 }
             });
             submit.setOnAction((action->{
-                Set<ListedRecord> dishes_in_order = new HashSet<>(dishes_checkedList.getItems());
-                CustomerCartAndHistoryController.order_in_cart = dishes_in_order;
-                StackPane pane = (StackPane)placeOrder_pane.getParent();
                 try {
+                    alert_lbl.setText("");
+                    Set<ListedRecord> dishes_in_order = new HashSet<>(dishes_checkedList.getItems());
+                    if(dishes_in_order.size() == 0)
+                        throw new NullPointerException();
+                    CustomerCartAndHistoryController.order_in_cart = dishes_in_order;
+                    StackPane pane = (StackPane)placeOrder_pane.getParent();
                     Node cart = FXMLLoader.load(getClass().getResource("CustomerCartAndHistory.fxml"));
                     pane.getChildren().remove(placeOrder_pane);
                     pane.getChildren().add(cart);
-                }catch (IOException | NullPointerException ex){
+                }catch (IOException ex){
                     System.out.println("Error Loading");
+                }
+                catch (NullPointerException ex){
+                    alert_lbl.setText("Please add dishes to your order first!");
                 }
             }));
         }catch(NullPointerException ex){

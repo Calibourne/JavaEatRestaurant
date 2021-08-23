@@ -23,9 +23,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="596.0" prefWidth="605.0" styleClass="VBox" stylesheets="@../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.SignupPageController">
+<BorderPane prefHeight="596.0" prefWidth="605.0" styleClass="VBox" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.SignupPageController">
    <left>
-      <AnchorPane prefHeight="407.0" prefWidth="230.0" styleClass="HBox" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="407.0" prefWidth="230.0" styleClass="OuterMenuBar" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="60.0" layoutY="299.0" prefHeight="69.0" prefWidth="109.0" text="Sign Up" textFill="WHITE">
                <font>
@@ -60,7 +60,7 @@
       </AnchorPane>
    </left>
    <center>
-      <GridPane>
+      <GridPane styleClass="Content">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
          </columnConstraints>

@@ -87,9 +87,15 @@ public class SignupPageController {
         return_grid.setVisible(false);
 
         usernameField.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+        ControllerUtils.setAlerts(usernameField, stringPattern, error_label);
         passwordField.setTextFormatter(ControllerUtils.textFormatter(passwordValidChars));
+        ControllerUtils.setAlerts(passwordField, passwordValidChars, error_label);
+        confirmPasswordField.setTextFormatter(ControllerUtils.textFormatter(passwordValidChars));
+        ControllerUtils.setAlerts(confirmPasswordField, passwordValidChars, error_label);
         fnameInput.setTextFormatter(ControllerUtils.textFormatter(wordPattern));
+        ControllerUtils.setAlerts(fnameInput, wordPattern, error_label);
         lnameInput.setTextFormatter(ControllerUtils.textFormatter(wordPattern));
+        ControllerUtils.setAlerts(lnameInput, wordPattern, error_label);
 
         birthdateDP.setConverter(ControllerUtils.getStringConverter());
 

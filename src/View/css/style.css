@@ -309,3 +309,7 @@ $element_pressed:#fff013;
   -fx-border-color: #ff0000;
   -fx-border-width: 0 0 1 0;
 }
+
+.transparent-list {
+  -fx-background-color: transparent;
+}

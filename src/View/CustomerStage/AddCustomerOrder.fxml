@@ -43,6 +43,7 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Group fx:id="addOrders_sctn" styleClass="Content" stylesheets="@../css/style.css">
@@ -92,7 +93,7 @@
                                                                                     <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="270.0" visible="false" />
                                                                                  </children>
                                                                               </Group>
-                                                                              <CheckListView fx:id="dishes_checkedList" prefHeight="168.0" prefWidth="270.0" />
+                                                                              <CheckListView fx:id="dishes_checkedList" prefHeight="168.0" prefWidth="270.0" styleClass="transparent-list" />
                                                                               <HBox alignment="CENTER" prefHeight="34.0" prefWidth="270.0" spacing="25.0" styleClass="OuterMenuBar">
                                                                                  <children>
                                                                                     <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
@@ -176,6 +177,7 @@
                   </GridPane>
                </children>
             </Group>
+            <Label fx:id="alert_lbl" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

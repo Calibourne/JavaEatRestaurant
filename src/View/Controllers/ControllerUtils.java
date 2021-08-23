@@ -1,32 +1,28 @@
 package View.Controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import org.controlsfx.control.CheckComboBox;
-
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class ControllerUtils {
@@ -102,8 +98,6 @@ public class ControllerUtils {
                 field.getStyleClass().add("text-field");
             }
             else {
-                /*field.getStyleClass().removeAll("WarningAlert");
-                field.getStyleClass().removeAll("text-field");*/
                 field.getStyleClass().clear();
                 field.getStyleClass().add("text-input");
                 field.getStyleClass().add("ErrorAlert");
@@ -120,6 +114,59 @@ public class ControllerUtils {
                 field.getStyleClass().clear();
                 field.getStyleClass().add("text-input");
                 field.getStyleClass().add("ErrorAlert");
+            }
+        });
+    }
+
+    public static void setAlerts(TextField field, Pattern pattern, Label alert) {
+        field.setOnKeyTyped(ke-> {
+            if(!Objects.equals(ke.getCharacter(), "\b")) {
+                String newText = field.getText() + ke.getCharacter();
+                if (pattern.matcher(newText).matches()) {
+                    field.getStyleClass().clear();
+                    field.getStyleClass().add("text-input");
+                    field.getStyleClass().add("text-field");
+                    alert.setText("");
+                }
+                else {
+                    field.getStyleClass().clear();
+                    field.getStyleClass().add("text-input");
+                    if(field.getText().length()>0) {
+                        field.getStyleClass().add("WarningAlert");
+                        alert.setText("Illegal character entered");
+                        alert.setStyle("-fx-text-fill: gold");
+                    }
+                    else {
+                        field.getStyleClass().add("ErrorAlert");
+                    }
+                }
+            }
+        });
+        field.textProperty().addListener((obs, o, n)->{
+            if(n.length()>0 && o.length()>0){
+                field.getStyleClass().clear();
+                field.getStyleClass().add("text-input");
+                field.getStyleClass().add("text-field");
+                alert.setText("");
+            }
+            else {
+                field.getStyleClass().clear();
+                field.getStyleClass().add("text-input");
+                field.getStyleClass().add("ErrorAlert");
+            }
+
+        });
+        field.focusedProperty().addListener((obs, o, n) -> {
+            if(field.getText().length()>0) {
+                if (!n) {
+                    field.getStyleClass().remove("WarningAlert");
+                }
+            }
+            else{
+                field.getStyleClass().clear();
+                field.getStyleClass().add("text-input");
+                field.getStyleClass().add("ErrorAlert");
+                alert.setText("");
             }
         });
     }

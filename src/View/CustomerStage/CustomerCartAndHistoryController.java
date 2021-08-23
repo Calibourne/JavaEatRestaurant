@@ -1,6 +1,7 @@
 package View.CustomerStage;
 
 import Model.*;
+import Model.Record;
 import Model.Requests.AddRecordRequest;
 import Model.Requests.RecordRequest;
 import View.Controllers.LoginPageController;
@@ -65,6 +66,7 @@ public class CustomerCartAndHistoryController {
 
     @FXML
     void initialize() {
+
         assert pnlQueries != null : "fx:id=\"pnlQueries\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
         assert home_page_header != null : "fx:id=\"home_page_header\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
         assert shopping_cart_button != null : "fx:id=\"shopping_cart_button\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
@@ -147,9 +149,11 @@ public class CustomerCartAndHistoryController {
                 choice = r.nextInt(DeliveryPerson.getIdCounter());
                 dp = restaurant.getRealDeliveryPerson(choice);
             }while (dp == null);
+            ArrayList<Record> dishes = new ArrayList<>(shopping_cart_list.getItems().stream().map(ListedRecord::getRecord).toList());
+            if(dishes.size() == 0)
+                throw new NullPointerException();
             AddRecordRequest orderRequest = new AddRecordRequest(new Order(-1),
-                    customer,
-                    new ArrayList<>(shopping_cart_list.getItems().stream().map(ListedRecord::getRecord).toList())
+                    customer, dishes
             );
             TreeSet<Order> order = new TreeSet<>();
             order.add((Order) orderRequest.getRecord());
@@ -166,7 +170,7 @@ public class CustomerCartAndHistoryController {
             restaurant.saveDatabase("Rest.ser");
 
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             cart_empty_message.setText("Failed to place an order");
             cart_empty_message.setStyle("-fx-text-fill: red");
         }

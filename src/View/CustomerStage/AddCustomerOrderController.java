@@ -38,6 +38,9 @@ public class AddCustomerOrderController {
     private CheckListView<ListedRecord> dishes_checkedList;
 
     @FXML
+    private Label error_label;
+
+    @FXML
     private Button minus_btn;
 
     @FXML
@@ -101,9 +104,10 @@ public class AddCustomerOrderController {
 
 
 
-
             Restaurant rest = Restaurant.getInstance();
             addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+            // TODO Fix customer order error label
+            //error_label.setText(""); causes exception need to fix
 
             addComponents_combo.setOnAction(action->{
                 Dish d = (Dish) addComponents_combo.getValue();
@@ -172,9 +176,13 @@ public class AddCustomerOrderController {
             submit.setOnAction((action->{
                 Set<ListedRecord> dishes_in_order = new HashSet<>(dishes_checkedList.getItems());
                 CustomerCartAndHistoryController.order_in_cart = dishes_in_order;
+
+                //TODO This label causes exceptions idk why
+                //error_label.setText("Order has been added to the shopping cart");
             }));
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage());
+         //   error_label.setText("Please choose dishes to ad to your order"); causes exception need to fix
         }
     }
 }

@@ -1,3 +1,17 @@
+/*
+$outer_navbar_c:   #de2d00;
+$inner_navbar_c:   #e63a07;
+$background_c:     #ff7119;
+$light_c:          #ffab19;
+
+// elements colours
+$outernav_element_colour:    $outer_navbar_c;
+$innerpane_element_colour:   $outer_navbar_c;
+$innernav_element_colour:    $inner_navbar_c;
+
+$element_hover:   $light_c;
+$element_pressed:#fff013;
+*/
 .button {
   -fx-background-color: #061E47;
   -fx-text-fill: #e7e5e5;
@@ -105,7 +119,7 @@
 }
 
 .Dashboard {
-  -fx-background-color: black;
+  -fx-background-color: #041430;
 }
 
 .toggle-button {
@@ -118,7 +132,7 @@
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical {
-  -fx-background-color: transparent;
+  -fx-background-color: #041430;
 }
 
 .increment-button, .decrement-button {
@@ -128,19 +142,19 @@
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track {
-  -fx-background-color: #0b235e;
+  -fx-background-color: #041430;
   -fx-border-color: transparent;
   -fx-background-radius: 0em;
 }
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-  -fx-background-color: #0b235e;
+  -fx-background-color: #1F4591;
   -fx-background-radius: 5em;
 }
 
 .scroll-pane > .corner {
-  -fx-background-color: black;
+  -fx-background-color: #041430;
 }
 
 .progress-bar {

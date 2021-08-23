@@ -1,6 +1,7 @@
 // color variables up front to work more efficient
 
 // container colours
+$darker_c:         #041430;
 $outer_navbar_c:   #061E47;
 $inner_navbar_c:   #0b235e;
 $background_c:     #1F4591;
@@ -21,7 +22,21 @@ $text_hover:      #ffd700;
 $warning_alert_colour: #daa520;
 $error_alert_colour:   #ff0000;
 
-// css classes ssettings
+// css classes settings
+/*
+$outer_navbar_c:   #de2d00;
+$inner_navbar_c:   #e63a07;
+$background_c:     #ff7119;
+$light_c:          #ffab19;
+
+// elements colours
+$outernav_element_colour:    $outer_navbar_c;
+$innerpane_element_colour:   $outer_navbar_c;
+$innernav_element_colour:    $inner_navbar_c;
+
+$element_hover:   $light_c;
+$element_pressed:#fff013;
+*/
 
 // default item settings
 .button{
@@ -119,7 +134,7 @@ $error_alert_colour:   #ff0000;
     -fx-border-color: $text_colour;
 }
 .Dashboard{
-    -fx-background-color: black;
+    -fx-background-color: $darker_c;
 }
 
 .toggle-button{
@@ -131,7 +146,7 @@ $error_alert_colour:   #ff0000;
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical{
-    -fx-background-color:transparent;
+    -fx-background-color: $darker_c;
 }
 .increment-button, .decrement-button {
     -fx-background-color: transparent;
@@ -139,17 +154,17 @@ $error_alert_colour:   #ff0000;
 }
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
-    -fx-background-color: $innernav_element_colour;
+    -fx-background-color: $darker_c;
     -fx-border-color: transparent;
     -fx-background-radius: 0em;
 }
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: $innernav_element_colour;
+    -fx-background-color: $background_c;
     -fx-background-radius: 5em;
 }
 .scroll-pane > .corner {
-    -fx-background-color: black;
+    -fx-background-color: $darker_c;
 }
 
 .progress-bar {

@@ -6,12 +6,11 @@ import javafx.scene.image.Image;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ImageManager implements Serializable {
     private  final int MAX_DIM = 96;
@@ -26,6 +25,7 @@ public class ImageManager implements Serializable {
     private ImageManager(){
         images = new HashMap<>();
         images.put("Default", getClass().getResource("/View/images/profile/default.png"));
+        images.put("Alert", getClass().getResource("/View/images/profile/defaultToUpdate.png"));
     }
 
     public void setImages(HashMap<String, URL> images){

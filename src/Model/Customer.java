@@ -1,12 +1,12 @@
 package Model;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.time.LocalDate;
-
 import Utils.Gender;
 import Utils.ImageManager;
 import Utils.Neighberhood;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * A class that represents a customer object
@@ -137,6 +137,9 @@ public class Customer extends Person{
 		}catch(IllegalArgumentException | IOException e){
 			return null;
 		}
+	}
+	public String getProfileImgName(){
+		return profileImgName;
 	}
 	public void setProfileImg(String img){
 		this.profileImgName = img;

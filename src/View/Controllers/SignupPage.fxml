@@ -168,7 +168,7 @@
                                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <PasswordField fx:id="passwordField" onKeyTyped="#determinePasswordStrength" />
+                                                <PasswordField fx:id="passwordField" onAction="#determinePasswordStrength" onKeyTyped="#determinePasswordStrength" />
                                              </children>
                                           </GridPane>
                                        </children>

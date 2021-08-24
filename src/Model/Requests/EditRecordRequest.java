@@ -1,22 +1,26 @@
 package Model.Requests;
 import Model.*;
-import Model.Exceptions.NoComponentsException;
 import Model.Record;
+import Model.Exceptions.NoComponentsException;
 import Utils.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EditRecordRequest extends RecordRequest{
     private Object[] args;
+    private Object[] oldArgs;
     public EditRecordRequest(Record record, Object... args) throws IllegalArgumentException{
         this.args = args;
+        oldArgs = new Object[args.length];
         if(Arrays.stream(args).anyMatch(o -> o.equals(null)))
             throw new IllegalArgumentException();
         this.record = record;
@@ -24,9 +28,11 @@ public class EditRecordRequest extends RecordRequest{
     @Override
     public boolean saveRequest() {
         if(record instanceof DeliveryArea){
+            oldArgs[0] = ((DeliveryArea) record).getAreaName();
             ((DeliveryArea) record).setAreaName((String) args[0]);
             Set<Neighberhood> selected = (Set<Neighberhood>) args[1],
                     current = ((DeliveryArea) record).getNeighberhoods();
+            oldArgs[1] = ((DeliveryArea) record).getNeighberhoods();
             Set<Neighberhood> intersect = selected.stream().filter(e->current.contains(e)).collect(Collectors.toSet());
             Set<Neighberhood> unite = Stream.concat(selected.stream(), current.stream()).collect(Collectors.toSet());
             Set<Neighberhood> notIntersect = unite.stream().filter(e->!intersect.contains(e)).collect(Collectors.toSet());
@@ -38,18 +44,27 @@ public class EditRecordRequest extends RecordRequest{
             });
         }
         if(record instanceof Person){
+            oldArgs[0] = ((Person) record).getFirstName();
             ((Person) record).setFirstName((String) args[0]);
+            oldArgs[1] = ((Person) record).getLastName();
             ((Person) record).setLastName((String) args[1]);
+            oldArgs[2] = ((Person) record).getGender();
             ((Person) record).setGender((Gender) args[2]);
+            oldArgs[3] = ((Person) record).getBirthDay();
             ((Person) record).setBirthDay((LocalDate) args[3]);
             if(record instanceof Cook){
+                oldArgs[4] = ((Cook) record).getExpert();
                 ((Cook) record).setExpert((Expertise) args[4]);
+                oldArgs[5] = ((Cook) record).isChef();
                 ((Cook) record).setChef((boolean) args[5]);
             }
             if(record instanceof Customer){
+                oldArgs[4] = ((Customer) record).getNeighberhood();
                 ((Customer) record).setNeighberhood((Neighberhood) args[4]);
+                oldArgs[5] = ((Customer) record).isSensitiveToGluten();
                 ((Customer) record).setSensitiveToGluten((Boolean) args[5]);
-                ((Customer) record).setSensitiveToGluten((Boolean) args[6]);
+                oldArgs[6] = ((Customer) record).isSensitiveToLactose();
+                ((Customer) record).setSensitiveToLactose((Boolean) args[6]);
                 //TODO Add change password attribute in edit customer fxml
                 setCustomerImage((Image) args[7]);
                 if(args.length==9)

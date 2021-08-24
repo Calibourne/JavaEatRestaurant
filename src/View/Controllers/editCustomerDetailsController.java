@@ -6,21 +6,12 @@ import Model.Restaurant;
 import Utils.Gender;
 import Utils.ImageManager;
 import Utils.Neighberhood;
-import View.CustomerStage.CustomerHomeController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 public class editCustomerDetailsController {
@@ -72,6 +63,7 @@ public class editCustomerDetailsController {
     private void initialize(){
         ControllerUtils.setFileChooser(img_choose, img_source);
         try{
+            ImageManager manager = ImageManager.getInstance();
             user = LoginPageController.getCustomer();
             fname_field.setText(user.getFirstName());
             lname_field.setText(user.getLastName());
@@ -82,6 +74,7 @@ public class editCustomerDetailsController {
             neighbourhoods_combo.setValue(user.getNeighberhood());
             glutenIntolerant_check.setSelected(user.isSensitiveToGluten());
             lactoseIntolerant_check.setSelected(user.isSensitiveToLactose());
+            img_source.setImage(SwingFXUtils.toFXImage(user.getProfileImg(), null));
             username_lbl.setText(user.getUsername());
         }catch(NullPointerException e){
             e.getMessage();

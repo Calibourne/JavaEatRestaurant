@@ -2,6 +2,7 @@ package View.CustomerStage;
 
 import Model.Customer;
 import Model.Restaurant;
+import Utils.ImageManager;
 import View.Controllers.LoginPageController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -60,7 +62,7 @@ public class CustomerHomeController {
     private Button signout_button;
 
     @FXML
-    private static ImageView user_img;
+    private ImageView user_img;
 
 
     Restaurant restaurant = Restaurant.getInstance();
@@ -83,6 +85,16 @@ public class CustomerHomeController {
             loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml")));
             content_pane.getChildren().add(loadedPage);
             customer = LoginPageController.getCustomer();
+            System.out.println(customer.getProfileImgName());
+            if(customer.getProfileImgName().equals("Default")) {
+                BufferedImage bi = ImageManager.getInstance().getImage("Alert");
+                System.out.println(bi);
+                user_img.setImage(SwingFXUtils.toFXImage(bi,null));
+            }
+            else{
+                user_img.setImage(SwingFXUtils.toFXImage(customer.getProfileImg(),null));
+            }
+
 //        username_label.setText("Welcome, \n"+customer.getFirstName()+" "+customer.getLastName()); This makes the label span on two lines
             username_label.setText("Welcome, " + customer.getFirstName() + " " + customer.getLastName());
 

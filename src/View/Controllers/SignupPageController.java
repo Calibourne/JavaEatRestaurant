@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -117,6 +116,7 @@ public class SignupPageController {
             }
         });
         passwordField.textProperty().addListener((obs, o, n)->{
+            determinePasswordStrength();
             if (!n.equals(confirmPasswordField.getText())) {
                 pass_alert.setText("Passwords don't match 😟");
                 pass_alert.setStyle("-fx-text-fill: red");
@@ -227,13 +227,12 @@ public class SignupPageController {
      * so here is a brief explanation about each of the commands:
      * [a-z]+ : the sequence has at least 1 character, and it's a lowercase english letter only
      * [a-z]* : the sequence has only lower
-     * @param e
-     * The key event
      *
      */
     @FXML
-    private void determinePasswordStrength(KeyEvent e){
+    private void determinePasswordStrength(){
         String password = passwordField.getText();
+        System.out.println(password);
         if(password.length() == 0){
             passStrengthLbl.setText("");
             passwordStrengthInd.setProgress(0);

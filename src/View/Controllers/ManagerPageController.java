@@ -103,7 +103,7 @@ public class ManagerPageController {
     private void initDashboard() {
         try {
             pnlChoosedPage.getChildren().clear();
-            Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../Controllers/RestaurantDashboard.fxml")));
+            Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RestaurantDashboard.fxml")));
             pnlChoosedPage.getChildren().add(recordsA);
         } catch(IOException | NullPointerException e){
             System.out.println(e.getMessage());
@@ -113,7 +113,7 @@ public class ManagerPageController {
         if(e.getSource() == btnAddRecords)
             try {
                 pnlChoosedPage.getChildren().clear();
-                Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/addRecordsPage/addRecords.fxml")));
+                Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addRecords.fxml")));
                 pnlChoosedPage.getChildren().add(recordsA);
             } catch(IOException | NullPointerException ex){
                 System.out.println(ex.getMessage());

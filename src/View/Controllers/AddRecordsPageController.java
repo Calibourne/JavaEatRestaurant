@@ -1,35 +1,17 @@
 package View.Controllers;
 
 //import Model.DeliveryArea;
-import Model.*;
-import Utils.*;
 //import View.Main;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 //import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import org.controlsfx.control.CheckComboBox;
+        import javafx.scene.Node;
+        import javafx.scene.control.*;
+        import javafx.scene.layout.GridPane;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static View.Controllers.ControllerUtils.*;
+        import java.io.IOException;
+import java.util.Objects;
 
 public class AddRecordsPageController extends RecordManagementController {
 
@@ -75,43 +57,43 @@ public class AddRecordsPageController extends RecordManagementController {
                 addWindow.setVisible(false);
                 addWindow.getChildren().clear();
                 if (e.getSource() == addCooks_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addCooks.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCooks.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addCustomers_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addCustomers.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCustomers.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDeliPersons_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addDeliveryPersons.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveryPersons.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addComponents_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addIngredients.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addIngredients.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDishes_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addDishes.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDishes.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addOrders_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addOrders.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addOrders.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDeliveries_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addDeliveries.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveries.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addAreas_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addDeliveryAreas.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveryAreas.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addToBlacklist_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/addRecordsPage/addToBlacklist.fxml"));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addToBlacklist.fxml")));
                     addWindow.getChildren().add(node);
                 }
                 addWindow.setVisible(true);
-            } catch (IOException ex) {
+            } catch (IOException | NullPointerException ex) {
                 ex.printStackTrace();
             }
             //super.handleButtonClick(e);

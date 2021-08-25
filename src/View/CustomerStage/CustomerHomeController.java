@@ -165,7 +165,7 @@ public class CustomerHomeController {
     public void signout(){
         try {
             Stage s = (Stage) signout_button.getScene().getWindow();
-            Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/LoginPage.fxml")));
+            Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../Controllers/LoginPage.fxml")));
             s.hide();
             s.setScene(new Scene(p));
             s.centerOnScreen();

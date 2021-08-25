@@ -90,7 +90,7 @@ public class ManagerPageController {
         if(e.getSource() == btnSignOut) {
             try {
                 Stage s = (Stage) btnSignOut.getScene().getWindow();
-                Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/LoginPage.fxml")));
+                Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../Controllers/LoginPage.fxml")));
                 s.hide();
                 s.setScene(new Scene(p));
                 s.centerOnScreen();

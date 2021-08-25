@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class ImageManager implements Serializable {
     private  final int MAX_DIM = 96;
     private static ImageManager instance;
-    transient HashMap<String, URL> images;
+    private HashMap<String, URL> images;
     public static ImageManager getInstance() {
         if(instance == null)
             instance = new ImageManager();

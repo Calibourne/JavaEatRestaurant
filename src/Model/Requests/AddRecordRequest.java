@@ -1,13 +1,11 @@
 package Model.Requests;
 
 import Model.*;
-import Model.Exceptions.ConvertToExpressException;
 import Model.Record;
+import Model.Exceptions.ConvertToExpressException;
 import Utils.*;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -188,16 +186,9 @@ public class AddRecordRequest extends RecordRequest {
     }
 
     @Override
-    protected void setCustomerImage(Image img) {
-        try {
-            ImageManager manager = ImageManager.getInstance();
-            Image current = SwingFXUtils.toFXImage(manager.getImage("Default"), null);
-            if (!img.equals(current))
-                super.setCustomerImage(img);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+    protected void setCustomerImage(Image img){
+        if (!((Customer) record).getProfileImgName().equals("Default"))
+            super.setCustomerImage(img);
     }
 
     @Override

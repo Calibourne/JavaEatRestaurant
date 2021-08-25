@@ -1023,7 +1023,8 @@ public class Restaurant implements Serializable {
 				Dish.setIdCounter(res.runningDishes);
 				Order.setIdCounter(res.runningOrders);
 				Delivery.setIdCounter(res.runningDeliveries);
-				this.manager = res.manager;
+				manager = ImageManager.getInstance();
+				this.manager.setImages(res.manager.getImages());
 				setFirstRun(false);
 				return true;
 			}

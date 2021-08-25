@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="576.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <Group fx:id="addToBlacklist_sctn">
@@ -30,7 +29,7 @@
                <children>
                   <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="278.0" text="Customer" />
+                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="278.0" text="Customer:" />
                         <ComboBox fx:id="customersToBlacklist_combo" prefHeight="25.0" prefWidth="352.0" />
                      </children>
                   </VBox>
@@ -55,7 +54,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label alignment="CENTER" text="Please fill the following form and press the button to add a customer to the restaurant's blacklist" textAlignment="CENTER">
+            <Label alignment="CENTER" text="Please select a customer from the list below and press the button to add him/her to the blacklist" textAlignment="CENTER">
                <effect>
                   <DropShadow />
                </effect>

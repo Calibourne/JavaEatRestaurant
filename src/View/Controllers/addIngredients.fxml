@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="576.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <VBox alignment="CENTER" prefHeight="80.0" prefWidth="617.0" styleClass="InnerMenuBar">
@@ -61,21 +60,21 @@
                      <children>
                         <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Ingredient name" />
+                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Ingredient name:" />
                               <TextField fx:id="ingredientName_field" />
                            </children>
                         </VBox>
                         <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="1">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Price (₪, numbers only)" />
-                              <TextField fx:id="ingredientPrice_field" />
+                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Price (₪):" />
+                              <TextField fx:id="ingredientPrice_field" promptText="Numbers only" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="70.0" prefWidth="119.0" styleClass="Container" GridPane.rowIndex="2">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Sensitivities" underline="true" />
-                              <CheckBox fx:id="hasGluten_check" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Has Gluten" />
-                              <CheckBox fx:id="hasLactose_check" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="85.0" text="Has Lactose" />
+                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Allergens:" underline="true" />
+                              <CheckBox fx:id="hasGluten_check" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="Contains Gluten" />
+                              <CheckBox fx:id="hasLactose_check" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="Contains Lactose" />
                            </children>
                         </VBox>
                         <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Ingredient" GridPane.halignment="CENTER" GridPane.rowIndex="3" />

@@ -2,20 +2,14 @@ package View.Controllers;
 
 import Model.DeliveryArea;
 import Model.Record;
-import Model.Requests.RecordRequest;
 import Model.Requests.RemoveRecordRequest;
 import Model.Restaurant;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-
-import java.util.List;
 
 public class RemoveRecordsController {
     @FXML
@@ -43,39 +37,39 @@ public class RemoveRecordsController {
     @FXML
     private void initialize(){
         if(removeCooks_sctn != null){
-            record_combo.setPromptText("Choose cook to remove");
+            //record_combo.setPromptText("Choose cook to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getCooks().values());
         }
         if(removeDeliPersons_sctn != null){
-            record_combo.setPromptText("Choose deliveryman to remove");
+           // record_combo.setPromptText("Choose deliveryman to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
         }
         if(removeCustomers_sctn != null){
-            record_combo.setPromptText("Choose customer to remove");
+           // record_combo.setPromptText("Choose customer to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
         }
         if(removeComponents_sctn != null){
-            record_combo.setPromptText("Choose ingredient to remove");
+            //record_combo.setPromptText("Choose ingredient to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getComponents().values());
         }
         if(removeDishes_sctn != null){
-            record_combo.setPromptText("Choose dish to remove");
+            //record_combo.setPromptText("Choose dish to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getDishes().values());
         }
         if(removeDishes_sctn != null){
-            record_combo.setPromptText("Choose dish to remove");
+            //record_combo.setPromptText("Choose dish to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getDishes().values());
         }
         if(removeOrders_sctn != null){
-            record_combo.setPromptText("Choose order to remove");
+            //record_combo.setPromptText("Choose order to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getOrders().values());
         }
         if(removeDeliveries_sctn != null){
-            record_combo.setPromptText("Choose delivery to remove");
+            //record_combo.setPromptText("Choose delivery to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getDeliveries().values());
         }
         if(removeAreas_sctn != null){
-            record_combo.setPromptText("Choose delivery area to remove");
+            //record_combo.setPromptText("Choose delivery area to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
             newArea_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
         }

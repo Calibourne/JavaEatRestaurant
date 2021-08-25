@@ -16,7 +16,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-
 <AnchorPane prefHeight="576.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <VBox alignment="CENTER" prefHeight="80.0" prefWidth="617.0" styleClass="InnerMenuBar">
@@ -90,8 +89,8 @@
                                        <children>
                                           <VBox prefHeight="40.0" prefWidth="210.0" styleClass="Container">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery time" />
-                                                <TextField fx:id="deliveryTime_field" />
+                                                <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery time in minutes:" />
+                                                <TextField fx:id="deliveryTime_field" promptText="Whole numbers only" />
                                              </children>
                                           </VBox>
                                        </children>

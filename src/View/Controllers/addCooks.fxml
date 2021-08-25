@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="576.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <VBox alignment="CENTER" prefHeight="80.0" prefWidth="617.0" styleClass="InnerMenuBar">
@@ -75,7 +74,7 @@
                         </VBox>
                         <VBox prefHeight="42.0" prefWidth="210.0" styleClass="Container" GridPane.rowIndex="2">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Birthdate" />
+                              <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Date of birth" />
                               <DatePicker fx:id="birthDate_dp" prefHeight="40.0" prefWidth="210.0" />
                            </children>
                         </VBox>
@@ -93,7 +92,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="1.0" prefWidth="100.0" styleClass="Container" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
-                              <CheckBox fx:id="isChef_check" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="Is Chef" />
+                              <CheckBox fx:id="isChef_check" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="Is a chef" />
                            </children>
                         </VBox>
                      </children>

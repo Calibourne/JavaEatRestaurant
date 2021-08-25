@@ -36,25 +36,32 @@ public class AddRecordsPageController extends RecordManagementController {
     private Button addToBlacklist_btn;
     @FXML
     private GridPane addWindow;
+    @FXML
+    private GridPane welcome_grid;
+    @FXML
+    private GridPane alert_grid;
     //endregion
 
     @FXML
     protected void handleButtonClick(ActionEvent e) {
         if (e.getSource() == addDeliPersons_btn && getRestaurant().getAreas().size() == 0) {
+            alert_grid.toFront();
             ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some delivery areas first");
         } else if (e.getSource() == addToBlacklist_btn && getRestaurant().getCustomers().size() == 0) {
+            alert_grid.toFront();
             ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some customers first");
         } else if (e.getSource() == addDishes_btn && getRestaurant().getComponents().size() == 0) {
+            alert_grid.toFront();
             ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some ingredients first");
         } else if (e.getSource() == addOrders_btn && getRestaurant().getDishes().size() == 0) {
+            alert_grid.toFront();
             ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some dishes first");
         } else if (e.getSource() == addDeliveries_btn && getRestaurant().getOrders().size() == 0) {
+            alert_grid.toFront();
             ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some orders first");
         } else {
             try {
-                welcome_sctn.setVisible(false);
-                alert_sctn.setVisible(false);
-                addWindow.setVisible(false);
+                addWindow.toFront();
                 addWindow.getChildren().clear();
                 if (e.getSource() == addCooks_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCooks.fxml")));

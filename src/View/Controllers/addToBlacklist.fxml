@@ -44,7 +44,7 @@
       </Group>
       <VBox alignment="CENTER" prefHeight="80.0" prefWidth="617.0" styleClass="InnerMenuBar">
          <children>
-            <Label alignment="CENTER" text="Add Orders" textAlignment="CENTER">
+            <Label alignment="CENTER" text="Add Customers to the Blacklist" textAlignment="CENTER">
                <font>
                   <Font size="30.0" />
                </font>
@@ -55,7 +55,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label alignment="CENTER" text="Please fill the following forms and press the button to add an order to the restaurant" textAlignment="CENTER">
+            <Label alignment="CENTER" text="Please fill the following form and press the button to add a customer to the restaurant's blacklist" textAlignment="CENTER">
                <effect>
                   <DropShadow />
                </effect>

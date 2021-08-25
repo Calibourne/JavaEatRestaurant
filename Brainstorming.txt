@@ -3,3 +3,4 @@
 * create an order --> place an order <- done
 *Fix shnitzel to not appear custom while it is not
 * add a rickroll
+*להוסיף הודעת הצלחה/כישלון לכל עמודי המנהל

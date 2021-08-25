@@ -9,10 +9,16 @@ import Utils.Neighberhood;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class editCustomerDetailsController {
 
@@ -92,11 +98,14 @@ public class editCustomerDetailsController {
                         fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
                         neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
                 request.saveRequest();
-            }catch (IllegalArgumentException ex){
+                Restaurant.getInstance().saveDatabase("Rest.ser");
+//                Stage window = (Stage) submit.getScene().getWindow();
+//                Parent customerHome = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CustomerHome.fxml")));
+//                window.setScene(new Scene(customerHome));
+
+            }catch (IllegalArgumentException | IOException | NullPointerException ex){
                 System.out.println(ex.getMessage());
             }
-            request.saveRequest();
-            Restaurant.getInstance().saveDatabase("Rest.ser");
             //change_lbl.setVisible(true);
             //change_lbl.requestFocus();
         }

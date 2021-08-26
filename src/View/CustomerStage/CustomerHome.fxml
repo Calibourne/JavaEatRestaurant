@@ -10,8 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="785.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerHomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="785.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerHomeController">
    <effect>
       <DropShadow color="#1b1eeb" />
    </effect>
@@ -91,6 +92,14 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label prefHeight="0.0" prefWidth="168.0" style="-fx-text-fill: C0C0C0;" text="© Eddy Kavensky, Daniel Sharon 2021">
+         <font>
+            <Font size="10.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="-27.0" top="65.0" />
+         </VBox.margin>
+      </Label>
    </VBox>
    <StackPane fx:id="content_pane" layoutX="200.0" prefHeight="576.0" prefWidth="585.0" styleClass="StackPane" />
    <stylesheets>

@@ -33,6 +33,12 @@ public class CustomerCartAndHistoryController {
     private Button clear_history_button;
 
     @FXML
+    private Button delete_entry_button;
+
+    @FXML
+    private Button edit_order_button;
+
+    @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -103,7 +109,7 @@ public class CustomerCartAndHistoryController {
     private void shoppingCartButtonPressed() {
         try {
             cart_empty_message.setText("");
-            shopping_cart_list.getItems().clear();
+            //shopping_cart_list.getItems().clear(); line not working as intended
             shopping_cart_list.getItems().addAll(order_in_cart);
             if(shopping_cart_list.getItems().size()==0){
                 throw new NullPointerException();
@@ -117,6 +123,7 @@ public class CustomerCartAndHistoryController {
     public void clearHistory(){
         try {
             history_empty_message.setText("");
+            order_in_cart.clear();
             order_history_list.getItems().clear();
             if (order_history_list.getItems().size() == 0) {
                 throw new NullPointerException();

@@ -3,13 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.ViewStructuresController">
+<AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.ViewStructuresController">
     <GridPane prefHeight="576.0" prefWidth="813.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="520.0" minWidth="10.0" prefWidth="228.0" />
@@ -35,57 +37,114 @@
                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <children>
-                    <Button fx:id="customers_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="View Customers">
+               <Button fx:id="customers_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="257.0" text="View Customers">
+                  <graphic>
+                     <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8_Person_32px.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
-                    <Button fx:id="ingredients_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="View Ingredients" GridPane.rowIndex="1">
-                        <GridPane.margin>
-                            <Insets />
-                        </GridPane.margin>
+               </Button>
+               <Button fx:id="ingredients_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="252.0" text="View Ingredients" GridPane.rowIndex="1">
+                  <graphic>
+                     <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8-ingredient-32.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
-                    <Button fx:id="cooks_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="View Cooks" GridPane.rowIndex="2">
-                        <GridPane.margin>
-                            <Insets />
-                        </GridPane.margin>
+               </Button>
+               <Button fx:id="dishes_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="251.0" text="View Dishes" GridPane.rowIndex="4">
+                  <graphic>
+                     <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8-dish-32.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
-                    <Button fx:id="dishes_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="View Dishes" GridPane.rowIndex="4">
+               </Button>
+               <Button fx:id="orders_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="255.0" text="View Orders" GridPane.rowIndex="5">
+                  <graphic>
+                     <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8-order-32.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
-                    <Button fx:id="orders_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="View Orders" GridPane.rowIndex="5">
+               </Button>
+               <Button fx:id="deliveries_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="248.0" text="View Deliveries" GridPane.rowIndex="6">
+                  <graphic>
+                     <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8_Delivery_32px.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
-                    <Button fx:id="deliveries_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="View Deliveries" GridPane.rowIndex="6">
+               </Button>
+               <Button fx:id="blacklist_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="228.0" text="View Blacklisted Customers" GridPane.rowIndex="8">
+                  <graphic>
+                     <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8-blacklist-32.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
-                    <Button fx:id="dp_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="241.0" text="View Delivery Persons" GridPane.rowIndex="3">
+               </Button>
+               <Button fx:id="cooks_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="262.0" text="View Cooks" GridPane.rowIndex="2">
+                  <graphic>
+                     <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8-cook-32.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
-                    <Button fx:id="da_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="View Delivery Areas" GridPane.rowIndex="7">
+               </Button>
+               <Button fx:id="da_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="290.0" text="View Delivery Areas" GridPane.rowIndex="7">
+                  <graphic>
+                     <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8-area-32.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
-                    <Button fx:id="blacklist_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="250.0" text="View Blacklisted Customers" GridPane.rowIndex="8">
+               </Button>
+               <Button fx:id="dp_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#queryButtonPushed" prefHeight="40.0" prefWidth="265.0" text="View Delivery Men" GridPane.rowIndex="3">
+                  <graphic>
+                     <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/icons8-delivery-boy-32.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
                   <padding>
-                     <Insets left="15.0" />
+                     <Insets left="14.0" right="25.0" />
                   </padding>
-                    </Button>
+               </Button>
                 </children>
             </GridPane>
             <GridPane fx:id="content_pane" styleClass="Content" GridPane.columnIndex="1">

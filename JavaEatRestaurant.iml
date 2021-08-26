@@ -9,7 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="lib" level="project" />
+    <orderEntry type="library" exported="" name="javaFX" level="project" />
     <orderEntry type="library" exported="" name="ControlsFX" level="project" />
+    <orderEntry type="library" exported="" name="apache-poi" level="project" />
   </component>
 </module>

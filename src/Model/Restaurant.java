@@ -392,6 +392,7 @@ public class Restaurant implements Serializable {
 		if(cust == null || !getCustomers().containsValue(cust))
 			return false;
 		getOrderByCustomer().remove(cust);
+		getUsersList().remove(cust.getUsername());
 		return getCustomers().remove(cust.getId(), cust);
 	}
 

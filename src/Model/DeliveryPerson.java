@@ -90,7 +90,7 @@ public class DeliveryPerson extends Person {
 	
 	@Override
 	public String description() {
-		return String.format("%s, Vehicle: %s",super.toString(), vehicle);
+		return String.format("%s, Delivery Area: %s, Vehicle: %s",super.toString(), area.getAreaName(), vehicle);
 	}
 
 //	@Override

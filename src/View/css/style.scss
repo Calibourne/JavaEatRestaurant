@@ -1,6 +1,7 @@
 // color variables up front to work more efficient
 
 // container colours
+
 $darker_c:         #041430;
 $outer_navbar_c:   #061E47;
 $inner_navbar_c:   #0b235e;
@@ -201,6 +202,10 @@ $element_pressed:#fff013;
 }
 .list-view .list-cell:even:hover {
     -fx-background-color: $light_c;
+}
+
+.list-view .list-cell:filled:focused:selected{
+    -fx-background-color: #000000;
 }
 
 /* Tab pane styling */

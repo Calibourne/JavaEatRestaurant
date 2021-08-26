@@ -207,6 +207,10 @@ $element_pressed:#fff013;
   -fx-background-color: #2B6AD0;
 }
 
+.list-view .list-cell:filled:focused:selected {
+  -fx-background-color: #000000;
+}
+
 /* Tab pane styling */
 .tab-pane .tab-header-area .tab-header-background {
   -fx-opacity: 0;

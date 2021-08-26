@@ -90,7 +90,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="delipersons_tab" onSelectionChanged="#initDashboard" text="Couriers">
+            <Tab fx:id="delipersons_tab" onSelectionChanged="#initDashboard" text="Deliverymen">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -105,7 +105,7 @@
                                                 <Font name="System Bold" size="26.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Active Couriers" textFill="#e7e5e5" />
+                                          <Label text="Active Deliverymen" textFill="#e7e5e5" />
                                        </children>
                                     </VBox>
                                  </children>

@@ -133,7 +133,6 @@ public class RestaurantDashboardController {
 
         if(e.getSource() == delipersons_tab){
             numOfDeliPersons.setText(rest.getDeliveryPersons().values().size()+"");
-            rest.getAddRecordHistory().get(DeliveryPerson.class.getSimpleName()).forEach(System.out::println);
             delipersons_history.getItems().clear();
             try {
                 delipersons_history.getItems().addAll(rest.getAddRecordHistory().get(DeliveryPerson.class.getSimpleName()).stream().toList());
@@ -153,7 +152,7 @@ public class RestaurantDashboardController {
         }
 
         if(e.getSource() == cooks_tab){
-            numOfCooks.setText(rest.getCustomers().values().size()+"");
+            numOfCooks.setText(rest.getCooks().values().size()+"");
             cooks_history.getItems().clear();
             try {
                 cooks_history.getItems().addAll(rest.getAddRecordHistory().get(Cook.class.getSimpleName()).stream().toList());

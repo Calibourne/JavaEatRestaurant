@@ -886,7 +886,7 @@ public class Restaurant implements Serializable {
 			Double rel2 = d2.getPrice()/d2.getTimeToMake();
 			int result = rel2.compareTo(rel1);
 			if(result == 0)
-				return ((Integer)d2.getId()).compareTo(d1.getId());
+				return d2.getId().compareTo(d1.getId());
 			return result;
 		};
 		TreeSet<Dish> query = new TreeSet<>(comp);

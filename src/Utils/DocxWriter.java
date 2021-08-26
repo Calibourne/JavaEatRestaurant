@@ -12,6 +12,21 @@ import java.io.*;
 public class DocxWriter {
     private static DocxWriter instance;
     private XWPFDocument template;
+    private enum Styles{
+        Title("Title"),
+        Heading1("Heading1"),
+        Heading2("Heading2"),
+        Default("Normal");
+
+        final String name;
+        Styles(String name){
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
     private DocxWriter(){
         try{
             File f = new File("Template.docx");
@@ -42,7 +57,7 @@ public class DocxWriter {
             try{
                 for(String s : prompt){
                     XWPFParagraph p = doc.createParagraph();
-                    generateParagraphRun(p, s, Styles.Default);
+                    generateParagraphRun(p, s, Styles.Heading1);
                 }
             }catch (NullPointerException e){
                 e.getMessage();
@@ -103,21 +118,5 @@ public class DocxWriter {
         XWPFRun paragraphRun = paragraph.createRun();
         paragraph.setStyle(style.getName());
         paragraphRun.setText(prompt);
-    }
-}
-
-enum Styles{
-    Title("Title"),
-    Heading1("Heading1"),
-    Heading2("Heading2"),
-    Default("Normal");
-
-    private final String name;
-    private Styles(String name){
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 }

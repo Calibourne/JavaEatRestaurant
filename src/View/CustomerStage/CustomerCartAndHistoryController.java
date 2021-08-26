@@ -63,7 +63,7 @@ public class CustomerCartAndHistoryController {
     private Tab order_history_button;
 
     @FXML
-    private ListView<String> order_history_list;
+    private ListView<ListedRecord> order_history_list;
 
     public static Set<ListedRecord> order_in_cart;
 
@@ -100,7 +100,7 @@ public class CustomerCartAndHistoryController {
                 throw new NullPointerException();
             order_history_list.getItems().addAll(s);
         } catch (NullPointerException e) {
-            order_history_list.getItems().add("You didn't order anything yet");
+            history_empty_message.setText("No orders to show at the moment");
         }
     }
 
@@ -109,7 +109,7 @@ public class CustomerCartAndHistoryController {
     private void shoppingCartButtonPressed() {
         try {
             cart_empty_message.setText("");
-            //shopping_cart_list.getItems().clear(); line not working as intended
+            shopping_cart_list.getItems().clear();
             shopping_cart_list.getItems().addAll(order_in_cart);
             if(shopping_cart_list.getItems().size()==0){
                 throw new NullPointerException();
@@ -120,23 +120,24 @@ public class CustomerCartAndHistoryController {
 
     }
 
-    public void clearHistory(){
-        try {
-            history_empty_message.setText("");
-            order_in_cart.clear();
-            order_history_list.getItems().clear();
-            if (order_history_list.getItems().size() == 0) {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
-            history_empty_message.setText("No orders to show at the moment");
-        }
-    }
+//    public void clearHistory(){
+//        try {
+//            history_empty_message.setText("");
+//            order_in_cart.clear();
+//            order_history_list.getItems().clear();
+//            if (order_history_list.getItems().size() == 0) {
+//                throw new NullPointerException();
+//            }
+//        } catch (NullPointerException e) {
+//            history_empty_message.setText("No orders to show at the moment");
+//        }
+//    }
 
     public void clearCart(){
         try {
             cart_empty_message.setText("");
             shopping_cart_list.getItems().clear();
+            order_in_cart.clear();
             if (shopping_cart_list.getItems().size() == 0) {
                 throw new NullPointerException();
             }
@@ -182,18 +183,17 @@ public class CustomerCartAndHistoryController {
             cart_empty_message.setStyle("-fx-text-fill: red");
         }
     }
+
+
+    @FXML
+    void deleteHistoryOrder(ActionEvent event) {
+        //order_history_list.getSelectionModel().getSelectedItem()
+
+    }
+
+    @FXML
+    void editHistoryOrder(ActionEvent event) {
+
+
+    }
 }
-
-
-/**/
-
-//restaurant = Restaurant.getInstance();
-            /*assert pnlQueries != null : "fx:id=\"pnlQueries\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-            assert home_page_header != null : "fx:id=\"home_page_header\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-            assert shopping_cart_button != null : "fx:id=\"shopping_cart_button\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-            assert shopping_cart_list != null : "fx:id=\"shopping_cart_list\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-            assert order_history_button != null : "fx:id=\"order_history_button\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-            assert order_history_list != null : "fx:id=\"order_history_list\" was not injected: check your FXML file 'CustomerCartAndHistory.fxml'.";
-            */
-//customer = LoginPageController.getCustomer();
-//home_page_header.setText(customer.getFirstName() + "'s Orders");

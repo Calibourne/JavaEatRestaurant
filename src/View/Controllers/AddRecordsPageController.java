@@ -37,28 +37,28 @@ public class AddRecordsPageController extends RecordManagementController {
     @FXML
     private GridPane addWindow;
     @FXML
-    private GridPane welcome_grid;
-    @FXML
     private GridPane alert_grid;
+    @FXML
+    private Label alert_lbl;
     //endregion
 
     @FXML
     protected void handleButtonClick(ActionEvent e) {
         if (e.getSource() == addDeliPersons_btn && getRestaurant().getAreas().size() == 0) {
+            alert_lbl.setText("Please add at least 1 delivery area first");
             alert_grid.toFront();
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some delivery areas first");
         } else if (e.getSource() == addToBlacklist_btn && getRestaurant().getCustomers().size() == 0) {
+            alert_lbl.setText("Please add at least 1 customers first");
             alert_grid.toFront();
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some customers first");
         } else if (e.getSource() == addDishes_btn && getRestaurant().getComponents().size() == 0) {
+            alert_lbl.setText("Please add at least 1 ingredients first");
             alert_grid.toFront();
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some ingredients first");
         } else if (e.getSource() == addOrders_btn && getRestaurant().getDishes().size() == 0) {
+            alert_lbl.setText("Please add at least 1 dishes first");
             alert_grid.toFront();
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some dishes first");
         } else if (e.getSource() == addDeliveries_btn && getRestaurant().getOrders().size() == 0) {
+            alert_lbl.setText("Please add at least 1 orders first");
             alert_grid.toFront();
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some orders first");
         } else {
             try {
                 addWindow.toFront();
@@ -96,6 +96,9 @@ public class AddRecordsPageController extends RecordManagementController {
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addToBlacklist_btn) {
+                    alert_lbl.setText("No more customers to blacklist, please add at least 1 more customer first");
+                    alert_grid.toFront();
+                    addWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addToBlacklist.fxml")));
                     addWindow.getChildren().add(node);
                 }

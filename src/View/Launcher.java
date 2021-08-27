@@ -17,20 +17,21 @@ public class Launcher {
         }
         Main.main(args);
         List<Dish> ts = Restaurant.getInstance().getProfitRelation().stream().toList();
-        String[] prompt = new String[ts.size()];
-        for (int i = 0; i < prompt.length; i++) {
-            prompt[i] = String.format("%s profit: %.2f",ts.get(i).getDishName(), ts.get(i).getPrice());
-            if(i == 0){
-                prompt[0] = "🥇 " + prompt[0];
-            }
-            else if(i == 1){
-                prompt[1] = "🥈 " + prompt[1];
-            }
-            else if(i == 2){
-                prompt[2] = "🥉 " + prompt[2];
-            }
-            else{
-                prompt[i] = i + ") "+ prompt[i];
+        String[] prompt = new String[ts.size()+1];
+        prompt[0] = "SUBTITLE-CENTER~(Dish price / minute of preparation)";
+        for (int i = 1; i < prompt.length-1; i++) {
+            prompt[i] = String.format("%s profit: %.2f ₪/min",ts.get(i).getDishName(),ts.get(i-1).getPrice() / (1.0 *ts.get(i-1).getTimeToMake()));
+            if(i > 0) {
+                if (i == 1) {
+                    prompt[1] = "🥇 " + prompt[1];
+                } else if (i == 2) {
+                    prompt[2] = "🥈 " + prompt[2];
+                } else if (i == 3) {
+                    prompt[3] = "🥉 " + prompt[3];
+                } else if (i > 3) {
+                    prompt[i] = i + ") " + prompt[i];
+                }
+                prompt[i] = "-CENTER~" + prompt[i];
             }
         }
         DocxWriter.getInstance().writeToDocx("profits.docx", "JavaEat Profits List", prompt);

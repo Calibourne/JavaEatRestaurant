@@ -21,21 +21,14 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class ControllerUtils {
 
-    public static void showAlertMessage(Collection<Group> groups, Group section,String prompt){
-        groups.forEach(g->g.setVisible(false));
+    public static void showAlertMessage(Group section,String prompt){
         Pane grid = (Pane) section.getChildren().get(0);
         ((Label) grid.getChildren().get(1)).setText(prompt);
-        section.setVisible(true);
-    }
-    public static void showAlertMessage(Collection<Group> groups, Group section,Group visible_section,String prompt){
-        showAlertMessage(groups, section, prompt);
-        visible_section.setVisible(false);
     }
 
     /**

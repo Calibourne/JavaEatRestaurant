@@ -3,7 +3,10 @@ package Utils;
 import org.apache.poi.xwpf.usermodel.*;
 import org.apache.xmlbeans.XmlException;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * A utility class to write .docx files
@@ -14,6 +17,7 @@ public class DocxWriter {
     private XWPFDocument template;
     private enum Styles{
         Title("Title"),
+        Subtitle("Subtitle"),
         Heading1("Heading1"),
         Heading2("Heading2"),
         Default("Normal");
@@ -44,6 +48,20 @@ public class DocxWriter {
         return instance;
     }
 
+    /**
+     *
+     * @param fileName
+     * @param docTitle
+     * @param prompt
+     * An array of texts inside the paragraphs - might include decorator to indicate the style and alignment of the text
+     * example for one of the prompts:
+     * -CENTER~example
+     * where "-CENTER" indicates the text would be aligned at the center with the default style,
+     * and "~" indicates the end of the decorator
+     *
+     * The method assumes that no-decorator prompt corresponds to "-LEFT~<REST of the prompt>" prompt
+     * @return
+     */
     public boolean writeToDocx(final String fileName, final String docTitle ,String[] prompt){
         try(XWPFDocument doc = new XWPFDocument()){
             XWPFStyles styles = doc.createStyles();
@@ -56,8 +74,33 @@ public class DocxWriter {
             generateParagraphRun(title, docTitle, Styles.Title);
             try{
                 for(String s : prompt){
-                    XWPFParagraph p = doc.createParagraph();
-                    generateParagraphRun(p, s, Styles.Heading1);
+                    String[] args = {s};
+                    if(s.contains("~"))
+                        args = s.split("~");
+                    if(args.length == 1)
+                    {
+                        XWPFParagraph p = doc.createParagraph();
+                        p.setAlignment(ParagraphAlignment.LEFT);
+                        generateParagraphRun(p, s, Styles.Default);
+                    }
+                    else if(args.length == 2){
+                        String[] pStyle = args[0].split("-");
+
+                        XWPFParagraph p = doc.createParagraph();
+                        switch (pStyle[1]) {
+                            case "LEFT" -> p.setAlignment(ParagraphAlignment.LEFT);
+                            case "RIGHT" -> p.setAlignment(ParagraphAlignment.RIGHT);
+                            case "CENTER" -> p.setAlignment(ParagraphAlignment.CENTER);
+                            case "" -> p.setAlignment(ParagraphAlignment.DISTRIBUTE);
+                        }
+                        switch (pStyle[0]){
+                            case "TITLE" -> generateParagraphRun(p, args[1], Styles.Title);
+                            case "SUBTITLE" -> generateParagraphRun(p, args[1], Styles.Subtitle);
+                            case "HEADING1" -> generateParagraphRun(p, args[1], Styles.Heading1);
+                            case "HEADING2" -> generateParagraphRun(p, args[1], Styles.Heading2);
+                            case "" -> generateParagraphRun(p, args[1], Styles.Default);
+                        }
+                    }
                 }
             }catch (NullPointerException e){
                 e.getMessage();

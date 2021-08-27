@@ -178,7 +178,7 @@
                      <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                     <Group fx:id="alert_sctn" visible="false">
+                     <Group visible="false">
                         <children>
                            <GridPane>
                               <columnConstraints>
@@ -194,7 +194,7 @@
                                        <Font size="32.0" />
                                     </font>
                                  </Label>
-                                 <Label text="Please add some records first" GridPane.rowIndex="1">
+                                 <Label fx:id="alert_lbl" text="Please add some records first" GridPane.rowIndex="1">
                                     <font>
                                        <Font size="18.0" />
                                     </font>
@@ -213,25 +213,11 @@
                      <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                     <Group fx:id="welcome_sctn">
-                        <children>
-                           <GridPane>
-                              <columnConstraints>
-                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                              <children>
-                                 <Label text="Please select which records to add">
-                                    <font>
-                                       <Font size="32.0" />
-                                    </font>
-                                 </Label>
-                              </children>
-                           </GridPane>
-                        </children>
-                     </Group>
+                     <Label text="Please select which records to add">
+                        <font>
+                           <Font size="32.0" />
+                        </font>
+                     </Label>
                   </children>
                </GridPane>
             </children>

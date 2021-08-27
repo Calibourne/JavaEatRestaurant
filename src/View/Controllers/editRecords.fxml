@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsPageController">
+<AnchorPane prefHeight="576.0" prefWidth="813.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsPageController">
    <children>
       <GridPane prefHeight="576.0" prefWidth="813.0" styleClass="InnerMenuBar">
          <columnConstraints>
@@ -42,7 +42,7 @@
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons8-cook-32.png" />
+                              <Image url="@../images/icons8-cook-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -54,7 +54,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons8-area-32.png" />
+                              <Image url="@../images/icons8-area-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -69,7 +69,7 @@
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons8-delivery-boy-32.png" />
+                              <Image url="@../images/icons8-delivery-boy-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -84,7 +84,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons8_Person_32px.png" />
+                              <Image url="@../images/icons8_Person_32px.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -96,7 +96,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons8-ingredient-32.png" />
+                              <Image url="@../images/icons8-ingredient-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -108,7 +108,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons8-dish-32.png" />
+                              <Image url="@../images/icons8-dish-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -120,7 +120,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons8-order-32.png" />
+                              <Image url="@../images/icons8-order-32.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -132,7 +132,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/icons8_Delivery_32px.png" />
+                              <Image url="@../images/icons8_Delivery_32px.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -158,36 +158,56 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                   </GridPane>
-                  <Group fx:id="welcome_sctn">
+                  <GridPane fx:id="alert_grid" styleClass="Content">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
-                        <Label text="Please select which records to edit">
-                           <font>
-                              <Font size="32.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-                  <Group fx:id="alert_sctn" layoutX="70.0" layoutY="272.0" visible="false">
-                     <children>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
+                        <Group fx:id="alert_sctn">
                            <children>
-                              <Label style="-fx-text-fill: red;" text="Can't do that yet!">
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label style="-fx-text-fill: red;" text="Can't do that yet!">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="alert_lbl" text="You don't have any {record}s in the database" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </Group>
+                     </children>
+                  </GridPane>
+                  <GridPane styleClass="Content">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Group fx:id="welcome_sctn">
+                           <children>
+                              <Label text="Please select which records to edit">
                                  <font>
-                                    <Font size="36.0" />
+                                    <Font size="32.0" />
                                  </font>
                               </Label>
-                              <Label text="You don't have any {record}s in the database" GridPane.rowIndex="1" />
                            </children>
-                        </GridPane>
+                        </Group>
                      </children>
-                  </Group>
+                  </GridPane>
                </children>
             </GridPane>
          </children>

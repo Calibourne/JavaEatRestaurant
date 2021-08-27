@@ -1,41 +1,24 @@
 package View.Controllers;
 
 import Model.*;
-import Model.Exceptions.NoComponentsException;
 import Model.Requests.AddRecordRequest;
 import Utils.*;
-import impl.org.controlsfx.collections.ReadOnlyUnbackedObservableList;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.fxml.FXML;
-
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.lang.Record;
-import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.Function;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AddRecordsController {
     // region Properties
@@ -184,6 +167,9 @@ public class AddRecordsController {
     private Button minus_btn;
     // endregion
 
+    @FXML
+    private AnchorPane window;
+
     private Restaurant rest;
 
     @FXML
@@ -329,6 +315,10 @@ public class AddRecordsController {
                         .addAll(rest.getCustomers().values().stream().
                                 filter(c->!rest.getBlacklist().contains(c))
                                 .toList());
+                if(customersToBlacklist_combo.getItems().size() == 0){
+                    GridPane g = (GridPane) window.getParent();
+                    g.getChildren().remove(window);
+                }
             }
         }catch (NullPointerException ex){
             System.out.println(ex.getMessage());
@@ -468,13 +458,13 @@ public class AddRecordsController {
                     neighbourhoods_combo.getSelectionModel().clearSelection();
                     glutenIntolerant_check.setSelected(false);
                     lactoseIntolerant_check.setSelected(false);
+                    Image img = SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"), null);
+                    img_source.setImage(img);
                 }
                 fname_field.clear();
                 lname_field.clear();
                 genders_combo.getSelectionModel().clearSelection();
                 birthDate_dp.setValue(null);
-                Image img = SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"), null);
-                img_source.setImage(img);
             }
             if (addComponents_sctn != null) {
                 String ingredientName = ingredientName_field.getText().length()>0?ingredientName_field.getText():null;

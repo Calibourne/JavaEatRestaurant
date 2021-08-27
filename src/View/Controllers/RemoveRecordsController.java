@@ -37,15 +37,12 @@ public class RemoveRecordsController {
     @FXML
     private void initialize(){
         if(removeCooks_sctn != null){
-            //record_combo.setPromptText("Choose cook to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getCooks().values());
         }
         if(removeDeliPersons_sctn != null){
-           // record_combo.setPromptText("Choose deliveryman to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
         }
         if(removeCustomers_sctn != null){
-           // record_combo.setPromptText("Choose customer to remove");
             record_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
         }
         if(removeComponents_sctn != null){

@@ -2,28 +2,16 @@ package View.Controllers;
 
 //import Model.DeliveryArea;
 
-import Model.*;
-import Utils.*;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 
 public class RemoveRecordsPageController extends RecordManagementController{
@@ -47,72 +35,106 @@ public class RemoveRecordsPageController extends RecordManagementController{
     private Button removeAreas_btn;
     @FXML
     private GridPane removeWindow;
+    @FXML
+    private GridPane alert_grid;
+    @FXML
+    private Label alert_lbl;
     //endregion
 
     public void handleButtonClick(ActionEvent e) {
-        removeWindow.setVisible(false);
         if(e.getSource() == removeCooks_btn && getRestaurant().getCooks().size()==0){
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn,welcome_sctn, "You don't have any cooks to remove");
+            alert_grid.toFront();
+            alert_lbl.setText("No cooks to remove");
         }
         else if(e.getSource() == removeDeliPersons_btn && getRestaurant().getDeliveryPersons().size()==0){
-            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You don't have any deliverymen to remove");
+            alert_grid.toFront();
+            alert_lbl.setText("No deliverymen to remove");
         }
         else if(e.getSource() == removeCustomers_btn && getRestaurant().getCustomers().size()==0){
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn,welcome_sctn, "You don't have any customers to remove");
+            alert_grid.toFront();
+            alert_lbl.setText("No customers to remove");
         }
         else if(e.getSource() == removeComponents_btn && getRestaurant().getComponents().size()==0){
-            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"Tou don't have any ingredients to remove");
+            alert_grid.toFront();
+            alert_lbl.setText("No ingredients to remove");
         }
         else if(e.getSource() == removeDishes_btn && getRestaurant().getDishes().size()==0){
-            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You don't have any dishes to remove");
+            alert_grid.toFront();
+            alert_lbl.setText("No dishes to remove");
         }
         else if(e.getSource() == removeOrders_btn && getRestaurant().getOrders().size()==0){
-            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You don't have any orders to remove");
+            alert_grid.toFront();
+            alert_lbl.setText("No orders to remove");
         }
         else if(e.getSource() == removeDeliveries_btn && getRestaurant().getDeliveries().size()==0){
-            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You don't have any deliveries to remove");
+            alert_grid.toFront();
+            alert_lbl.setText("No deliveries to remove");
         }
         else if(e.getSource() == removeAreas_btn && getRestaurant().getAreas().size()<=1){
-            ControllerUtils.showAlertMessage(getGroups().values(),alert_sctn,welcome_sctn,"You should have at least 2 delivery areas to be able to remove one");
+            alert_grid.toFront();
+            alert_lbl.setText("You need to have at least 2 delivery areas to be able to remove one");
         }
         else {
             try {
-                welcome_sctn.setVisible(false);
-                alert_sctn.setVisible(false);
-                removeWindow.getChildren().clear();
+                //removeWindow.getChildren().clear();
+                removeWindow.toFront();
                 if (e.getSource() == removeCooks_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeCooks.fxml"));
+                    System.out.println("test");
+                    alert_lbl.setText("No Cooks to remove");
+                    alert_grid.toFront();
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeCooks.fxml")));
                     removeWindow.getChildren().add(node);
+                    removeWindow.toFront();
                 }
                 if (e.getSource() == removeCustomers_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeCustomers.fxml"));
+                    alert_lbl.setText("No Customers to remove");
+                    alert_grid.toFront();
+                    removeWindow.toFront();
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeCustomers.fxml")));
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeDeliPersons_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeDeliveryPersons.fxml"));
+                    alert_lbl.setText("No Deliverymen to remove");
+                    alert_grid.toFront();
+                    removeWindow.toFront();
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeDeliveryPersons.fxml")));
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeComponents_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeIngredients.fxml"));
+                    alert_lbl.setText("No Ingredients to remove");
+                    alert_grid.toFront();
+                    removeWindow.toFront();
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeIngredients.fxml")));
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeDishes_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeDishes.fxml"));
+                    alert_lbl.setText("No Dishes to remove");
+                    alert_grid.toFront();
+                    removeWindow.toFront();
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeDishes.fxml")));
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeOrders_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeOrders.fxml"));
+                    alert_lbl.setText("No Orders to remove");
+                    alert_grid.toFront();
+                    removeWindow.toFront();
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeOrders.fxml")));
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeDeliveries_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeDeliveries.fxml"));
+                    alert_lbl.setText("No Deliveries to remove");
+                    alert_grid.toFront();
+                    removeWindow.toFront();
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeDeliveries.fxml")));
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeAreas_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/removeRecordsPage/removeDeliveryAreas.fxml"));
+                    alert_lbl.setText("No Delivery areas to remove");
+                    alert_grid.toFront();
+                    removeWindow.toFront();
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeDeliveryAreas.fxml")));
                     removeWindow.getChildren().add(node);
                 }
-                removeWindow.setVisible(true);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

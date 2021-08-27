@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -33,54 +34,60 @@ public class EditRecordsPageController extends RecordManagementController {
     private Button editDeliveries_btn;
     @FXML
     private GridPane editWindow;
+    @FXML
+    private GridPane alert_grid;
+    @FXML
+    private Label alert_lbl;
     //endregion
 
     @FXML
     protected void handleButtonClick(ActionEvent e) {
         if (e.getSource() == editDeliPersons_btn && getRestaurant().getAreas().size() == 0) {
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some delivery areas first");
+            alert_lbl.setText("Please add at least 1 delivery area first");
+            alert_grid.toFront();
         } else if (e.getSource() == editDishes_btn && getRestaurant().getComponents().size() == 0) {
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some ingredients first");
+            alert_lbl.setText("Please add some ingredients first");
+            alert_grid.toFront();
         } else if (e.getSource() == editOrders_btn && getRestaurant().getDishes().size() == 0) {
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some dishes first");
+            alert_lbl.setText("Please add some dishes first");
+            alert_grid.toFront();
         } else if (e.getSource() == editDeliveries_btn && getRestaurant().getOrders().size() == 0) {
-            ControllerUtils.showAlertMessage(getGroups().values(), alert_sctn, welcome_sctn, "Please add some orders first");
+            alert_lbl.setText("Please add some orders first");
+            alert_grid.toFront();
         } else {
             try {
-                welcome_sctn.setVisible(false);
-                alert_sctn.setVisible(false);
-                editWindow.setVisible(false);
+                editWindow.toFront();
                 editWindow.getChildren().clear();
                 if (e.getSource() == editCooks_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editCooks.fxml"));
+                    Node node = FXMLLoader.load(getClass().getResource("editCooks.fxml"));
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editCustomers_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editCustomers.fxml"));
+                    Node node = FXMLLoader.load(getClass().getResource("editCustomers.fxml"));
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editDeliPersons_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editDeliveryPersons.fxml"));
+                    Node node = FXMLLoader.load(getClass().getResource("editDeliveryPersons.fxml"));
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editComponents_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editIngredients.fxml"));
+                    Node node = FXMLLoader.load(getClass().getResource("editIngredients.fxml"));
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editDishes_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editDishes.fxml"));
+                    Node node = FXMLLoader.load(getClass().getResource("editDishes.fxml"));
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editOrders_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editOrders.fxml"));
+                    Node node = FXMLLoader.load(getClass().getResource("editOrders.fxml"));
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editDeliveries_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editDeliveries.fxml"));
+                    Node node = FXMLLoader.load(getClass().getResource("editDeliveries.fxml"));
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editAreas_btn) {
-                    Node node = FXMLLoader.load(getClass().getResource("../fxmls/editRecordsPage/editDeliveryAreas.fxml"));
+                    Node node = FXMLLoader.load(getClass().getResource("editDeliveryAreas.fxml"));
                     editWindow.getChildren().add(node);
                 }
                 editWindow.setVisible(true);

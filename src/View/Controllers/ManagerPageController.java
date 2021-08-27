@@ -121,7 +121,7 @@ public class ManagerPageController {
         if(e.getSource() == btnRemoveRecords)
             try{
                 pnlChoosedPage.getChildren().clear();
-                Node recordsR = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/removeRecordsPage/removeRecords.fxml")));;
+                Node recordsR = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeRecords.fxml")));;
                 pnlChoosedPage.getChildren().add(recordsR);
             }catch (IOException | NullPointerException ex) {
                 System.out.println(ex.getMessage());
@@ -129,7 +129,7 @@ public class ManagerPageController {
         if(e.getSource() == btnEditRecords)
             try {
                 pnlChoosedPage.getChildren().clear();
-                Node recordsE = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/editRecordsPage/editRecords.fxml")));
+                Node recordsE = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("editRecords.fxml")));
                 pnlChoosedPage.getChildren().add(recordsE);
             }catch (IOException | NullPointerException ex){
                 System.out.println(ex.getMessage());

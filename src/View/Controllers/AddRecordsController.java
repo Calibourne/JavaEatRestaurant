@@ -557,7 +557,7 @@ public class AddRecordsController {
                     List<Order> selectedItems = orders_checkedList.getItems();
                     request = new AddRecordRequest(
                             new RegularDelivery(-1),
-                            selectedItems,
+                            new TreeSet<>(selectedItems),
                             deliveryPerson,
                             area,
                             isDelivered,

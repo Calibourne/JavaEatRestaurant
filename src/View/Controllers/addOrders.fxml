@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-
 <AnchorPane prefHeight="576.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <VBox alignment="CENTER" prefHeight="80.0" prefWidth="617.0" styleClass="InnerMenuBar">
@@ -48,13 +47,14 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <GridPane fx:id="info_grid" vgap="20.0">
+                  <GridPane fx:id="info_grid" vgap="7.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <GridPane vgap="10.0">
@@ -172,6 +172,7 @@
                            </children>
                         </GridPane>
                         <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Order" GridPane.rowIndex="1" />
+                        <Label fx:id="result_label" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <GridPane fx:id="alert_grid" visible="false">

@@ -1,7 +1,7 @@
 package View.CustomerStage;
 
-import Model.*;
 import Model.Record;
+import Model.*;
 import Model.Requests.AddRecordRequest;
 import Model.Requests.RecordRequest;
 import Model.Requests.RemoveRecordRequest;
@@ -15,7 +15,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -192,22 +191,23 @@ public class CustomerCartAndHistoryController {
             );
             TreeSet<Order> order = new TreeSet<>();
             order.add((Order) orderRequest.getRecord());
-            AddRecordRequest deliveryRequest = new AddRecordRequest(new RegularDelivery(-1),
-                    order, dp, dp.getArea(), true , LocalDate.now()
-            );
-            ((Order)orderRequest.getRecord()).setDelivery((Delivery) deliveryRequest.getRecord());
+//            AddRecordRequest deliveryRequest = new AddRecordRequest(new RegularDelivery(-1),
+//                    order, dp, dp.getArea(), true , LocalDate.now()
+//            );
+//            ((Order)orderRequest.getRecord()).setDelivery((Delivery) deliveryRequest.getRecord());
             orderRequest.saveRequest();
-            deliveryRequest.saveRequest();
+//            deliveryRequest.saveRequest();
             Order o = (Order) orderRequest.getRecord();
             clearCart();
             order_in_cart = new HashSet<>();
-            cart_empty_message.setText("Order placed successfully and will arrive within " + o.orderWaitingTime(o.getDelivery().getArea()) + " minutes");
+            cart_empty_message.setStyle("-fx-text-fill: #00ff00");
+            cart_empty_message.setText("Order placed successfully");
             restaurant.saveDatabase("Rest.ser");
 
         }catch (Exception e){
-            //e.printStackTrace();
-            cart_empty_message.setText("Failed to place an order");
+            e.printStackTrace();
             cart_empty_message.setStyle("-fx-text-fill: red");
+            cart_empty_message.setText("Failed to place an order");
         }
     }
 

@@ -165,10 +165,14 @@ public class AddRecordsController {
     private Button plus_btn;
     @FXML
     private Button minus_btn;
-    // endregion
-
     @FXML
     private AnchorPane window;
+
+    @FXML
+    private Label result_label;
+
+    // endregion
+
 
     private Restaurant rest;
 
@@ -386,6 +390,7 @@ public class AddRecordsController {
     }
     private void addRecord(){
         try {
+            result_label.setText("");
             AddRecordRequest request = new AddRecordRequest(null);
             // The code for selecting the checked items is taken from the following site:
             // https://www.tabnine.com/code/java/classes/org.controlsfx.control.CheckComboBox
@@ -404,12 +409,17 @@ public class AddRecordsController {
                 neighbourhoods_checkedList.getCheckModel().clearChecks();
                 areaName_field.clear();
                 deliveryTime_field.clear();
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Delivery Area added successfully");
             }
             if (addCooks_sctn != null || addCustomers_sctn != null || addDeliPersons_sctn != null){
                 String fname = fname_field.getText().length()>0?fname_field.getText():null;
                 String lname = lname_field.getText().length()>0?lname_field.getText():null;
                 Gender gender = genders_combo.getValue();
                 LocalDate birthdate = birthDate_dp.getValue();
+                if(fname==null || lname==null || gender==null || birthdate==null){
+                    throw new NullPointerException();
+                }
                 if (addCooks_sctn != null) {
                     Expertise expertise = expertises_combo.getValue();
                     boolean isChef = isChef_check.isSelected();
@@ -424,6 +434,8 @@ public class AddRecordsController {
                     );
                     expertises_combo.getSelectionModel().clearSelection();
                     isChef_check.setSelected(false);
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Cook added successfully");
                 }
                 if (addDeliPersons_sctn != null) {
                     Vehicle vehicle = vehicles_combo.getValue();
@@ -439,6 +451,8 @@ public class AddRecordsController {
                     );
                     vehicles_combo.getSelectionModel().clearSelection();
                     deliveryAreas_combo.getSelectionModel().clearSelection();
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Delivery man added successfully");
                 }
                 if (addCustomers_sctn != null) {
                     Neighberhood neighbourhood = neighbourhoods_combo.getValue();
@@ -460,6 +474,8 @@ public class AddRecordsController {
                     lactoseIntolerant_check.setSelected(false);
                     Image img = SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"), null);
                     img_source.setImage(img);
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Customer added successfully");
                 }
                 fname_field.clear();
                 lname_field.clear();
@@ -468,9 +484,13 @@ public class AddRecordsController {
             }
             if (addComponents_sctn != null) {
                 String ingredientName = ingredientName_field.getText().length()>0?ingredientName_field.getText():null;
-                Integer ingredientPrice = ingredientPrice_field.getText().length()>0? Integer.valueOf(ingredientPrice_field.getText()) :null;
+                Double ingredientPrice = ingredientPrice_field.getText().length()>0? Double.valueOf(ingredientPrice_field.getText()) :null;
                 boolean hasGluten = hasGluten_check.isSelected();
                 boolean hasLactose = hasLactose_check.isSelected();
+                if(ingredientName==null || ingredientPrice_field.getText()==null){
+                    throw new NullPointerException();
+                }
+
                 request = new AddRecordRequest(
                         new Component(-1),
                         ingredientName,
@@ -482,6 +502,8 @@ public class AddRecordsController {
                 ingredientPrice_field.clear();
                 hasGluten_check.setSelected(false);
                 hasLactose_check.setSelected(false);
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Ingredient added successfully");
             }
             if (addDishes_sctn != null) {
                 String dishName = dishName_field.getText().length()>0?dishName_field.getText():null;
@@ -490,10 +512,17 @@ public class AddRecordsController {
                 List<Component> selectedItems = components_checkedList.getItems().stream()
                         .map(ListedRecord::getRecord).map(r->(Component)r).toList();
                 ArrayList<Component> selectedIngredients = new ArrayList<>(selectedItems);
+
+                if(dishName==null || dishPrepareTime_field.getText()==null || dishType==null || selectedItems.size()==0){
+                    throw new NullPointerException();
+                }
+
                 request = new AddRecordRequest(new Dish(-1), dishName, dishType, selectedIngredients, dishPrepareTime);
                 dishType_combo.getSelectionModel().clearSelection();
                 components_checkedList.getItems().clear();
                 dishName_field.clear();
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Dish added successfully");
             }
             if (addOrders_sctn != null) {
                 Customer customer = customers_combo.getValue();
@@ -516,6 +545,8 @@ public class AddRecordsController {
                 customers_combo.getSelectionModel().clearSelection();
                 deliveries_combo.getSelectionModel().clearSelection();
                 dishes_checkedList.getItems().clear();
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Order added successfully");
             }
             if (addDeliveries_sctn != null) {
                 DeliveryPerson deliveryPerson = deliveryPersons_combo.getValue();
@@ -547,7 +578,10 @@ public class AddRecordsController {
                     );
                     orders_combo.getSelectionModel().clearSelection();
                     expressFee_field.clear();
+
                 }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Delivery added successfully");
             }
             if (addToBlacklist_sctn != null) {
                 Customer toBlacklist = customersToBlacklist_combo.getValue();
@@ -558,12 +592,17 @@ public class AddRecordsController {
                 customersToBlacklist_combo.setValue(null);
                 customersToBlacklist_combo.setPromptText("Choose customer to blacklist");
                 System.out.printf("%s added to blacklist\n", toBlacklist);
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Successfully blacklisted the customer");
                 return;
             }
             request.saveRequest();
             Restaurant.getInstance().saveDatabase("Rest.ser");
             System.out.printf("%s was added successfully\n", request.getRecord());
+
         }catch (Exception e){
+            result_label.setStyle("-fx-text-fill: red");
+            result_label.setText("Please fill all required fields");
             e.printStackTrace();
             System.out.println(e.getMessage());
         }

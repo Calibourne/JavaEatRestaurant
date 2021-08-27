@@ -48,13 +48,14 @@
                   <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <GridPane fx:id="info_grid" vgap="20.0">
+                  <GridPane fx:id="info_grid" vgap="7.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <GridPane vgap="10.0">
@@ -136,6 +137,11 @@
                            </children>
                         </GridPane>
                         <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Dish" GridPane.rowIndex="1" />
+                        <Label fx:id="result_label" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
                      </children>
                      <GridPane.margin>
                         <Insets left="80.0" top="140.0" />

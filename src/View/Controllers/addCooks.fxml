@@ -40,7 +40,7 @@
       </VBox>
       <Group fx:id="addCooks_sctn">
          <children>
-            <GridPane layoutY="1.0" vgap="10.0">
+            <GridPane layoutY="1.0" vgap="40.0">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
@@ -105,5 +105,6 @@
             </GridPane>
          </children>
       </Group>
+      <Label fx:id="result_label" layoutX="230.0" layoutY="482.0" />
    </children>
 </AnchorPane>

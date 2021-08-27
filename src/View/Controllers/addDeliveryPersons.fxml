@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="576.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <VBox alignment="CENTER" prefHeight="80.0" prefWidth="617.0" styleClass="InnerMenuBar">
@@ -92,6 +91,7 @@
                      </children>
                   </GridPane>
                   <Button fx:id="submit" layoutX="168.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Add Delivery person" />
+                  <Label fx:id="result_label" layoutX="160.0" layoutY="240.0" />
                </children>
             </Group>
          </children>

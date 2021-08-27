@@ -18,7 +18,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-
 <AnchorPane prefHeight="576.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <Group fx:id="addDeliveries_sctn">
@@ -53,13 +52,14 @@
                         <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <GridPane fx:id="info_grid" vgap="20.0">
+                        <GridPane fx:id="info_grid" vgap="7.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <GridPane vgap="10.0">
@@ -172,6 +172,7 @@
                                  </children>
                               </GridPane>
                               <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Submit change" GridPane.rowIndex="1" />
+                              <Label fx:id="result_label" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <GridPane fx:id="alert_grid" visible="false">
@@ -193,7 +194,7 @@
                   </GridPane>
                </children>
                <padding>
-                  <Insets left="90.0" top="150.0" />
+                  <Insets left="90.0" top="110.0" />
                </padding>
             </GridPane>
          </children>

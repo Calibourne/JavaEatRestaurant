@@ -167,7 +167,8 @@ public class AddRecordsController {
     private Button minus_btn;
     @FXML
     private AnchorPane window;
-
+    @FXML
+    private GridPane info_grid;
     @FXML
     private Label result_label;
 
@@ -332,11 +333,13 @@ public class AddRecordsController {
     private void handleButtonClick(ActionEvent e){
         if (e.getSource() == ed_btn)
         {
+            info_grid.setVisible(true);
             ed_vbox.setVisible(true);
             rd_vbox.setVisible(false);
         }
         if (e.getSource() == rd_btn)
         {
+            info_grid.setVisible(true);
             ed_vbox.setVisible(false);
             rd_vbox.setVisible(true);
         }

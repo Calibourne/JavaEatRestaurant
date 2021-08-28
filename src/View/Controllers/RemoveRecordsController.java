@@ -9,9 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class RemoveRecordsController {
+    @FXML
+    private Label result_label;
     @FXML
     private Group removeCooks_sctn;
     @FXML
@@ -74,6 +77,7 @@ public class RemoveRecordsController {
     @FXML
     private void handleButtonClick(ActionEvent e){
         try {
+            result_label.setText("");
             RemoveRecordRequest request = new RemoveRecordRequest(null);
             if (removeAreas_sctn == null) {
                 Record record = record_combo.getSelectionModel().getSelectedItem();
@@ -86,10 +90,13 @@ public class RemoveRecordsController {
                 newArea_combo.getItems().clear();
                 request.saveRequest();
                 record_combo.getItems().clear();
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Delivery Area removed successfully");
                 initialize();
                 Restaurant.getInstance().saveDatabase("Rest.ser");
-                if(Restaurant.getInstance().getAreas().values().size()>2)
+                if(Restaurant.getInstance().getAreas().values().size()>2) {
                     return;
+                }
                 GridPane pane = (GridPane) removeAreas_sctn.getParent();
                 pane.getChildren().remove(removeAreas_sctn);
             }
@@ -101,6 +108,8 @@ public class RemoveRecordsController {
                     GridPane pane = (GridPane) removeCooks_sctn.getParent();
                     pane.getChildren().remove(removeCooks_sctn);
                 }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Cook removed successfully");
             }
             if (removeDeliPersons_sctn != null) {
                 Restaurant rest = Restaurant.getInstance();
@@ -108,6 +117,8 @@ public class RemoveRecordsController {
                     GridPane pane = (GridPane) removeDeliPersons_sctn.getParent();
                     pane.getChildren().remove(removeDeliPersons_sctn);
                 }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Delivery Person removed successfully");
             }
             if (removeCustomers_sctn != null) {
                 Restaurant rest = Restaurant.getInstance();
@@ -115,6 +126,8 @@ public class RemoveRecordsController {
                     GridPane pane = (GridPane) removeCustomers_sctn.getParent();
                     pane.getChildren().remove(removeCustomers_sctn);
                 }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Customer removed successfully");
             }
             if (removeComponents_sctn != null) {
                 Restaurant rest = Restaurant.getInstance();
@@ -122,6 +135,8 @@ public class RemoveRecordsController {
                     GridPane pane = (GridPane) removeComponents_sctn.getParent();
                     pane.getChildren().remove(removeComponents_sctn);
                 }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Ingredient removed successfully");
             }
             if (removeDishes_sctn != null) {
                 Restaurant rest = Restaurant.getInstance();
@@ -129,6 +144,8 @@ public class RemoveRecordsController {
                     GridPane pane = (GridPane) removeDishes_sctn.getParent();
                     pane.getChildren().remove(removeDishes_sctn);
                 }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Dish removed successfully");
             }
             if (removeOrders_sctn != null) {
                 Restaurant rest = Restaurant.getInstance();
@@ -136,6 +153,8 @@ public class RemoveRecordsController {
                     GridPane pane = (GridPane) removeOrders_sctn.getParent();
                     pane.getChildren().remove(removeOrders_sctn);
                 }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Dish removed successfully");
             }
             if (removeDeliveries_sctn != null) {
                 Restaurant rest = Restaurant.getInstance();
@@ -143,6 +162,8 @@ public class RemoveRecordsController {
                     GridPane pane = (GridPane) removeDeliveries_sctn.getParent();
                     pane.getChildren().remove(removeDeliveries_sctn);
                 }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Dish removed successfully");
             }
             initialize();
             Restaurant.getInstance().saveDatabase("Rest.ser");

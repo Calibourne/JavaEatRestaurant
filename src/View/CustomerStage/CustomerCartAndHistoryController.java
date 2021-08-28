@@ -5,6 +5,7 @@ import Model.*;
 import Model.Requests.AddRecordRequest;
 import Model.Requests.RecordRequest;
 import Model.Requests.RemoveRecordRequest;
+import Utils.SFXManager;
 import View.Controllers.LoginPageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -206,6 +207,7 @@ public class CustomerCartAndHistoryController {
 
         }catch (Exception e){
             e.printStackTrace();
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             cart_empty_message.setStyle("-fx-text-fill: red");
             cart_empty_message.setText("Failed to place an order");
         }

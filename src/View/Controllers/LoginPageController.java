@@ -3,6 +3,7 @@ package View.Controllers;
 import Model.Customer;
 import Model.Restaurant;
 import Utils.ImageManager;
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,19 +34,20 @@ public class LoginPageController {
     private Restaurant rest;
 
     private static Customer customer;
+
     @FXML
-    private void initialize(){
-        if(customer!=null){
+    private void initialize() {
+        if (customer != null) {
             usernameField.setText(customer.getUsername());
             passwordField.setText(customer.getPassword());
         }
         rest = Restaurant.getInstance();
         rest.saveDatabase("Rest.ser");
-        ImageManager.getInstance().getImages().forEach((k,v)-> System.out.printf("%s: %s\n",k, v));
+        ImageManager.getInstance().getImages().forEach((k, v) -> System.out.printf("%s: %s\n", k, v));
         //rest.getAddRecordHistory().get(DeliveryPerson.class.getSimpleName()).forEach(System.out::println);
     }
 
-    public static Customer getCustomer(){
+    public static Customer getCustomer() {
         return customer;
     }
 
@@ -54,45 +56,46 @@ public class LoginPageController {
     }
 
     @FXML
-    private void LoginButtonOnAction(ActionEvent e){
-        if(usernameField.getText().equals("m") && passwordField.getText().equals("m")){
+    private void LoginButtonOnAction(ActionEvent e) {
+        if (usernameField.getText().equals("m") && passwordField.getText().equals("m")) {
             try {
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("managerPage.fxml"));
                 ControllerUtils.changeScreen(s, p);
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logon_Sound.wav");
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-        }
-
-        if (rest.getUsersList().containsKey(usernameField.getText())
-                && passwordField.getText().equals(rest.getUsersList().get(usernameField.getText()).getPassword())){
+        }else if (rest.getUsersList().containsKey(usernameField.getText())
+                && passwordField.getText().equals(rest.getUsersList().get(usernameField.getText()).getPassword())) {
             try {
                 customer = rest.getUsersList().get(usernameField.getText());
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerHome.fxml"));
                 ControllerUtils.changeScreen(s, p);
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logon_sound.wav");
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-        }
-        else
+        } else {
             loginMessageLabel.setText("Username/Password is incorrect. Please try again.");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+        }
     }
 
     @FXML
-    private void cancelButtonOnAction(ActionEvent e){
+    private void cancelButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    private void registerButtonOnAction(ActionEvent e){
-        try{
+    private void registerButtonOnAction(ActionEvent e) {
+        try {
             Stage s = (Stage) registerButton.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("SignupPage.fxml"));
             ControllerUtils.changeScreen(s, p);
-        }catch (IOException ioException){
+        } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
@@ -101,11 +104,10 @@ public class LoginPageController {
         if (e.getSource() == loginButton) {
             LoginButtonOnAction(e);
         }
-        if (e.getSource() == cancelButton){
+        if (e.getSource() == cancelButton) {
             cancelButtonOnAction(e);
         }
     }
-
 
 
 //    @FXML

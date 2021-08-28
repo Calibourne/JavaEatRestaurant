@@ -4,6 +4,7 @@ import Model.Component;
 import Model.Dish;
 import Model.ListedRecord;
 import Model.Restaurant;
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -194,9 +195,11 @@ public class AddCustomerOrderController {
                     pane.getChildren().add(cart);
                 }catch (IOException ex){
                     System.out.println("Error Loading");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 }
                 catch (NullPointerException ex){
                     alert_lbl.setText("Please add dishes to your order first!");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 }
             }));
         }catch(NullPointerException ex){

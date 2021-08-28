@@ -1,5 +1,6 @@
 package View.Controllers;
 
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -89,6 +90,7 @@ public class ManagerPageController {
         }
         if(e.getSource() == btnSignOut) {
             try {
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logoff_Sound.wav");
                 Stage s = (Stage) btnSignOut.getScene().getWindow();
                 Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../Controllers/LoginPage.fxml")));
                 s.hide();

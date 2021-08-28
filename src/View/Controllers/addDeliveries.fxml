@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane prefHeight="576.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
+<AnchorPane prefHeight="576.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
       <Group fx:id="addDeliveries_sctn">
          <children>
@@ -212,7 +212,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label alignment="CENTER" text="Please fill the following forms and press the button to add a delivery to the restaurant" textAlignment="CENTER">
+            <Label alignment="CENTER" text="Please choose a delivery type and then fill in the forms to add a delivery to the restaurant" textAlignment="CENTER">
                <effect>
                   <DropShadow />
                </effect>

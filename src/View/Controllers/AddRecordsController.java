@@ -606,6 +606,7 @@ public class AddRecordsController {
         }catch (Exception e){
             result_label.setStyle("-fx-text-fill: red");
             result_label.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             e.printStackTrace();
             System.out.println(e.getMessage());
         }

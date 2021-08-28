@@ -91,7 +91,7 @@
          </VBox.margin>
          <children>
             <ListView fx:id="query_result" layoutX="40.0" maxWidth="500.0" prefHeight="104.0" prefWidth="500.0" />
-            <Label fx:id="null_label" layoutX="279.0" layoutY="44.0" />
+            <Label fx:id="null_label" layoutX="170.0" layoutY="44.0" />
          </children>
       </AnchorPane>
       <GridPane maxWidth="300.0" prefHeight="30.0" prefWidth="300.0">
@@ -110,6 +110,9 @@
             <Insets top="10.0" />
          </VBox.margin>
       </GridPane>
-      <Label fx:id="result_label" />
+      <Label fx:id="result_label" alignment="CENTER" contentDisplay="CENTER">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></Label>
     </VBox>
 </AnchorPane>

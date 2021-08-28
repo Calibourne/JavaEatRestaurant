@@ -313,7 +313,6 @@ public class EditRecordsController {
             records_combo.getItems().addAll(Restaurant.getInstance().getOrders().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
-                    customers_combo.setCellFactory(list->new imageListCell<>());
                     customers_combo.setValue(((Order)newValue).getCustomer());
                     customers_combo.getItems().addAll(rest.getCustomers().values());
 

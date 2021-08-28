@@ -53,17 +53,20 @@ public class ImageManager implements Serializable {
                 images.put(saveName, output1.toURI().toURL());
                 images.put(saveName+"m", output2.toURI().toURL());
                 int h = im.getHeight(), w = im.getWidth();
+                double ratio = 1.0 * w / h;
                 if(h > MAX_DIM || w > MAX_DIM){
-                    double ratio = 1.0 * w / h;
                     int scaledDim = (int) ((ratio>1)?(1.0 * MAX_DIM / ratio):(1.0 * MAX_DIM * ratio));
-                    int scaledDimMinimised = (int) ((ratio>1)?(1.0 * MINIMIZED_DIM / ratio):(1.0 * MINIMIZED_DIM * ratio));
-                    if(w > h) {
+                    if(w > h)
                         resize(output1,saveNameFormat, MAX_DIM, scaledDim);
+                    else
+                        resize(output1,saveNameFormat, scaledDim, MAX_DIM);
+                }
+                if(h>MINIMIZED_DIM || w>MINIMIZED_DIM){
+                    int scaledDimMinimised = (int) ((ratio>1)?(1.0 * MINIMIZED_DIM / ratio):(1.0 * MINIMIZED_DIM * ratio));
+                    if(w > h)
                         resize(output2, saveMinimised, MINIMIZED_DIM, scaledDimMinimised);
-                        return true;
-                    }
-                    resize(output1,saveNameFormat, scaledDim, MAX_DIM);
-                    resize(output2,saveMinimised, scaledDimMinimised, MINIMIZED_DIM);
+                    else
+                        resize(output2,saveMinimised, scaledDimMinimised, MINIMIZED_DIM);
                 }
             }
         } catch (IOException e) {
@@ -94,5 +97,29 @@ public class ImageManager implements Serializable {
 
         // writes to output file
         ImageIO.write(outputImage, formatName, new File(outputImagePath));
+    }
+
+
+    // O(N^2), but there is no more efficient way
+    public static boolean isImageEqual(Image firstImage, Image secondImage){
+        // Prevent NullPointerException
+        if(firstImage != null && secondImage == null) return false;
+        if(firstImage == null) return secondImage == null;
+
+        // Compare images size
+        if(firstImage.getWidth() != secondImage.getWidth()) return false;
+        if(firstImage.getHeight() != secondImage.getHeight()) return false;
+
+        // Compare images color
+        for(int x = 0; x < firstImage.getWidth(); x++){
+            for(int y = 0; y < firstImage.getHeight(); y++){
+                int firstArgb = firstImage.getPixelReader().getArgb(x, y);
+                int secondArgb = secondImage.getPixelReader().getArgb(x, y);
+
+                if(firstArgb != secondArgb) return false;
+            }
+        }
+
+        return true;
     }
 }

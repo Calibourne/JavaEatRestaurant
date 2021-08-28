@@ -131,11 +131,19 @@ public class Customer extends Person{
 		this.password = password;
 	}
 
-	public BufferedImage getProfileImg() {
-		try{
-			return ImageManager.getInstance().getImage(profileImgName);
-		}catch(IllegalArgumentException | IOException e){
-			return null;
+	public BufferedImage getProfileImg(boolean minimized) {
+		if (!minimized) {
+			try {
+				return ImageManager.getInstance().getImage(profileImgName);
+			} catch (IllegalArgumentException | IOException e) {
+				return null;
+			}
+		} else {
+			try {
+				return ImageManager.getInstance().getImage(profileImgName + "m");
+			} catch (IllegalArgumentException | IOException e) {
+				return null;
+			}
 		}
 	}
 	public String getProfileImgName(){

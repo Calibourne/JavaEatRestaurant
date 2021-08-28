@@ -203,7 +203,7 @@ public class EditRecordRequest extends RecordRequest{
 
     @Override
     protected void setCustomerImage(Image img) {
-        Image current = SwingFXUtils.toFXImage(((Customer)record).getProfileImg(),null);
+        Image current = SwingFXUtils.toFXImage(((Customer)record).getProfileImg(false),null);
         if (!img.equals(current))
             super.setCustomerImage(img);
     }

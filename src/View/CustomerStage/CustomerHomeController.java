@@ -85,14 +85,13 @@ public class CustomerHomeController {
             loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerCartAndHistory.fxml")));
             content_pane.getChildren().add(loadedPage);
             customer = LoginPageController.getCustomer();
-            System.out.println(customer.getProfileImgName());
             if(customer.getProfileImgName().equals("Default")) {
                 BufferedImage bi = ImageManager.getInstance().getImage("Alert");
                 System.out.println(bi);
                 user_img.setImage(SwingFXUtils.toFXImage(bi,null));
             }
             else{
-                user_img.setImage(SwingFXUtils.toFXImage(customer.getProfileImg(),null));
+                user_img.setImage(SwingFXUtils.toFXImage(customer.getProfileImg(false),null));
             }
 
 //        username_label.setText("Welcome, \n"+customer.getFirstName()+" "+customer.getLastName()); This makes the label span on two lines

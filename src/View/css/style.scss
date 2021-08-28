@@ -22,13 +22,14 @@ $text_hover:      #ffd700;
 // other colours:
 $warning_alert_colour: #daa520;
 $error_alert_colour:   #ff0000;
-
-// css classes settings
 /*
-$outer_navbar_c:   #de2d00;
-$inner_navbar_c:   #e63a07;
-$background_c:     #ff7119;
-$light_c:          #ffab19;
+// css classes settings
+
+$darker_c:         #922424;
+$outer_navbar_c:   #d27434;
+$inner_navbar_c:   #e18025;
+$background_c:     #dba035;
+$light_c:          #dda96f;
 
 // elements colours
 $outernav_element_colour:    $outer_navbar_c;
@@ -36,8 +37,12 @@ $innerpane_element_colour:   $outer_navbar_c;
 $innernav_element_colour:    $inner_navbar_c;
 
 $element_hover:   $light_c;
-$element_pressed:#fff013;
+$element_pressed:#dfbb92;
+
+$text_colour:     #ffffff;
+$text_hover:      #71722e;
 */
+
 
 // default item settings
 .button{

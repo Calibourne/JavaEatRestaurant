@@ -9,10 +9,15 @@ import Utils.Neighberhood;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class editCustomerDetailsController {
 
@@ -74,7 +79,7 @@ public class editCustomerDetailsController {
             neighbourhoods_combo.setValue(user.getNeighberhood());
             glutenIntolerant_check.setSelected(user.isSensitiveToGluten());
             lactoseIntolerant_check.setSelected(user.isSensitiveToLactose());
-            img_source.setImage(SwingFXUtils.toFXImage(user.getProfileImg(), null));
+            img_source.setImage(SwingFXUtils.toFXImage(user.getProfileImg(false), null));
             username_lbl.setText(user.getUsername());
         }catch(NullPointerException e){
             e.getMessage();
@@ -93,11 +98,11 @@ public class editCustomerDetailsController {
                         neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
                 request.saveRequest();
                 Restaurant.getInstance().saveDatabase("Rest.ser");
-//                Stage window = (Stage) submit.getScene().getWindow();
-//                Parent customerHome = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CustomerHome.fxml")));
-//                window.setScene(new Scene(customerHome));
+                Stage window = (Stage) submit.getScene().getWindow();
+                Parent customerHome = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CustomerHome.fxml")));
+                ControllerUtils.changeScreen(window, customerHome);
 
-            }catch (IllegalArgumentException | NullPointerException ex){
+            }catch (IllegalArgumentException | NullPointerException | IOException ex){
                 System.out.println(ex.getMessage());
             }
             //change_lbl.setVisible(true);

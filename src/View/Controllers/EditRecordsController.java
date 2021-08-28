@@ -1,29 +1,24 @@
 package View.Controllers;
 
-import Model.*;
 import Model.Record;
+import Model.*;
 import Model.Requests.EditRecordRequest;
 import Utils.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
+import View.newElements.imageListCell;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -238,6 +233,7 @@ public class EditRecordsController {
             });
         }
         if(editCustomers_sctn != null){
+            records_combo.setCellFactory(list-> new imageListCell());
             records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
@@ -250,7 +246,7 @@ public class EditRecordsController {
                     glutenIntolerant_check.setSelected(((Customer)newValue).isSensitiveToGluten());
                     lactoseIntolerant_check.setSelected(((Customer)newValue).isSensitiveToLactose());
 
-                    img_source.setImage(SwingFXUtils.toFXImage(((Customer)newValue).getProfileImg(), null));
+                    img_source.setImage(SwingFXUtils.toFXImage(((Customer)newValue).getProfileImg(false), null));
                     ControllerUtils.setFileChooser(img_choose, img_source);
                     info_grid.setVisible(true);
                     alert_grid.setVisible(false);
@@ -509,8 +505,18 @@ public class EditRecordsController {
                 }
             }
             if(editCustomers_sctn != null) {
-
-
+                try{
+                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                            fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                            neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
+                    request.saveRequest();
+                    records_combo.getItems().clear();
+                    records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
+                    info_grid.setVisible(false);
+                    alert_grid.setVisible(true);
+                }catch (IllegalArgumentException | NullPointerException ex){
+                    System.out.println(ex.getMessage());
+                }
             }
             if(editComponents_sctn != null) {
                 try{

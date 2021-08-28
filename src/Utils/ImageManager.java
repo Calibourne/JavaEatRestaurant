@@ -13,7 +13,8 @@ import java.net.URL;
 import java.util.HashMap;
 
 public class ImageManager implements Serializable {
-    private  final int MAX_DIM = 96;
+    private final int MAX_DIM = 96;
+    private final int MINIMIZED_DIM = 32;
     private static ImageManager instance;
     private HashMap<String, URL> images;
     public static ImageManager getInstance() {
@@ -25,6 +26,7 @@ public class ImageManager implements Serializable {
     private ImageManager(){
         images = new HashMap<>();
         images.put("Default", getClass().getResource("/View/images/profile/default.png"));
+        images.put("Defaultm", getClass().getResource("/View/images/profile/defaultm.png"));
         images.put("Alert", getClass().getResource("/View/images/profile/defaultToUpdate.png"));
     }
 
@@ -37,27 +39,31 @@ public class ImageManager implements Serializable {
     }
 
     public BufferedImage getImage(String imgName) throws IOException {
-        System.out.println(images.get(imgName));
         return ImageIO.read(images.get(imgName));
     }
 
     public boolean saveProfileImage(Image img, String saveName){
         String saveNameFormat = "src/View/images/profile/"+saveName+".png";
-        File output = new File(saveNameFormat);
+        String saveMinimised = "src/View/images/profile/"+saveName+"m"+".png";
+        File output1 = new File(saveNameFormat);
+        File output2 = new File(saveMinimised);
         try {
             BufferedImage im = SwingFXUtils.fromFXImage(img, null);
-
-            if(ImageIO.write(im, "png", output)){
-                images.put(saveName, output.toURI().toURL());
+            if(ImageIO.write(im, "png", output1) && ImageIO.write(im, "png", output2)){
+                images.put(saveName, output1.toURI().toURL());
+                images.put(saveName+"m", output2.toURI().toURL());
                 int h = im.getHeight(), w = im.getWidth();
                 if(h > MAX_DIM || w > MAX_DIM){
                     double ratio = 1.0 * w / h;
                     int scaledDim = (int) ((ratio>1)?(1.0 * MAX_DIM / ratio):(1.0 * MAX_DIM * ratio));
+                    int scaledDimMinimised = (int) ((ratio>1)?(1.0 * MINIMIZED_DIM / ratio):(1.0 * MINIMIZED_DIM * ratio));
                     if(w > h) {
-                        resize(output,saveNameFormat, MAX_DIM, scaledDim);
+                        resize(output1,saveNameFormat, MAX_DIM, scaledDim);
+                        resize(output2, saveMinimised, MINIMIZED_DIM, scaledDimMinimised);
                         return true;
                     }
-                    resize(output,saveNameFormat, scaledDim, MAX_DIM);
+                    resize(output1,saveNameFormat, scaledDim, MAX_DIM);
+                    resize(output2,saveMinimised, scaledDimMinimised, MINIMIZED_DIM);
                 }
             }
         } catch (IOException e) {

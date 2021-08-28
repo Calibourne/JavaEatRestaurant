@@ -3,6 +3,7 @@ package View.CustomerStage;
 import Model.Customer;
 import Model.Restaurant;
 import Utils.ImageManager;
+import Utils.SFXManager;
 import View.Controllers.LoginPageController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -164,6 +165,7 @@ public class CustomerHomeController {
     public void signout(){
         try {
             Stage s = (Stage) signout_button.getScene().getWindow();
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logoff_Sound.wav");
             Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../Controllers/LoginPage.fxml")));
             s.hide();
             s.setScene(new Scene(p));

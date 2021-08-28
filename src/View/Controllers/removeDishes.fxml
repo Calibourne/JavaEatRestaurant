@@ -24,6 +24,7 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <GridPane vgap="5.0">
@@ -40,6 +41,7 @@
                      </children>
                   </GridPane>
                   <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Remove Dish" GridPane.rowIndex="1" />
+                  <Label fx:id="result_label" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

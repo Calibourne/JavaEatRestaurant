@@ -6,6 +6,7 @@ import Model.Restaurant;
 import Utils.Gender;
 import Utils.ImageManager;
 import Utils.Neighberhood;
+import Utils.SFXManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
@@ -195,6 +196,7 @@ public class SignupPageController {
         }catch(Exception ex){
             System.out.println("Try again!");
             error_label.setText("Please fill all the required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             return;
         }
         Restaurant.getInstance().saveDatabase("Rest.ser");

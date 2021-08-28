@@ -2,6 +2,7 @@ package View.QueryPages;
 
 import Model.*;
 import Model.Requests.RecordRequest;
+import Utils.SFXManager;
 import impl.org.controlsfx.collections.ReadOnlyUnbackedObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -84,7 +85,7 @@ public class createAIMacineController {
         accept_button.setOnAction(a -> {
             query_result.getItems().clear();
             requestSet.forEach(RecordRequest::saveRequest);
-            result_label.setStyle("-fx-text-fill: #8befad");
+            result_label.setStyle("-fx-text-fill: #00ff56");
             result_label.setText("Deliveries created successfully");
             initialize();
         });
@@ -118,7 +119,9 @@ public class createAIMacineController {
             query_result.getItems().addAll(requestSet.stream().map(RecordRequest::getRecord).map(r -> (Delivery) r).toList());
             // query_result.setText("AI Machine has created a delivery beep beep boop boop");
         }catch(NullPointerException e){
+            null_label.setStyle("-fx-text-fill: red");
             null_label.setText("Please make sure that all the forms are filled");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
         }
     }
 

@@ -22,27 +22,6 @@ $text_hover:      #ffd700;
 // other colours:
 $warning_alert_colour: #daa520;
 $error_alert_colour:   #ff0000;
-/*
-// css classes settings
-
-$darker_c:         #922424;
-$outer_navbar_c:   #d27434;
-$inner_navbar_c:   #e18025;
-$background_c:     #dba035;
-$light_c:          #dda96f;
-
-// elements colours
-$outernav_element_colour:    $outer_navbar_c;
-$innerpane_element_colour:   $outer_navbar_c;
-$innernav_element_colour:    $inner_navbar_c;
-
-$element_hover:   $light_c;
-$element_pressed:#dfbb92;
-
-$text_colour:     #ffffff;
-$text_hover:      #71722e;
-*/
-
 
 // default item settings
 .button{
@@ -210,7 +189,7 @@ $text_hover:      #71722e;
 }
 
 .list-view .list-cell:filled:focused:selected{
-    -fx-background-color: #000000;
+    -fx-background-color: $outer_navbar_c;
 }
 
 /* Tab pane styling */
@@ -234,6 +213,28 @@ $text_hover:      #71722e;
     -fx-text-fill: #ffffff;
 }
 
+.date-picker-popup > .month-year-pane, 
+.date-picker-popup > * > .date-cell {
+    -fx-border-color: #000000;
+    -fx-background-color: $innerpane_element_colour;
+    -fx-text-fil:$text_colour;
+}
+
+.date-picker-popup > .calendar-grid{
+    -fx-border-color: #000000;
+}
+
+.date-picker-popup > * > .date-cell:hover {
+    -fx-background-color: $element_hover;
+}
+.date-picker-popup > * > .date-cell:selected:focused {
+    -fx-background-color: $element_hover;
+    -fx-text-fill: $text_hover;
+}
+
+.date-picker-popup > * > .today {
+    -fx-text-fil:$text_hover;
+}
 // overview page settings
 .Overview{
     -fx-background-color: $background_c;

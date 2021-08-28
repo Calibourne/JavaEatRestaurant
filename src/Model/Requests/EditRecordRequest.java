@@ -66,6 +66,7 @@ public class EditRecordRequest extends RecordRequest{
                 oldArgs[6] = ((Customer) record).isSensitiveToLactose();
                 ((Customer) record).setSensitiveToLactose((Boolean) args[6]);
                 //TODO Add change password attribute in edit customer fxml
+
                 setCustomerImage((Image) args[7]);
                 if(args.length==9)
                     ((Customer) record).setPassword((String) args[8]);

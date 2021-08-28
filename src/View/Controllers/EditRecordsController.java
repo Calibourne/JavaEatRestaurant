@@ -145,6 +145,8 @@ public class EditRecordsController {
     private Button plus_btn;
     @FXML
     private Button submit;
+    @FXML
+    private Label alert_lbl;
     // endregion
 
     @FXML
@@ -262,12 +264,12 @@ public class EditRecordsController {
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     ingredientName_field.setText(((Component)newValue).getComponentName());
-                    ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                    ControllerUtils.setAlerts(ingredientName_field, stringPattern);
-
                     ingredientPrice_field.setText(String.format("%.2f",((Component)newValue).getPrice()));
+
+                    ingredientName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+                    ControllerUtils.setAlerts(ingredientName_field, stringPattern, alert_lbl);
                     ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
-                    ControllerUtils.setAlerts(ingredientPrice_field, doublePattern);
+                    ControllerUtils.setAlerts(ingredientPrice_field, doublePattern, alert_lbl);
 
                     hasGluten_check.setSelected(((Component)newValue).isHasGluten());
                     hasLactose_check.setSelected(((Component)newValue).isHasLactose());
@@ -286,11 +288,11 @@ public class EditRecordsController {
                 try{
                     dishName_field.setText(((Dish)newValue).getDishName());
                     dishName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                    ControllerUtils.setAlerts(dishName_field, stringPattern);
+                    ControllerUtils.setAlerts(dishName_field, stringPattern, alert_lbl);
 
                     dishPrepareTime_field.setText(String.format("%d",((Dish)newValue).getTimeToMake()));
                     dishPrepareTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
-                    ControllerUtils.setAlerts(dishPrepareTime_field, intPattern);
+                    ControllerUtils.setAlerts(dishPrepareTime_field, intPattern, alert_lbl);
 
                     dishType_combo.getItems().clear();
                     dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
@@ -382,7 +384,7 @@ public class EditRecordsController {
                 try{
                     areaName_field.setText(((DeliveryArea)newValue).getAreaName());
                     areaName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                    ControllerUtils.setAlerts(areaName_field, stringPattern);
+                    ControllerUtils.setAlerts(areaName_field, stringPattern, alert_lbl);
 
                     neighbourhoods_checkedList.getItems().clear();
                     neighbourhoods_checkedList.getItems().addAll(((DeliveryArea)newValue).getNeighberhoods());
@@ -597,11 +599,11 @@ public class EditRecordsController {
     private void setNames(Record newValue, Pattern stringPattern){
         fname_field.setText(((Person)newValue).getFirstName());
         fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-        ControllerUtils.setAlerts(fname_field, stringPattern);
+        ControllerUtils.setAlerts(fname_field, stringPattern, alert_lbl);
 
         lname_field.setText(((Person)newValue).getLastName());
         lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-        ControllerUtils.setAlerts(lname_field, stringPattern);
+        ControllerUtils.setAlerts(lname_field, stringPattern, alert_lbl);
     }
 
     private void setPersonAttributes(Record newValue, Pattern stringPattern){

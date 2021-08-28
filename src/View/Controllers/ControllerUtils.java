@@ -65,7 +65,7 @@ public class ControllerUtils {
         );
     }
 
-    public static void setAlerts(TextField field, Pattern pattern) {
+    /*public static void setAlerts(TextField field, Pattern pattern) {
         field.setOnKeyTyped(ke-> {
             if(!Objects.equals(ke.getCharacter(), "\b")) {
                 String newText = field.getText() + ke.getCharacter();
@@ -109,7 +109,7 @@ public class ControllerUtils {
                 field.getStyleClass().add("ErrorAlert");
             }
         });
-    }
+    }*/
 
     public static void setAlerts(TextField field, Pattern pattern, Label alert) {
         field.setOnKeyTyped(ke-> {
@@ -134,31 +134,23 @@ public class ControllerUtils {
                     }
                 }
             }
-        });
-        field.textProperty().addListener((obs, o, n)->{
-            if(n.length()>0 && o.length()>0){
+            else{
                 field.getStyleClass().clear();
                 field.getStyleClass().add("text-input");
                 field.getStyleClass().add("text-field");
                 alert.setText("");
             }
-            else {
-                field.getStyleClass().clear();
-                field.getStyleClass().add("text-input");
-                field.getStyleClass().add("ErrorAlert");
-            }
-
         });
         field.focusedProperty().addListener((obs, o, n) -> {
             if(field.getText().length()>0) {
                 if (!n) {
                     field.getStyleClass().remove("WarningAlert");
+                    field.getStyleClass().remove("ErrorAlert");
                 }
             }
             else{
                 field.getStyleClass().clear();
                 field.getStyleClass().add("text-input");
-                field.getStyleClass().add("ErrorAlert");
                 alert.setText("");
             }
         });

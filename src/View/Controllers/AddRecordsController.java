@@ -188,10 +188,10 @@ public class AddRecordsController {
             if(addCooks_sctn!=null || addDeliPersons_sctn!=null || addCustomers_sctn!=null) {
 
                 fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                ControllerUtils.setAlerts(fname_field, stringPattern);
+                ControllerUtils.setAlerts(fname_field, stringPattern, result_label);
 
                 lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                ControllerUtils.setAlerts(lname_field, stringPattern);
+                ControllerUtils.setAlerts(lname_field, stringPattern, result_label);
 
                 genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
 
@@ -212,10 +212,10 @@ public class AddRecordsController {
             }
             if(addComponents_sctn!=null){
                 ingredientName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                ControllerUtils.setAlerts(ingredientName_field, stringPattern);
+                ControllerUtils.setAlerts(ingredientName_field, stringPattern, result_label);
 
                 ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
-                ControllerUtils.setAlerts(ingredientPrice_field,doublePattern);
+                ControllerUtils.setAlerts(ingredientPrice_field,doublePattern, result_label);
                 //Pattern err = Pattern.compile("((([1-9])(\\d*)|0)(\\.))");
             }
             if(addDishes_sctn!=null){
@@ -232,9 +232,10 @@ public class AddRecordsController {
                 //components_checkedList.getItems().addAll(rest.getComponents().values());
 
                 dishName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                ControllerUtils.setAlerts(dishName_field, stringPattern);
+                ControllerUtils.setAlerts(dishName_field, stringPattern, result_label);
 
                 dishPrepareTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
+                ControllerUtils.setAlerts(dishPrepareTime_field, intPattern, result_label);
             }
             if(addOrders_sctn!=null){
                 customers_combo.setCellFactory(list->new imageListCell<>());

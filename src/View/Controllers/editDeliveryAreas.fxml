@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane prefHeight="576.0" prefWidth="617.0" styleClass="Content" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsController">
+<AnchorPane prefHeight="576.0" prefWidth="617.0" styleClass="Content" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsController">
    <children>
       <Group fx:id="editAreas_sctn">
          <children>
@@ -57,6 +57,7 @@
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <GridPane prefWidth="430.0" vgap="10.0">
@@ -124,6 +125,7 @@
                                  </children>
                               </GridPane>
                               <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Submit change" GridPane.rowIndex="1" />
+                              <Label fx:id="alert_lbl" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <GridPane fx:id="alert_grid" visible="false">

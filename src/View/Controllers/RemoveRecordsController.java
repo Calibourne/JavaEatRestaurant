@@ -4,6 +4,7 @@ import Model.DeliveryArea;
 import Model.Record;
 import Model.Requests.RemoveRecordRequest;
 import Model.Restaurant;
+import View.newElements.imageListCell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -43,6 +44,7 @@ public class RemoveRecordsController {
             record_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
         }
         if(removeCustomers_sctn != null){
+            record_combo.setCellFactory(list->new imageListCell<>());
             record_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
         }
         if(removeComponents_sctn != null){
@@ -74,7 +76,7 @@ public class RemoveRecordsController {
     @FXML
     private void handleButtonClick(ActionEvent e){
         try {
-            RemoveRecordRequest request = new RemoveRecordRequest(null);
+            RemoveRecordRequest request;
             if (removeAreas_sctn == null) {
                 Record record = record_combo.getSelectionModel().getSelectedItem();
                 request = new RemoveRecordRequest(record);

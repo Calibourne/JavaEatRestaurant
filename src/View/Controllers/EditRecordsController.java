@@ -233,7 +233,7 @@ public class EditRecordsController {
             });
         }
         if(editCustomers_sctn != null){
-            records_combo.setCellFactory(list-> new imageListCell());
+            records_combo.setCellFactory(list-> new imageListCell<>());
             records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
@@ -313,6 +313,7 @@ public class EditRecordsController {
             records_combo.getItems().addAll(Restaurant.getInstance().getOrders().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
+                    customers_combo.setCellFactory(list->new imageListCell<>());
                     customers_combo.setValue(((Order)newValue).getCustomer());
                     customers_combo.getItems().addAll(rest.getCustomers().values());
 

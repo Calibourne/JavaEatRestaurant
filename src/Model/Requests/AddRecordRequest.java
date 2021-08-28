@@ -55,8 +55,10 @@ public class AddRecordRequest extends RecordRequest {
                         (boolean) args[5],
                         (boolean) args[6]
                 );
-                if(args.length==8)
-                setCustomerImage((Image) args[7]);
+                if(args.length==8) {
+                    ((Customer)this.record).setProfileImg("Customer"+this.record.getId());
+                    setCustomerImage((Image) args[7]);
+                }
             }
             else{
                 toBlacklist = true;

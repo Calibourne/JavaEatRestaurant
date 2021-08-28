@@ -3,6 +3,7 @@ package View.Controllers;
 import Model.*;
 import Model.Requests.AddRecordRequest;
 import Utils.*;
+import View.newElements.imageListCell;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -236,6 +237,7 @@ public class AddRecordsController {
                 dishPrepareTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
             }
             if(addOrders_sctn!=null){
+                customers_combo.setCellFactory(list->new imageListCell<>());
                 customers_combo.getItems().addAll(rest.getCustomers().values());
                 deliveries_combo.getItems().addAll(rest.getDeliveries().values());
                 addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
@@ -316,6 +318,7 @@ public class AddRecordsController {
                 deliveryTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
             }
             if(addToBlacklist_sctn!=null){
+                customersToBlacklist_combo.setCellFactory(list->new imageListCell<>());
                 customersToBlacklist_combo.getItems()
                         .addAll(rest.getCustomers().values().stream().
                                 filter(c->!rest.getBlacklist().contains(c))

@@ -2,6 +2,7 @@ package View.ViewStructuresPages;
 
 import Model.Customer;
 import Model.Restaurant;
+import View.newElements.imageListCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -22,7 +23,7 @@ public class ViewBlacklistController {
     private AnchorPane pnlQueries;
 
     @FXML
-    private ListView<String> query_result;
+    private ListView query_result;
 
     @FXML
     void initialize() {
@@ -33,15 +34,14 @@ public class ViewBlacklistController {
 
             //Reset the result list each time a query is called upon
             if(!(query_result.getItems().isEmpty())){
-
                 query_result.getItems().clear();
             }
 
             Restaurant rest = Restaurant.getInstance();
 
             if(!(rest.getBlacklist().isEmpty())){
-
-                List<String> results = rest.getBlacklist().stream().map(Customer::toString).toList();
+                query_result.setCellFactory(list->new imageListCell<>());
+                List<Customer> results = rest.getBlacklist().stream().toList();
                 results.forEach(r->query_result.getItems().add(r));
 
             }

@@ -10,9 +10,9 @@ import javafx.scene.image.ImageView;
 /**
  * A class for displaying customer's profile picture
  */
-public class imageListCell extends ListCell<Record> {
+public class imageListCell<T extends Record> extends ListCell<T> {
     @Override
-    protected void updateItem(Record item, boolean isEmpty) {
+    protected void updateItem(T item, boolean isEmpty) {
         super.updateItem(item, isEmpty);
         setGraphic(null);
         setText(null);

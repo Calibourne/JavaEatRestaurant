@@ -3,6 +3,7 @@ package View.ViewStructuresPages;
 
 import Model.Customer;
 import Model.Restaurant;
+import View.newElements.imageListCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -23,7 +24,7 @@ public class ViewCustomersController {
     private AnchorPane pnlQueries;
 
     @FXML
-    private ListView<String> query_result;
+    private ListView query_result;
 
     @FXML
     void initialize() {
@@ -41,8 +42,8 @@ public class ViewCustomersController {
             Restaurant rest = Restaurant.getInstance();
 
             if(!(rest.getCustomers().isEmpty())){
-
-                List<String> results = rest.getCustomers().values().stream().map(Customer::toString).toList();
+                query_result.setCellFactory(list->new imageListCell<>());
+                List<Customer> results = rest.getCustomers().values().stream().toList();
                 results.forEach(r->query_result.getItems().add(r));
 
             }

@@ -3,6 +3,7 @@ package View.CustomerStage;
 import Model.Dish;
 import Model.Restaurant;
 import Utils.DishType;
+import Utils.SFXManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
@@ -62,6 +63,7 @@ public class CustomerMenuController {
                     appetizers_list.getItems().add(dish.toString());
                 }
             }
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         } catch (NullPointerException ex) {
             System.out.println(ex.getMessage());
         }
@@ -78,6 +80,7 @@ public class CustomerMenuController {
                     main_dishes_list.getItems().add(dish.toString());
                 }
             }
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         } catch (NullPointerException ex) {
             System.out.println(ex.getMessage());
         }
@@ -94,6 +97,7 @@ public class CustomerMenuController {
                     desserts_list.getItems().add(dish.toString());
                 }
             }
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         } catch (NullPointerException ex) {
             System.out.println(ex.getMessage());
         }

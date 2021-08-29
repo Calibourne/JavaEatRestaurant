@@ -6,6 +6,7 @@ import Model.Restaurant;
 import Utils.Gender;
 import Utils.ImageManager;
 import Utils.Neighberhood;
+import Utils.SFXManager;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,6 +93,7 @@ public class editCustomerDetailsController {
         if(e.getSource() == submit){
             Restaurant rest = Restaurant.getInstance();
             EditRecordRequest request = null;
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             try{
                 request = new EditRecordRequest(rest.getRealCustomer(user.getId()),
                         fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),

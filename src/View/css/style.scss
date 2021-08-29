@@ -189,7 +189,8 @@ $error_alert_colour:   #ff0000;
 }
 
 .list-view .list-cell:filled:focused:selected{
-    -fx-background-color: $outer_navbar_c;
+    -fx-background-color: $darker_c;
+    -fx-text-fill: $text_hover;
 }
 
 /* Tab pane styling */

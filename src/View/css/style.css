@@ -193,7 +193,8 @@
 }
 
 .list-view .list-cell:filled:focused:selected {
-  -fx-background-color: #061E47;
+  -fx-background-color: #041430;
+  -fx-text-fill: #ffd700;
 }
 
 /* Tab pane styling */

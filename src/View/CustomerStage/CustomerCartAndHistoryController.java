@@ -117,7 +117,6 @@ public class CustomerCartAndHistoryController {
     }
 
     @FXML
-    //TODO Create a ListedRecord list from the dishes, then turn them back into dishes to form an order upon a button press
     private void shoppingCartButtonPressed() {
         try {
             cart_empty_message.setText("");
@@ -130,6 +129,7 @@ public class CustomerCartAndHistoryController {
         } catch (NullPointerException e) {
             cart_empty_message.setText("Shopping Cart currently empty, please place a new order");
         }
+
 
     }
 

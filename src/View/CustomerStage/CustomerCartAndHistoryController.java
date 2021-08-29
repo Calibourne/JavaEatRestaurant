@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CustomerCartAndHistoryController {
 
@@ -77,6 +76,7 @@ public class CustomerCartAndHistoryController {
 
     private Restaurant restaurant;
     private Customer customer;
+    private static Order order_to_change;
 
     @FXML
     void initialize() {
@@ -102,35 +102,12 @@ public class CustomerCartAndHistoryController {
         SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         try {
             history_empty_message.setText("");
-            Set<Record> s1 = null;
-            try {
-                s1 = restaurant.getAddRecordHistory()
-                        .get(Order.class.getSimpleName()).stream()
-                        .map(RecordRequest::getRecord).filter(record -> ((Order) record).getCustomer().equals(customer))
-                        .collect(Collectors.toSet());
-                s1.forEach(System.out::println);
 
-            }catch (NullPointerException e){
-                s1 = new HashSet<>();
-            }
-            Set<Record> s2 = null;
-            try {
-                s2 = restaurant.getRemoveRecordHistory()
-                        .get(Order.class.getSimpleName()).stream()
-                        .map(RecordRequest::getRecord).filter(record -> ((Order) record).getCustomer().equals(customer))
-                        .collect(Collectors.toSet());
-            }
-            catch (NullPointerException e){
-                s2 = new HashSet<>();
-            }
-            System.out.println(s2);
-            Set<Record> finalS = s1;
-            Set<Record> finalS1 = s2;
-            Set<Record> s3 = Stream.concat(s1.stream(), s2.stream())
-                    .filter(r-> finalS.contains(r)&& finalS1.contains(r)).collect(Collectors.toSet());
             Set<RecordRequest> s = restaurant.getAddRecordHistory()
                     .get(Order.class.getSimpleName()).stream()
-                    .filter(rr->((Order)rr.getRecord()).getCustomer().equals(customer)).filter(rr->!s3.contains(rr.getRecord())).collect(Collectors.toSet());
+                    .filter(rr->((Order)rr.getRecord()).getCustomer().equals(customer))
+                    .filter(rr->restaurant.getOrders().containsValue((Order)rr.getRecord()))
+                    .collect(Collectors.toSet());
             if (s.size() == 0)
                 throw new NullPointerException();
             order_history_list.getItems().addAll(s);
@@ -156,18 +133,9 @@ public class CustomerCartAndHistoryController {
 
     }
 
-//    public void clearHistory(){
-//        try {
-//            history_empty_message.setText("");
-//            order_in_cart.clear();
-//            order_history_list.getItems().clear();
-//            if (order_history_list.getItems().size() == 0) {
-//                throw new NullPointerException();
-//            }
-//        } catch (NullPointerException e) {
-//            history_empty_message.setText("No orders to show at the moment");
-//        }
-//    }
+    public static Order getOrder_to_change() {
+        return order_to_change;
+    }
 
     public void clearCart(){
         try {
@@ -244,11 +212,10 @@ public class CustomerCartAndHistoryController {
     void editHistoryOrder(ActionEvent event) {
         Node page = null;
         try {
-            Order o = (Order) order_history_list.getSelectionModel().getSelectedItem().getRecord();
-            if (o == null)
+            order_to_change = (Order) order_history_list.getSelectionModel().getSelectedItem().getRecord();
+            if (order_to_change == null)
                 throw new NullPointerException();
             page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/EditCustomerOrders.fxml")));
-            EditCustomerOrdersController.setOrder(o);
             cart_and_history_pane.getChildren().add(page);
             page.toFront();
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");

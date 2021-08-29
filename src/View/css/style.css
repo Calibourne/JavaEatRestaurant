@@ -97,13 +97,12 @@
   -fx-background-color: #061E47;
 }
 
-.Container {
-  -fx-border-radius: 1em;
-  -fx-border-width: 2px;
-  -fx-padding: 0.5em;
-  -fx-border-color: #e7e5e5;
-}
-
+/*.Container{
+    -fx-border-radius: 1em;
+    -fx-border-width: 2px;
+    -fx-padding: 0.5em;
+    -fx-border-color: $text_colour;
+}*/
 .Dashboard {
   -fx-background-color: #041430;
 }
@@ -237,13 +236,18 @@
   -fx-background-color: #2B6AD0;
 }
 
-.date-picker-popup > * > .date-cell:selected:focused {
+.date-picker-popup > * > .day-name-cell,
+.date-picker-popup > * > .date-cell {
+  -fx-text-fill: #e7e5e5;
+}
+
+.date-picker-popup > * > .selected {
   -fx-background-color: #2B6AD0;
   -fx-text-fill: #ffd700;
 }
 
 .date-picker-popup > * > .today {
-  -fx-text-fil: #ffd700;
+  -fx-text-fill: #ffd700;
 }
 
 .Overview {
@@ -303,13 +307,6 @@
 
 .Content .button:pressed {
   -fx-background-color: #68A4F1;
-}
-
-.Container {
-  -fx-border-radius: 1em;
-  -fx-border-width: 2px;
-  -fx-padding: 0.5em;
-  -fx-border-color: white;
 }
 
 .WarningAlert {

@@ -15,10 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckListView;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -98,6 +95,22 @@ public class EditRecordsController {
     private ComboBox<Delivery> deliveries_combo;
     @FXML
     private CheckListView<ListedRecord> dishes_checkedList;
+    @FXML
+    private ComboBox<Component> addSubcomponents_combo;
+    @FXML
+    private CheckListView<ListedRecord> dishesIngredients_checkedList;
+    @FXML
+    private Button Iplus_btn;
+    @FXML
+    private Button Iminus_btn;
+    @FXML
+    private Label dish_id;
+    @FXML
+    private Label dish_name;
+    @FXML
+    private VBox ingredients_vbox;
+    @FXML
+    private Button addSubcomp_btn;
     // endregion
     // region Delivery attributes
     @FXML
@@ -315,6 +328,7 @@ public class EditRecordsController {
             records_combo.getItems().addAll(Restaurant.getInstance().getOrders().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
+                    customers_combo.setCellFactory(list->new imageListCell<>());
                     customers_combo.setValue(((Order)newValue).getCustomer());
                     customers_combo.getItems().addAll(rest.getCustomers().values());
 
@@ -335,6 +349,58 @@ public class EditRecordsController {
                 catch (NullPointerException | ClassCastException e){
                     System.out.println(e.getMessage());
                 }
+            });
+            addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+
+            addComponents_combo.setOnAction(action->{
+                Dish d = (Dish) addComponents_combo.getValue();
+                if(d != null) {
+                    dishesIngredients_checkedList.getItems().addAll(
+                            d.getComponents().stream().map(ListedRecord::new).toList()
+                    );
+                    dish_id.setText(""+d.getId());
+                    //dishes_checkedList.getItems().add(new ListedRecord(d));
+                    ingredients_vbox.setVisible(true);
+                    addComponents_combo.setVisible(false);
+                    dish_name.setText(d.getDishName()+" ingredients: ");
+                }
+            });
+
+            addSubcomponents_combo.setOnAction(action -> {
+                Component c = addSubcomponents_combo.getValue();
+                if(c != null) {
+                    dishesIngredients_checkedList.getItems().add(new ListedRecord(c));
+                    addSubcomponents_combo.setVisible(false);
+                }
+            });
+            addSubcomp_btn.setOnAction(action -> {
+                List<Component> selectedList = dishesIngredients_checkedList.getItems()
+                        .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
+                        dishList = rest.getRealDish(Integer.parseInt(dish_id.getText())).getComponents()
+                                .stream().sorted(Comparator.comparing(Component::getId)).toList();
+                if(dishList.equals(selectedList)){
+                    dishes_checkedList.getItems().add(
+                            new ListedRecord(rest.getRealDish(Integer.parseInt(dish_id.getText())))
+                    );
+                }
+                else {
+                    Dish d = rest.getRealDish(Integer.parseInt(dish_id.getText()));
+                    dishes_checkedList.getItems().add(
+                            new ListedRecord(new Dish("custom made " + d.getDishName() ,d.getType(), new ArrayList<>(dishList), d.getTimeToMake()))
+                    );
+                }
+                dishesIngredients_checkedList.getItems().clear();
+                ingredients_vbox.setVisible(false);
+            });
+            Iplus_btn.setOnAction(action->{
+                addSubcomponents_combo.getItems().clear();
+                addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+                addSubcomponents_combo.setVisible(true);
+            });
+            Iminus_btn.setOnAction(action -> {
+                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
+                dishesIngredients_checkedList.getCheckModel().clearChecks();
+                dishesIngredients_checkedList.getItems().removeAll(set);
             });
         }
         if(editDeliveries_sctn != null){

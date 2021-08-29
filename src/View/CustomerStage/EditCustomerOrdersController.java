@@ -1,9 +1,6 @@
 package View.CustomerStage;
 
-import Model.Component;
-import Model.Dish;
-import Model.ListedRecord;
-import Model.Order;
+import Model.*;
 import Model.Requests.EditRecordRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +13,7 @@ import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckListView;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class EditCustomerOrdersController {
 
@@ -77,24 +74,32 @@ public class EditCustomerOrdersController {
     @FXML
     private GridPane alert_grid;
 
-    private static Order order;
-
-    public static void setOrder(Order order) {
-        EditCustomerOrdersController.order = order;
-    }
-
     @FXML
     void handleButtonClick(ActionEvent event) {
-        try {
-            EditRecordRequest request = null;
-            request = new EditRecordRequest(order,
-                    order.getCustomer(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
+        if(event.getSource() == submit) {
+            try {
+                Order o = CustomerCartAndHistoryController.getOrder_to_change();
+                EditRecordRequest request = new EditRecordRequest(o,
+                        o.getCustomer(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
 
-            request.saveRequest();
-            info_grid.setVisible(false);
-            alert_grid.setVisible(true);
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
+                request.saveRequest();
+                info_grid.setVisible(false);
+                alert_grid.setVisible(true);
+            } catch (IllegalArgumentException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        if(event.getSource() == plus_btn){
+            addComponents_combo.getItems().clear();
+            addComponents_combo.getItems().addAll(Restaurant.getInstance().getDishes().values());
+            addComponents_combo.setVisible(true);
+        }
+        if(event.getSource() == minus_btn){
+            Set<ListedRecord> selectedItems = new HashSet<>(dishes_checkedList.getCheckModel().getCheckedItems());
+            if(selectedItems.size() > 0) {
+                dishes_checkedList.getItems().removeAll(selectedItems);
+                dishes_checkedList.getCheckModel().clearChecks();
+            }
         }
     }
 
@@ -117,7 +122,62 @@ public class EditCustomerOrdersController {
         assert submit != null : "fx:id=\"submit\" was not injected: check your FXML file 'EditCustomerOrders.fxml'.";
         assert alert_lbl != null : "fx:id=\"alert_lbl\" was not injected: check your FXML file 'EditCustomerOrders.fxml'.";
         assert alert_grid != null : "fx:id=\"alert_grid\" was not injected: check your FXML file 'EditCustomerOrders.fxml'.";
+        Restaurant rest = Restaurant.getInstance();
+        Order order = CustomerCartAndHistoryController.getOrder_to_change();
+        if(order!=null){
+            System.out.println(order);
+            dishes_checkedList.getItems().addAll(order.getDishes().stream().map(ListedRecord::new).toList());
+            addComponents_combo.getItems().addAll(rest.getDishes().values());
+            addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+            addComponents_combo.setOnAction(action->{
+                Dish d = addComponents_combo.getValue();
+                if(d != null) {
+                    dishesIngredients_checkedList.getItems().addAll(
+                            d.getComponents().stream().map(ListedRecord::new).toList()
+                    );
+                    dish_id.setText(""+d.getId());
+                    ingredients_vbox.setVisible(true);
+                    addComponents_combo.setVisible(false);
+                    dish_name.setText(d.getDishName()+" ingredients: ");
+                }
+            });
 
-
+            addSubcomponents_combo.setOnAction(action -> {
+                Component c = addSubcomponents_combo.getValue();
+                if(c != null) {
+                    dishesIngredients_checkedList.getItems().add(new ListedRecord(c));
+                    addSubcomponents_combo.setVisible(false);
+                }
+            });
+            addSubcomp_btn.setOnAction(action -> {
+                List<Component> selectedList = dishesIngredients_checkedList.getItems()
+                        .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
+                        dishList = rest.getRealDish(Integer.parseInt(dish_id.getText())).getComponents()
+                                .stream().sorted(Comparator.comparing(Component::getId)).toList();
+                if(dishList.equals(selectedList)){
+                    dishes_checkedList.getItems().add(
+                            new ListedRecord(rest.getRealDish(Integer.parseInt(dish_id.getText())))
+                    );
+                }
+                else {
+                    Dish d = rest.getRealDish(Integer.parseInt(dish_id.getText()));
+                    dishes_checkedList.getItems().add(
+                            new ListedRecord(new Dish("custom made " + d.getDishName() ,d.getType(), new ArrayList<>(dishList), d.getTimeToMake()))
+                    );
+                }
+                dishesIngredients_checkedList.getItems().clear();
+                ingredients_vbox.setVisible(false);
+            });
+            Iplus_btn.setOnAction(action->{
+                addSubcomponents_combo.getItems().clear();
+                addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+                addSubcomponents_combo.setVisible(true);
+            });
+            Iminus_btn.setOnAction(action -> {
+                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
+                dishesIngredients_checkedList.getCheckModel().clearChecks();
+                dishesIngredients_checkedList.getItems().removeAll(set);
+            });
+        }
     }
 }

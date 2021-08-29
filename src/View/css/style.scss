@@ -112,12 +112,12 @@ $error_alert_colour:   #ff0000;
 .date-picker{
     -fx-background-color: $innerpane_element_colour;
 }
-.Container{
+/*.Container{
     -fx-border-radius: 1em;
     -fx-border-width: 2px;
     -fx-padding: 0.5em;
     -fx-border-color: $text_colour;
-}
+}*/
 .Dashboard{
     -fx-background-color: $darker_c;
 }
@@ -227,13 +227,19 @@ $error_alert_colour:   #ff0000;
 .date-picker-popup > * > .date-cell:hover {
     -fx-background-color: $element_hover;
 }
-.date-picker-popup > * > .date-cell:selected:focused {
+
+.date-picker-popup > * > .day-name-cell, 
+.date-picker-popup > * > .date-cell{
+    -fx-text-fill:$text_colour;
+}
+
+.date-picker-popup > * > .selected {
     -fx-background-color: $element_hover;
     -fx-text-fill: $text_hover;
 }
 
 .date-picker-popup > * > .today {
-    -fx-text-fil:$text_hover;
+    -fx-text-fill:$text_hover;
 }
 // overview page settings
 .Overview{
@@ -248,7 +254,7 @@ $error_alert_colour:   #ff0000;
 }
 
 // side nav bar settings
-.OuterMenuBar {
+.OuterMenuBar{
     -fx-background-color: $outer_navbar_c;
     .button {
         -fx-background-color: $outernav_element_colour;
@@ -288,14 +294,6 @@ $error_alert_colour:   #ff0000;
         -fx-background-color : $element_pressed;
     }
 }
-
-.Container{
-    -fx-border-radius: 1em;
-    -fx-border-width: 2px;
-    -fx-padding: 0.5em;
-    -fx-border-color: white;
-}
-
 
 
 .WarningAlert{

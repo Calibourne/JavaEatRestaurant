@@ -120,6 +120,7 @@ public class CustomerHomeController {
 //                        content_pane.getChildren().add(loadedPage);
 //                        break;
                     case "new_order_button":
+                        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/AddCustomerOrder.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
@@ -130,26 +131,31 @@ public class CustomerHomeController {
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "view_menu_button":
+                        //SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerMenu.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "popular_ingredients_button":
+                        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getPopularComponent.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "cooks_expertise_button":
+                        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getCooksByExpertise.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "relevant_dish_menu_button":
+                        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/getRelevantDishList.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);
                         break;
                     case "settings_button":
+                        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                         loadedPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/editCustomerDetails.fxml")));
                         content_pane.getChildren().clear();
                         content_pane.getChildren().add(loadedPage);

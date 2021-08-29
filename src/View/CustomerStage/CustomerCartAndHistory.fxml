@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="375.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
+<AnchorPane fx:id="cart_and_history_pane" prefHeight="375.0" prefWidth="585.0" styleClass="Content" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CustomerStage.CustomerCartAndHistoryController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="OuterMenuBar">
             <Label fx:id="home_page_header" alignment="CENTER" textAlignment="CENTER">

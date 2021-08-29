@@ -9,12 +9,15 @@ import Utils.SFXManager;
 import View.Controllers.LoginPageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -67,6 +70,9 @@ public class CustomerCartAndHistoryController {
     @FXML
     private ListView<RecordRequest> order_history_list;
 
+    @FXML
+    private AnchorPane cart_and_history_pane;
+
     public static Set<ListedRecord> order_in_cart;
 
     private Restaurant restaurant;
@@ -93,6 +99,7 @@ public class CustomerCartAndHistoryController {
     @FXML
     private void orderHistoryButtonPressed() {
         order_history_list.getItems().clear();
+        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         try {
             history_empty_message.setText("");
             Set<Record> s1 = null;
@@ -102,6 +109,7 @@ public class CustomerCartAndHistoryController {
                         .map(RecordRequest::getRecord).filter(record -> ((Order) record).getCustomer().equals(customer))
                         .collect(Collectors.toSet());
                 s1.forEach(System.out::println);
+
             }catch (NullPointerException e){
                 s1 = new HashSet<>();
             }
@@ -138,6 +146,7 @@ public class CustomerCartAndHistoryController {
             cart_empty_message.setText("");
             shopping_cart_list.getItems().clear();
             shopping_cart_list.getItems().addAll(order_in_cart);
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             if(shopping_cart_list.getItems().size()==0){
                 throw new NullPointerException();
             }
@@ -233,6 +242,22 @@ public class CustomerCartAndHistoryController {
 
     @FXML
     void editHistoryOrder(ActionEvent event) {
+        Node page = null;
+        try {
+            Order o = (Order) order_history_list.getSelectionModel().getSelectedItem().getRecord();
+            if (o == null)
+                throw new NullPointerException();
+            page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/EditCustomerOrders.fxml")));
+            EditCustomerOrdersController.setOrder(o);
+            cart_and_history_pane.getChildren().add(page);
+            page.toFront();
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
+        }catch(NullPointerException e){
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            history_empty_message.setText("Please select an order");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }

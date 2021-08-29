@@ -106,6 +106,7 @@ public class ManagerPageController {
         try {
             pnlChoosedPage.getChildren().clear();
             Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RestaurantDashboard.fxml")));
+            // SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav"); plays at login, not how we intended
             pnlChoosedPage.getChildren().add(recordsA);
         } catch(IOException | NullPointerException e){
             System.out.println(e.getMessage());
@@ -116,6 +117,7 @@ public class ManagerPageController {
             try {
                 pnlChoosedPage.getChildren().clear();
                 Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addRecords.fxml")));
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 pnlChoosedPage.getChildren().add(recordsA);
             } catch(IOException | NullPointerException ex){
                 System.out.println(ex.getMessage());
@@ -123,7 +125,8 @@ public class ManagerPageController {
         if(e.getSource() == btnRemoveRecords)
             try{
                 pnlChoosedPage.getChildren().clear();
-                Node recordsR = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeRecords.fxml")));;
+                Node recordsR = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeRecords.fxml")));
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 pnlChoosedPage.getChildren().add(recordsR);
             }catch (IOException | NullPointerException ex) {
                 System.out.println(ex.getMessage());
@@ -132,6 +135,7 @@ public class ManagerPageController {
             try {
                 pnlChoosedPage.getChildren().clear();
                 Node recordsE = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("editRecords.fxml")));
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 pnlChoosedPage.getChildren().add(recordsE);
             }catch (IOException | NullPointerException ex){
                 System.out.println(ex.getMessage());
@@ -143,6 +147,7 @@ public class ManagerPageController {
         try{
             pnlChoosedPage.getChildren().clear();
             Node queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/Queries.fxml")));
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             pnlChoosedPage.getChildren().add(queryPage);
         }
         catch(IOException e){
@@ -155,6 +160,7 @@ public class ManagerPageController {
         try{
             pnlChoosedPage.getChildren().clear();
             Node ViewRecordsPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/ViewStructures.fxml")));
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             pnlChoosedPage.getChildren().add(ViewRecordsPage);
         }
         catch(IOException e){

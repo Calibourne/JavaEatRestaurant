@@ -4,6 +4,7 @@ import Model.Delivery;
 import Model.DeliveryPerson;
 import Model.Restaurant;
 import Utils.Months;
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -56,6 +57,7 @@ public class getDeliveriesByPersonController {
 
             List<String> results = restaurant.getDeliveriesByPerson(dp, month).stream().toList().stream().map(Delivery::toString).toList();
             results.forEach(r->query_result.getItems().add(r));
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
 
             if(results.size() == 0){
                 query_result.getItems().add("No relevant deliveries for selected delivery guy and month");

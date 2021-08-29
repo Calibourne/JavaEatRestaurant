@@ -172,6 +172,7 @@ public class SignupPageController {
             error_label.setText("");
            if(!passwordField.getText().equals(confirmPasswordField.getText()) && passwordField.getText().length()>0)
                throw new Exception();
+
            String fname = fnameInput.getText();
            String lname = lnameInput.getText();
            Gender gender = genderCb.getValue();
@@ -193,6 +194,7 @@ public class SignupPageController {
            ((Customer)request.getRecord()).setPassword(passwordField.getText());
            ((Customer) request.getRecord()).setUsername(usernameField.getText());
            request.saveRequest();
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         }catch(Exception ex){
             System.out.println("Try again!");
             error_label.setText("Please fill all the required fields");
@@ -218,6 +220,7 @@ public class SignupPageController {
             Stage s = (Stage) cancelButton.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
             ControllerUtils.changeScreen(s, p);
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

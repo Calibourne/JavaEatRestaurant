@@ -1,6 +1,7 @@
 package View.QueryPages;
 
 import Model.Restaurant;
+import Utils.SFXManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,6 +48,7 @@ public class getNumberOfDeliveriesPerTypeController {
 //            query_result.setText("");
 //        }
         query_result.setText(String.format("%d regular deliveries have been delivered since January", rest.getNumberOfDeliveriesPerType().get("Regular delivery")));
+        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
 
     }
 
@@ -58,5 +60,6 @@ public class getNumberOfDeliveriesPerTypeController {
 //            query_result.setText("");
 //        }
         query_result.setText(String.format("%d express deliveries have been delivered since January", rest.getNumberOfDeliveriesPerType().get("Express delivery")));
+        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
     }
 }

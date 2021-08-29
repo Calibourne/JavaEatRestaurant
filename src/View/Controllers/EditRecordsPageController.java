@@ -3,6 +3,7 @@ package View.Controllers;
 //import Model.DeliveryArea;
 //import View.Main;
 
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,34 +61,42 @@ public class EditRecordsPageController extends RecordManagementController {
                 editWindow.getChildren().clear();
                 if (e.getSource() == editCooks_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("editCooks.fxml"));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editCustomers_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("editCustomers.fxml"));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editDeliPersons_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("editDeliveryPersons.fxml"));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editComponents_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("editIngredients.fxml"));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editDishes_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("editDishes.fxml"));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editOrders_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("editOrders.fxml"));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editDeliveries_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("editDeliveries.fxml"));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     editWindow.getChildren().add(node);
                 }
                 if (e.getSource() == editAreas_btn) {
                     Node node = FXMLLoader.load(getClass().getResource("editDeliveryAreas.fxml"));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     editWindow.getChildren().add(node);
                 }
                 editWindow.setVisible(true);

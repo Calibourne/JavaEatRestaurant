@@ -5,6 +5,7 @@ import Model.Exceptions.IllegalCustomerException;
 import Model.Exceptions.NoComponentsException;
 import Model.Exceptions.SensitiveException;
 import Model.Requests.AddRecordRequest;
+import Model.Requests.EditRecordRequest;
 import Model.Requests.RecordRequest;
 import Model.Requests.RemoveRecordRequest;
 import Utils.Expertise;
@@ -38,6 +39,7 @@ public class Restaurant implements Serializable {
 	private HashSet<Customer> blackList;
 	private HashMap<String,TreeSet<AddRecordRequest>> addRecordHistory; //keeps track of added records history
 	private HashMap<String,TreeSet<RemoveRecordRequest>> removeRecordHistory; //keeps track of removed records history
+	private HashMap<String,TreeSet<EditRecordRequest>> editRecordHistory;
 
 	// hashmap to allow us to work on each customer by his username
 	private HashMap<String, Customer> usersList;
@@ -80,6 +82,7 @@ public class Restaurant implements Serializable {
 			usersList = new HashMap<>();
 			addRecordHistory = new HashMap<>();
 			removeRecordHistory = new HashMap<>();
+			editRecordHistory = new HashMap<>();
 		}
 	}
 
@@ -150,6 +153,10 @@ public class Restaurant implements Serializable {
 	public HashMap<String, TreeSet<RemoveRecordRequest>> getRemoveRecordHistory() {
 		return removeRecordHistory;
 	}
+	public HashMap<String, TreeSet<EditRecordRequest>> getEditRecordHistory() {
+		return editRecordHistory;
+	}
+
 	public HashMap<String, Customer> getUsersList() {
 		return usersList;
 	}
@@ -1016,6 +1023,7 @@ public class Restaurant implements Serializable {
 				this.usersList = res.usersList;
 				this.addRecordHistory = res.addRecordHistory;
 				this.removeRecordHistory = res.removeRecordHistory;
+				this.editRecordHistory = res.editRecordHistory;
 				Customer.setIdCounter(res.runningCustomers);
 				Cook.setIdCounter(res.runningCooks);
 				DeliveryPerson.setIdCounter(res.runningDelipersons);

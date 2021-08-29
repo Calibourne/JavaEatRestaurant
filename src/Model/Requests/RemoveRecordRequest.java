@@ -1,14 +1,9 @@
 package Model.Requests;
 
-import Model.*;
 import Model.Record;
-import Model.Exceptions.ConvertToExpressException;
-import Utils.*;
+import Model.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.TreeSet;
 
 public class RemoveRecordRequest extends RecordRequest {
@@ -29,13 +24,16 @@ public class RemoveRecordRequest extends RecordRequest {
         boolean toReturn = true;
         try {
             if(record instanceof Customer){
-                    toReturn = restaurant.removeCustomer((Customer) record);
+                Customer c = restaurant.getRealCustomer(record.getId());
+                toReturn = restaurant.removeCustomer(c);
             }
             if(record instanceof Cook){
-                toReturn = restaurant.removeCook((Cook) record);
+                Cook c = restaurant.getRealCook(record.getId());
+                toReturn = restaurant.removeCook(c);
             }
             if(record instanceof DeliveryArea){
-                toReturn = restaurant.removeDeliveryArea((DeliveryArea) record, newArea);
+                DeliveryArea da = restaurant.getRealDeliveryArea(record.getId());
+                toReturn = restaurant.removeDeliveryArea(da, newArea);
             }
             if(record instanceof DeliveryPerson){
                 toReturn = restaurant.removeDeliveryPerson((DeliveryPerson) record);

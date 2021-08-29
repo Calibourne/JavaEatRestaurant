@@ -2,7 +2,6 @@ package View.Controllers;
 
 import Model.*;
 import Model.Requests.RecordRequest;
-import Utils.SFXManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -96,6 +95,11 @@ public class RestaurantDashboardController {
             }catch (NullPointerException ex){
 
             }
+            try{
+                areas_history.getItems().addAll(rest.getEditRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
             areas_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
@@ -117,6 +121,11 @@ public class RestaurantDashboardController {
             }
             try{
                 customers_history.getItems().addAll(rest.getRemoveRecordHistory().get(Customer.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
+            try{
+                customers_history.getItems().addAll(rest.getEditRecordHistory().get(Customer.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -145,6 +154,11 @@ public class RestaurantDashboardController {
             }catch (NullPointerException ex){
 
             }
+            try{
+                delipersons_history.getItems().addAll(rest.getEditRecordHistory().get(DeliveryPerson.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
             delipersons_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
@@ -165,6 +179,11 @@ public class RestaurantDashboardController {
             }catch (NullPointerException ex){
 
             }
+            try{
+                cooks_history.getItems().addAll(rest.getEditRecordHistory().get(Cook.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
             cooks_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
@@ -181,8 +200,12 @@ public class RestaurantDashboardController {
 
             }
             try{
-                rest.getRemoveRecordHistory().get(Component.class.getSimpleName()).forEach(System.out::println);
                 components_history.getItems().addAll(rest.getRemoveRecordHistory().get(Component.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
+            try{
+                components_history.getItems().addAll(rest.getEditRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -206,6 +229,11 @@ public class RestaurantDashboardController {
             }catch (NullPointerException ex){
 
             }
+            try{
+                dishes_history.getItems().addAll(rest.getEditRecordHistory().get(Dish.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
             dishes_history.getItems().sort(
                     Comparator.comparing(RecordRequest::getDateOfRequest)
                             .thenComparing(RecordRequest::getTimeOfRequest)
@@ -223,6 +251,11 @@ public class RestaurantDashboardController {
             }
             try{
                 orders_history.getItems().addAll(rest.getRemoveRecordHistory().get(Order.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
+            try{
+                orders_history.getItems().addAll(rest.getEditRecordHistory().get(Order.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -256,6 +289,16 @@ public class RestaurantDashboardController {
             }
             try {
                 deliveries_history.getItems().addAll(rest.getRemoveRecordHistory().get(ExpressDelivery.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
+            try{
+                deliveries_history.getItems().addAll(rest.getEditRecordHistory().get(RegularDelivery.class.getSimpleName()).stream().toList());
+            }catch (NullPointerException ex){
+
+            }
+            try{
+                deliveries_history.getItems().addAll(rest.getEditRecordHistory().get(ExpressDelivery.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }

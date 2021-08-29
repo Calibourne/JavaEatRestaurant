@@ -26,6 +26,10 @@ public class EditRecordRequest extends RecordRequest{
     }
     @Override
     public boolean saveRequest() {
+        TreeSet<EditRecordRequest> ts;
+        ts = Restaurant.getInstance().getEditRecordHistory().get(record.getClass().getSimpleName());
+        if(ts==null)
+            ts = new TreeSet<>();
         if(record instanceof DeliveryArea){
             argsNames[0] = "Area name";
             oldArgs[0] = ((DeliveryArea) record).getAreaName();
@@ -173,12 +177,16 @@ public class EditRecordRequest extends RecordRequest{
                     }
                 }
             });
+            System.out.println(((Dish) record).getComponents().size());
             if(((Dish) record).getComponents().size()==0){
                 Restaurant rest = Restaurant.getInstance();
                 try {
                     RemoveRecordRequest request = new RemoveRecordRequest(record);
+                    //ts.add(this);
+                    //rest.getEditRecordHistory().put(record.getClass().getSimpleName(),ts);
                     request.saveRequest();
                     rest.saveDatabase("Rest.ser");
+                    return true;
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -270,6 +278,8 @@ public class EditRecordRequest extends RecordRequest{
                 ((ExpressDelivery) record).setPostage((Double) args[4]);
             }
         }
+        ts.add(this);
+        Restaurant.getInstance().getEditRecordHistory().put(record.getClass().getSimpleName(), ts);
         return true;
     }
 

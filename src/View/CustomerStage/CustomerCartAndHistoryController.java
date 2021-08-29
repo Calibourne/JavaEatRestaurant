@@ -165,6 +165,7 @@ public class CustomerCartAndHistoryController {
             cart_empty_message.setText("");
             shopping_cart_list.getItems().clear();
             order_in_cart.clear();
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             if (shopping_cart_list.getItems().size() == 0) {
                 throw new NullPointerException();
             }
@@ -204,7 +205,7 @@ public class CustomerCartAndHistoryController {
             cart_empty_message.setStyle("-fx-text-fill: #00ff00");
             cart_empty_message.setText("Order placed successfully");
             restaurant.saveDatabase("Rest.ser");
-
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         }catch (Exception e){
             e.printStackTrace();
             SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
@@ -222,7 +223,9 @@ public class CustomerCartAndHistoryController {
             RemoveRecordRequest request = new RemoveRecordRequest(order_history_list.getSelectionModel().getSelectedItem().getRecord());
             request.saveRequest();
             orderHistoryButtonPressed();
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         } catch (Exception e){
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             history_empty_message.setText("Please select an order to delete");
         }
 

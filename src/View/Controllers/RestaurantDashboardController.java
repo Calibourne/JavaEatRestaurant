@@ -2,6 +2,7 @@ package View.Controllers;
 
 import Model.*;
 import Model.Requests.RecordRequest;
+import Utils.SFXManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

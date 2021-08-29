@@ -2,6 +2,7 @@ package View.Controllers;
 
 //import Model.DeliveryArea;
 
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,6 +84,7 @@ public class RemoveRecordsPageController extends RecordManagementController{
                     alert_lbl.setText("No Cooks to remove");
                     alert_grid.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeCooks.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     removeWindow.getChildren().add(node);
                     removeWindow.toFront();
                 }
@@ -91,6 +93,7 @@ public class RemoveRecordsPageController extends RecordManagementController{
                     alert_grid.toFront();
                     removeWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeCustomers.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeDeliPersons_btn) {
@@ -98,6 +101,7 @@ public class RemoveRecordsPageController extends RecordManagementController{
                     alert_grid.toFront();
                     removeWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeDeliveryPersons.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeComponents_btn) {
@@ -105,6 +109,7 @@ public class RemoveRecordsPageController extends RecordManagementController{
                     alert_grid.toFront();
                     removeWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeIngredients.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeDishes_btn) {
@@ -112,6 +117,7 @@ public class RemoveRecordsPageController extends RecordManagementController{
                     alert_grid.toFront();
                     removeWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeDishes.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeOrders_btn) {
@@ -119,6 +125,7 @@ public class RemoveRecordsPageController extends RecordManagementController{
                     alert_grid.toFront();
                     removeWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeOrders.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeDeliveries_btn) {
@@ -126,6 +133,7 @@ public class RemoveRecordsPageController extends RecordManagementController{
                     alert_grid.toFront();
                     removeWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeDeliveries.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     removeWindow.getChildren().add(node);
                 }
                 if (e.getSource() == removeAreas_btn) {
@@ -133,6 +141,7 @@ public class RemoveRecordsPageController extends RecordManagementController{
                     alert_grid.toFront();
                     removeWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeDeliveryAreas.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     removeWindow.getChildren().add(node);
                 }
             } catch (IOException ex) {

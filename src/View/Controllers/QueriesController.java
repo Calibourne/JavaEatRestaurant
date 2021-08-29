@@ -1,5 +1,6 @@
 package View.Controllers;
 
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -91,38 +93,47 @@ public class QueriesController {
             switch(((Node)event.getSource()).getId()){
                 case "profit_relation_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getProfitRelation.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "ai_macine_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/createAIMacine.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "express_revenue_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/revenueFromExpressDeliveries.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "delis_by_type_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getNumberOfDeliveriesPerType.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "delis_by_dp_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getDeliveriesByPerson.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "order_waiting_time_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/orderWaitingTime.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "popular_ingredients_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getPopularComponent.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "cooks_by_expertise_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getCooksByExpertise.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "relevant_dish_list_button":
                     queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../QueryPages/getRelevantDishList.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;
 

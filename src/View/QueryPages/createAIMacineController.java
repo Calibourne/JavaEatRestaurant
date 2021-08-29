@@ -117,6 +117,7 @@ public class createAIMacineController {
             // rest.createAIMacine(dp, da, orders).forEach(rest::addDelivery);
             requestSet = rest.createAIMacine(dp, da, orders);
             query_result.getItems().addAll(requestSet.stream().map(RecordRequest::getRecord).map(r -> (Delivery) r).toList());
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             // query_result.setText("AI Machine has created a delivery beep beep boop boop");
         }catch(NullPointerException e){
             null_label.setStyle("-fx-text-fill: red");

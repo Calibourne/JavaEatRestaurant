@@ -119,6 +119,7 @@ public class AddCustomerOrderController {
             addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
 
             addComponents_combo.setOnAction(action->{
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 Dish d = (Dish) addComponents_combo.getValue();
                 if(d != null) {
                     dishesIngredients_checkedList.getItems().addAll(
@@ -133,6 +134,7 @@ public class AddCustomerOrderController {
             });
 
             addSubcomponents_combo.setOnAction(action -> {
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 Component c = addSubcomponents_combo.getValue();
                 if(c != null) {
                     dishesIngredients_checkedList.getItems().add(new ListedRecord(c));
@@ -140,6 +142,7 @@ public class AddCustomerOrderController {
                 }
             });
             addSubcomp_btn.setOnAction(action -> {
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 List<Component> selectedList = dishesIngredients_checkedList.getItems()
                         .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
                         dishList = rest.getRealDish(Integer.parseInt(dish_id.getText())).getComponents()
@@ -159,16 +162,19 @@ public class AddCustomerOrderController {
                 ingredients_vbox.setVisible(false);
             });
             Iplus_btn.setOnAction(action->{
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 addSubcomponents_combo.getItems().clear();
                 addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
                 addSubcomponents_combo.setVisible(true);
             });
             Iminus_btn.setOnAction(action -> {
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
                 dishesIngredients_checkedList.getCheckModel().clearChecks();
                 dishesIngredients_checkedList.getItems().removeAll(set);
             });
             plus_btn.setOnAction(action->{
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 addComponents_combo.getItems().clear();
                 dishesIngredients_checkedList.getItems().clear();
                 ingredients_vbox.setVisible(false);
@@ -176,6 +182,7 @@ public class AddCustomerOrderController {
                 addComponents_combo.setVisible(true);
             });
             minus_btn.setOnAction(action->{
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 if(addOrders_sctn!=null){
                     Set<ListedRecord> set = new HashSet<>(dishes_checkedList.getCheckModel().getCheckedItems());
                     dishes_checkedList.getCheckModel().clearChecks();
@@ -193,6 +200,7 @@ public class AddCustomerOrderController {
                     Node cart = FXMLLoader.load(getClass().getResource("CustomerCartAndHistory.fxml"));
                     pane.getChildren().remove(placeOrder_pane);
                     pane.getChildren().add(cart);
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 }catch (IOException ex){
                     System.out.println("Error Loading");
                     SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");

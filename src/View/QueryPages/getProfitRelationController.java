@@ -3,6 +3,7 @@ package View.QueryPages;
 import Model.Dish;
 import Model.Restaurant;
 import Utils.DocxWriter;
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -95,6 +96,7 @@ public class getProfitRelationController {
         DocxWriter.getInstance().writeToDocx("profits.docx", "JavaEat Profits List", prompt);
 
         success_label.setStyle("-fx-text-fill: #00ff00");
+        SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         success_label.setText("Document generated successfully");
     }
 }

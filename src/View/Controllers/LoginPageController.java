@@ -61,8 +61,8 @@ public class LoginPageController {
             try {
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("managerPage.fxml"));
-                ControllerUtils.changeScreen(s, p);
                 SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logon_Sound.wav");
+                ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -72,8 +72,8 @@ public class LoginPageController {
                 customer = rest.getUsersList().get(usernameField.getText());
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerHome.fxml"));
-                ControllerUtils.changeScreen(s, p);
                 SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logon_sound.wav");
+                ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -94,6 +94,7 @@ public class LoginPageController {
         try {
             Stage s = (Stage) registerButton.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("SignupPage.fxml"));
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             ControllerUtils.changeScreen(s, p);
         } catch (IOException ioException) {
             ioException.printStackTrace();

@@ -2,15 +2,17 @@ package View.Controllers;
 
 //import Model.DeliveryArea;
 //import View.Main;
+
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-//import javafx.geometry.Pos;
-        import javafx.scene.Node;
-        import javafx.scene.control.*;
-        import javafx.scene.layout.GridPane;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
-        import java.io.IOException;
+import java.io.IOException;
 import java.util.Objects;
 
 public class AddRecordsPageController extends RecordManagementController {
@@ -65,34 +67,42 @@ public class AddRecordsPageController extends RecordManagementController {
                 addWindow.getChildren().clear();
                 if (e.getSource() == addCooks_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCooks.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addCustomers_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCustomers.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDeliPersons_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveryPersons.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addComponents_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addIngredients.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDishes_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDishes.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addOrders_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addOrders.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDeliveries_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveries.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addAreas_btn) {
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveryAreas.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addToBlacklist_btn) {
@@ -100,6 +110,7 @@ public class AddRecordsPageController extends RecordManagementController {
                     alert_grid.toFront();
                     addWindow.toFront();
                     Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addToBlacklist.fxml")));
+                    SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 addWindow.setVisible(true);

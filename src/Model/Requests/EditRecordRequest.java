@@ -32,7 +32,7 @@ public class EditRecordRequest extends RecordRequest{
             ((DeliveryArea) record).setAreaName((String) args[0]);
             Set<Neighberhood> selected = (Set<Neighberhood>) args[1],
                     current = ((DeliveryArea) record).getNeighberhoods();
-            argsNames[0] = "Neighbourhoods";
+            argsNames[1] = "Neighbourhoods";
             oldArgs[1] = ((DeliveryArea) record).getNeighberhoods();
             Set<Neighberhood> intersect = selected.stream().filter(e->current.contains(e)).collect(Collectors.toSet());
             Set<Neighberhood> unite = Stream.concat(selected.stream(), current.stream()).collect(Collectors.toSet());
@@ -45,28 +45,38 @@ public class EditRecordRequest extends RecordRequest{
             });
         }
         if(record instanceof Person){
+            argsNames[0] = "First name";
             oldArgs[0] = ((Person) record).getFirstName();
             ((Person) record).setFirstName((String) args[0]);
+            argsNames[1] = "Last name";
             oldArgs[1] = ((Person) record).getLastName();
             ((Person) record).setLastName((String) args[1]);
+            argsNames[2] = "Gender";
             oldArgs[2] = ((Person) record).getGender();
             ((Person) record).setGender((Gender) args[2]);
+            argsNames[3] = "Birthdate";
             oldArgs[3] = ((Person) record).getBirthDay();
             ((Person) record).setBirthDay((LocalDate) args[3]);
             if(record instanceof Cook){
+                argsNames[4] = "Expertise";
                 oldArgs[4] = ((Cook) record).getExpert();
                 ((Cook) record).setExpert((Expertise) args[4]);
+                argsNames[5] = "Is chef";
                 oldArgs[5] = ((Cook) record).isChef();
                 ((Cook) record).setChef((boolean) args[5]);
             }
             if(record instanceof Customer){
+                argsNames[4] = "Neighbourhood";
                 oldArgs[4] = ((Customer) record).getNeighberhood();
                 ((Customer) record).setNeighberhood((Neighberhood) args[4]);
+                argsNames[5] = "Sensitive to gluten";
                 oldArgs[5] = ((Customer) record).isSensitiveToGluten();
                 ((Customer) record).setSensitiveToGluten((Boolean) args[5]);
+                argsNames[6] = "Sensitive to lactose";
                 oldArgs[6] = ((Customer) record).isSensitiveToLactose();
                 ((Customer) record).setSensitiveToLactose((Boolean) args[6]);
                 //TODO Add change password attribute in edit customer fxml
+
                 oldArgs[7] = SwingFXUtils.toFXImage(((Customer) record).getProfileImg(false), null);
                 setCustomerImage((Image) args[7]);
                 if(args.length==9) {
@@ -253,9 +263,9 @@ public class EditRecordRequest extends RecordRequest{
     public String toString() {
         String edited = String.format("Edited %s: \n", record);
         for (int i = 0; i < args.length; i++) {
-            if(!(args[i] instanceof Collection<?>) && !(args[i] instanceof Boolean)){
+            if(!(args[i] instanceof Collection<?>) && !(args[i] instanceof Boolean) && !(args[i] instanceof Image)){
                 edited += (args[i].equals(oldArgs[i]))?"":
-                        String.format("%s -> %s\n", oldArgs[i], args[i]);
+                        String.format("%s: %s -> %s\n", argsNames[i], oldArgs[i], args[i]);
             }
             else{
 

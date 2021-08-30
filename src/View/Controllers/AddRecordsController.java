@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckListView;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -395,39 +396,49 @@ public class AddRecordsController {
             }
         }
     }
-    private void addRecord(){
-        try {
-            result_label.setText("");
-            AddRecordRequest request = new AddRecordRequest(null);
-            // The code for selecting the checked items is taken from the following site:
-            // https://www.tabnine.com/code/java/classes/org.controlsfx.control.CheckComboBox
-            if (addAreas_sctn != null) {
+    private void addRecord() {
+        result_label.setText("");
+        AddRecordRequest request = null;
+        // The code for selecting the checked items is taken from the following site:
+        // https://www.tabnine.com/code/java/classes/org.controlsfx.control.CheckComboBox
+        if (addAreas_sctn != null) {
+            try {
                 ObservableList<Neighberhood> selectedItems = neighbourhoods_checkedList.getItems();
+                System.out.println(selectedItems.size());
+                if (selectedItems.size() == 0)
+                    throw new NullPointerException();
                 HashSet<Neighberhood> selectedNeighbourhoods = new HashSet<>(selectedItems.stream().toList());
-                selectedNeighbourhoods = (selectedNeighbourhoods.size()>0)?selectedNeighbourhoods:null;
-                String areaName = areaName_field.getText().length()>0?areaName_field.getText():null;
-                Integer deliveryTime = deliveryTime_field.getText().length()>0? Integer.parseInt(deliveryTime_field.getText()) :null;
+                selectedNeighbourhoods = (selectedNeighbourhoods.size() > 0) ? selectedNeighbourhoods : null;
+                String areaName = areaName_field.getText().length() > 0 ? areaName_field.getText() : null;
+                Integer deliveryTime = deliveryTime_field.getText().length() > 0 ? Integer.parseInt(deliveryTime_field.getText()) : null;
                 request = new AddRecordRequest(
                         new DeliveryArea(-1),
                         areaName,
                         selectedNeighbourhoods,
                         deliveryTime
                 );
-                neighbourhoods_checkedList.getCheckModel().clearChecks();
+                neighbourhoods_checkedList.getItems().clear();
                 areaName_field.clear();
                 deliveryTime_field.clear();
                 result_label.setStyle("-fx-text-fill: #00ff00");
                 result_label.setText("Delivery Area added successfully");
+            } catch (IllegalArgumentException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please fill all required fields");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            } catch (NullPointerException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please add at least 1 neighbourhood to the delivery area");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
-            if (addCooks_sctn != null || addCustomers_sctn != null || addDeliPersons_sctn != null){
-                String fname = fname_field.getText().length()>0?fname_field.getText():null;
-                String lname = lname_field.getText().length()>0?lname_field.getText():null;
-                Gender gender = genders_combo.getValue();
-                LocalDate birthdate = birthDate_dp.getValue();
-                if(fname==null || lname==null || gender==null || birthdate==null){
-                    throw new NullPointerException();
-                }
-                if (addCooks_sctn != null) {
+        }
+        if (addCooks_sctn != null || addCustomers_sctn != null || addDeliPersons_sctn != null) {
+            String fname = fname_field.getText().length() > 0 ? fname_field.getText() : null;
+            String lname = lname_field.getText().length() > 0 ? lname_field.getText() : null;
+            Gender gender = genders_combo.getValue();
+            LocalDate birthdate = birthDate_dp.getValue();
+            if (addCooks_sctn != null) {
+                try{
                     Expertise expertise = expertises_combo.getValue();
                     boolean isChef = isChef_check.isSelected();
                     request = new AddRecordRequest(
@@ -443,8 +454,14 @@ public class AddRecordsController {
                     isChef_check.setSelected(false);
                     result_label.setStyle("-fx-text-fill: #00ff00");
                     result_label.setText("Cook added successfully");
+                }catch (IllegalArgumentException e) {
+                    result_label.setStyle("-fx-text-fill: red");
+                    result_label.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 }
-                if (addDeliPersons_sctn != null) {
+            }
+            if (addDeliPersons_sctn != null) {
+                try {
                     Vehicle vehicle = vehicles_combo.getValue();
                     DeliveryArea area = deliveryAreas_combo.getValue();
                     request = new AddRecordRequest(
@@ -460,8 +477,14 @@ public class AddRecordsController {
                     deliveryAreas_combo.getSelectionModel().clearSelection();
                     result_label.setStyle("-fx-text-fill: #00ff00");
                     result_label.setText("Delivery man added successfully");
+                }catch (IllegalArgumentException e) {
+                    result_label.setStyle("-fx-text-fill: red");
+                    result_label.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 }
-                if (addCustomers_sctn != null) {
+            }
+            if (addCustomers_sctn != null) {
+                try {
                     Neighberhood neighbourhood = neighbourhoods_combo.getValue();
                     boolean isGlutenIntolerant = glutenIntolerant_check.isSelected();
                     boolean isLactoseIntolerant = lactoseIntolerant_check.isSelected();
@@ -479,25 +502,31 @@ public class AddRecordsController {
                     neighbourhoods_combo.getSelectionModel().clearSelection();
                     glutenIntolerant_check.setSelected(false);
                     lactoseIntolerant_check.setSelected(false);
-                    Image img = SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"), null);
-                    img_source.setImage(img);
+                    try {
+                        Image img = SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"), null);
+                        img_source.setImage(img);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     result_label.setStyle("-fx-text-fill: #00ff00");
                     result_label.setText("Customer added successfully");
+                }catch (IllegalArgumentException e) {
+                    result_label.setStyle("-fx-text-fill: red");
+                    result_label.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 }
-                fname_field.clear();
-                lname_field.clear();
-                genders_combo.getSelectionModel().clearSelection();
-                birthDate_dp.setValue(null);
             }
-            if (addComponents_sctn != null) {
-                String ingredientName = ingredientName_field.getText().length()>0?ingredientName_field.getText():null;
-                Double ingredientPrice = ingredientPrice_field.getText().length()>0? Double.valueOf(ingredientPrice_field.getText()) :null;
+            fname_field.clear();
+            lname_field.clear();
+            genders_combo.getSelectionModel().clearSelection();
+            birthDate_dp.setValue(null);
+        }
+        if (addComponents_sctn != null) {
+            try {
+                String ingredientName = ingredientName_field.getText().length() > 0 ? ingredientName_field.getText() : null;
+                Double ingredientPrice = ingredientPrice_field.getText().length() > 0 ? Double.valueOf(ingredientPrice_field.getText()) : null;
                 boolean hasGluten = hasGluten_check.isSelected();
                 boolean hasLactose = hasLactose_check.isSelected();
-                if(ingredientName==null || ingredientPrice_field.getText()==null){
-                    throw new NullPointerException();
-                }
-
                 request = new AddRecordRequest(
                         new Component(-1),
                         ingredientName,
@@ -511,18 +540,23 @@ public class AddRecordsController {
                 hasLactose_check.setSelected(false);
                 result_label.setStyle("-fx-text-fill: #00ff00");
                 result_label.setText("Ingredient added successfully");
+            }catch (IllegalArgumentException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please fill all required fields");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
-            if (addDishes_sctn != null) {
-                String dishName = dishName_field.getText().length()>0?dishName_field.getText():null;
+        }
+        if (addDishes_sctn != null) {
+            try {
+                String dishName = dishName_field.getText().length() > 0 ? dishName_field.getText() : null;
                 int dishPrepareTime = Integer.parseInt(dishPrepareTime_field.getText());
                 DishType dishType = dishType_combo.getValue();
                 List<Component> selectedItems = components_checkedList.getItems().stream()
-                        .map(ListedRecord::getRecord).map(r->(Component)r).toList();
-                ArrayList<Component> selectedIngredients = new ArrayList<>(selectedItems);
-
-                if(dishName==null || dishPrepareTime_field.getText()==null || dishType==null || selectedItems.size()==0){
+                        .map(ListedRecord::getRecord).map(r -> (Component) r).toList();
+                System.out.println(selectedItems.size());
+                if (components_checkedList.getItems().size() == 0)
                     throw new NullPointerException();
-                }
+                ArrayList<Component> selectedIngredients = new ArrayList<>(selectedItems);
 
                 request = new AddRecordRequest(new Dish(-1), dishName, dishType, selectedIngredients, dishPrepareTime);
                 dishType_combo.getSelectionModel().clearSelection();
@@ -530,14 +564,26 @@ public class AddRecordsController {
                 dishName_field.clear();
                 result_label.setStyle("-fx-text-fill: #00ff00");
                 result_label.setText("Dish added successfully");
+            } catch (IllegalArgumentException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please fill all required fields");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            } catch (NullPointerException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please add at least 1 ingredient to the dish");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
-            if (addOrders_sctn != null) {
+        }
+        if (addOrders_sctn != null) {
+            try {
                 Customer customer = customers_combo.getValue();
                 Delivery delivery = deliveries_combo.getValue();
                 List<Dish> selectedItems = dishes_checkedList.getItems().stream()
-                        .map(ListedRecord::getRecord).map(r->(Dish)r).toList();
+                        .map(ListedRecord::getRecord).map(r -> (Dish) r).toList();
                 ArrayList<Dish> selectedDishes = new ArrayList<>(selectedItems);
-                if (delivery!= null)
+                if (selectedDishes.size() == 0)
+                    throw new NullPointerException();
+                if (delivery != null)
                     request = new AddRecordRequest(new Order(-1),
                             customer,
                             selectedDishes,
@@ -554,14 +600,26 @@ public class AddRecordsController {
                 dishes_checkedList.getItems().clear();
                 result_label.setStyle("-fx-text-fill: #00ff00");
                 result_label.setText("Order added successfully");
+            } catch (IllegalArgumentException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please fill all required fields");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            } catch (NullPointerException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please add at least 1 dish to the order");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
-            if (addDeliveries_sctn != null) {
+        }
+        if (addDeliveries_sctn != null) {
+            try {
                 DeliveryPerson deliveryPerson = deliveryPersons_combo.getValue();
                 DeliveryArea area = deliveryPerson.getArea();
                 LocalDate deliveryDate = deliveryDate_dp.getValue();
                 boolean isDelivered = isDelivered_check.isSelected();
-                if(rd_vbox.isVisible()) {
+                if (rd_vbox.isVisible()) {
                     List<Order> selectedItems = orders_checkedList.getItems();
+                    if (selectedItems.size() == 0)
+                        throw new NullPointerException();
                     request = new AddRecordRequest(
                             new RegularDelivery(-1),
                             new TreeSet<>(selectedItems),
@@ -571,8 +629,7 @@ public class AddRecordsController {
                             deliveryDate
                     );
                     orders_checkedList.getItems().clear();
-                }
-                else {
+                } else {
                     Order order = orders_combo.getValue();
                     int fee = Integer.parseInt(expressFee_field.getText());
                     request = new AddRecordRequest(
@@ -589,8 +646,18 @@ public class AddRecordsController {
                 }
                 result_label.setStyle("-fx-text-fill: #00ff00");
                 result_label.setText("Delivery added successfully");
+            } catch (IllegalArgumentException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please fill all required fields");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            } catch (NullPointerException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please add at least 1 order to the delivery");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
-            if (addToBlacklist_sctn != null) {
+        }
+        if (addToBlacklist_sctn != null) {
+            try {
                 Customer toBlacklist = customersToBlacklist_combo.getValue();
                 request = new AddRecordRequest(toBlacklist);
                 request.saveRequest();
@@ -602,17 +669,15 @@ public class AddRecordsController {
                 result_label.setStyle("-fx-text-fill: #00ff00");
                 result_label.setText("Successfully blacklisted the customer");
                 return;
+            }catch (IllegalArgumentException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please fill all required fields");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
-            request.saveRequest();
-            Restaurant.getInstance().saveDatabase("Rest.ser");
-            System.out.printf("%s was added successfully\n", request.getRecord());
-
-        }catch (Exception e){
-            result_label.setStyle("-fx-text-fill: red");
-            result_label.setText("Please fill all required fields");
-            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-            e.printStackTrace();
-            System.out.println(e.getMessage());
         }
+        if(request!=null)
+            request.saveRequest();
+        Restaurant.getInstance().saveDatabase("Rest.ser");
+        System.out.printf("%s was added successfully\n", request.getRecord());
     }
 }

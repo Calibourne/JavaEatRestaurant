@@ -14,9 +14,9 @@ import java.util.TreeSet;
 
 public class AddRecordRequest extends RecordRequest {
     private boolean toBlacklist;
-    public AddRecordRequest(Record record, Object... args) throws Exception {
-        if(Arrays.stream(args).anyMatch(a->a.equals(null)))
-            throw new Exception();
+    public AddRecordRequest(Record record, Object... args) throws IllegalArgumentException {
+        if(Arrays.stream(args).anyMatch(a->a==null))
+            throw new IllegalArgumentException();
         if (record instanceof DeliveryArea) {
             this.record = new DeliveryArea(
                     (String) args[0],

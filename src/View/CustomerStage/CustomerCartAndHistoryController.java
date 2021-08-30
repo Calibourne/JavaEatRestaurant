@@ -108,6 +108,7 @@ public class CustomerCartAndHistoryController {
                     .filter(rr->((Order)rr.getRecord()).getCustomer().equals(customer))
                     .filter(rr->restaurant.getOrders().containsValue((Order)rr.getRecord()))
                     .collect(Collectors.toSet());
+            System.out.println(s);
             if (s.size() == 0)
                 throw new NullPointerException();
             order_history_list.getItems().addAll(s);

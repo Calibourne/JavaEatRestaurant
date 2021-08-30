@@ -36,19 +36,24 @@ public class RemoveRecordRequest extends RecordRequest {
                 toReturn = restaurant.removeDeliveryArea(da, newArea);
             }
             if(record instanceof DeliveryPerson){
-                toReturn = restaurant.removeDeliveryPerson((DeliveryPerson) record);
+                DeliveryPerson dp = restaurant.getRealDeliveryPerson(record.getId());
+                toReturn = restaurant.removeDeliveryPerson(dp);
             }
             if(record instanceof Component){
-                toReturn = restaurant.removeComponent((Component) record);
+                Component c = restaurant.getRealComponent(record.getId());
+                toReturn = restaurant.removeComponent(c);
             }
             if(record instanceof Dish){
-                toReturn = restaurant.removeDish((Dish) record);
+                Dish d = restaurant.getRealDish(record.getId());
+                toReturn = restaurant.removeDish(d);
             }
             if(record instanceof Order){
-                toReturn = restaurant.removeOrder((Order) record);
+                Order o = restaurant.getRealOrder(record.getId());
+                toReturn = restaurant.removeOrder(o);
             }
             if(record instanceof Delivery){
-                toReturn = restaurant.removeDelivery((Delivery) record);
+                Delivery d = restaurant.getRealDelivery(record.getId());
+                toReturn = restaurant.removeDelivery(d);
             }
         } catch(RuntimeException e){
             System.out.println(e.getMessage());

@@ -138,6 +138,17 @@ public class EditRecordRequest extends RecordRequest{
                     .sorted(Comparator.comparing(Component::getId)).toList();
             args[3] = ((List<Component>) args[3]).stream()
                     .sorted(Comparator.comparing(Component::getId)).toList();
+            if(((List<Component>)args[3]).size()==0){
+                try {
+                    Restaurant rest = Restaurant.getInstance();
+                    RemoveRecordRequest request = new RemoveRecordRequest(record);
+                    request.saveRequest();
+                    rest.saveDatabase("Rest.ser");
+                    return true;
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
             Set<Component> intersect = selected.keySet().stream().filter(e->current.keySet().contains(e)).collect(Collectors.toSet());
             Set<Component> unite = Stream.concat(current.keySet().stream(),selected.keySet().stream()).collect(Collectors.toSet());
             Set<Component> notIntersect = unite.stream().filter(e->!intersect.contains(e)).collect(Collectors.toSet());
@@ -178,19 +189,6 @@ public class EditRecordRequest extends RecordRequest{
                 }
             });
             System.out.println(((Dish) record).getComponents().size());
-            if(((Dish) record).getComponents().size()==0){
-                Restaurant rest = Restaurant.getInstance();
-                try {
-                    RemoveRecordRequest request = new RemoveRecordRequest(record);
-                    //ts.add(this);
-                    //rest.getEditRecordHistory().put(record.getClass().getSimpleName(),ts);
-                    request.saveRequest();
-                    rest.saveDatabase("Rest.ser");
-                    return true;
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
         }
         if(record instanceof Order){
             argsNames[0] = "Customer";

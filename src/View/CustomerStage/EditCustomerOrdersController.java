@@ -2,6 +2,7 @@ package View.CustomerStage;
 
 import Model.*;
 import Model.Requests.EditRecordRequest;
+import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -78,15 +79,21 @@ public class EditCustomerOrdersController {
     void handleButtonClick(ActionEvent event) {
         if(event.getSource() == submit) {
             try {
+                if (dishes_checkedList.getItems().size() == 0)
+                    throw new NullPointerException();
                 Order o = CustomerCartAndHistoryController.getOrder_to_change();
                 EditRecordRequest request = new EditRecordRequest(o,
                         o.getCustomer(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
-
                 request.saveRequest();
                 info_grid.setVisible(false);
                 alert_grid.setVisible(true);
             } catch (IllegalArgumentException ex) {
+                alert_lbl.setText("Please fill out all the required fields");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 System.out.println(ex.getMessage());
+            } catch (NullPointerException ex){
+                alert_lbl.setText("Please add at least 1 dish to the order");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
         }
         if(event.getSource() == plus_btn){

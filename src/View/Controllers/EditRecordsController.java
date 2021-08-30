@@ -533,6 +533,8 @@ public class EditRecordsController {
         if(e.getSource() == submit) {
             if(editAreas_sctn != null){
                 try{
+                    if(neighbourhoods_checkedList.getItems().size() == 0)
+                        throw new NullPointerException();
                     EditRecordRequest request = new EditRecordRequest(records_combo.getValue(), areaName_field.getText(),
                             neighbourhoods_checkedList.getItems().stream().collect(Collectors.toSet()));
                     request.saveRequest();
@@ -541,6 +543,12 @@ public class EditRecordsController {
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
+                    alert_lbl.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+                    System.out.println(ex.getMessage());
+                }catch (NullPointerException ex){
+                    alert_lbl.setText("Please add at least 1 neighbourhood to the delivery area");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                     System.out.println(ex.getMessage());
                 }
             }
@@ -555,6 +563,8 @@ public class EditRecordsController {
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
+                    alert_lbl.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                     System.out.println(ex.getMessage());
                 }
             }
@@ -569,6 +579,8 @@ public class EditRecordsController {
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
+                    alert_lbl.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                     System.out.println(ex.getMessage());
                 }
             }
@@ -583,6 +595,8 @@ public class EditRecordsController {
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException | NullPointerException ex){
+                    alert_lbl.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                     System.out.println(ex.getMessage());
                 }
             }
@@ -597,11 +611,15 @@ public class EditRecordsController {
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
+                    alert_lbl.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                     System.out.println(ex.getMessage());
                 }
             }
             if(editDishes_sctn != null) {
                 try{
+                    if(components_checkedList.getItems().size()==0)
+                        throw new NullPointerException();
                     EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
                             dishName_field.getText(), dishType_combo.getValue(), Integer.parseInt(dishPrepareTime_field.getText()),
                             components_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
@@ -611,11 +629,18 @@ public class EditRecordsController {
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
+                    alert_lbl.setText("Please fill all required fields");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                     System.out.println(ex.getMessage());
+                }catch (NullPointerException ex){
+                    alert_lbl.setText("Please add at least 1 ingredient to the dish");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 }
             }
             if(editOrders_sctn != null) {
                 try{
+                    if(dishes_checkedList.getItems().size() == 0)
+                        throw new NullPointerException();
                     EditRecordRequest request = null;
                     if(deliveries_combo.getValue() == null)
                         request = new EditRecordRequest(records_combo.getValue(),
@@ -631,10 +656,15 @@ public class EditRecordsController {
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
+                }catch (NullPointerException ex){
+                    alert_lbl.setText("Please add at least 1 dish to the order");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 }
             }
             if(editDeliveries_sctn != null) {
                 try{
+                    if(orders_checkedList.getItems().size() == 0)
+                        throw new NullPointerException();
                     EditRecordRequest request = null;
                     Delivery d = (Delivery) records_combo.getValue();
                     if(d instanceof RegularDelivery){
@@ -656,7 +686,11 @@ public class EditRecordsController {
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
+
                     System.out.println(ex.getMessage());
+                }catch (NullPointerException ex){
+                    alert_lbl.setText("Please add at least 1 order to the delivery");
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
                 }
             }
         }

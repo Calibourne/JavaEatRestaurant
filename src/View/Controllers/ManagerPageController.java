@@ -15,6 +15,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * The controller for the manager page
+ * @author Eddie Kanevsky
+ */
 public class ManagerPageController {
     // region FXML comps
     @FXML
@@ -102,6 +106,10 @@ public class ManagerPageController {
             }
         }
     }
+
+    /**
+     * Shows a sub-window with the dashboard (RestaurantDashboard.fxml)
+     */
     private void initDashboard() {
         try {
             pnlChoosedPage.getChildren().clear();
@@ -113,6 +121,12 @@ public class ManagerPageController {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Shows a sub-windpw with the record-management pages (add / remove / edit)
+     * @param e
+     * the Action event (which button pressed)
+     */
     private void initRecords(ActionEvent e) {
         if(e.getSource() == btnAddRecords)
             try {
@@ -143,7 +157,9 @@ public class ManagerPageController {
             }
     }
 
-    // This makes the query button clickable
+    /**
+     * Shows the query sub-window (Queries.fxml)
+     */
     private void initQueries(){
         try{
             pnlChoosedPage.getChildren().clear();
@@ -156,7 +172,9 @@ public class ManagerPageController {
         }
     }
 
-    // This makes the View Records button clickable
+    /**
+     * Shows the structures view page (ViewStructures.fxml)
+     */
     private void initViewRecords(){
         try{
             pnlChoosedPage.getChildren().clear();

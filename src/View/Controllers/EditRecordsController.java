@@ -19,7 +19,11 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class EditRecordsController {
+/**
+ * A controller that controls the structures edit pages
+ * @author Eddie Kanevsky
+ */
+public class EditRecordsController extends RecordManagementController{
 
     // region Properties
     // region Person attributes
@@ -167,7 +171,6 @@ public class EditRecordsController {
         Pattern intPattern = Pattern.compile("([0-9]+)?");
         Pattern doublePattern = Pattern.compile("((([1-9])(\\d*)|0)(\\.\\d*)?)?");
         Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ \\-\']?)([a-zA-Z]*))*");
-        Restaurant rest = Restaurant.getInstance();
         try{
             info_grid.setVisible(false);
             addComponents_combo.setOnAction(action->{
@@ -200,7 +203,7 @@ public class EditRecordsController {
             System.out.println(e.getMessage());
         }
         if(editCooks_sctn != null){
-            records_combo.getItems().addAll(rest.getCooks().values().stream().toList());
+            records_combo.getItems().addAll(getRestaurant().getCooks().values().stream().toList());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try {
                     if (!newValue.equals(oldValue)) {
@@ -226,7 +229,7 @@ public class EditRecordsController {
             });
         }
         if(editDeliPersons_sctn != null){
-            records_combo.getItems().addAll(Restaurant.getInstance().getDeliveryPersons().values());
+            records_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                         try{
                             setPersonAttributes(newValue, stringPattern);
@@ -237,7 +240,7 @@ public class EditRecordsController {
 
                             deliveryAreas_combo.getItems().clear();
                             deliveryAreas_combo.setValue(((DeliveryPerson)newValue).getArea());
-                            deliveryAreas_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
+                            deliveryAreas_combo.getItems().addAll(getRestaurant().getAreas().values());
 
                             info_grid.setVisible(true);
                             alert_grid.setVisible(false);
@@ -249,7 +252,7 @@ public class EditRecordsController {
         }
         if(editCustomers_sctn != null){
             records_combo.setCellFactory(list-> new imageListCell<>());
-            records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
+            records_combo.getItems().addAll(getRestaurant().getCustomers().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     setPersonAttributes(newValue, stringPattern);
@@ -273,7 +276,7 @@ public class EditRecordsController {
             });
         }
         if(editComponents_sctn != null){
-            records_combo.getItems().addAll(Restaurant.getInstance().getComponents().values());
+            records_combo.getItems().addAll(getRestaurant().getComponents().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     ingredientName_field.setText(((Component)newValue).getComponentName());
@@ -296,7 +299,7 @@ public class EditRecordsController {
             });
         }
         if(editDishes_sctn != null){
-            records_combo.getItems().addAll(Restaurant.getInstance().getDishes().values());
+            records_combo.getItems().addAll(getRestaurant().getDishes().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     dishName_field.setText(((Dish)newValue).getDishName());
@@ -325,15 +328,15 @@ public class EditRecordsController {
             });
         }
         if(editOrders_sctn != null){
-            records_combo.getItems().addAll(Restaurant.getInstance().getOrders().values());
+            records_combo.getItems().addAll(getRestaurant().getOrders().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     customers_combo.setCellFactory(list->new imageListCell<>());
                     customers_combo.setValue(((Order)newValue).getCustomer());
-                    customers_combo.getItems().addAll(rest.getCustomers().values());
+                    customers_combo.getItems().addAll(getRestaurant().getCustomers().values());
 
                     deliveries_combo.getItems().addAll(
-                            rest.getDeliveries().values().stream().filter(d -> d instanceof RegularDelivery).toList()
+                            getRestaurant().getDeliveries().values().stream().filter(d -> d instanceof RegularDelivery).toList()
                     );
                     deliveries_combo.setValue(((Order)newValue).getDelivery());
 
@@ -350,7 +353,7 @@ public class EditRecordsController {
                     System.out.println(e.getMessage());
                 }
             });
-            addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+            addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
 
             addComponents_combo.setOnAction(action->{
                 Dish d = (Dish) addComponents_combo.getValue();
@@ -376,15 +379,15 @@ public class EditRecordsController {
             addSubcomp_btn.setOnAction(action -> {
                 List<Component> selectedList = dishesIngredients_checkedList.getItems()
                         .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
-                        dishList = rest.getRealDish(Integer.parseInt(dish_id.getText())).getComponents()
+                        dishList = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText())).getComponents()
                                 .stream().sorted(Comparator.comparing(Component::getId)).toList();
                 if(dishList.equals(selectedList)){
                     dishes_checkedList.getItems().add(
-                            new ListedRecord(rest.getRealDish(Integer.parseInt(dish_id.getText())))
+                            new ListedRecord(getRestaurant().getRealDish(Integer.parseInt(dish_id.getText())))
                     );
                 }
                 else {
-                    Dish d = rest.getRealDish(Integer.parseInt(dish_id.getText()));
+                    Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
                     dishes_checkedList.getItems().add(
                             new ListedRecord(new Dish("custom made " + d.getDishName() ,d.getType(), new ArrayList<>(dishList), d.getTimeToMake()))
                     );
@@ -394,7 +397,7 @@ public class EditRecordsController {
             });
             Iplus_btn.setOnAction(action->{
                 addSubcomponents_combo.getItems().clear();
-                addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
+                addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
                 addSubcomponents_combo.setVisible(true);
             });
             Iminus_btn.setOnAction(action -> {
@@ -404,12 +407,12 @@ public class EditRecordsController {
             });
         }
         if(editDeliveries_sctn != null){
-            records_combo.getItems().addAll(Restaurant.getInstance().getDeliveries().values());
+            records_combo.getItems().addAll(getRestaurant().getDeliveries().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     deliveryPersons_combo.getItems().clear();
                     deliveryPersons_combo.setValue(((Delivery)newValue).getDeliveryPerson());
-                    deliveryPersons_combo.getItems().addAll(rest.getDeliveryPersons().values());
+                    deliveryPersons_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
 
                     deliveryDate_dp.setValue(((Delivery)newValue).getDeliveryDate());
 
@@ -431,7 +434,7 @@ public class EditRecordsController {
 
                         orders_combo.getItems().clear();
                         orders_combo.setValue(((ExpressDelivery)newValue).getOrder());
-                        orders_combo.getItems().addAll(rest.getOrders().values());
+                        orders_combo.getItems().addAll(getRestaurant().getOrders().values());
 
                         expressFee_field.setText(String.format("%.2f",((ExpressDelivery)newValue).getPostage()));
                     }
@@ -445,7 +448,7 @@ public class EditRecordsController {
             });
         }
         if(editAreas_sctn != null){
-            records_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
+            records_combo.getItems().addAll(getRestaurant().getAreas().values());
             records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
                 try{
                     areaName_field.setText(((DeliveryArea)newValue).getAreaName());
@@ -500,21 +503,20 @@ public class EditRecordsController {
             }
         }
         if(e.getSource() == plus_btn) {
-            Restaurant rest = Restaurant.getInstance();
             if (components_checkedList != null) {
                 addComponents_combo.getItems().clear();
-                addComponents_combo.getItems().addAll(rest.getComponents().values());
+                addComponents_combo.getItems().addAll(getRestaurant().getComponents().values());
                 addComponents_combo.setVisible(true);
             }
             if (dishes_checkedList != null) {
                 addComponents_combo.getItems().clear();
-                addComponents_combo.getItems().addAll(rest.getDishes().values());
+                addComponents_combo.getItems().addAll(getRestaurant().getDishes().values());
                 addComponents_combo.setVisible(true);
             }
             if (orders_checkedList != null) {
                 addComponents_combo.getItems().clear();
                 List<Record> list = orders_checkedList.getItems().stream().map(ListedRecord::getRecord).toList();
-                addComponents_combo.getItems().addAll(rest.getOrders().values()
+                addComponents_combo.getItems().addAll(getRestaurant().getOrders().values()
                         .stream().filter(o->!list.contains(o))
                         .toList()
                 );
@@ -539,7 +541,7 @@ public class EditRecordsController {
                             neighbourhoods_checkedList.getItems().stream().collect(Collectors.toSet()));
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
+                    records_combo.getItems().addAll(getRestaurant().getAreas().values());
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
@@ -559,7 +561,7 @@ public class EditRecordsController {
                             expertises_combo.getValue(),isChef_check.isSelected());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getCooks().values());
+                    records_combo.getItems().addAll(getRestaurant().getCooks().values());
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
@@ -575,7 +577,7 @@ public class EditRecordsController {
                             vehicles_combo.getValue(), deliveryAreas_combo.getValue());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getDeliveryPersons().values());
+                    records_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
@@ -591,7 +593,7 @@ public class EditRecordsController {
                             neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
+                    records_combo.getItems().addAll(getRestaurant().getCustomers().values());
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException | NullPointerException ex){
@@ -607,7 +609,7 @@ public class EditRecordsController {
                             hasGluten_check.isSelected(), hasLactose_check.isSelected());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getComponents().values());
+                    records_combo.getItems().addAll(getRestaurant().getComponents().values());
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
@@ -625,7 +627,7 @@ public class EditRecordsController {
                             components_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getDishes().values());
+                    records_combo.getItems().addAll(getRestaurant().getDishes().values());
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
@@ -651,7 +653,7 @@ public class EditRecordsController {
                                 deliveries_combo.getValue());
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getOrders().values());
+                    records_combo.getItems().addAll(getRestaurant().getOrders().values());
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){
@@ -682,7 +684,7 @@ public class EditRecordsController {
                     }
                     request.saveRequest();
                     records_combo.getItems().clear();
-                    records_combo.getItems().addAll(Restaurant.getInstance().getDeliveries().values());
+                    records_combo.getItems().addAll(getRestaurant().getDeliveries().values());
                     info_grid.setVisible(false);
                     alert_grid.setVisible(true);
                 }catch (IllegalArgumentException ex){

@@ -3,7 +3,6 @@ package View.Controllers;
 import Model.DeliveryArea;
 import Model.Record;
 import Model.Requests.RemoveRecordRequest;
-import Model.Restaurant;
 import View.newElements.imageListCell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +12,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-public class RemoveRecordsController {
+/**
+ * A controller that controls the structures remove pages
+ * @author Eddie Kanevsky
+ */
+public class RemoveRecordsController extends RecordManagementController{
     @FXML
     private Label result_label;
     @FXML
@@ -41,46 +44,46 @@ public class RemoveRecordsController {
     @FXML
     private void initialize(){
         if(removeCooks_sctn != null){
-            record_combo.getItems().addAll(Restaurant.getInstance().getCooks().values());
+            record_combo.getItems().addAll(getRestaurant().getCooks().values());
         }
         if(removeDeliPersons_sctn != null){
-            record_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
+            record_combo.getItems().addAll(getRestaurant().getCustomers().values());
         }
         if(removeCustomers_sctn != null){
             record_combo.setCellFactory(list->new imageListCell<>());
-            record_combo.getItems().addAll(Restaurant.getInstance().getCustomers().values());
+            record_combo.getItems().addAll(getRestaurant().getCustomers().values());
         }
         if(removeComponents_sctn != null){
             //record_combo.setPromptText("Choose ingredient to remove");
-            record_combo.getItems().addAll(Restaurant.getInstance().getComponents().values());
+            record_combo.getItems().addAll(getRestaurant().getComponents().values());
         }
         if(removeDishes_sctn != null){
             //record_combo.setPromptText("Choose dish to remove");
-            record_combo.getItems().addAll(Restaurant.getInstance().getDishes().values());
+            record_combo.getItems().addAll(getRestaurant().getDishes().values());
         }
         if(removeDishes_sctn != null){
             //record_combo.setPromptText("Choose dish to remove");
-            record_combo.getItems().addAll(Restaurant.getInstance().getDishes().values());
+            record_combo.getItems().addAll(getRestaurant().getDishes().values());
         }
         if(removeOrders_sctn != null){
             //record_combo.setPromptText("Choose order to remove");
-            record_combo.getItems().addAll(Restaurant.getInstance().getOrders().values());
+            record_combo.getItems().addAll(getRestaurant().getOrders().values());
         }
         if(removeDeliveries_sctn != null){
             //record_combo.setPromptText("Choose delivery to remove");
-            record_combo.getItems().addAll(Restaurant.getInstance().getDeliveries().values());
+            record_combo.getItems().addAll(getRestaurant().getDeliveries().values());
         }
         if(removeAreas_sctn != null){
             //record_combo.setPromptText("Choose delivery area to remove");
-            record_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
-            newArea_combo.getItems().addAll(Restaurant.getInstance().getAreas().values());
+            record_combo.getItems().addAll(getRestaurant().getAreas().values());
+            newArea_combo.getItems().addAll(getRestaurant().getAreas().values());
         }
     }
     @FXML
     private void handleButtonClick(ActionEvent e){
         try {
             result_label.setText("");
-            RemoveRecordRequest request = new RemoveRecordRequest(null);
+            RemoveRecordRequest request = null;
             if (removeAreas_sctn == null) {
                 Record record = record_combo.getSelectionModel().getSelectedItem();
                 request = new RemoveRecordRequest(record);
@@ -95,8 +98,8 @@ public class RemoveRecordsController {
                 result_label.setStyle("-fx-text-fill: #00ff00");
                 result_label.setText("Delivery Area removed successfully");
                 initialize();
-                Restaurant.getInstance().saveDatabase("Rest.ser");
-                if(Restaurant.getInstance().getAreas().values().size()>2) {
+                getRestaurant().saveDatabase("Rest.ser");
+                if(getRestaurant().getAreas().values().size()>2) {
                     return;
                 }
                 GridPane pane = (GridPane) removeAreas_sctn.getParent();
@@ -105,8 +108,7 @@ public class RemoveRecordsController {
             request.saveRequest();
             record_combo.getItems().clear();
             if (removeCooks_sctn != null) {
-                Restaurant rest = Restaurant.getInstance();
-                if(rest.getCooks().size()==0){
+                if(getRestaurant().getCooks().size()==0){
                     GridPane pane = (GridPane) removeCooks_sctn.getParent();
                     pane.getChildren().remove(removeCooks_sctn);
                 }
@@ -114,8 +116,7 @@ public class RemoveRecordsController {
                 result_label.setText("Cook removed successfully");
             }
             if (removeDeliPersons_sctn != null) {
-                Restaurant rest = Restaurant.getInstance();
-                if(rest.getDeliveryPersons().size()==0){
+                if(getRestaurant().getDeliveryPersons().size()==0){
                     GridPane pane = (GridPane) removeDeliPersons_sctn.getParent();
                     pane.getChildren().remove(removeDeliPersons_sctn);
                 }
@@ -123,8 +124,7 @@ public class RemoveRecordsController {
                 result_label.setText("Delivery Person removed successfully");
             }
             if (removeCustomers_sctn != null) {
-                Restaurant rest = Restaurant.getInstance();
-                if(rest.getCustomers().size()==0){
+                if(getRestaurant().getCustomers().size()==0){
                     GridPane pane = (GridPane) removeCustomers_sctn.getParent();
                     pane.getChildren().remove(removeCustomers_sctn);
                 }
@@ -132,8 +132,7 @@ public class RemoveRecordsController {
                 result_label.setText("Customer removed successfully");
             }
             if (removeComponents_sctn != null) {
-                Restaurant rest = Restaurant.getInstance();
-                if(rest.getComponents().size()==0){
+                if(getRestaurant().getComponents().size()==0){
                     GridPane pane = (GridPane) removeComponents_sctn.getParent();
                     pane.getChildren().remove(removeComponents_sctn);
                 }
@@ -141,8 +140,7 @@ public class RemoveRecordsController {
                 result_label.setText("Ingredient removed successfully");
             }
             if (removeDishes_sctn != null) {
-                Restaurant rest = Restaurant.getInstance();
-                if(rest.getDishes().size()==0){
+                if(getRestaurant().getDishes().size()==0){
                     GridPane pane = (GridPane) removeDishes_sctn.getParent();
                     pane.getChildren().remove(removeDishes_sctn);
                 }
@@ -150,8 +148,7 @@ public class RemoveRecordsController {
                 result_label.setText("Dish removed successfully");
             }
             if (removeOrders_sctn != null) {
-                Restaurant rest = Restaurant.getInstance();
-                if(rest.getOrders().size()==0){
+                if(getRestaurant().getOrders().size()==0){
                     GridPane pane = (GridPane) removeOrders_sctn.getParent();
                     pane.getChildren().remove(removeOrders_sctn);
                 }
@@ -159,8 +156,7 @@ public class RemoveRecordsController {
                 result_label.setText("Dish removed successfully");
             }
             if (removeDeliveries_sctn != null) {
-                Restaurant rest = Restaurant.getInstance();
-                if(rest.getCooks().size()==0){
+                if(getRestaurant().getCooks().size()==0){
                     GridPane pane = (GridPane) removeDeliveries_sctn.getParent();
                     pane.getChildren().remove(removeDeliveries_sctn);
                 }
@@ -168,7 +164,7 @@ public class RemoveRecordsController {
                 result_label.setText("Dish removed successfully");
             }
             initialize();
-            Restaurant.getInstance().saveDatabase("Rest.ser");
+            getRestaurant().saveDatabase("Rest.ser");
         } catch (Exception ex){
             ex.printStackTrace();
         }

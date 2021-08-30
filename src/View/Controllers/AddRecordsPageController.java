@@ -15,6 +15,10 @@ import javafx.scene.layout.GridPane;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * A class that controls the Add records selection page
+ * @author Eddie Kanevsky
+ */
 public class AddRecordsPageController extends RecordManagementController {
 
     //region Properties

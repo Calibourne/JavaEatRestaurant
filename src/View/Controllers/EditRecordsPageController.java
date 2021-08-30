@@ -14,6 +14,10 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 
+/**
+ * A class that controls the Edit records selection page
+ * @author Eddie Kanevsky
+ */
 public class EditRecordsPageController extends RecordManagementController {
 
     //region Properties

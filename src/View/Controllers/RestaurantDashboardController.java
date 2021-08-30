@@ -10,7 +10,12 @@ import javafx.scene.control.Tab;
 
 import java.util.Comparator;
 
-public class RestaurantDashboardController {
+
+/**
+ * A controller for a restaurant dashboard page that shows its statistics (when a certain record was added/ removed / edited)
+ * @author Eddie Kanevsky
+ */
+public class RestaurantDashboardController extends RecordManagementController{
 
     @FXML
     private Tab areas_tab;
@@ -71,32 +76,27 @@ public class RestaurantDashboardController {
     @FXML
     private Label numOfDelivered;
 
-    private Restaurant rest;
-    @FXML
-    private void initialize(){
-        rest = Restaurant.getInstance();
-    }
-
+    /**
+     * initializes the dashboard and populates it with the requests info
+     */
     @FXML
     private void initDashboard(Event e){
-        if(rest == null)
-            rest = Restaurant.getInstance();
         if(e.getSource() == areas_tab){
 
-            numOfAreas.setText(rest.getAreas().values().size()+"");
+            numOfAreas.setText(getRestaurant().getAreas().values().size()+"");
             areas_history.getItems().clear();
             try {
-                areas_history.getItems().addAll(rest.getAddRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
+                areas_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                areas_history.getItems().addAll(rest.getRemoveRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
+                areas_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                areas_history.getItems().addAll(rest.getEditRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
+                areas_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -109,28 +109,28 @@ public class RestaurantDashboardController {
 
         if(e.getSource() == customers_tab){
             numOfCustomers.setText(
-                    rest.getCustomers().values().stream()
-                            .filter(c->!rest.getBlacklist().contains(c)).toList().size()+""
+                    getRestaurant().getCustomers().values().stream()
+                            .filter(c->!getRestaurant().getBlacklist().contains(c)).toList().size()+""
             );
-            numOfBlacklisted.setText(rest.getBlacklist().size()+"");
+            numOfBlacklisted.setText(getRestaurant().getBlacklist().size()+"");
             customers_history.getItems().clear();
             try {
-                customers_history.getItems().addAll(rest.getAddRecordHistory().get(Customer.class.getSimpleName()).stream().toList());
+                customers_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(Customer.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                customers_history.getItems().addAll(rest.getRemoveRecordHistory().get(Customer.class.getSimpleName()).stream().toList());
+                customers_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(Customer.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                customers_history.getItems().addAll(rest.getEditRecordHistory().get(Customer.class.getSimpleName()).stream().toList());
+                customers_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(Customer.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                customers_history.getItems().addAll(rest.getAddRecordHistory().get("Blacklist").stream().toList());
+                customers_history.getItems().addAll(getRestaurant().getAddRecordHistory().get("Blacklist").stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -142,20 +142,20 @@ public class RestaurantDashboardController {
         }
 
         if(e.getSource() == delipersons_tab){
-            numOfDeliPersons.setText(rest.getDeliveryPersons().values().size()+"");
+            numOfDeliPersons.setText(getRestaurant().getDeliveryPersons().values().size()+"");
             delipersons_history.getItems().clear();
             try {
-                delipersons_history.getItems().addAll(rest.getAddRecordHistory().get(DeliveryPerson.class.getSimpleName()).stream().toList());
+                delipersons_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(DeliveryPerson.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                delipersons_history.getItems().addAll(rest.getRemoveRecordHistory().get(DeliveryPerson.class.getSimpleName()).stream().toList());
+                delipersons_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(DeliveryPerson.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                delipersons_history.getItems().addAll(rest.getEditRecordHistory().get(DeliveryPerson.class.getSimpleName()).stream().toList());
+                delipersons_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(DeliveryPerson.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -167,20 +167,20 @@ public class RestaurantDashboardController {
         }
 
         if(e.getSource() == cooks_tab){
-            numOfCooks.setText(rest.getCooks().values().size()+"");
+            numOfCooks.setText(getRestaurant().getCooks().values().size()+"");
             cooks_history.getItems().clear();
             try {
-                cooks_history.getItems().addAll(rest.getAddRecordHistory().get(Cook.class.getSimpleName()).stream().toList());
+                cooks_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(Cook.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                cooks_history.getItems().addAll(rest.getRemoveRecordHistory().get(Cook.class.getSimpleName()).stream().toList());
+                cooks_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(Cook.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                cooks_history.getItems().addAll(rest.getEditRecordHistory().get(Cook.class.getSimpleName()).stream().toList());
+                cooks_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(Cook.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -192,20 +192,20 @@ public class RestaurantDashboardController {
         }
 
         if(e.getSource() == components_tab){
-            numOfComponents.setText(rest.getComponents().values().size()+"");
+            numOfComponents.setText(getRestaurant().getComponents().values().size()+"");
             components_history.getItems().clear();
             try {
-                components_history.getItems().addAll(rest.getAddRecordHistory().get(Component.class.getSimpleName()).stream().toList());
+                components_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(Component.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                components_history.getItems().addAll(rest.getRemoveRecordHistory().get(Component.class.getSimpleName()).stream().toList());
+                components_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(Component.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                components_history.getItems().addAll(rest.getEditRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
+                components_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(DeliveryArea.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -217,20 +217,20 @@ public class RestaurantDashboardController {
         }
 
         if(e.getSource() == dishes_tab){
-            numOfDishes.setText(rest.getDishes().values().size()+"");
+            numOfDishes.setText(getRestaurant().getDishes().values().size()+"");
             dishes_history.getItems().clear();
             try {
-                dishes_history.getItems().addAll(rest.getAddRecordHistory().get(Dish.class.getSimpleName()).stream().toList());
+                dishes_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(Dish.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                dishes_history.getItems().addAll(rest.getRemoveRecordHistory().get(Dish.class.getSimpleName()).stream().toList());
+                dishes_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(Dish.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                dishes_history.getItems().addAll(rest.getEditRecordHistory().get(Dish.class.getSimpleName()).stream().toList());
+                dishes_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(Dish.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -242,20 +242,20 @@ public class RestaurantDashboardController {
         }
 
         if(e.getSource() == orders_tab){
-            numOfOrders.setText(rest.getOrders().values().size()+"");
+            numOfOrders.setText(getRestaurant().getOrders().values().size()+"");
             orders_history.getItems().clear();
             try {
-                orders_history.getItems().addAll(rest.getAddRecordHistory().get(Order.class.getSimpleName()).stream().toList());
+                orders_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(Order.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                orders_history.getItems().addAll(rest.getRemoveRecordHistory().get(Order.class.getSimpleName()).stream().toList());
+                orders_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(Order.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                orders_history.getItems().addAll(rest.getEditRecordHistory().get(Order.class.getSimpleName()).stream().toList());
+                orders_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(Order.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
@@ -267,38 +267,38 @@ public class RestaurantDashboardController {
         }
 
         if(e.getSource() == deliveries_tab){
-            numOfDeliveries.setText(rest.getDeliveries().values().size()+"");
-            numOfRegular.setText(rest.getDeliveries().values().stream().filter(d->d instanceof RegularDelivery).toList().size()+"");
-            numOfExpress.setText(rest.getDeliveries().values().stream().filter(d->d instanceof ExpressDelivery).toList().size()+"");
-            numOfDelivered.setText(rest.getDeliveries().values().stream().filter(Delivery::isDelivered).toList().size()+"");
+            numOfDeliveries.setText(getRestaurant().getDeliveries().values().size()+"");
+            numOfRegular.setText(getRestaurant().getDeliveries().values().stream().filter(d->d instanceof RegularDelivery).toList().size()+"");
+            numOfExpress.setText(getRestaurant().getDeliveries().values().stream().filter(d->d instanceof ExpressDelivery).toList().size()+"");
+            numOfDelivered.setText(getRestaurant().getDeliveries().values().stream().filter(Delivery::isDelivered).toList().size()+"");
             deliveries_history.getItems().clear();
             try {
-                deliveries_history.getItems().addAll(rest.getAddRecordHistory().get(RegularDelivery.class.getSimpleName()).stream().toList());
+                deliveries_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(RegularDelivery.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try {
-                deliveries_history.getItems().addAll(rest.getAddRecordHistory().get(ExpressDelivery.class.getSimpleName()).stream().toList());
+                deliveries_history.getItems().addAll(getRestaurant().getAddRecordHistory().get(ExpressDelivery.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try {
-                deliveries_history.getItems().addAll(rest.getRemoveRecordHistory().get(RegularDelivery.class.getSimpleName()).stream().toList());
+                deliveries_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(RegularDelivery.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try {
-                deliveries_history.getItems().addAll(rest.getRemoveRecordHistory().get(ExpressDelivery.class.getSimpleName()).stream().toList());
+                deliveries_history.getItems().addAll(getRestaurant().getRemoveRecordHistory().get(ExpressDelivery.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                deliveries_history.getItems().addAll(rest.getEditRecordHistory().get(RegularDelivery.class.getSimpleName()).stream().toList());
+                deliveries_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(RegularDelivery.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }
             try{
-                deliveries_history.getItems().addAll(rest.getEditRecordHistory().get(ExpressDelivery.class.getSimpleName()).stream().toList());
+                deliveries_history.getItems().addAll(getRestaurant().getEditRecordHistory().get(ExpressDelivery.class.getSimpleName()).stream().toList());
             }catch (NullPointerException ex){
 
             }

@@ -4,7 +4,6 @@ import Model.Customer;
 import Model.Requests.EditRecordRequest;
 import Model.Restaurant;
 import Utils.Gender;
-import Utils.ImageManager;
 import Utils.Neighberhood;
 import Utils.SFXManager;
 import javafx.embed.swing.SwingFXUtils;
@@ -20,7 +19,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class editCustomerDetailsController {
+/**
+ * the controller for customer's user settings
+ * @author Eddie Kanevsky
+ */
+public class editCustomerDetailsController{
 
     @FXML
     private TextField fname_field;
@@ -69,7 +72,6 @@ public class editCustomerDetailsController {
     private void initialize(){
         ControllerUtils.setFileChooser(img_choose, img_source);
         try{
-            ImageManager manager = ImageManager.getInstance();
             user = LoginPageController.getCustomer();
             fname_field.setText(user.getFirstName());
             lname_field.setText(user.getLastName());
@@ -107,8 +109,6 @@ public class editCustomerDetailsController {
             }catch (IllegalArgumentException | NullPointerException | IOException ex){
                 System.out.println(ex.getMessage());
             }
-            //change_lbl.setVisible(true);
-            //change_lbl.requestFocus();
         }
     }
 

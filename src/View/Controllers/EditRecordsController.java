@@ -166,7 +166,7 @@ public class EditRecordsController {
     private void initialize(){
         Pattern intPattern = Pattern.compile("([0-9]+)?");
         Pattern doublePattern = Pattern.compile("((([1-9])(\\d*)|0)(\\.\\d*)?)?");
-        Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ -]?)([a-zA-Z]*))*");
+        Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ \\-\']?)([a-zA-Z]*))*");
         Restaurant rest = Restaurant.getInstance();
         try{
             info_grid.setVisible(false);
@@ -697,10 +697,14 @@ public class EditRecordsController {
     }
 
     private void setNames(Record newValue, Pattern stringPattern){
+        lname_field.setTextFormatter(null);
+        fname_field.setTextFormatter(null);
+        fname_field.setText("");
         fname_field.setText(((Person)newValue).getFirstName());
         fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
         ControllerUtils.setAlerts(fname_field, stringPattern, alert_lbl);
 
+        lname_field.setText("");
         lname_field.setText(((Person)newValue).getLastName());
         lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
         ControllerUtils.setAlerts(lname_field, stringPattern, alert_lbl);

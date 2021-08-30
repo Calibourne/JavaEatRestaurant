@@ -1,6 +1,0 @@
-* לפרק את AIMACHINE לשני חלקים- חלק ראשון יציג את ההצעה של המשלוחים והחלק השני יהיה כפתור של אישור המשלוחים (או דחייתם) והכנסתם למאגר.
-* שיפוץ קבצי הCSS באמצעות סינטקס של SCSS/SASS <- done
-* create an order --> place an order <- done
-*Fix shnitzel to not appear custom while it is not
-* add a rickroll
-*להוסיף הודעת הצלחה/כישלון לכל עמודי המנהל

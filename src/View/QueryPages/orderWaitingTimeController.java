@@ -7,6 +7,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * This is a controller class for the orderWaitingTime query page
+ * @author Daniel Sharon
+ */
+
 public class orderWaitingTimeController {
 
     @FXML

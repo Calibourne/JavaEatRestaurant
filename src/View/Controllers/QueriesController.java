@@ -12,6 +12,10 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * This controller serves as the submenu of the queries part of the UI, giving function to the buttons within
+ * @author Daniel Sharon
+ */
 public class QueriesController {
 
     @FXML
@@ -76,7 +80,9 @@ public class QueriesController {
 
     }
 
-
+    /**
+     * This method serves as a button click action
+     */
     public void handleButtonClick(ActionEvent event) {
         if(event.getSource()== ai_macine_button){
             paneAiMacine.setStyle("-fx-background-color: #1F4591");
@@ -84,9 +90,9 @@ public class QueriesController {
         }
     }
 
-    // method(s) used to switch between scenes within a stage
-
-
+    /**
+     * method(s) used to switch between scenes within a stage
+     */
     public void queryButtonPushed(ActionEvent event) {
         try{
             Node queryPage;

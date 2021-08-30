@@ -10,6 +10,11 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This is a controller class for the getNumberOfDeliveriesPerType query page
+ * @author Daniel Sharon
+ */
+
 public class getNumberOfDeliveriesPerTypeController {
 
     @FXML
@@ -39,26 +44,22 @@ public class getNumberOfDeliveriesPerTypeController {
         System.out.println(rest.getNumberOfDeliveriesPerType().get("Express delivery"));
     }
 
+    /**
+     * This method activates the actual query function for deliveries of regular type
+     */
     @FXML
     public void regularButtonPressed(){
-
-//        //Reset the result list each time a query is called upon
-//        if(!(query_result.getText().isEmpty())){
-//
-//            query_result.setText("");
-//        }
         query_result.setText(String.format("%d regular deliveries have been delivered since January", rest.getNumberOfDeliveriesPerType().get("Regular delivery")));
         SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
 
     }
 
+    /**
+     * This method activates the actual query function for deliveries of express type
+     */
     public void expressButtonPressed(){
         Restaurant rest = Restaurant.getInstance();
-//        //Reset the result list each time a query is called upon
-//        if(!(query_result.getText().isEmpty())){
-//
-//            query_result.setText("");
-//        }
+
         query_result.setText(String.format("%d express deliveries have been delivered since January", rest.getNumberOfDeliveriesPerType().get("Express delivery")));
         SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
     }

@@ -22,6 +22,10 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * This Controller is for the CustomerCartAndHistory page
+ * @author Daniel Sharon
+ */
 public class CustomerCartAndHistoryController {
 
     @FXML
@@ -96,6 +100,9 @@ public class CustomerCartAndHistoryController {
         }
     }
 
+    /**
+     * This method is used to switch the inner pane of the tab to the order history view
+     */
     @FXML
     private void orderHistoryButtonPressed() {
         order_history_list.getItems().clear();
@@ -117,6 +124,9 @@ public class CustomerCartAndHistoryController {
         }
     }
 
+    /**
+     * This method is used to switch the inner pane of the tab to the shopping cart view
+     */
     @FXML
     private void shoppingCartButtonPressed() {
         try {
@@ -134,6 +144,9 @@ public class CustomerCartAndHistoryController {
 
     }
 
+    /**
+     * @return Order to be edited in the history pane
+     */
     public static Order getOrder_to_change() {
         return order_to_change;
     }
@@ -152,6 +165,10 @@ public class CustomerCartAndHistoryController {
         }
     }
 
+    /**
+     * This method is used to place and order selected from the listview of the shopping cart
+     * @param event
+     */
     public void placeOrder(ActionEvent event){
         try {
             cart_empty_message.setText("");
@@ -171,10 +188,7 @@ public class CustomerCartAndHistoryController {
             );
             TreeSet<Order> order = new TreeSet<>();
             order.add((Order) orderRequest.getRecord());
-//            AddRecordRequest deliveryRequest = new AddRecordRequest(new RegularDelivery(-1),
-//                    order, dp, dp.getArea(), true , LocalDate.now()
-//            );
-//            ((Order)orderRequest.getRecord()).setDelivery((Delivery) deliveryRequest.getRecord());
+
             orderRequest.saveRequest();
 //            deliveryRequest.saveRequest();
             Order o = (Order) orderRequest.getRecord();
@@ -192,9 +206,11 @@ public class CustomerCartAndHistoryController {
         }
     }
 
-
+    /**
+     *  This method is used to delete an order selected from the order history list
+     */
     @FXML
-    void deleteHistoryOrder(ActionEvent event) {
+    void deleteHistoryOrder() {
         try {
             history_empty_message.setText("");
             System.out.println("test");
@@ -209,8 +225,11 @@ public class CustomerCartAndHistoryController {
 
     }
 
+    /**
+     * A method used to send the user to the edit order page for the selected order upon pressing the 'edit order' button
+     */
     @FXML
-    void editHistoryOrder(ActionEvent event) {
+    void editHistoryOrder() {
         Node page = null;
         try {
             order_to_change = (Order) order_history_list.getSelectionModel().getSelectedItem().getRecord();

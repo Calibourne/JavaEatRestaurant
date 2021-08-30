@@ -16,6 +16,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This controller serves the login page
+ * @author Daniel Sharon
+ */
 public class LoginPageController {
 
     @FXML
@@ -47,17 +51,23 @@ public class LoginPageController {
         //rest.getAddRecordHistory().get(DeliveryPerson.class.getSimpleName()).forEach(System.out::println);
     }
 
+    /**
+     * This getter and setter are used to feed the customer attributes to the customer stage pages
+     * @return Customer to be logged in
+     */
     public static Customer getCustomer() {
         return customer;
     }
-
     public static void setCustomer(Customer customer) {
         LoginPageController.customer = customer;
     }
 
+    /**
+     * This method is used to check the log in details and send the user to the manager customer stages
+     */
     @FXML
-    private void LoginButtonOnAction(ActionEvent e) {
-        if (usernameField.getText().equals("m") && passwordField.getText().equals("m")) {
+    private void LoginButtonOnAction() {
+        if ((usernameField.getText().equals("manager") && passwordField.getText().equals("manager")) || ((usernameField).getText().equals("m") && passwordField.getText().equals("m"))) {
             try {
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("managerPage.fxml"));
@@ -83,14 +93,20 @@ public class LoginPageController {
         }
     }
 
+    /**
+     * Method to close the program. Same purpose as the 'X'  button on Windows
+     */
     @FXML
-    private void cancelButtonOnAction(ActionEvent e) {
+    private void cancelButtonOnAction() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Method to send the user to the sign up page
+     */
     @FXML
-    private void registerButtonOnAction(ActionEvent e) {
+    private void registerButtonOnAction() {
         try {
             Stage s = (Stage) registerButton.getScene().getWindow();
             Parent p = FXMLLoader.load(getClass().getResource("SignupPage.fxml"));
@@ -101,31 +117,15 @@ public class LoginPageController {
         }
     }
 
+    /**
+     * This method assigns the 'Enter' and 'Esc' buttons to the login and cancel buttons accordingly
+     */
     public void handleOnAction(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            LoginButtonOnAction(e);
+            LoginButtonOnAction();
         }
         if (e.getSource() == cancelButton) {
-            cancelButtonOnAction(e);
+            cancelButtonOnAction();
         }
     }
-
-
-//    @FXML
-//    private Text actiontarget;
-//    @FXML protected void handleSubmitButtonAction(ActionEvent event) {
-//        actiontarget.setText("Sign in button pressed");
-//    }
-//
-//    @Override
-//    public void start(Stage stage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-//
-//        Scene scene = new Scene(root);
-//
-//        stage.setTitle("FXML Welcome");
-//        stage.setScene(scene);
-//        stage.show();
-//    }
-
 }

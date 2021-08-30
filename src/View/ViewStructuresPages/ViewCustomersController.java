@@ -12,6 +12,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This is a controller class for the View Customers page
+ * @author Daniel Sharon
+ */
+
 public class ViewCustomersController {
 
     @FXML

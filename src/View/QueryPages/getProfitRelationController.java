@@ -4,7 +4,6 @@ import Model.Dish;
 import Model.Restaurant;
 import Utils.DocxWriter;
 import Utils.SFXManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +14,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This is a controller class for the getProfitRelation query page
+ * @authors Daniel Sharon, Eddie Kanevsky
+ */
 public class getProfitRelationController {
 
     @FXML
@@ -73,8 +76,11 @@ public class getProfitRelationController {
 
     }
 
+    /**
+     * This method is used to generate a Word document for the query. The document is given the name 'profit.docx'
+     */
     @FXML
-    void generateDOCX(ActionEvent event) {
+    void generateDOCX() {
         List<Dish> ts = Restaurant.getInstance().getProfitRelation().stream().toList();
         String[] prompt = new String[ts.size()+1];
         prompt[0] = "SUBTITLE-CENTER~(Dish price / minute of preparation)";

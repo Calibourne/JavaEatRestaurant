@@ -13,6 +13,10 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * This controller serves as the submenu of the 'view structures' part of the UI, giving function to the buttons within
+ * @author Daniel Sharon
+ */
 public class ViewStructuresController {
 
     @FXML
@@ -67,7 +71,9 @@ public class ViewStructuresController {
 
     }
 
-    // method(s) used to switch between scenes within a stage
+    /**
+     * Method(s) used to switch between scenes within a stage
+     */
     @FXML
     public void queryButtonPushed(ActionEvent event) {
         try{

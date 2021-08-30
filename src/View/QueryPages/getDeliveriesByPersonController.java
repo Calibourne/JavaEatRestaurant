@@ -15,6 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This is a controller class for the getDeliveriesByPerson query page
+ * @author Daniel Sharon
+ */
+
 public class getDeliveriesByPersonController {
 
     @FXML
@@ -42,6 +47,9 @@ public class getDeliveriesByPersonController {
 
     }
 
+    /**
+     * This method activates the actual query function upon a press of a button
+     */
     @FXML
     private void buttonPressed(ActionEvent event){
         try{

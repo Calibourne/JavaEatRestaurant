@@ -17,6 +17,11 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * This is a controller class for the createAIMacine query page
+ * @author Daniel Sharon
+ */
+
 public class createAIMacineController {
 
     @FXML
@@ -96,6 +101,10 @@ public class createAIMacineController {
         });
 
     }
+
+    /**
+     * This method activates the actual query function upon a press of a button
+     */
 
     @FXML
     public void buttonPressed(){

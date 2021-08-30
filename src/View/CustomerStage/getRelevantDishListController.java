@@ -11,6 +11,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This is a controller class for the getRelevantDishList query page
+ * @author Daniel Sharon
+ */
 public class getRelevantDishListController {
 
     @FXML

@@ -1,7 +1,6 @@
 package View.QueryPages;
 
 import Model.Component;
-import Model.Cook;
 import Model.Restaurant;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -9,6 +8,10 @@ import javafx.scene.layout.AnchorPane;
 
 import java.util.List;
 
+/**
+ * This is a controller class for the getPopularComponent query page
+ * @author Daniel Sharon
+ */
 public class getPopularComponentController {
 
     @FXML
@@ -43,11 +46,8 @@ public class getPopularComponentController {
 
             }
 
-
         }catch (NullPointerException ex){
             System.out.println(ex.getMessage());
         }
-
     }
-
 }

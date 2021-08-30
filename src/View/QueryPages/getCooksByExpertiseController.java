@@ -3,15 +3,18 @@ package View.QueryPages;
 import Model.Cook;
 import Model.Restaurant;
 import Utils.Expertise;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.Arrays;
 import java.util.List;
+
+/**
+ * This is a controller class for the getCooksByExpertise query page
+ * @author Daniel Sharon
+ */
 
 public class getCooksByExpertiseController {
 
@@ -47,38 +50,4 @@ public class getCooksByExpertiseController {
             System.out.println(ex.getMessage());
         }
     }
-
-    // Daniel's old implementation of the query activation without an event listener
-//    public void buttonPressed(ActionEvent event){
-//        try {
-//
-//            //Reset the result list each time a query is called upon
-//            if(!(query_result.getItems().isEmpty())){
-//
-//                query_result.getItems().clear();
-//            }
-//
-//            Restaurant rest = Restaurant.getInstance();
-//
-//            if(!(rest.getCooksByExpertise(expertise_combobox.getSelectionModel().getSelectedItem()).values().isEmpty())){
-//
-//                List<String> results = rest.getCooksByExpertise(expertise_combobox.getValue()).values().stream().map(Cook::toString).toList();
-//                results.forEach(r->query_result.getItems().add(r));
-//
-//            }
-//            else{
-//                if(!(query_result.getItems().isEmpty())){
-//
-//                    query_result.getItems().clear();
-//                }
-//                query_result.getItems().add("No cooks available for the selected expertise");
-//
-//            }
-//
-//
-//        }catch (NullPointerException ex){
-//            System.out.println(ex.getMessage());
-//        }
-//
-//    }
 }

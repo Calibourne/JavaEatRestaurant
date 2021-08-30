@@ -16,6 +16,10 @@ import org.controlsfx.control.CheckListView;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * This controller serves the page that appears when the customer presses the edit order button in the order history page
+ * @authors Eddie Kanevsky, Daniel Sharon
+ */
 public class EditCustomerOrdersController {
 
     @FXML
@@ -75,6 +79,9 @@ public class EditCustomerOrdersController {
     @FXML
     private GridPane alert_grid;
 
+    /**
+     * This method serves the different buttons that are in the edit orders page
+     */
     @FXML
     void handleButtonClick(ActionEvent event) {
         if(event.getSource() == submit) {

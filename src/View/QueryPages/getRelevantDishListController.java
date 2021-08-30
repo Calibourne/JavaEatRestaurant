@@ -3,17 +3,18 @@ package View.QueryPages;
 import Model.Customer;
 import Model.Dish;
 import Model.Restaurant;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
-import java.sql.SQLException;
 import java.util.List;
+
+/**
+ * This is a controller class for the getRelevantDishList query page
+ * @author Daniel Sharon
+ */
 
 public class getRelevantDishListController {
 

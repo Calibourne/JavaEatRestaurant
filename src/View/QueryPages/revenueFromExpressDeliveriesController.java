@@ -5,6 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * This is a controller class for the revenueFromExpressDeliveries query page
+ * @author Daniel Sharon
+ */
+
 public class revenueFromExpressDeliveriesController {
 
     @FXML

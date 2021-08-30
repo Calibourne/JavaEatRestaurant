@@ -12,6 +12,10 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This controller is used to display the restaurant menu in the customer stage
+ * @author Daniel Sharon
+ */
 public class CustomerMenuController {
 
     @FXML
@@ -52,6 +56,9 @@ public class CustomerMenuController {
         assert desserts_list != null : "fx:id=\"desserts_list\" was not injected: check your FXML file 'CustomerMenu.fxml'.";
     }
 
+    /**
+     * A method that makes the appetizers button display the proper dish list
+     */
     @FXML
     public void appetizersButtonPressed(){
         try {
@@ -69,6 +76,9 @@ public class CustomerMenuController {
         }
     }
 
+    /**
+     * A method that makes the mains button display the proper dish list
+     */
     @FXML
     public void mainsButtonPressed(){
         try {
@@ -86,6 +96,9 @@ public class CustomerMenuController {
         }
     }
 
+    /**
+     * A method that makes the dessert button display the proper dish list
+     */
     @FXML
     public void dessertButtonPressed(){
         try {

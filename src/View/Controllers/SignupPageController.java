@@ -23,7 +23,10 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-
+/**
+ * This controller serves the sign-up page of the program
+ * @authors Eddie Kanevsky, Daniel Sharon
+ */
 public class SignupPageController {
     @FXML
     private GridPane signup_grid;
@@ -166,8 +169,11 @@ public class SignupPageController {
     }
 
 
+    /**
+     * This method serves the register button, prompts the user to log in upon successful account creation
+     */
     @FXML
-    private void registerButtonOnAction(ActionEvent e){
+    private void registerButtonOnAction(){
         try{
             error_label.setText("");
            if(!passwordField.getText().equals(confirmPasswordField.getText()) && passwordField.getText().length()>0)
@@ -210,6 +216,9 @@ public class SignupPageController {
 
     }
 
+    /**
+     * This method serves the cancel button and sends the user back to the login page when prompted
+     */
     @FXML
     private void exitButtonOnAction(ActionEvent e){
         if(e.getSource() == returnButton) {

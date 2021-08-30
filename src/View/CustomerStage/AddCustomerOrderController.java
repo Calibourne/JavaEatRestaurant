@@ -5,7 +5,6 @@ import Model.Dish;
 import Model.ListedRecord;
 import Model.Restaurant;
 import Utils.SFXManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -23,6 +22,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * This Controller is for the AddCustomerOrder page
+ * @author Daniel Sharon
+ */
 public class AddCustomerOrderController {
 
     @FXML
@@ -85,11 +88,6 @@ public class AddCustomerOrderController {
 
     @FXML
     private GridPane alert_grid;
-
-    @FXML
-    void handleButtonClick(ActionEvent event) {
-
-    }
 
     @FXML
     void initialize() {

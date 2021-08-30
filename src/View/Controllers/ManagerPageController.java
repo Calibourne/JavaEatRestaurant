@@ -106,6 +106,7 @@ public class ManagerPageController {
         try {
             pnlChoosedPage.getChildren().clear();
             Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RestaurantDashboard.fxml")));
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             // SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav"); plays at login, not how we intended
             pnlChoosedPage.getChildren().add(recordsA);
         } catch(IOException | NullPointerException e){

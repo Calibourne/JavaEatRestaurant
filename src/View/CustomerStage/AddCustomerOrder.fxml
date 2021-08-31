@@ -96,8 +96,8 @@
                                                                               <CheckListView fx:id="dishes_checkedList" prefHeight="168.0" prefWidth="270.0" styleClass="transparent-list" />
                                                                               <HBox alignment="CENTER" prefHeight="34.0" prefWidth="270.0" spacing="25.0" styleClass="OuterMenuBar">
                                                                                  <children>
-                                                                                    <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
-                                                                                    <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                                                                    <Button fx:id="minus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="-" />
+                                                                                    <Button fx:id="plus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="+" />
                                                                                  </children>
                                                                               </HBox>
                                                                            </children>
@@ -134,9 +134,9 @@
                                                                               <CheckListView fx:id="dishesIngredients_checkedList" prefHeight="200.0" prefWidth="155.0" />
                                                                               <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="5.0" styleClass="OuterMenuBar">
                                                                                  <children>
-                                                                                    <Button fx:id="Iminus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
-                                                                                    <Button fx:id="addSubcomp_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="73.0" text="Add Dish" />
-                                                                                    <Button fx:id="Iplus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                                                                    <Button fx:id="Iminus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="-" />
+                                                                                    <Button fx:id="addSubcomp_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Add Dish" />
+                                                                                    <Button fx:id="Iplus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="+" />
                                                                                  </children>
                                                                               </HBox>
                                                                            </children>
@@ -155,7 +155,7 @@
                                     </Group>
                                  </children>
                               </GridPane>
-                              <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Add to shopping cart" GridPane.rowIndex="1" />
+                              <Button fx:id="submit" mnemonicParsing="false" text="Add to shopping cart" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                         <GridPane fx:id="alert_grid" visible="false">

@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -52,10 +53,10 @@ public class editCustomerDetailsController{
     private Button img_choose;
 
     @FXML
-    private TextField npass_field;
+    private PasswordField npass_field;
 
     @FXML
-    private TextField rpass_field;
+    private PasswordField rpass_field;
 
     @FXML
     private Label username_lbl;
@@ -65,6 +66,15 @@ public class editCustomerDetailsController{
 
     @FXML
     private Label change_lbl;
+
+    @FXML
+    private Label pass_alert;
+
+    @FXML
+    private Label passStrengthLbl;
+
+    @FXML
+    private ProgressBar passwordStrengthInd;
 
     Customer user;
 
@@ -87,27 +97,63 @@ public class editCustomerDetailsController{
         }catch(NullPointerException e){
             e.getMessage();
         }
+        npass_field.textProperty().addListener((obs, o, n)->{
+            if(npass_field.getText().equals(rpass_field.getText())){
+                if(npass_field.getText().equals("")){
+                    pass_alert.setText("");
+                }
+                else{
+                    pass_alert.setStyle("-fx-text-fill: #00ff00");
+                    pass_alert.setText("Passwords match 👍");
+                }
+            }else {
+                pass_alert.setStyle("-fx-text-fill: red");
+                pass_alert.setText("Passwords don't match 😟");
+            }
+        });
+        rpass_field.textProperty().addListener((obs, o, n)->{
+            if(rpass_field.getText().equals(npass_field.getText())){
+                pass_alert.setStyle("-fx-text-fill: #00ff00");
+                pass_alert.setText("Passwords match 👍");
+            }else {
+                pass_alert.setStyle("-fx-text-fill: red");
+                pass_alert.setText("Passwords don't match 😟");
+            }
+        });
         submit.setOnAction(this::handleButtonClick);
+        npass_field.setOnKeyTyped(this::determinePasswordStrength);
+        ControllerUtils.initStrengthIndicator(passwordStrengthInd);
+    }
+
+    private void determinePasswordStrength(KeyEvent e){
+        ControllerUtils.determinePasswordStrength(npass_field, passStrengthLbl, passwordStrengthInd);
     }
 
     @FXML
     private void handleButtonClick(ActionEvent e) {
         if(e.getSource() == submit){
+            change_lbl.setText("");
             Restaurant rest = Restaurant.getInstance();
             EditRecordRequest request = null;
-            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
+            String fname = (fname_field.getText().length() > 0)? fname_field.getText():null;
+            String lname = (lname_field.getText().length() > 0)? lname_field.getText():null;
             try{
                 request = new EditRecordRequest(rest.getRealCustomer(user.getId()),
-                        fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                        fname, lname, genders_combo.getValue(), birthDate_dp.getValue(),
                         neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
                 request.saveRequest();
                 Restaurant.getInstance().saveDatabase("Rest.ser");
                 Stage window = (Stage) submit.getScene().getWindow();
-                Parent customerHome = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("CustomerHome.fxml")));
+                SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
+                Parent customerHome = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerHome.fxml")));
                 ControllerUtils.changeScreen(window, customerHome);
 
-            }catch (IllegalArgumentException | NullPointerException | IOException ex){
-                System.out.println(ex.getMessage());
+            }catch (IllegalArgumentException ex){
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+                change_lbl.setText("Please fill out all the required fields");
+            }catch (NullPointerException | IOException ex){
+                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+                    System.out.println(ex.getMessage());
             }
         }
     }

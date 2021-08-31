@@ -1,7 +1,6 @@
 package View.CustomerStage;
 
 import Model.Customer;
-import Model.Restaurant;
 import Utils.ImageManager;
 import Utils.SFXManager;
 import View.Controllers.LoginPageController;
@@ -17,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -68,8 +68,6 @@ public class CustomerHomeController {
     @FXML
     private ImageView user_img;
 
-
-    Restaurant restaurant = Restaurant.getInstance();
     private Customer customer;
 
     @FXML

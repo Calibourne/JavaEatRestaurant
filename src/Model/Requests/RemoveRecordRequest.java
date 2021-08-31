@@ -8,9 +8,9 @@ import java.util.TreeSet;
 
 public class RemoveRecordRequest extends RecordRequest {
     private DeliveryArea newArea;
-    public RemoveRecordRequest(Record record, Object... args) throws Exception {
-        if(Arrays.stream(args).anyMatch(a->a.equals(null)))
-            throw new Exception();
+    public RemoveRecordRequest(Record record, Object... args) throws IllegalArgumentException{
+        if(Arrays.stream(args).anyMatch(o->o==null))
+            throw new IllegalArgumentException();
         this.record = record;
         if (record instanceof DeliveryArea) {
             newArea = (DeliveryArea) args[0];

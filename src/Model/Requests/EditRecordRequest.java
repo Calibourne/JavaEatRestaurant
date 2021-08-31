@@ -17,7 +17,7 @@ public class EditRecordRequest extends RecordRequest{
     transient Image img;
     public EditRecordRequest(Record record, Object... args) throws IllegalArgumentException{
         this.args = args;
-        if(Arrays.stream(args).anyMatch(o -> o.equals(null)))
+        if(Arrays.stream(args).anyMatch(o->o==null))
             throw new IllegalArgumentException();
         this.record = record;
     }

@@ -7,15 +7,12 @@ import Utils.*;
 import javafx.scene.image.Image;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.TreeSet;
+import java.util.*;
 
 public class AddRecordRequest extends RecordRequest {
     private boolean toBlacklist;
     public AddRecordRequest(Record record, Object... args) throws IllegalArgumentException {
-        if(Arrays.stream(args).anyMatch(a->a==null))
+        if(Arrays.stream(args).anyMatch(o->o==null))
             throw new IllegalArgumentException();
         if (record instanceof DeliveryArea) {
             this.record = new DeliveryArea(

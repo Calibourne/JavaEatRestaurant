@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckListView?>
+
+<AnchorPane prefHeight="576.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
+   <children>
+      <Group fx:id="addDeliveries_sctn">
+         <children>
+            <GridPane vgap="20.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <GridPane hgap="50.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="ed_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Express Delivery" GridPane.columnIndex="1" />
+                        <Button fx:id="rd_btn" mnemonicParsing="false" onAction="#handleButtonClick" text="Regular Delivery" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <GridPane fx:id="info_grid" vgap="7.0" visible="false">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <GridPane vgap="10.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <GridPane vgap="10.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <GridPane hgap="10.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <VBox prefHeight="0.0" prefWidth="210.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Delivery person" />
+                                                      <ComboBox fx:id="deliveryPersons_combo" prefHeight="25.0" prefWidth="386.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="40.0" prefWidth="210.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Date of delivery" />
+                                                      <DatePicker fx:id="deliveryDate_dp" prefHeight="25.0" prefWidth="293.0" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                          <CheckBox fx:id="isDelivered_check" mnemonicParsing="false" text="Is delivered" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane GridPane.rowIndex="1">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <VBox fx:id="ed_vbox" prefHeight="40.0" prefWidth="210.0" spacing="10.0" styleClass="Container">
+                                                   <children>
+                                                      <VBox styleClass="Container">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="Order" />
+                                                            <ComboBox fx:id="orders_combo" prefHeight="25.0" prefWidth="311.0" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox styleClass="Container">
+                                                         <children>
+                                                            <Label alignment="CENTER" prefHeight="17.0" prefWidth="379.0" text="Postage fee" />
+                                                            <TextField fx:id="expressFee_field" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </Group>
+                                          <Group>
+                                             <children>
+                                                <VBox fx:id="rd_vbox" alignment="CENTER" prefHeight="172.0" prefWidth="277.0" styleClass="Container">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="88.0" text="orders" />
+                                                      <Group>
+                                                         <children>
+                                                            <Group layoutX="64.0">
+                                                               <children>
+                                                                  <VBox alignment="CENTER" prefHeight="198.0" prefWidth="360.0">
+                                                                     <children>
+                                                                        <Group>
+                                                                           <children>
+                                                                              <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="360.0" visible="false" />
+                                                                           </children>
+                                                                        </Group>
+                                                                        <CheckListView fx:id="orders_checkedList" prefHeight="200.0" prefWidth="360.0" />
+                                                                        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="25.0" styleClass="HBox">
+                                                                           <children>
+                                                                              <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
+                                                                              <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </Group>
+                                                         </children>
+                                                      </Group>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
+                              <Button fx:id="submit" mnemonicParsing="false" onAction="#handleButtonClick" text="Submit change" GridPane.rowIndex="1" />
+                              <Label fx:id="result_label" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane fx:id="alert_grid" visible="false">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Delivery successfully edited">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+               </children>
+               <padding>
+                  <Insets left="90.0" top="110.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </Group>
+      <VBox alignment="CENTER" prefHeight="80.0" prefWidth="617.0" styleClass="InnerMenuBar">
+         <children>
+            <Label alignment="CENTER" text="Add Deliveries" textAlignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" text="Please choose a delivery type and then fill in the forms to add a delivery to the restaurant" textAlignment="CENTER">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

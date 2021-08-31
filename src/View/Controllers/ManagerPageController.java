@@ -96,7 +96,7 @@ public class ManagerPageController {
             try {
                 SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logoff_Sound.wav");
                 Stage s = (Stage) btnSignOut.getScene().getWindow();
-                Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../Controllers/LoginPage.fxml")));
+                Parent p = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/LoginPage.fxml")));
                 s.hide();
                 s.setScene(new Scene(p));
                 s.centerOnScreen();
@@ -113,7 +113,7 @@ public class ManagerPageController {
     private void initDashboard() {
         try {
             pnlChoosedPage.getChildren().clear();
-            Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RestaurantDashboard.fxml")));
+            Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/RestaurantDashboard.fxml")));
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             // SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav"); plays at login, not how we intended
             pnlChoosedPage.getChildren().add(recordsA);
@@ -131,7 +131,7 @@ public class ManagerPageController {
         if(e.getSource() == btnAddRecords)
             try {
                 pnlChoosedPage.getChildren().clear();
-                Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addRecords.fxml")));
+                Node recordsA = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addRecords.fxml")));
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 pnlChoosedPage.getChildren().add(recordsA);
             } catch(IOException | NullPointerException ex){
@@ -140,7 +140,7 @@ public class ManagerPageController {
         if(e.getSource() == btnRemoveRecords)
             try{
                 pnlChoosedPage.getChildren().clear();
-                Node recordsR = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("removeRecords.fxml")));
+                Node recordsR = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/removeRecords.fxml")));
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 pnlChoosedPage.getChildren().add(recordsR);
             }catch (IOException | NullPointerException ex) {
@@ -149,7 +149,7 @@ public class ManagerPageController {
         if(e.getSource() == btnEditRecords)
             try {
                 pnlChoosedPage.getChildren().clear();
-                Node recordsE = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("editRecords.fxml")));
+                Node recordsE = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/editRecords.fxml")));
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 pnlChoosedPage.getChildren().add(recordsE);
             }catch (IOException | NullPointerException ex){
@@ -163,7 +163,7 @@ public class ManagerPageController {
     private void initQueries(){
         try{
             pnlChoosedPage.getChildren().clear();
-            Node queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/Queries.fxml")));
+            Node queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/Queries.fxml")));
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             pnlChoosedPage.getChildren().add(queryPage);
         }
@@ -178,7 +178,7 @@ public class ManagerPageController {
     private void initViewRecords(){
         try{
             pnlChoosedPage.getChildren().clear();
-            Node ViewRecordsPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../fxmls/ViewStructures.fxml")));
+            Node ViewRecordsPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewStructures.fxml")));
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             pnlChoosedPage.getChildren().add(ViewRecordsPage);
         }

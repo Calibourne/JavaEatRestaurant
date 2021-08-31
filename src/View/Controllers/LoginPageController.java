@@ -2,7 +2,6 @@ package View.Controllers;
 
 import Model.Customer;
 import Model.Restaurant;
-import Utils.ImageManager;
 import Utils.SFXManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,8 +46,6 @@ public class LoginPageController {
         }
         rest = Restaurant.getInstance();
         rest.saveDatabase("Rest.ser");
-        ImageManager.getInstance().getImages().forEach((k, v) -> System.out.printf("%s: %s\n", k, v));
-        //rest.getAddRecordHistory().get(DeliveryPerson.class.getSimpleName()).forEach(System.out::println);
     }
 
     /**
@@ -70,7 +67,7 @@ public class LoginPageController {
         if ((usernameField.getText().equals("manager") && passwordField.getText().equals("manager")) || ((usernameField).getText().equals("m") && passwordField.getText().equals("m"))) {
             try {
                 Stage s = (Stage) loginButton.getScene().getWindow();
-                Parent p = FXMLLoader.load(getClass().getResource("managerPage.fxml"));
+                Parent p = FXMLLoader.load(getClass().getResource("fxmls/managerPage.fxml"));
                 SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logon_Sound.wav");
                 ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {
@@ -109,7 +106,7 @@ public class LoginPageController {
     private void registerButtonOnAction() {
         try {
             Stage s = (Stage) registerButton.getScene().getWindow();
-            Parent p = FXMLLoader.load(getClass().getResource("SignupPage.fxml"));
+            Parent p = FXMLLoader.load(getClass().getResource("fxmls/SignupPage.fxml"));
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             ControllerUtils.changeScreen(s, p);
         } catch (IOException ioException) {

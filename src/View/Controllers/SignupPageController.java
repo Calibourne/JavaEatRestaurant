@@ -198,7 +198,7 @@ public class SignupPageController {
         }
         try {
             Stage s = (Stage) cancelButton.getScene().getWindow();
-            Parent p = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Parent p = FXMLLoader.load(getClass().getResource("fxmls/LoginPage.fxml"));
             ControllerUtils.changeScreen(s, p);
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
         } catch (IOException ioException) {

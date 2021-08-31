@@ -70,42 +70,42 @@ public class AddRecordsPageController extends RecordManagementController {
                 addWindow.toFront();
                 addWindow.getChildren().clear();
                 if (e.getSource() == addCooks_btn) {
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCooks.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addCooks.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addCustomers_btn) {
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addCustomers.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addCustomers.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDeliPersons_btn) {
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveryPersons.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addDeliveryPersons.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addComponents_btn) {
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addIngredients.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addIngredients.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDishes_btn) {
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDishes.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addDishes.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addOrders_btn) {
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addOrders.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addOrders.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addDeliveries_btn) {
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveries.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addDeliveries.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
                 if (e.getSource() == addAreas_btn) {
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addDeliveryAreas.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addDeliveryAreas.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }
@@ -113,7 +113,7 @@ public class AddRecordsPageController extends RecordManagementController {
                     alert_lbl.setText("No more customers to blacklist, please add at least 1 more customer first");
                     alert_grid.toFront();
                     addWindow.toFront();
-                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("addToBlacklist.fxml")));
+                    Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/addToBlacklist.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     addWindow.getChildren().add(node);
                 }

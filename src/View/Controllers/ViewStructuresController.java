@@ -80,47 +80,47 @@ public class ViewStructuresController {
             Node queryPage;
             switch(((Node)event.getSource()).getId()){
                 case "customers_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewCustomers.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewCustomers.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "ingredients_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewIngredients.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewIngredients.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "cooks_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewCooks.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewCooks.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "dp_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDeliveryPersons.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewDeliveryPersons.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "dishes_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDishes.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewDishes.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "orders_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewOrders.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewOrders.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "deliveries_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDeliveries.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewDeliveries.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "da_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewDeliveryAreas.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewDeliveryAreas.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;
                 case "blacklist_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../ViewStructuresPages/ViewBlacklist.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/ViewBlacklist.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     content_pane.getChildren().add(queryPage);
                     break;

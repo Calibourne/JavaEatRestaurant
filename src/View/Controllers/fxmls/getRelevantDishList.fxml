@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" stylesheets="@../../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.getRelevantDishListController">
+    <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
+        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
+            <Label alignment="CENTER" text="Customer's Relevant dishes" textAlignment="CENTER">
+                <font>
+                    <Font size="30.0" />
+                </font>
+                <effect>
+                    <DropShadow />
+                </effect>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" text="Select a customer to see which dishes they can eat safely" textAlignment="CENTER">
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Label>
+        </VBox>
+        <GridPane alignment="CENTER" hgap="15.0" prefHeight="192.0" prefWidth="525.0" vgap="40.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="150.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.33331298828125" minWidth="10.0" prefWidth="215.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.33334350585938" minWidth="10.0" prefWidth="214.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <VBox.margin>
+                <Insets left="30.0" right="30.0" top="20.0"/>
+            </VBox.margin>
+            <Label text="Select a customer:" GridPane.columnIndex="1">
+                <font>
+                    <Font size="16.0"/>
+                </font>
+                <effect>
+                    <DropShadow/>
+                </effect>
+            </Label>
+            <ComboBox fx:id="customer_combobox" prefWidth="200.0" GridPane.columnIndex="2"/>
+        </GridPane>
+      <ListView fx:id="query_result" prefHeight="360.0" prefWidth="485.0" styleClass="HBox">
+         <VBox.margin>
+            <Insets bottom="50.0" left="50.0" right="50.0" />
+         </VBox.margin>
+      </ListView>
+    </VBox>
+</AnchorPane>

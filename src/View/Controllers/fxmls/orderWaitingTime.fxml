@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" stylesheets="@../../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.orderWaitingTimeController">
+    <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
+        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
+            <Label alignment="CENTER" text="Calculate waiting time for an order" textAlignment="CENTER">
+                <font>
+                    <Font size="30.0" />
+                </font>
+                <effect>
+                    <DropShadow />
+                </effect>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" text="Select an order to calculate the estimated waiting time" textAlignment="CENTER">
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Label>
+        </VBox>
+        <GridPane alignment="CENTER" hgap="15.0" prefHeight="161.0" prefWidth="525.0" vgap="40.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="228.33331298828125" minWidth="10.0" prefWidth="215.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="223.33334350585938" minWidth="10.0" prefWidth="214.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <VBox.margin>
+                <Insets left="30.0" right="30.0" />
+            </VBox.margin>
+            <Label text="Select an order:">
+                <font>
+                    <Font size="16.0" />
+                </font>
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Label>
+            <ComboBox fx:id="order_combobox" prefWidth="250.0" GridPane.columnIndex="1" />
+        </GridPane>
+      <Label text="Estimated waiting time:">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="17.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="120.0" />
+         </VBox.margin>
+      </Label>
+        <Label fx:id="query_result">
+            <effect>
+                <DropShadow />
+            </effect>
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+        </Label>
+    </VBox>
+</AnchorPane>

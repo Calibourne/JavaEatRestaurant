@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pnlQueries" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="375.0" prefWidth="585.0" stylesheets="@../../css/RecordsScreenStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.getProfitRelationController">
+    <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
+        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="HBox">
+            <Label alignment="CENTER" text="Profit Relation" textAlignment="CENTER">
+                <font>
+                    <Font size="30.0" />
+                </font>
+                <effect>
+                    <DropShadow />
+                </effect>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+            </Label>
+            <Label alignment="CENTER" text="Press 'Generate' to list the restaurant's dishes sorted by a price/time-to-make relation " textAlignment="CENTER">
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Label>
+        </VBox>
+      <GridPane vgap="10.0">
+         <VBox.margin>
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+         </VBox.margin>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ListView fx:id="query_result" prefHeight="322.0" prefWidth="485.0" styleClass="HBox" />
+            <Button fx:id="generate_doc_button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#generateDOCX" text="Generate document from query" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label fx:id="success_label" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+    </VBox>
+</AnchorPane>

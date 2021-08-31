@@ -78,7 +78,7 @@ public class LoginPageController {
             try {
                 customer = rest.getUsersList().get(usernameField.getText());
                 Stage s = (Stage) loginButton.getScene().getWindow();
-                Parent p = FXMLLoader.load(getClass().getResource("../CustomerStage/CustomerHome.fxml"));
+                Parent p = FXMLLoader.load(getClass().getResource("fxmls/CustomerHome.fxml"));
                 SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logon_sound.wav");
                 ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {

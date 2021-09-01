@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * the controller for customer's user settings
@@ -80,11 +81,17 @@ public class editCustomerDetailsController{
 
     @FXML
     private void initialize(){
+        Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ \\-\']?)([a-zA-Z]*))*");
+
         ControllerUtils.setFileChooser(img_choose, img_source);
         try{
             user = LoginPageController.getCustomer();
             fname_field.setText(user.getFirstName());
+            fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+            ControllerUtils.setAlerts(fname_field, stringPattern ,change_lbl);
             lname_field.setText(user.getLastName());
+            lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+            ControllerUtils.setAlerts(lname_field, stringPattern ,change_lbl);
             birthDate_dp.setValue(user.getBirthDay());
             genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
             genders_combo.setValue(user.getGender());

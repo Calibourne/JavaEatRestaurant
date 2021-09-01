@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
@@ -157,16 +158,16 @@
                                                             <VBox prefHeight="40.0" prefWidth="210.0">
                                                                <children>
                                                                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="new password (optional)" />
-                                                                  <TextField fx:id="npass_field" />
+                                                                  <PasswordField fx:id="npass_field" />
                                                                </children>
                                                             </VBox>
                                                             <VBox prefHeight="40.0" prefWidth="210.0" GridPane.rowIndex="1">
                                                                <children>
                                                                   <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="repeat password (if necessary)" />
-                                                                  <TextField fx:id="rpass_field" />
+                                                                  <PasswordField fx:id="rpass_field" />
                                                                </children>
                                                             </VBox>
-                                                            <Label fx:id="pass_alert" style="-fx-text-fill: #00ff00;" text="Passwords match 👍" GridPane.rowIndex="2" />
+                                                            <Label fx:id="pass_alert" style="-fx-text-fill: #00ff00;" GridPane.rowIndex="2" />
                                                          </children>
                                                       </GridPane>
                                                       <VBox prefHeight="59.0" prefWidth="210.0" GridPane.rowIndex="1">

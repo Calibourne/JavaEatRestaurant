@@ -10,7 +10,7 @@ public class Launcher {
         }catch (IOException e){
             e.getMessage();
         }
-        //SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Startup.wav"); Too irritating, had to disable for now
+        //SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Startup.wav"); //Too irritating, had to disable for now
         Main.main(args);
     }
 }

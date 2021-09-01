@@ -6,6 +6,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
+/**
+ * A class that plays sound effects
+ * @author Daniel Sharon
+ */
 public class SFXManager {
     private static SFXManager instance;
 

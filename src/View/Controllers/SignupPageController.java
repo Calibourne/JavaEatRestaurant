@@ -71,7 +71,7 @@ public class SignupPageController {
     public void initialize() {
         error_label.setText("");
         Pattern passwordValidChars = Pattern.compile("[A-Za-z0-9!@#$%^&*.\\[\\](){}]*");
-        Pattern wordPattern = Pattern.compile("[A-Za-z]*");
+        Pattern wordPattern = Pattern.compile("(([a-zA-Z]*)([ \\-\']?)([a-zA-Z]*))*");
         Pattern intPattern = Pattern.compile("[0-9]*");
         Pattern stringPattern = Pattern.compile("[ A-Za-z0-9\\-]*");
 

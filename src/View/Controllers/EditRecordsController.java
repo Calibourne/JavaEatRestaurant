@@ -65,6 +65,14 @@ public class EditRecordsController extends RecordManagementController{
     private Button img_choose;
     @FXML
     private ImageView img_source;
+    @FXML
+    private PasswordField npass_field;
+    @FXML
+    private PasswordField rpass_field;
+    @FXML
+    private Label pass_alert;
+    @FXML
+    private TextField usernameField;
     // endregion
     // region Ingredient attributes
     @FXML
@@ -272,6 +280,30 @@ public class EditRecordsController extends RecordManagementController{
                 catch (NullPointerException e){
                     e.printStackTrace();
                     System.out.println(e.getMessage());
+                }
+            });
+            npass_field.textProperty().addListener((obs, o, n)->{
+                if(npass_field.getText().equals(rpass_field.getText())){
+                    if(npass_field.getText().equals(""))
+                        pass_alert.setText("");
+                    else{
+                        pass_alert.setStyle("-fx-text-fill: #00ff00");
+                        pass_alert.setText("Passwords match 👍");
+                    }
+                }
+                else{
+                    pass_alert.setStyle("-fx-text-fill: red");
+                    pass_alert.setText("Passwords don't match 😟");
+                }
+            });
+            rpass_field.textProperty().addListener((obs, o, n)->{
+                if(npass_field.getText().equals(rpass_field.getText())){
+                    pass_alert.setStyle("-fx-text-fill: #00ff00");
+                    pass_alert.setText("Passwords match 👍");
+                }
+                else{
+                    pass_alert.setStyle("-fx-text-fill: red");
+                    pass_alert.setText("Passwords don't match 😟");
                 }
             });
         }
@@ -588,9 +620,30 @@ public class EditRecordsController extends RecordManagementController{
             }
             if(editCustomers_sctn != null) {
                 try{
-                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                    EditRecordRequest request = null;
+                    if(!npass_field.getText().equals(rpass_field.getText()))
+                        throw new IllegalArgumentException();
+                    if(getRestaurant().getUsersList().get(usernameField.getText())!=null)
+                        throw new IllegalArgumentException();
+                    if(npass_field.getText().length()==0 && usernameField.getText().length()==0)
+                        request = new EditRecordRequest(records_combo.getValue(),
                             fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
                             neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
+                    else if(npass_field.getText().length()>0)
+                        request = new EditRecordRequest(records_combo.getValue(),
+                                fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                                neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
+                                npass_field.getText());
+                    else if(usernameField.getText().length()>0)
+                        request = new EditRecordRequest(records_combo.getValue(),
+                                fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                                neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
+                                ((Customer)records_combo.getValue()).getPassword(), usernameField.getText());
+                    else
+                        request = new EditRecordRequest(records_combo.getValue(),
+                                fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                                neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
+                                npass_field.getText(), usernameField.getText());
                     request.saveRequest();
                     records_combo.getItems().clear();
                     records_combo.getItems().addAll(getRestaurant().getCustomers().values());

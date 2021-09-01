@@ -91,7 +91,7 @@ public class LoginPageController {
     }
 
     /**
-     * Method to close the program. Same purpose as the 'X'  button on Windows
+     * Method to close the program. Same purpose as the 'X' button on Windows
      */
     @FXML
     private void cancelButtonOnAction() {
@@ -100,7 +100,7 @@ public class LoginPageController {
     }
 
     /**
-     * Method to send the user to the sign up page
+     * Method to send the user to the signup page
      */
     @FXML
     private void registerButtonOnAction() {

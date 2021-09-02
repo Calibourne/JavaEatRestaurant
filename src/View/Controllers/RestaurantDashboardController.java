@@ -2,6 +2,7 @@ package View.Controllers;
 
 import Model.*;
 import Model.Requests.RecordRequest;
+import Utils.SFXManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -82,6 +83,7 @@ public class RestaurantDashboardController extends RecordManagementController{
     @FXML
     private void initDashboard(Event e){
         if(e.getSource() == areas_tab){
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
 
             numOfAreas.setText(getRestaurant().getAreas().values().size()+"");
             areas_history.getItems().clear();
@@ -108,6 +110,7 @@ public class RestaurantDashboardController extends RecordManagementController{
         }
 
         if(e.getSource() == customers_tab){
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             numOfCustomers.setText(
                     getRestaurant().getCustomers().values().stream()
                             .filter(c->!getRestaurant().getBlacklist().contains(c)).toList().size()+""
@@ -142,6 +145,7 @@ public class RestaurantDashboardController extends RecordManagementController{
         }
 
         if(e.getSource() == delipersons_tab){
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             numOfDeliPersons.setText(getRestaurant().getDeliveryPersons().values().size()+"");
             delipersons_history.getItems().clear();
             try {
@@ -167,6 +171,7 @@ public class RestaurantDashboardController extends RecordManagementController{
         }
 
         if(e.getSource() == cooks_tab){
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             numOfCooks.setText(getRestaurant().getCooks().values().size()+"");
             cooks_history.getItems().clear();
             try {
@@ -192,6 +197,7 @@ public class RestaurantDashboardController extends RecordManagementController{
         }
 
         if(e.getSource() == components_tab){
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             numOfComponents.setText(getRestaurant().getComponents().values().size()+"");
             components_history.getItems().clear();
             try {
@@ -217,6 +223,7 @@ public class RestaurantDashboardController extends RecordManagementController{
         }
 
         if(e.getSource() == dishes_tab){
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             numOfDishes.setText(getRestaurant().getDishes().values().size()+"");
             dishes_history.getItems().clear();
             try {
@@ -242,6 +249,7 @@ public class RestaurantDashboardController extends RecordManagementController{
         }
 
         if(e.getSource() == orders_tab){
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             numOfOrders.setText(getRestaurant().getOrders().values().size()+"");
             orders_history.getItems().clear();
             try {
@@ -267,6 +275,7 @@ public class RestaurantDashboardController extends RecordManagementController{
         }
 
         if(e.getSource() == deliveries_tab){
+            SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             numOfDeliveries.setText(getRestaurant().getDeliveries().values().size()+"");
             numOfRegular.setText(getRestaurant().getDeliveries().values().stream().filter(d->d instanceof RegularDelivery).toList().size()+"");
             numOfExpress.setText(getRestaurant().getDeliveries().values().stream().filter(d->d instanceof ExpressDelivery).toList().size()+"");

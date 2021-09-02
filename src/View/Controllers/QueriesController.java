@@ -138,7 +138,7 @@ public class QueriesController {
                     query_pane.getChildren().add(queryPage);
                     break;
                 case "relevant_dish_list_button":
-                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/getCustomerRelevantDishList.fxml")));
+                    queryPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/getRelevantDishList.fxml")));
                     SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                     query_pane.getChildren().add(queryPage);
                     break;

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" styleClass="Content" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.getCustomerRelevantDishListController">
+<AnchorPane fx:id="pnlQueries" prefHeight="375.0" prefWidth="585.0" styleClass="Content" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.getCustomerRelevantDishListController">
     <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="585.0" styleClass="VBox">
         <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" styleClass="OuterMenuBar">
             <Label alignment="CENTER" text="Customer's Relevant dishes" textAlignment="CENTER">
@@ -22,7 +20,7 @@
                     <Insets />
                 </VBox.margin>
             </Label>
-            <Label alignment="CENTER" text="Select a customer to see which dishes they can eat safely" textAlignment="CENTER">
+            <Label alignment="CENTER" text="Here are the dishes relevant to your mentioned intolerances" textAlignment="CENTER">
                 <effect>
                     <DropShadow />
                 </effect>

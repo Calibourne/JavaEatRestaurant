@@ -145,14 +145,23 @@ public class editCustomerDetailsController{
             String fname = (fname_field.getText().length() > 0)? fname_field.getText():null;
             String lname = (lname_field.getText().length() > 0)? lname_field.getText():null;
             try{
-                request = new EditRecordRequest(rest.getRealCustomer(user.getId()),
-                        fname, lname, genders_combo.getValue(), birthDate_dp.getValue(),
-                        neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
+                if(!npass_field.getText().equals(rpass_field.getText()))
+                    throw new IllegalArgumentException();
+                if(npass_field.getText().length()>0)
+                    request = new EditRecordRequest(rest.getRealCustomer(user.getId()),
+                            fname, lname, genders_combo.getValue(), birthDate_dp.getValue(),
+                            neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
+                            npass_field.getText());
+                else{
+                    request = new EditRecordRequest(rest.getRealCustomer(user.getId()),
+                            fname, lname, genders_combo.getValue(), birthDate_dp.getValue(),
+                            neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
+                }
                 request.saveRequest();
                 Restaurant.getInstance().saveDatabase("Rest.ser");
                 Stage window = (Stage) submit.getScene().getWindow();
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
-                Parent customerHome = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../CustomerStage/CustomerHome.fxml")));
+                Parent customerHome = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxmls/CustomerHome.fxml")));
                 ControllerUtils.changeScreen(window, customerHome);
 
             }catch (IllegalArgumentException ex){

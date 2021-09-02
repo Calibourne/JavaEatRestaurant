@@ -101,7 +101,7 @@ public class SignupPageController {
             else{
                 Restaurant rest = Restaurant.getInstance();
                 if(rest.getUsersList().get(usernameField.getText())!=null){
-                    username_alert.setText("This Username is already taken!");
+                    username_alert.setText("This username is already taken!");
                     username_alert.setStyle("-fx-text-fill: red");
                 }
                 else{
@@ -148,7 +148,9 @@ public class SignupPageController {
         try{
             error_label.setText("");
            if(!passwordField.getText().equals(confirmPasswordField.getText()) && passwordField.getText().length()>0)
-               throw new Exception();
+               throw new IllegalArgumentException();
+           if(username_alert.getText().contains("taken"))
+               throw new IllegalArgumentException();
 
            String fname = fnameInput.getText();
            String lname = lnameInput.getText();
@@ -172,8 +174,7 @@ public class SignupPageController {
            ((Customer) request.getRecord()).setUsername(usernameField.getText());
            request.saveRequest();
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
-        }catch(Exception ex){
-            System.out.println("Try again!");
+        }catch(IllegalArgumentException | IOException ex){
             error_label.setText("Please fill all the required fields");
             SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             return;

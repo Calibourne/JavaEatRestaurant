@@ -1,9 +1,13 @@
 <component name="libraryTable">
   <library name="JavaEatRestaurant">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/JavaEatRestaurant_jar/JavaEatRestaurant.jar!/" />
+      <root url="file://$PROJECT_DIR$/out/artifacts/JavaEatRestaurant_jar" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/out/artifacts/JavaEatRestaurant_jar" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/out/artifacts/JavaEatRestaurant_jar" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/out/artifacts/JavaEatRestaurant_jar" recursive="false" type="SOURCES" />
   </library>
 </component>

@@ -113,7 +113,7 @@
                                                 </Group>
                                                 <Group>
                                                    <children>
-                                                      <VBox fx:id="ingredients_vbox" alignment="CENTER" prefHeight="216.0" prefWidth="58.0" styleClass="Container">
+                                                      <VBox fx:id="ingredients_vbox" alignment="CENTER" prefHeight="216.0" prefWidth="58.0" styleClass="Container" visible="false">
                                                          <children>
                                                             <Label fx:id="dish_name" alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="146.0" text="Ingredients to remove:" />
                                                             <Group>
@@ -132,12 +132,17 @@
                                                                                     <ComboBox fx:id="addSubcomponents_combo" prefHeight="25.0" prefWidth="155.0" visible="false" />
                                                                                  </children>
                                                                               </Group>
-                                                                              <CheckListView fx:id="dishesIngredients_checkedList" prefHeight="139.0" prefWidth="155.0" />
-                                                                              <Label prefHeight="17.0" prefWidth="218.0" text="Label" />
+                                                                              <CheckListView fx:id="dishesIngredients_checkedList" prefHeight="162.0" prefWidth="155.0" />
+                                                                              <HBox alignment="CENTER" styleClass="OuterMenuBar">
+                                                                                 <children>
+                                                                                    <Label prefHeight="17.0" prefWidth="61.0" text="Dish price:" />
+                                                                                    <Label fx:id="dishPrice_lbl" text="0" />
+                                                                                 </children>
+                                                                              </HBox>
                                                                               <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="5.0" styleClass="OuterMenuBar">
                                                                                  <children>
                                                                                     <Button fx:id="Iminus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="-" />
-                                                                                    <Button fx:id="addSubcomp_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Add Dish" />
+                                                                                    <Button fx:id="addSubcomp_btn" mnemonicParsing="false" prefHeight="7.0" prefWidth="73.0" text="Add Dish" />
                                                                                     <Button fx:id="Iplus_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="+" />
                                                                                  </children>
                                                                               </HBox>
@@ -163,7 +168,7 @@
                                     <HBox spacing="15.0">
                                        <children>
                                           <Label text="Order price:" />
-                                          <Label text="0" />
+                                          <Label fx:id="orderPrice_lbl" text="0" />
                                        </children>
                                     </HBox>
                                  </children>

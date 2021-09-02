@@ -3,6 +3,7 @@ package View.Controllers;
 import Model.*;
 import Model.Requests.EditRecordRequest;
 import Utils.SFXManager;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -54,6 +55,12 @@ public class EditCustomerOrdersController {
 
     @FXML
     private Label dish_id;
+
+    @FXML
+    private Label orderPrice_lbl;
+
+    @FXML
+    private Label dishPrice_lbl;
 
     @FXML
     private ComboBox<Component> addSubcomponents_combo;
@@ -137,8 +144,12 @@ public class EditCustomerOrdersController {
         assert alert_lbl != null : "fx:id=\"alert_lbl\" was not injected: check your FXML file 'EditCustomerOrders.fxml'.";
         assert alert_grid != null : "fx:id=\"alert_grid\" was not injected: check your FXML file 'EditCustomerOrders.fxml'.";
         Restaurant rest = Restaurant.getInstance();
+        dish_id.setText("0");
         Order order = CustomerCartAndHistoryController.getOrder_to_change();
         if(order!=null){
+            double initialPrice = order.getDishes().stream()
+                            .map(Dish::getPrice).reduce(0.0, Double::sum);
+            orderPrice_lbl.setText(String.format("%.2f₪",initialPrice));
             System.out.println(order);
             dishes_checkedList.getItems().addAll(order.getDishes().stream().map(ListedRecord::new).toList());
             addComponents_combo.getItems().addAll(rest.getDishes().values());
@@ -152,6 +163,7 @@ public class EditCustomerOrdersController {
                     dish_id.setText(""+d.getId());
                     ingredients_vbox.setVisible(true);
                     addComponents_combo.setVisible(false);
+                    dishPrice_lbl.setText(String.format("%.2f₪", d.getPrice()));
                     dish_name.setText(d.getDishName()+" ingredients: ");
                 }
             });
@@ -191,6 +203,32 @@ public class EditCustomerOrdersController {
                 Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
                 dishesIngredients_checkedList.getCheckModel().clearChecks();
                 dishesIngredients_checkedList.getItems().removeAll(set);
+            });
+
+            dishes_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
+                try{
+                    double price = dishes_checkedList.getItems().stream()
+                            .map(ListedRecord::getRecord).map(r->(Dish)r)
+                            .map(Dish::getPrice).reduce(0.0, Double::sum);
+                    orderPrice_lbl.setText(String.format("%.2f₪", price));
+                }catch (NullPointerException e){
+                    orderPrice_lbl.setText("0₪");
+                }
+            });
+            dishesIngredients_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
+                try{
+                    Collection<Component> cmp = dishesIngredients_checkedList.getItems().stream()
+                            .map(ListedRecord::getRecord).map(r->(Component)r).toList();
+                    Dish d = rest.getRealDish(Integer.parseInt(dish_id.getText()));
+                    if(d.getComponents().equals(cmp))
+                        dishPrice_lbl.setText(String.format("%.2f₪", d.getPrice()));
+                    else {
+                        double price = cmp.stream().map(Component::getPrice).reduce(0.0, Double::sum);
+                        dishPrice_lbl.setText(String.format("%.2f₪", price));
+                    }
+                }catch (NullPointerException e){
+                    dishPrice_lbl.setText("0₪");
+                }
             });
         }
     }

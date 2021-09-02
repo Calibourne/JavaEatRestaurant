@@ -228,13 +228,4 @@ public class Dish extends Record {
 		price = price*3;
 		return price;
 	}
-
-	public Dish cloneDish() {
-		Dish cloned = new Dish(-1);
-		cloned.dishName = dishName;
-		cloned.type = type;
-		cloned.price = price;
-		cloned.components = components;
-		return cloned;
-	}
 }

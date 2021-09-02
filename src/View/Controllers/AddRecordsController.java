@@ -4,6 +4,7 @@ import Model.*;
 import Model.Requests.AddRecordRequest;
 import Utils.*;
 import View.newElements.imageListCell;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * A controller that controls the structures add pages
@@ -117,6 +119,10 @@ public class AddRecordsController extends RecordManagementController{
     private Button Iplus_btn;
     @FXML
     private Button Iminus_btn;
+    @FXML
+    private Label orderPrice_lbl;
+    @FXML
+    private Label dishPrice_lbl;
     // endregion
     // region Delivery attributes
     @FXML
@@ -241,6 +247,7 @@ public class AddRecordsController extends RecordManagementController{
                 customers_combo.setCellFactory(list->new imageListCell<>());
                 customers_combo.getItems().addAll(getRestaurant().getCustomers().values());
                 deliveries_combo.getItems().addAll(getRestaurant().getDeliveries().values());
+                dish_id.setText("0");
                 addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
 
                 addComponents_combo.setOnAction(action->{
@@ -253,6 +260,7 @@ public class AddRecordsController extends RecordManagementController{
                         ingredients_vbox.setVisible(true);
                         addComponents_combo.setVisible(false);
                         dish_name.setText(d.getDishName()+" ingredients: ");
+                        dishPrice_lbl.setText(String.format("%.2f₪",d.getPrice()));
                     }
                 });
 
@@ -264,10 +272,10 @@ public class AddRecordsController extends RecordManagementController{
                     }
                 });
                 addSubcomp_btn.setOnAction(action -> {
-                    List<Component> selectedList = dishesIngredients_checkedList.getItems()
+                    Collection<Component> selectedList = dishesIngredients_checkedList.getItems()
                             .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
-                            dishList = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText())).getComponents()
-                                    .stream().sorted(Comparator.comparing(Component::getId)).toList();
+                            dishList = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()))
+                                    .getComponents().stream().toList();
                     if(dishList.equals(selectedList)){
                         dishes_checkedList.getItems().add(
                                 new ListedRecord(getRestaurant().getRealDish(Integer.parseInt(dish_id.getText())))
@@ -276,7 +284,7 @@ public class AddRecordsController extends RecordManagementController{
                     else {
                         Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
                         dishes_checkedList.getItems().add(
-                                new ListedRecord(new Dish("custom made " + d.getDishName() ,d.getType(), new ArrayList<>(dishList), d.getTimeToMake()))
+                                new ListedRecord(new Dish("Custom " + d.getDishName() ,d.getType(), new ArrayList<>(selectedList), d.getTimeToMake()))
                         );
                     }
                     dishesIngredients_checkedList.getItems().clear();
@@ -291,6 +299,35 @@ public class AddRecordsController extends RecordManagementController{
                     Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
                     dishesIngredients_checkedList.getCheckModel().clearChecks();
                     dishesIngredients_checkedList.getItems().removeAll(set);
+                });
+                orderPrice_lbl.setText("0₪");
+                dishes_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
+                    try{
+                        double price = dishes_checkedList.getItems().stream()
+                                .map(ListedRecord::getRecord).map(r -> (Dish) r)
+                                .map(Dish::getPrice).reduce(0.0, Double::sum);
+                        orderPrice_lbl.setText(String.format("%.2f₪", price));
+                    }catch (NullPointerException e){
+                        orderPrice_lbl.setText("0₪");
+                    }
+                });
+                dishPrice_lbl.setText("0₪");
+                dishesIngredients_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>)change -> {
+                    try{
+                        Collection<Component> cmp = dishesIngredients_checkedList.getItems().stream()
+                                .map(ListedRecord::getRecord).map(r->(Component)r).collect(Collectors.toList());
+                        Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
+                        if(d.getComponents().equals(cmp)){
+                            dishPrice_lbl.setText(String.format("%.2f₪", d.getPrice()));
+                        }else{
+                            double price = 3 * dishesIngredients_checkedList.getItems().stream()
+                                    .map(ListedRecord::getRecord).map(r->(Component)r)
+                                    .map(Component::getPrice).reduce(0.0, Double::sum);
+                            dishPrice_lbl.setText(String.format("%.2f₪", price));
+                        }
+                    }catch(NullPointerException e){
+                        dishPrice_lbl.setText("0₪");
+                    }
                 });
             }
             if(addDeliveries_sctn!=null){

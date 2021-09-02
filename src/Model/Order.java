@@ -1,7 +1,5 @@
 package Model;
 
-import Utils.MyFileLogWriter;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -167,7 +165,6 @@ public class Order extends Record implements Comparable<Order> {
 			}
 			revenue += (price - cost);
 		}
-		MyFileLogWriter.println("Order Revenue = "+revenue);
 		return revenue;
 	}
 	
@@ -182,7 +179,6 @@ public class Order extends Record implements Comparable<Order> {
 		for(Dish d : getDishes()) {
 			time += d.getTimeToMake();
 		}
-		//MyFileLogWriter.println("Time for order: "+this+" is "+time+" minutes");
 		return time;
 	}
 

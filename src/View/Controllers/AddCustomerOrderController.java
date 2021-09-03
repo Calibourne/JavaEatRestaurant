@@ -160,6 +160,7 @@ public class AddCustomerOrderController extends RecordManagementController{
                     );
                     dishPrice_lbl.setText(String.format("%.2f₪",d.getPrice()));
                     dish_id.setText(""+d.getId());
+                    dish_name.setText(d.getDishName()+" ingredients:");
                     ingredients_vbox.setVisible(true);
                     addComponents_combo.setVisible(false);
                 }

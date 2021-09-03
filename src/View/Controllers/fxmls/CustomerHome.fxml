@@ -40,7 +40,7 @@
             <Insets />
          </VBox.margin>
       </Button>
-      <Button fx:id="new_order_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="199.0" text="New Order" textFill="#e7e5e5">
+      <Button fx:id="new_order_button" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="42.0" prefWidth="199.0" text="Add Dish To Order" textFill="#e7e5e5">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@../../images/icons8-cutlery-32.png" />

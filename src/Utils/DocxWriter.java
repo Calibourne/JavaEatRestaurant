@@ -49,9 +49,11 @@ public class DocxWriter {
     }
 
     /**
-     *
+     * Writes an array of strings into a .docx file, with a given title as an argument
      * @param fileName
+     *the file name
      * @param docTitle
+     * the document title
      * @param prompt
      * An array of texts inside the paragraphs - might include decorator to indicate the style and alignment of the text
      * example for one of the prompts:

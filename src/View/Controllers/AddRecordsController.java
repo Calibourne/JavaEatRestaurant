@@ -104,9 +104,9 @@ public class AddRecordsController extends RecordManagementController{
     @FXML
     private ComboBox<Delivery> deliveries_combo;
     @FXML
-    private CheckListView<ListedRecord> dishes_checkedList;
+    private ListView<ListedRecord> dishes_checkedList;
     @FXML
-    private CheckListView<ListedRecord> dishesIngredients_checkedList;
+    private ListView<ListedRecord> dishesIngredients_checkedList;
     @FXML
     private ComboBox<Component> addSubcomponents_combo;
     @FXML
@@ -296,8 +296,8 @@ public class AddRecordsController extends RecordManagementController{
                     addSubcomponents_combo.setVisible(true);
                 });
                 Iminus_btn.setOnAction(action -> {
-                    Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
-                    dishesIngredients_checkedList.getCheckModel().clearChecks();
+                    Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
+                    dishesIngredients_checkedList.getSelectionModel().clearSelection();
                     dishesIngredients_checkedList.getItems().removeAll(set);
                 });
                 orderPrice_lbl.setText("0₪");
@@ -425,8 +425,8 @@ public class AddRecordsController extends RecordManagementController{
                 components_checkedList.getItems().removeAll(set);
             }
             if(addOrders_sctn!=null){
-                Set<ListedRecord> set = new HashSet<>(dishes_checkedList.getCheckModel().getCheckedItems());
-                dishes_checkedList.getCheckModel().clearChecks();
+                Set<ListedRecord> set = new HashSet<>(dishes_checkedList.getSelectionModel().getSelectedItems());
+                dishes_checkedList.getSelectionModel().clearSelection();
                 dishes_checkedList.getItems().removeAll(set);
             }
         }

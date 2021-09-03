@@ -107,11 +107,11 @@ public class EditRecordsController extends RecordManagementController{
     @FXML
     private ComboBox<Delivery> deliveries_combo;
     @FXML
-    private CheckListView<ListedRecord> dishes_checkedList;
+    private ListView<ListedRecord> dishes_checkedList;
     @FXML
     private ComboBox<Component> addSubcomponents_combo;
     @FXML
-    private CheckListView<ListedRecord> dishesIngredients_checkedList;
+    private ListView<ListedRecord> dishesIngredients_checkedList;
     @FXML
     private Button Iplus_btn;
     @FXML
@@ -439,8 +439,8 @@ public class EditRecordsController extends RecordManagementController{
                 addSubcomponents_combo.setVisible(true);
             });
             Iminus_btn.setOnAction(action -> {
-                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
-                dishesIngredients_checkedList.getCheckModel().clearChecks();
+                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
+                dishesIngredients_checkedList.getSelectionModel().clearSelection();
                 dishesIngredients_checkedList.getItems().removeAll(set);
             });
             dishes_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
@@ -545,10 +545,10 @@ public class EditRecordsController extends RecordManagementController{
                 }
             }
             if(dishes_checkedList != null){
-                Set<ListedRecord> selectedItems = new HashSet<>(dishes_checkedList.getCheckModel().getCheckedItems());
+                Set<ListedRecord> selectedItems = new HashSet<>(dishes_checkedList.getSelectionModel().getSelectedItems());
                 if(selectedItems.size() > 0) {
                     dishes_checkedList.getItems().removeAll(selectedItems);
-                    dishes_checkedList.getCheckModel().clearChecks();
+                    dishes_checkedList.getSelectionModel().clearSelection();
                 }
             }
             if(orders_checkedList != null){

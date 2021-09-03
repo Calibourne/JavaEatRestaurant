@@ -10,8 +10,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="javaFX" level="project" />
-    <orderEntry type="library" name="ControlsFX" level="project" />
-    <orderEntry type="library" name="poi-5.0" level="project" />
-    <orderEntry type="library" name="controlsfx-11.1.0" level="project" />
+    <orderEntry type="library" exported="" name="ControlsFX" level="project" />
+    <orderEntry type="library" exported="" name="apache-poi" level="project" />
+    <orderEntry type="library" exported="" name="JavaEatRestaurant" level="project" />
   </component>
 </module>

@@ -13,11 +13,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.controlsfx.control.CheckListView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,7 +50,7 @@ public class AddCustomerOrderController extends RecordManagementController{
     private ComboBox addComponents_combo;
 
     @FXML
-    private CheckListView<ListedRecord> dishes_checkedList;
+    private ListView<ListedRecord> dishes_checkedList;
 
     @FXML
     private Button minus_btn;
@@ -80,7 +80,7 @@ public class AddCustomerOrderController extends RecordManagementController{
     private ComboBox<Component> addSubcomponents_combo;
 
     @FXML
-    private CheckListView<ListedRecord> dishesIngredients_checkedList;
+    private ListView<ListedRecord> dishesIngredients_checkedList;
 
     @FXML
     private Button Iminus_btn;
@@ -201,8 +201,8 @@ public class AddCustomerOrderController extends RecordManagementController{
             });
             Iminus_btn.setOnAction(action -> {
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
-                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
-                dishesIngredients_checkedList.getCheckModel().clearChecks();
+                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
+                dishesIngredients_checkedList.getSelectionModel().clearSelection();
                 dishesIngredients_checkedList.getItems().removeAll(set);
             });
             plus_btn.setOnAction(action->{
@@ -216,8 +216,8 @@ public class AddCustomerOrderController extends RecordManagementController{
             minus_btn.setOnAction(action->{
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 if(addOrders_sctn!=null){
-                    Set<ListedRecord> set = new HashSet<>(dishes_checkedList.getCheckModel().getCheckedItems());
-                    dishes_checkedList.getCheckModel().clearChecks();
+                    Set<ListedRecord> set = new HashSet<>(dishes_checkedList.getSelectionModel().getSelectedItems());
+                    dishes_checkedList.getSelectionModel().clearSelection();
                     dishes_checkedList.getItems().removeAll(set);
                 }
             });

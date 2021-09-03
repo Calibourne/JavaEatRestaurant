@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.controlsfx.control.CheckListView;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -142,7 +141,7 @@ public class EditRecordsController extends RecordManagementController{
     @FXML
     private VBox rd_vbox;
     @FXML
-    private CheckListView<ListedRecord> orders_checkedList;
+    private ListView<Order> orders_checkedList;
     // endregion
     // region Express Delivery attributes
     @FXML
@@ -199,7 +198,7 @@ public class EditRecordsController extends RecordManagementController{
                             }
                             if (orders_checkedList != null) {
                                 Record r = (Record) addComponents_combo.getSelectionModel().getSelectedItem();
-                                orders_checkedList.getItems().add(new ListedRecord(r));
+                                orders_checkedList.getItems().add((Order)r);
                             }
                             if (neighbourhoods_checkedList != null) {
                                 Neighberhood n = (Neighberhood) addComponents_combo.getSelectionModel().getSelectedItem();
@@ -439,7 +438,6 @@ public class EditRecordsController extends RecordManagementController{
                 addSubcomponents_combo.setVisible(true);
             });
             Iminus_btn.setOnAction(action -> {
-                /// should see this comment
                 Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
                 dishesIngredients_checkedList.getSelectionModel().clearSelection();
                 dishesIngredients_checkedList.getItems().removeAll(set);
@@ -488,8 +486,7 @@ public class EditRecordsController extends RecordManagementController{
                         ed_vbox.setVisible(false);
 
                         orders_checkedList.getItems().clear();
-                        orders_checkedList.getItems().addAll(((RegularDelivery) newValue).getOrders().
-                                stream().map(ListedRecord::new).toList());
+                        orders_checkedList.getItems().addAll(((RegularDelivery) newValue).getOrders());
 
                         addComponents_combo.setVisible(false);
                     }
@@ -553,10 +550,10 @@ public class EditRecordsController extends RecordManagementController{
                 }
             }
             if(orders_checkedList != null){
-                Set<ListedRecord> selectedItems = new HashSet<>(orders_checkedList.getCheckModel().getCheckedItems());
+                Set<Order> selectedItems = new HashSet<>(orders_checkedList.getSelectionModel().getSelectedItems());
                 if(selectedItems.size() > 0) {
                     orders_checkedList.getItems().removeAll(selectedItems);
-                    orders_checkedList.getCheckModel().clearChecks();
+                    orders_checkedList.getSelectionModel().clearSelection();
                 }
             }
             if(neighbourhoods_checkedList != null){
@@ -580,7 +577,7 @@ public class EditRecordsController extends RecordManagementController{
             }
             if (orders_checkedList != null) {
                 addComponents_combo.getItems().clear();
-                List<Record> list = orders_checkedList.getItems().stream().map(ListedRecord::getRecord).toList();
+                List<Order> list = orders_checkedList.getItems();
                 addComponents_combo.getItems().addAll(getRestaurant().getOrders().values()
                         .stream().filter(o->!list.contains(o))
                         .toList()
@@ -760,7 +757,7 @@ public class EditRecordsController extends RecordManagementController{
 
                                 deliveryPersons_combo.getValue(),
                                 deliveryDate_dp.getValue(), isDelivered_check.isSelected(),
-                                orders_checkedList.getItems().stream().map(ListedRecord::getRecord).collect(Collectors.toSet()));
+                                new HashSet<>(orders_checkedList.getItems()));
                     }
                     else{
                         request = new EditRecordRequest(d,

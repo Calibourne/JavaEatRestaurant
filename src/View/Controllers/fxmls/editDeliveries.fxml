@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +17,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.CheckListView?>
 
 <AnchorPane prefHeight="576.0" styleClass="Content" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.EditRecordsController">
    <children>
@@ -150,8 +150,8 @@
                                                                               <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="360.0" visible="false" />
                                                                            </children>
                                                                         </Group>
-                                                                        <CheckListView fx:id="orders_checkedList" prefHeight="200.0" prefWidth="360.0" />
-                                                                        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="25.0" styleClass="HBox">
+                                                                        <ListView fx:id="orders_checkedList" prefHeight="200.0" prefWidth="200.0" />
+                                                                        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="25.0" styleClass="OuterMenuBar">
                                                                            <children>
                                                                               <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />
                                                                               <Button fx:id="plus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="29.0" text="+" />

@@ -45,6 +45,11 @@ public class EditRecordsPageController extends RecordManagementController {
     private Label alert_lbl;
     //endregion
 
+    /**
+     * The first part of the method shows a warning message in case the query cannot be performed because of a lack of enough required objects.
+     * The second part activating the scene corresponding to the button chosen by the user.
+     * @param e
+     */
     @FXML
     protected void handleButtonClick(ActionEvent e) {
         if (e.getSource() == editDeliPersons_btn && getRestaurant().getAreas().size() == 0) {

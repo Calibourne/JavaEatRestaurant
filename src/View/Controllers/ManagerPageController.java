@@ -44,9 +44,6 @@ public class ManagerPageController {
     private Button btnQueries;
 
     @FXML
-    private Button btnSettings;
-
-    @FXML
     private Button btnSignOut;
     // endregion
     // region panels
@@ -71,6 +68,11 @@ public class ManagerPageController {
     private void initialize(){
         initDashboard();
     }
+
+    /**
+     * This method is in charge of sending the user to the scene corresponding to the selected button
+     * @param e
+     */
     @FXML
     private void handleButtonClick(ActionEvent e) {
         if(e.getSource() == btnOverview) {

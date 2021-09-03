@@ -45,6 +45,10 @@ public class RemoveRecordsPageController extends RecordManagementController{
     private Label alert_lbl;
     //endregion
 
+    /**
+     * The first part of the button click method shows a message if there are no objects of the chosen instance to remove
+     * @param e
+     */
     public void handleButtonClick(ActionEvent e) {
         if(e.getSource() == removeCooks_btn && getRestaurant().getCooks().size()==0){
             alert_grid.toFront();
@@ -79,6 +83,9 @@ public class RemoveRecordsPageController extends RecordManagementController{
             alert_lbl.setText("You need to have at least 2 delivery areas to be able to remove one");
         }
         else {
+            /**
+             * This part of the method is in charge of putting the correct pane in focus according to the button that had been pressed
+             */
             try {
                 //removeWindow.getChildren().clear();
                 removeWindow.toFront();

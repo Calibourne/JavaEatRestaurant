@@ -48,6 +48,11 @@ public class AddRecordsPageController extends RecordManagementController {
     private Label alert_lbl;
     //endregion
 
+    /**
+     * The first part of the method shows a warning if there are missing objects of a required type for the query to work.
+     * The second part of the method activates the different scenes according to the button pressed by the user.
+     * @param e
+     */
     @FXML
     protected void handleButtonClick(ActionEvent e) {
         if (e.getSource() == addDeliPersons_btn && getRestaurant().getAreas().size() == 0) {

@@ -79,6 +79,10 @@ public class RemoveRecordsController extends RecordManagementController{
             newArea_combo.getItems().addAll(getRestaurant().getAreas().values());
         }
     }
+
+    /**
+     * This method controls the action of the removal button according to the current active pane
+     */
     @FXML
     private void handleButtonClick(ActionEvent e){
         try {

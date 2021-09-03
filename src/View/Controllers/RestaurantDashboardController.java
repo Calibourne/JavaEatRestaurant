@@ -51,7 +51,6 @@ public class RestaurantDashboardController extends RecordManagementController{
     private ListView<RecordRequest> orders_history;
     @FXML
     private ListView<RecordRequest> deliveries_history;
-
     @FXML
     private Label numOfAreas;
     @FXML
@@ -109,6 +108,9 @@ public class RestaurantDashboardController extends RecordManagementController{
             );
         }
 
+        /**
+         * This part of the method is in charge of populating each tab with the corresponding list of objects
+         */
         if(e.getSource() == customers_tab){
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
             numOfCustomers.setText(

@@ -97,7 +97,7 @@ public class EditRecordsController extends RecordManagementController{
     @FXML
     private ComboBox<DishType> dishType_combo;
     @FXML
-    private CheckListView<ListedRecord> components_checkedList;
+    private ListView<ListedRecord> components_checkedList;
     // endregion
     // region Order attributes
     @FXML
@@ -159,7 +159,7 @@ public class EditRecordsController extends RecordManagementController{
     @FXML
     private TextField areaName_field;
     @FXML
-    private CheckListView<Neighberhood> neighbourhoods_checkedList;
+    private ListView<Neighberhood> neighbourhoods_checkedList;
     // endregion
     @FXML
     private ComboBox<Record> records_combo;
@@ -538,10 +538,10 @@ public class EditRecordsController extends RecordManagementController{
     private void handleButtonClick(ActionEvent e){
         if(e.getSource() == minus_btn) {
             if(components_checkedList != null){
-                Set<ListedRecord> selectedItems = new HashSet<>(components_checkedList.getCheckModel().getCheckedItems());
+                Set<ListedRecord> selectedItems = new HashSet<>(components_checkedList.getSelectionModel().getSelectedItems());
                 if(selectedItems.size() > 0) {
                     components_checkedList.getItems().removeAll(selectedItems);
-                    components_checkedList.getCheckModel().clearChecks();
+                    components_checkedList.getSelectionModel().clearSelection();
                 }
             }
             if(dishes_checkedList != null){
@@ -559,9 +559,9 @@ public class EditRecordsController extends RecordManagementController{
                 }
             }
             if(neighbourhoods_checkedList != null){
-                Set<Neighberhood> selectedItems = new HashSet<>(neighbourhoods_checkedList.getCheckModel().getCheckedItems());
+                Set<Neighberhood> selectedItems = new HashSet<>(neighbourhoods_checkedList.getSelectionModel().getSelectedItems());
                 if(selectedItems.size() > 0) {
-                    neighbourhoods_checkedList.getCheckModel().clearChecks();
+                    neighbourhoods_checkedList.getSelectionModel().clearSelection();
                     neighbourhoods_checkedList.getItems().removeAll(selectedItems);
                 }
             }

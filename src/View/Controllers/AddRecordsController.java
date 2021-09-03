@@ -92,7 +92,7 @@ public class AddRecordsController extends RecordManagementController{
     @FXML
     private ComboBox<DishType> dishType_combo;
     @FXML
-    private CheckListView<ListedRecord> components_checkedList;
+    private ListView<ListedRecord> components_checkedList;
     // endregion
     // region Order attributes
     @FXML
@@ -160,7 +160,7 @@ public class AddRecordsController extends RecordManagementController{
     @FXML
     private TextField deliveryTime_field;
     @FXML
-    private CheckListView<Neighberhood> neighbourhoods_checkedList;
+    private ListView<Neighberhood> neighbourhoods_checkedList;
     // endregion
     // region Blacklist attributes
     @FXML
@@ -415,13 +415,13 @@ public class AddRecordsController extends RecordManagementController{
         }
         if(e.getSource() == minus_btn){
             if(addAreas_sctn!=null){
-                Set<Neighberhood> set = new HashSet<>(neighbourhoods_checkedList.getCheckModel().getCheckedItems());
-                neighbourhoods_checkedList.getCheckModel().clearChecks();
+                Set<Neighberhood> set = new HashSet<>(neighbourhoods_checkedList.getSelectionModel().getSelectedItems());
+                neighbourhoods_checkedList.getSelectionModel().clearSelection();
                 neighbourhoods_checkedList.getItems().removeAll(set);
             }
             if(addDishes_sctn!=null){
-                Set<ListedRecord> set = new HashSet<>(components_checkedList.getCheckModel().getCheckedItems());
-                components_checkedList.getCheckModel().clearChecks();
+                Set<ListedRecord> set = new HashSet<>(components_checkedList.getSelectionModel().getSelectedItems());
+                components_checkedList.getSelectionModel().clearSelection();
                 components_checkedList.getItems().removeAll(set);
             }
             if(addOrders_sctn!=null){

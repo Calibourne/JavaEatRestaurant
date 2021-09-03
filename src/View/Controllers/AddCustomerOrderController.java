@@ -118,6 +118,7 @@ public class AddCustomerOrderController extends RecordManagementController{
             assert submit != null : "fx:id=\"submit\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
             assert alert_grid != null : "fx:id=\"alert_grid\" was not injected: check your FXML file 'AddCustomerOrder.fxml'.";
 
+            dish_id.setText("0");
             orderPrice_lbl.setText("0₪");
             dishes_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
                 try{
@@ -228,7 +229,7 @@ public class AddCustomerOrderController extends RecordManagementController{
                     Set<ListedRecord> dishes_in_order = new HashSet<>(dishes_checkedList.getItems());
                     if(dishes_in_order.size() == 0)
                         throw new NullPointerException();
-                    CustomerCartAndHistoryController.order_in_cart = dishes_in_order;
+                    CustomerCartAndHistoryController.order_in_cart.addAll(dishes_in_order);
                     StackPane pane = (StackPane)placeOrder_pane.getParent();
                     Node cart = FXMLLoader.load(getClass().getResource("fxmls/CustomerCartAndHistory.fxml"));
                     pane.getChildren().remove(placeOrder_pane);

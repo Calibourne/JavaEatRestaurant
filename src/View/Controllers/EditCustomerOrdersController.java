@@ -10,9 +10,9 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.controlsfx.control.CheckListView;
 
 import java.net.URL;
 import java.util.*;
@@ -39,7 +39,7 @@ public class EditCustomerOrdersController {
     private ComboBox<Dish> addComponents_combo;
 
     @FXML
-    private CheckListView<ListedRecord> dishes_checkedList;
+    private ListView<ListedRecord> dishes_checkedList;
 
     @FXML
     private Button minus_btn;
@@ -66,7 +66,7 @@ public class EditCustomerOrdersController {
     private ComboBox<Component> addSubcomponents_combo;
 
     @FXML
-    private CheckListView<ListedRecord> dishesIngredients_checkedList;
+    private ListView<ListedRecord> dishesIngredients_checkedList;
 
     @FXML
     private Button Iminus_btn;
@@ -116,10 +116,10 @@ public class EditCustomerOrdersController {
             addComponents_combo.setVisible(true);
         }
         if(event.getSource() == minus_btn){
-            Set<ListedRecord> selectedItems = new HashSet<>(dishes_checkedList.getCheckModel().getCheckedItems());
+            Set<ListedRecord> selectedItems = new HashSet<>(dishes_checkedList.getSelectionModel().getSelectedItems());
             if(selectedItems.size() > 0) {
                 dishes_checkedList.getItems().removeAll(selectedItems);
-                dishes_checkedList.getCheckModel().clearChecks();
+                dishes_checkedList.getSelectionModel().clearSelection();
             }
         }
     }
@@ -200,8 +200,8 @@ public class EditCustomerOrdersController {
                 addSubcomponents_combo.setVisible(true);
             });
             Iminus_btn.setOnAction(action -> {
-                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getCheckModel().getCheckedItems());
-                dishesIngredients_checkedList.getCheckModel().clearChecks();
+                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
+                dishesIngredients_checkedList.getSelectionModel().clearSelection();
                 dishesIngredients_checkedList.getItems().removeAll(set);
             });
 

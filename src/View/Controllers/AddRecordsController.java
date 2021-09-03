@@ -16,7 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.controlsfx.control.CheckListView;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -139,7 +138,7 @@ public class AddRecordsController extends RecordManagementController{
     @FXML
     private VBox rd_vbox;
     @FXML
-    private CheckListView<Order> orders_checkedList;
+    private ListView<Order> orders_checkedList;
     // endregion
     // region Express Delivery attributes
     @FXML
@@ -428,6 +427,11 @@ public class AddRecordsController extends RecordManagementController{
                 Set<ListedRecord> set = new HashSet<>(dishes_checkedList.getSelectionModel().getSelectedItems());
                 dishes_checkedList.getSelectionModel().clearSelection();
                 dishes_checkedList.getItems().removeAll(set);
+            }
+            if(addDeliveries_sctn!=null){
+                Set<Order> set = new HashSet<>(orders_checkedList.getSelectionModel().getSelectedItems());
+                orders_checkedList.getSelectionModel().clearSelection();
+                orders_checkedList.getItems().removeAll(set);
             }
         }
     }

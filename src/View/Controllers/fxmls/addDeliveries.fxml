@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +17,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.CheckListView?>
 
 <AnchorPane prefHeight="576.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controllers.AddRecordsController">
    <children>
@@ -52,7 +52,7 @@
                         <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <GridPane fx:id="info_grid" vgap="7.0" visible="false">
+                        <GridPane fx:id="info_grid" vgap="7.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                            </columnConstraints>
@@ -150,7 +150,7 @@
                                                                               <ComboBox fx:id="addComponents_combo" prefHeight="25.0" prefWidth="360.0" visible="false" />
                                                                            </children>
                                                                         </Group>
-                                                                        <CheckListView fx:id="orders_checkedList" prefHeight="200.0" prefWidth="360.0" />
+                                                                        <ListView fx:id="orders_checkedList" prefHeight="200.0" prefWidth="200.0" />
                                                                         <HBox alignment="CENTER" prefHeight="55.0" prefWidth="360.0" spacing="25.0" styleClass="HBox">
                                                                            <children>
                                                                               <Button fx:id="minus_btn" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="25.0" prefWidth="30.0" text="-" />

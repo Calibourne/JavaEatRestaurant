@@ -4,10 +4,8 @@ import Model.Customer;
 import Model.Requests.AddRecordRequest;
 import Model.Restaurant;
 import Utils.Gender;
-import Utils.ImageManager;
 import Utils.Neighberhood;
 import Utils.SFXManager;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -167,14 +165,14 @@ public class SignupPageController {
                    gender,
                    neighborhood,
                    glutenIntolerant,
-                   lactoseIntolerant,
-                   SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"),null)
+                   lactoseIntolerant
            );
+           ((Customer)request.getRecord()).setProfileImg("Default");
            ((Customer)request.getRecord()).setPassword(passwordField.getText());
            ((Customer) request.getRecord()).setUsername(usernameField.getText());
            request.saveRequest();
             SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
-        }catch(IllegalArgumentException | IOException ex){
+        }catch(IllegalArgumentException ex){
             error_label.setText("Please fill all the required fields");
             SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             return;

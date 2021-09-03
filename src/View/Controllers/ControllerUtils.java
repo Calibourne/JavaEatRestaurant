@@ -1,7 +1,12 @@
 package View.Controllers;
 
+import Model.Component;
+import Model.Dish;
+import Model.ListedRecord;
+import Model.Restaurant;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -10,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -20,8 +26,9 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Helper class to organize the code
@@ -78,7 +85,7 @@ public class ControllerUtils {
      * @param alert
      * the alert label we want to display the alert message
      */
-    public static void setAlerts(TextField field, Pattern pattern, Label alert) {
+    protected static void setAlerts(TextField field, Pattern pattern, Label alert) {
         field.setOnKeyTyped(ke-> {
             if(!Objects.equals(ke.getCharacter(), "\b")) {
                 String newText = field.getText() + ke.getCharacter();
@@ -123,7 +130,7 @@ public class ControllerUtils {
         });
     }
 
-    public static void setFileChooser(Button btn, ImageView imgView){
+    protected static void setFileChooser(Button btn, ImageView imgView){
         btn.setOnAction(action->{
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open Resource File");
@@ -148,7 +155,7 @@ public class ControllerUtils {
      * @return
      * the string converter
      */
-    public static StringConverter<LocalDate> getStringConverter(){
+    protected static StringConverter<LocalDate> getStringConverter(){
         return new StringConverter<LocalDate>() {
             private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             @Override
@@ -181,7 +188,7 @@ public class ControllerUtils {
      * @param passwordStrengthInd
      * the bar to show the strength
      */
-    public static void determinePasswordStrength(PasswordField passwordField, Label strengthLbl, ProgressBar passwordStrengthInd){
+    protected static void determinePasswordStrength(PasswordField passwordField, Label strengthLbl, ProgressBar passwordStrengthInd){
         String password = passwordField.getText();
         if(password.length() == 0){
             strengthLbl.setText("");
@@ -246,7 +253,7 @@ public class ControllerUtils {
      * @param passwordStrengthInd
      * the progress bar served as an indicator
      */
-    public static void initStrengthIndicator(ProgressBar passwordStrengthInd){
+    protected static void initStrengthIndicator(ProgressBar passwordStrengthInd){
         passwordStrengthInd.progressProperty().addListener(new ChangeListener<>() {
             private static final String DARKRED_BAR    = "darkred-bar";
             private static final String RED_BAR    = "red-bar";
@@ -273,6 +280,100 @@ public class ControllerUtils {
             private void setBarStyleClass(ProgressBar bar, String barStyleClass) {
                 bar.getStyleClass().removeAll(barColorStyleClasses);
                 bar.getStyleClass().add(barStyleClass);
+            }
+        });
+    }
+
+    protected static void initOrderListViews(
+            ComboBox<Component> ingredients_combo,
+            ComboBox<Dish> dishes_combo,
+            ListView<ListedRecord> ingredients_list,
+            ListView<ListedRecord> dishes_list,
+            Button addDish_btn,
+            Button plus_btn,
+            Button minus_btn,
+            Label dish_id,
+            Label dishPrice_lbl,
+            Label dish_name,
+            Label orderPrice_lbl,
+            VBox ingredients_vbox
+            ){
+        ingredients_combo.getItems().addAll(Restaurant.getInstance().getComponents().values());
+
+        dishes_combo.setOnAction(action->{
+            Dish d = (Dish) dishes_combo.getValue();
+            if(d != null) {
+                ingredients_list.getItems().addAll(
+                        d.getComponents().stream().map(ListedRecord::new).toList()
+                );
+                dish_id.setText(""+d.getId());
+                ingredients_vbox.setVisible(true);
+                dishes_combo.setVisible(false);
+                dish_name.setText(d.getDishName()+" ingredients: ");
+                dishPrice_lbl.setText(String.format("%.2f₪",d.getPrice()));
+            }
+        });
+
+        ingredients_combo.setOnAction(action -> {
+            Component c = ingredients_combo.getValue();
+            if(c != null) {
+                ingredients_list.getItems().add(new ListedRecord(c));
+                ingredients_combo.setVisible(false);
+            }
+        });
+        addDish_btn.setOnAction(action -> {
+            Collection<Component> selectedList = ingredients_list.getItems()
+                    .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
+                    dishList = Restaurant.getInstance().getRealDish(Integer.parseInt(dish_id.getText()))
+                            .getComponents().stream().toList();
+            if(dishList.equals(selectedList)){
+                dishes_list.getItems().add(
+                        new ListedRecord(Restaurant.getInstance().getRealDish(Integer.parseInt(dish_id.getText())))
+                );
+            }
+            else {
+                Dish d = Restaurant.getInstance().getRealDish(Integer.parseInt(dish_id.getText()));
+                dishes_list.getItems().add(
+                        new ListedRecord(new Dish("Custom " + d.getDishName() ,d.getType(), new ArrayList<>(selectedList), d.getTimeToMake()))
+                );
+            }
+            ingredients_list.getItems().clear();
+            ingredients_vbox.setVisible(false);
+        });
+        plus_btn.setOnAction(action->{
+            ingredients_combo.getItems().clear();
+            ingredients_combo.getItems().addAll(Restaurant.getInstance().getComponents().values());
+            ingredients_combo.setVisible(true);
+        });
+        minus_btn.setOnAction(action -> {
+            Set<ListedRecord> set = new HashSet<>(ingredients_list.getSelectionModel().getSelectedItems());
+            ingredients_list.getSelectionModel().clearSelection();
+            ingredients_list.getItems().removeAll(set);
+        });
+        dishes_list.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
+            try{
+                double price = dishes_list.getItems().stream()
+                        .map(ListedRecord::getRecord).map(r->(Dish)r)
+                        .map(Dish::getPrice).reduce(0.0, Double::sum);
+                orderPrice_lbl.setText(String.format("%.2f₪",price));
+            }catch (NullPointerException e){
+                orderPrice_lbl.setText("0₪");
+            }
+        });
+        ingredients_list.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
+            try{
+                Collection<Component> cmp = ingredients_list.getItems().stream()
+                        .map(ListedRecord::getRecord).map(r->(Component)r)
+                        .collect(Collectors.toList());
+                Dish d = Restaurant.getInstance().getRealDish(Integer.parseInt(dish_id.getText()));
+                if(d.getComponents().equals(cmp))
+                    dishPrice_lbl.setText(String.format("%.2f₪",d.getPrice()));
+                else {
+                    double price = 3 * cmp.stream().map(Component::getPrice).reduce(0.0, Double::sum);
+                    dishPrice_lbl.setText(String.format("%.2f₪",price));
+                }
+            }catch (NullPointerException e){
+                dishPrice_lbl.setText("0₪");
             }
         });
     }

@@ -5,7 +5,6 @@ import Model.*;
 import Model.Requests.EditRecordRequest;
 import Utils.*;
 import View.newElements.imageListCell;
-import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -211,324 +213,33 @@ public class EditRecordsController extends RecordManagementController{
                     }
                 }
             });
-        }catch (NullPointerException e){
+        }
+        catch (NullPointerException e){
             System.out.println(e.getMessage());
         }
         if(editCooks_sctn != null){
-            records_combo.getItems().addAll(getRestaurant().getCooks().values().stream().toList());
-            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                try {
-                    if (!newValue.equals(oldValue)) {
-                        try {
-                            setPersonAttributes(newValue, stringPattern);
-
-                            expertises_combo.getItems().clear();
-                            expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
-                            expertises_combo.setValue(((Cook) newValue).getExpert());
-
-                            isChef_check.setSelected(((Cook) newValue).isChef());
-
-                            info_grid.setVisible(true);
-                            alert_grid.setVisible(false);
-                        } catch (NullPointerException e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                }
-                catch (NullPointerException e){
-                    System.out.println("It's normal keep going!");
-                }
-            });
+            initCooksPage(stringPattern);
         }
         if(editDeliPersons_sctn != null){
-            records_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
-            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                        try{
-                            setPersonAttributes(newValue, stringPattern);
-
-                            vehicles_combo.getItems().clear();
-                            vehicles_combo.setValue(((DeliveryPerson)newValue).getVehicle());
-                            vehicles_combo.getItems().addAll(Arrays.stream(Vehicle.values()).toList());
-
-                            deliveryAreas_combo.getItems().clear();
-                            deliveryAreas_combo.setValue(((DeliveryPerson)newValue).getArea());
-                            deliveryAreas_combo.getItems().addAll(getRestaurant().getAreas().values());
-
-                            info_grid.setVisible(true);
-                            alert_grid.setVisible(false);
-                        }
-                        catch (NullPointerException e){
-                            System.out.println(e.getMessage());
-                        }
-            });
+            initDeliveryPersonsPage(stringPattern);
         }
         if(editCustomers_sctn != null){
-            records_combo.setCellFactory(list-> new imageListCell<>());
-            records_combo.getItems().addAll(getRestaurant().getCustomers().values());
-            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                try{
-                    setPersonAttributes(newValue, stringPattern);
-
-                    neighbourhoods_combo.getItems().clear();
-                    neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
-                    neighbourhoods_combo.setValue(((Customer)newValue).getNeighberhood());
-
-                    glutenIntolerant_check.setSelected(((Customer)newValue).isSensitiveToGluten());
-                    lactoseIntolerant_check.setSelected(((Customer)newValue).isSensitiveToLactose());
-
-                    img_source.setImage(SwingFXUtils.toFXImage(((Customer)newValue).getProfileImg(false), null));
-                    ControllerUtils.setFileChooser(img_choose, img_source);
-                    info_grid.setVisible(true);
-                    alert_grid.setVisible(false);
-                }
-                catch (NullPointerException e){
-                    e.printStackTrace();
-                    System.out.println(e.getMessage());
-                }
-            });
-            npass_field.textProperty().addListener((obs, o, n)->{
-                if(npass_field.getText().equals(rpass_field.getText())){
-                    if(npass_field.getText().equals(""))
-                        pass_alert.setText("");
-                    else{
-                        pass_alert.setStyle("-fx-text-fill: #00ff00");
-                        pass_alert.setText("Passwords match 👍");
-                    }
-                }
-                else{
-                    pass_alert.setStyle("-fx-text-fill: red");
-                    pass_alert.setText("Passwords don't match 😟");
-                }
-            });
-            rpass_field.textProperty().addListener((obs, o, n)->{
-                if(npass_field.getText().equals(rpass_field.getText())){
-                    pass_alert.setStyle("-fx-text-fill: #00ff00");
-                    pass_alert.setText("Passwords match 👍");
-                }
-                else{
-                    pass_alert.setStyle("-fx-text-fill: red");
-                    pass_alert.setText("Passwords don't match 😟");
-                }
-            });
+            initCustomersPage(stringPattern);
         }
         if(editComponents_sctn != null){
-            records_combo.getItems().addAll(getRestaurant().getComponents().values());
-            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                try{
-                    ingredientName_field.setText(((Component)newValue).getComponentName());
-                    ingredientPrice_field.setText(String.format("%.2f",((Component)newValue).getPrice()));
-
-                    ingredientName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                    ControllerUtils.setAlerts(ingredientName_field, stringPattern, alert_lbl);
-                    ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
-                    ControllerUtils.setAlerts(ingredientPrice_field, doublePattern, alert_lbl);
-
-                    hasGluten_check.setSelected(((Component)newValue).isHasGluten());
-                    hasLactose_check.setSelected(((Component)newValue).isHasLactose());
-
-                    info_grid.setVisible(true);
-                    alert_grid.setVisible(false);
-                }
-                catch (NullPointerException | ClassCastException e){
-                    System.out.println(e.getMessage());
-                }
-            });
+            initIngredientPage(stringPattern, doublePattern);
         }
         if(editDishes_sctn != null){
-            records_combo.getItems().addAll(getRestaurant().getDishes().values());
-            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                try{
-                    dishName_field.setText(((Dish)newValue).getDishName());
-                    dishName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                    ControllerUtils.setAlerts(dishName_field, stringPattern, alert_lbl);
-
-                    dishPrepareTime_field.setText(String.format("%d",((Dish)newValue).getTimeToMake()));
-                    dishPrepareTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
-                    ControllerUtils.setAlerts(dishPrepareTime_field, intPattern, alert_lbl);
-
-                    dishType_combo.getItems().clear();
-                    dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
-                    dishType_combo.setValue(((Dish)newValue).getType());
-
-                    components_checkedList.getItems().clear();
-                    components_checkedList.getItems().addAll(((Dish)newValue).getComponents()
-                            .stream().map(ListedRecord::new).toList());
-                    addComponents_combo.setVisible(false);
-
-                    info_grid.setVisible(true);
-                    alert_grid.setVisible(false);
-                }
-                catch (NullPointerException | ClassCastException e){
-                    System.out.println(e.getMessage());
-                }
-            });
+            initDishesPage(stringPattern, intPattern);
         }
         if(editOrders_sctn != null){
-            records_combo.getItems().addAll(getRestaurant().getOrders().values());
-            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                try{
-                    customers_combo.setCellFactory(list->new imageListCell<>());
-                    customers_combo.setValue(((Order)newValue).getCustomer());
-                    customers_combo.getItems().addAll(getRestaurant().getCustomers().values());
-
-                    deliveries_combo.getItems().addAll(
-                            getRestaurant().getDeliveries().values().stream().filter(d -> d instanceof RegularDelivery).toList()
-                    );
-                    deliveries_combo.setValue(((Order)newValue).getDelivery());
-
-                    dishes_checkedList.getItems().clear();
-                    dishes_checkedList.getItems().addAll(((Order)newValue).getDishes()
-                            .stream().map(ListedRecord::new).toList());
-
-                    addComponents_combo.setVisible(false);
-
-                    info_grid.setVisible(true);
-                    alert_grid.setVisible(false);
-                }
-                catch (NullPointerException | ClassCastException e){
-                    System.out.println(e.getMessage());
-                }
-            });
-
-            addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
-
-            addComponents_combo.setOnAction(action->{
-                Dish d = (Dish) addComponents_combo.getValue();
-                if(d != null) {
-                    dishesIngredients_checkedList.getItems().addAll(
-                            d.getComponents().stream().map(ListedRecord::new).toList()
-                    );
-                    dish_id.setText(""+d.getId());
-                    ingredients_vbox.setVisible(true);
-                    addComponents_combo.setVisible(false);
-                    dish_name.setText(d.getDishName()+" ingredients: ");
-                    dishPrice_lbl.setText(String.format("%.2f₪",d.getPrice()));
-                }
-            });
-
-            addSubcomponents_combo.setOnAction(action -> {
-                Component c = addSubcomponents_combo.getValue();
-                if(c != null) {
-                    dishesIngredients_checkedList.getItems().add(new ListedRecord(c));
-                    addSubcomponents_combo.setVisible(false);
-                }
-            });
-            addSubcomp_btn.setOnAction(action -> {
-                Collection<Component> selectedList = dishesIngredients_checkedList.getItems()
-                        .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
-                        dishList = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()))
-                                .getComponents().stream().toList();
-                if(dishList.equals(selectedList)){
-                    dishes_checkedList.getItems().add(
-                            new ListedRecord(getRestaurant().getRealDish(Integer.parseInt(dish_id.getText())))
-                    );
-                }
-                else {
-                    Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
-                    dishes_checkedList.getItems().add(
-                            new ListedRecord(new Dish("Custom " + d.getDishName() ,d.getType(), new ArrayList<>(selectedList), d.getTimeToMake()))
-                    );
-                }
-                dishesIngredients_checkedList.getItems().clear();
-                ingredients_vbox.setVisible(false);
-            });
-            Iplus_btn.setOnAction(action->{
-                addSubcomponents_combo.getItems().clear();
-                addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
-                addSubcomponents_combo.setVisible(true);
-            });
-            Iminus_btn.setOnAction(action -> {
-                Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
-                dishesIngredients_checkedList.getSelectionModel().clearSelection();
-                dishesIngredients_checkedList.getItems().removeAll(set);
-            });
-            dishes_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
-                try{
-                    double price = dishes_checkedList.getItems().stream()
-                            .map(ListedRecord::getRecord).map(r->(Dish)r)
-                            .map(Dish::getPrice).reduce(0.0, Double::sum);
-                    orderPrice_lbl.setText(String.format("%.2f₪",price));
-                }catch (NullPointerException e){
-                    orderPrice_lbl.setText("0₪");
-                }
-            });
-            dishesIngredients_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
-                try{
-                    Collection<Component> cmp = dishesIngredients_checkedList.getItems().stream()
-                            .map(ListedRecord::getRecord).map(r->(Component)r)
-                            .collect(Collectors.toList());
-                    Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
-                    if(d.getComponents().equals(cmp))
-                        dishPrice_lbl.setText(String.format("%.2f₪",d.getPrice()));
-                    else {
-                        double price = 3 * cmp.stream().map(Component::getPrice).reduce(0.0, Double::sum);
-                        dishPrice_lbl.setText(String.format("%.2f₪",price));
-                    }
-                }catch (NullPointerException e){
-                    dishPrice_lbl.setText("0₪");
-                }
-            });
+            initOrdersPage();
         }
         if(editDeliveries_sctn != null){
-            records_combo.getItems().addAll(getRestaurant().getDeliveries().values());
-            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                try{
-                    deliveryPersons_combo.getItems().clear();
-                    deliveryPersons_combo.setValue(((Delivery)newValue).getDeliveryPerson());
-                    deliveryPersons_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
-
-                    deliveryDate_dp.setValue(((Delivery)newValue).getDeliveryDate());
-
-                    isDelivered_check.setSelected(((Delivery)newValue).isDelivered());
-
-                    if(newValue instanceof RegularDelivery){
-                        rd_vbox.setVisible(true);
-                        ed_vbox.setVisible(false);
-
-                        orders_checkedList.getItems().clear();
-                        orders_checkedList.getItems().addAll(((RegularDelivery) newValue).getOrders());
-
-                        addComponents_combo.setVisible(false);
-                    }
-                    else{
-                        ed_vbox.setVisible(true);
-                        rd_vbox.setVisible(false);
-
-                        orders_combo.getItems().clear();
-                        orders_combo.setValue(((ExpressDelivery)newValue).getOrder());
-                        orders_combo.getItems().addAll(getRestaurant().getOrders().values());
-
-                        expressFee_field.setText(String.format("%.2f",((ExpressDelivery)newValue).getPostage()));
-                    }
-
-                    info_grid.setVisible(true);
-                    alert_grid.setVisible(false);
-                }
-                catch (NullPointerException | ClassCastException e){
-                    System.out.println(e.getMessage());
-                }
-            });
+            initDeliveriesPage(doublePattern);
         }
         if(editAreas_sctn != null){
-            records_combo.getItems().addAll(getRestaurant().getAreas().values());
-            records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
-                try{
-                    areaName_field.setText(((DeliveryArea)newValue).getAreaName());
-                    areaName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                    ControllerUtils.setAlerts(areaName_field, stringPattern, alert_lbl);
-
-                    neighbourhoods_checkedList.getItems().clear();
-                    neighbourhoods_checkedList.getItems().addAll(((DeliveryArea)newValue).getNeighberhoods());
-
-                    addComponents_combo.setVisible(false);
-
-                    info_grid.setVisible(true);
-                    alert_grid.setVisible(false);
-                }
-                catch (NullPointerException | ClassCastException e){
-                    System.out.println(e.getMessage());
-                }
-            });
+            initAreasPage(stringPattern);
         }
     }
 
@@ -595,189 +306,39 @@ public class EditRecordsController extends RecordManagementController{
             }
         }
         if(e.getSource() == submit) {
-            if(editAreas_sctn != null){
-                try{
-                    if(neighbourhoods_checkedList.getItems().size() == 0)
-                        throw new NullPointerException();
-                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(), areaName_field.getText(),
-                            neighbourhoods_checkedList.getItems().stream().collect(Collectors.toSet()));
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(getRestaurant().getAreas().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException ex){
-                    alert_lbl.setText("Please fill all required fields");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                    System.out.println(ex.getMessage());
-                }catch (NullPointerException ex){
-                    alert_lbl.setText("Please add at least 1 neighbourhood to the delivery area");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                    System.out.println(ex.getMessage());
-                }
-            }
-            if(editCooks_sctn != null) {
-                try{
-                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
-                            fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                            expertises_combo.getValue(),isChef_check.isSelected());
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(getRestaurant().getCooks().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException ex){
-                    alert_lbl.setText("Please fill all required fields");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                    System.out.println(ex.getMessage());
-                }
-            }
-            if(editDeliPersons_sctn != null) {
-                try{
-                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
-                            fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                            vehicles_combo.getValue(), deliveryAreas_combo.getValue());
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException ex){
-                    alert_lbl.setText("Please fill all required fields");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                    System.out.println(ex.getMessage());
-                }
-            }
-            if(editCustomers_sctn != null) {
-                try{
-                    EditRecordRequest request = null;
-                    if(!npass_field.getText().equals(rpass_field.getText()))
-                        throw new IllegalArgumentException();
-                    if(getRestaurant().getUsersList().get(usernameField.getText())!=null)
-                        throw new IllegalArgumentException();
-                    if(npass_field.getText().length()==0 && usernameField.getText().length()==0)
-                        request = new EditRecordRequest(records_combo.getValue(),
-                            fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                            neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
-                    else if(npass_field.getText().length()>0)
-                        request = new EditRecordRequest(records_combo.getValue(),
-                                fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                                neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
-                                npass_field.getText());
-                    else if(usernameField.getText().length()>0)
-                        request = new EditRecordRequest(records_combo.getValue(),
-                                fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                                neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
-                                ((Customer)records_combo.getValue()).getPassword(), usernameField.getText());
-                    else
-                        request = new EditRecordRequest(records_combo.getValue(),
-                                fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
-                                neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
-                                npass_field.getText(), usernameField.getText());
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(getRestaurant().getCustomers().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException | NullPointerException ex){
-                    alert_lbl.setText("Please fill all required fields");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                    System.out.println(ex.getMessage());
-                }
-            }
-            if(editComponents_sctn != null) {
-                try{
-                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
-                            ingredientName_field.getText(), Double.parseDouble(ingredientPrice_field.getText()),
-                            hasGluten_check.isSelected(), hasLactose_check.isSelected());
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(getRestaurant().getComponents().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException ex){
-                    alert_lbl.setText("Please fill all required fields");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                    System.out.println(ex.getMessage());
-                }
-            }
-            if(editDishes_sctn != null) {
-                try{
-                    if(components_checkedList.getItems().size()==0)
-                        throw new NullPointerException();
-                    EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
-                            dishName_field.getText(), dishType_combo.getValue(), Integer.parseInt(dishPrepareTime_field.getText()),
-                            components_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(getRestaurant().getDishes().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException ex){
-                    alert_lbl.setText("Please fill all required fields");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                    System.out.println(ex.getMessage());
-                }catch (NullPointerException ex){
-                    alert_lbl.setText("Please add at least 1 ingredient to the dish");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                }
-            }
-            if(editOrders_sctn != null) {
-                try{
-                    if(dishes_checkedList.getItems().size() == 0)
-                        throw new NullPointerException();
-                    EditRecordRequest request = null;
-                    if(deliveries_combo.getValue() == null)
-                        request = new EditRecordRequest(records_combo.getValue(),
-                                customers_combo.getValue(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
-                    else
-                        request = new EditRecordRequest(records_combo.getValue(),
-                                customers_combo.getValue(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList(),
-                                deliveries_combo.getValue());
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(getRestaurant().getOrders().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException ex){
-                    System.out.println(ex.getMessage());
-                }catch (NullPointerException ex){
-                    alert_lbl.setText("Please add at least 1 dish to the order");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                }
-            }
-            if(editDeliveries_sctn != null) {
-                try{
-                    if(orders_checkedList.getItems().size() == 0)
-                        throw new NullPointerException();
-                    EditRecordRequest request = null;
-                    Delivery d = (Delivery) records_combo.getValue();
-                    if(d instanceof RegularDelivery){
-                        request = new EditRecordRequest(d,
+            editRecords();
+        }
+    }
 
-                                deliveryPersons_combo.getValue(),
-                                deliveryDate_dp.getValue(), isDelivered_check.isSelected(),
-                                new HashSet<>(orders_checkedList.getItems()));
-                    }
-                    else{
-                        request = new EditRecordRequest(d,
-                                deliveryAreas_combo.getValue() ,deliveryPersons_combo.getValue(),
-                                deliveryDate_dp.getValue(), isDelivered_check.isSelected(),
-                                orders_combo.getValue(), Double.parseDouble(expressFee_field.getText()));
-                    }
-                    request.saveRequest();
-                    records_combo.getItems().clear();
-                    records_combo.getItems().addAll(getRestaurant().getDeliveries().values());
-                    info_grid.setVisible(false);
-                    alert_grid.setVisible(true);
-                }catch (IllegalArgumentException ex){
-
-                    System.out.println(ex.getMessage());
-                }catch (NullPointerException ex){
-                    alert_lbl.setText("Please add at least 1 order to the delivery");
-                    SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-                }
-            }
+    private void editRecords() {
+        EditRecordRequest request = null;
+        if(editAreas_sctn != null){
+            request = editAreaRequest();
+        }
+        if(editCooks_sctn != null) {
+            request = editCookRequest();
+        }
+        if(editDeliPersons_sctn != null) {
+            request = editDeliveryPersonRequest();
+        }
+        if(editCustomers_sctn != null) {
+            request = editCustomerRequest();
+        }
+        if(editComponents_sctn != null) {
+            request = editComponentRequest();
+        }
+        if(editDishes_sctn != null) {
+            request = editDishRequest();
+        }
+        if(editOrders_sctn != null) {
+            request = editOrderRequest();
+        }
+        if(editDeliveries_sctn != null) {
+            request = editDeliveryRequest();
+        }
+        if(request!=null) {
+            request.saveRequest();
+            getRestaurant().saveDatabase("Rest.ser");
         }
     }
 
@@ -804,5 +365,565 @@ public class EditRecordsController extends RecordManagementController{
 
         birthDate_dp.setValue(((Person)newValue).getBirthDay());
 
+    }
+
+    /**
+     * Initializes and populates the fields of cooks page
+     * @param stringPattern
+     * pattern that restricts user input
+     */
+    private void initCooksPage(Pattern stringPattern){
+        records_combo.getItems().addAll(getRestaurant().getCooks().values().stream().toList());
+        records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+            try {
+                if (!newValue.equals(oldValue)) {
+                    try {
+                        setPersonAttributes(newValue, stringPattern);
+
+                        expertises_combo.getItems().clear();
+                        expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
+                        expertises_combo.setValue(((Cook) newValue).getExpert());
+
+                        isChef_check.setSelected(((Cook) newValue).isChef());
+
+                        info_grid.setVisible(true);
+                        alert_grid.setVisible(false);
+                    } catch (NullPointerException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+            catch (NullPointerException e){
+                System.out.println(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Initializes and populates the fields of customers page
+     * @param stringPattern
+     * pattern that restricts user input
+     */
+    private void initCustomersPage(Pattern stringPattern){
+        records_combo.setCellFactory(list-> new imageListCell<>());
+        records_combo.getItems().addAll(getRestaurant().getCustomers().values());
+        records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+            try{
+                setPersonAttributes(newValue, stringPattern);
+
+                neighbourhoods_combo.getItems().clear();
+                neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
+                neighbourhoods_combo.setValue(((Customer)newValue).getNeighberhood());
+
+                glutenIntolerant_check.setSelected(((Customer)newValue).isSensitiveToGluten());
+                lactoseIntolerant_check.setSelected(((Customer)newValue).isSensitiveToLactose());
+
+                img_source.setImage(SwingFXUtils.toFXImage(((Customer)newValue).getProfileImg(false), null));
+                ControllerUtils.setFileChooser(img_choose, img_source);
+                info_grid.setVisible(true);
+                alert_grid.setVisible(false);
+            }
+            catch (NullPointerException e){
+                System.out.println(e.getMessage());
+            }
+        });
+        npass_field.textProperty().addListener((obs, o, n)->{
+            if(npass_field.getText().equals(rpass_field.getText())){
+                if(npass_field.getText().equals(""))
+                    pass_alert.setText("");
+                else{
+                    pass_alert.setStyle("-fx-text-fill: #00ff00");
+                    pass_alert.setText("Passwords match 👍");
+                }
+            }
+            else{
+                pass_alert.setStyle("-fx-text-fill: red");
+                pass_alert.setText("Passwords don't match 😟");
+            }
+        });
+        rpass_field.textProperty().addListener((obs, o, n)->{
+            if(npass_field.getText().equals(rpass_field.getText())){
+                pass_alert.setStyle("-fx-text-fill: #00ff00");
+                pass_alert.setText("Passwords match 👍");
+            }
+            else{
+                pass_alert.setStyle("-fx-text-fill: red");
+                pass_alert.setText("Passwords don't match 😟");
+            }
+        });
+    }
+
+    /**
+     * Initializes and populates the fields of delivery persons pages
+     * @param stringPattern
+     * pattern that restricts user input
+     */
+    private void initDeliveryPersonsPage(Pattern stringPattern){
+        records_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
+        records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+            try{
+                setPersonAttributes(newValue, stringPattern);
+
+                vehicles_combo.getItems().clear();
+                vehicles_combo.setValue(((DeliveryPerson)newValue).getVehicle());
+                vehicles_combo.getItems().addAll(Arrays.stream(Vehicle.values()).toList());
+
+                deliveryAreas_combo.getItems().clear();
+                deliveryAreas_combo.setValue(((DeliveryPerson)newValue).getArea());
+                deliveryAreas_combo.getItems().addAll(getRestaurant().getAreas().values());
+
+                info_grid.setVisible(true);
+                alert_grid.setVisible(false);
+            }
+            catch (NullPointerException e){
+                System.out.println(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Initializes and populates the fields of ingredients page
+     * @param stringPattern
+     * pattern that restricts user input for ingredient name
+     * @param doublePattern
+     * pattern that restricts user input for ingredient price
+     */
+    private void initIngredientPage(Pattern stringPattern, Pattern doublePattern){
+        records_combo.getItems().addAll(getRestaurant().getComponents().values());
+        records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+            try{
+                ingredientName_field.setText(((Component)newValue).getComponentName());
+                ingredientPrice_field.setText(String.format("%.2f",((Component)newValue).getPrice()));
+
+                ingredientName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+                ControllerUtils.setAlerts(ingredientName_field, stringPattern, alert_lbl);
+                ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
+                ControllerUtils.setAlerts(ingredientPrice_field, doublePattern, alert_lbl);
+
+                hasGluten_check.setSelected(((Component)newValue).isHasGluten());
+                hasLactose_check.setSelected(((Component)newValue).isHasLactose());
+
+                info_grid.setVisible(true);
+                alert_grid.setVisible(false);
+            }
+            catch (NullPointerException | ClassCastException e){
+                System.out.println(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Initializes and populates the fields of dishes page
+     * @param stringPattern
+     * pattern that restricts user input for dish name
+     * @param intPattern
+     * pattern that restricts user input for dish time to make
+     */
+    private void initDishesPage(Pattern stringPattern, Pattern intPattern){
+        records_combo.getItems().addAll(getRestaurant().getDishes().values());
+        records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+            try{
+                dishName_field.setText(((Dish)newValue).getDishName());
+                dishName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+                ControllerUtils.setAlerts(dishName_field, stringPattern, alert_lbl);
+
+                dishPrepareTime_field.setText(String.format("%d",((Dish)newValue).getTimeToMake()));
+                dishPrepareTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
+                ControllerUtils.setAlerts(dishPrepareTime_field, intPattern, alert_lbl);
+
+                dishType_combo.getItems().clear();
+                dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
+                dishType_combo.setValue(((Dish)newValue).getType());
+
+                components_checkedList.getItems().clear();
+                components_checkedList.getItems().addAll(((Dish)newValue).getComponents()
+                        .stream().map(ListedRecord::new).toList());
+                addComponents_combo.setVisible(false);
+
+                info_grid.setVisible(true);
+                alert_grid.setVisible(false);
+            }
+            catch (NullPointerException | ClassCastException e){
+                System.out.println(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Initializes and populates the fields of orders page
+     */
+    private void initOrdersPage(){
+        records_combo.getItems().addAll(getRestaurant().getOrders().values());
+        records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+            try{
+                customers_combo.setCellFactory(list->new imageListCell<>());
+                customers_combo.setValue(((Order)newValue).getCustomer());
+                customers_combo.getItems().addAll(getRestaurant().getCustomers().values());
+
+                deliveries_combo.getItems().addAll(
+                        getRestaurant().getDeliveries().values().stream().filter(d -> d instanceof RegularDelivery).toList()
+                );
+                deliveries_combo.setValue(((Order)newValue).getDelivery());
+
+                dishes_checkedList.getItems().clear();
+                dishes_checkedList.getItems().addAll(((Order)newValue).getDishes()
+                        .stream().map(ListedRecord::new).toList());
+
+                addComponents_combo.setVisible(false);
+
+                info_grid.setVisible(true);
+                alert_grid.setVisible(false);
+            }
+            catch (NullPointerException | ClassCastException e){
+                System.out.println(e.getMessage());
+            }
+        });
+        ControllerUtils.initOrderListViews(
+                addSubcomponents_combo,
+                addComponents_combo,
+                dishesIngredients_checkedList,
+                dishes_checkedList,
+                addSubcomp_btn,
+                Iplus_btn,
+                Iminus_btn,
+                dish_id,
+                dishPrice_lbl,
+                dish_name,
+                orderPrice_lbl,
+                ingredients_vbox
+        );
+    }
+
+    /**
+     * Initializes and populates the fields of deliveries page
+     */
+    private void initDeliveriesPage(Pattern doublePattern){
+        records_combo.getItems().addAll(getRestaurant().getDeliveries().values());
+        records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+            try{
+                deliveryPersons_combo.getItems().clear();
+                deliveryPersons_combo.setValue(((Delivery)newValue).getDeliveryPerson());
+                deliveryPersons_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
+
+                deliveryDate_dp.setValue(((Delivery)newValue).getDeliveryDate());
+
+                isDelivered_check.setSelected(((Delivery)newValue).isDelivered());
+
+                if(newValue instanceof RegularDelivery){
+                    rd_vbox.setVisible(true);
+                    ed_vbox.setVisible(false);
+
+                    orders_checkedList.getItems().clear();
+                    orders_checkedList.getItems().addAll(((RegularDelivery) newValue).getOrders());
+
+                    addComponents_combo.setVisible(false);
+                }
+                else{
+                    ed_vbox.setVisible(true);
+                    rd_vbox.setVisible(false);
+
+                    orders_combo.getItems().clear();
+                    orders_combo.setValue(((ExpressDelivery)newValue).getOrder());
+                    orders_combo.getItems().addAll(getRestaurant().getOrders().values());
+
+                    expressFee_field.setText(String.format("%.2f",((ExpressDelivery)newValue).getPostage()));
+                }
+
+                info_grid.setVisible(true);
+                alert_grid.setVisible(false);
+            }
+            catch (NullPointerException | ClassCastException e){
+                System.out.println(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Initializes and populates the fields of delivery areas page
+     */
+    private void initAreasPage(Pattern stringPattern){
+        records_combo.getItems().addAll(getRestaurant().getAreas().values());
+        records_combo.valueProperty().addListener((opt, oldValue, newValue)->{
+            try{
+                areaName_field.setText(((DeliveryArea)newValue).getAreaName());
+                areaName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+                ControllerUtils.setAlerts(areaName_field, stringPattern, alert_lbl);
+
+                neighbourhoods_checkedList.getItems().clear();
+                neighbourhoods_checkedList.getItems().addAll(((DeliveryArea)newValue).getNeighberhoods());
+
+                addComponents_combo.setVisible(false);
+
+                info_grid.setVisible(true);
+                alert_grid.setVisible(false);
+            }
+            catch (NullPointerException | ClassCastException e){
+                System.out.println(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * creates a delivery area based on parameters entered and puts it in record request for analytics purposes
+     * if fails to create one, shows alert to the user
+     * @return
+     * the created record request
+     */
+    public EditRecordRequest editAreaRequest(){
+        try{
+            if(neighbourhoods_checkedList.getItems().size() == 0)
+                throw new NullPointerException();
+            EditRecordRequest request = new EditRecordRequest(records_combo.getValue(), areaName_field.getText(),
+                    neighbourhoods_checkedList.getItems().stream().collect(Collectors.toSet()));
+            records_combo.getItems().clear();
+            records_combo.getItems().addAll(getRestaurant().getAreas().values());
+            info_grid.setVisible(false);
+            alert_grid.setVisible(true);
+            return request;
+        }
+        catch (IllegalArgumentException ex){
+            alert_lbl.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        catch (NullPointerException ex){
+            alert_lbl.setText("Please add at least 1 neighbourhood to the delivery area");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * creates a cook based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user
+     * @return
+     * the created record request
+     */
+    private EditRecordRequest editCookRequest(){
+        try{
+            EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                    fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                    expertises_combo.getValue(),isChef_check.isSelected());
+            records_combo.getItems().clear();
+            records_combo.getItems().addAll(getRestaurant().getCooks().values());
+            info_grid.setVisible(false);
+            alert_grid.setVisible(true);
+            return request;
+        }catch (IllegalArgumentException ex){
+            alert_lbl.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * creates a delivery person based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user
+     * @return
+     * the created record request
+     */
+    private EditRecordRequest editDeliveryPersonRequest(){
+        try{
+            EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                    fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                    vehicles_combo.getValue(), deliveryAreas_combo.getValue());
+            request.saveRequest();
+            records_combo.getItems().clear();
+            records_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
+            info_grid.setVisible(false);
+            alert_grid.setVisible(true);
+            return request;
+        }
+        catch (IllegalArgumentException ex){
+            alert_lbl.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * creates a customer based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user
+     * @return
+     * the created record request
+     */
+    private EditRecordRequest editCustomerRequest(){
+        try{
+            EditRecordRequest request = null;
+            if(!npass_field.getText().equals(rpass_field.getText()))
+                throw new IllegalArgumentException();
+            if(getRestaurant().getUsersList().get(usernameField.getText())!=null)
+                throw new IllegalArgumentException();
+            if(npass_field.getText().length()==0 && usernameField.getText().length()==0)
+                request = new EditRecordRequest(records_combo.getValue(),
+                        fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                        neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage());
+            else if(npass_field.getText().length()>0)
+                request = new EditRecordRequest(records_combo.getValue(),
+                        fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                        neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
+                        npass_field.getText());
+            else if(usernameField.getText().length()>0)
+                request = new EditRecordRequest(records_combo.getValue(),
+                        fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                        neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
+                        ((Customer)records_combo.getValue()).getPassword(), usernameField.getText());
+            else
+                request = new EditRecordRequest(records_combo.getValue(),
+                        fname_field.getText(), lname_field.getText(), genders_combo.getValue(), birthDate_dp.getValue(),
+                        neighbourhoods_combo.getValue(), glutenIntolerant_check.isSelected(), lactoseIntolerant_check.isSelected(), img_source.getImage(),
+                        npass_field.getText(), usernameField.getText());
+            records_combo.getItems().clear();
+            records_combo.getItems().addAll(getRestaurant().getCustomers().values());
+            info_grid.setVisible(false);
+            alert_grid.setVisible(true);
+            return request;
+        }
+        catch (IllegalArgumentException | NullPointerException ex){
+            alert_lbl.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * creates an ingredient based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user
+     * @return
+     * the created record request
+     */
+    private EditRecordRequest editComponentRequest(){
+        try{
+            EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                    ingredientName_field.getText(), Double.parseDouble(ingredientPrice_field.getText()),
+                    hasGluten_check.isSelected(), hasLactose_check.isSelected());
+            records_combo.getItems().clear();
+            records_combo.getItems().addAll(getRestaurant().getComponents().values());
+            info_grid.setVisible(false);
+            alert_grid.setVisible(true);
+            return request;
+        }catch (IllegalArgumentException ex){
+            alert_lbl.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * creates a dish based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user
+     * @return
+     * the created record request
+     */
+    private EditRecordRequest editDishRequest(){
+        try{
+            if(components_checkedList.getItems().size()==0)
+                throw new NullPointerException();
+            EditRecordRequest request = new EditRecordRequest(records_combo.getValue(),
+                    dishName_field.getText(), dishType_combo.getValue(), Integer.parseInt(dishPrepareTime_field.getText()),
+                    components_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
+            records_combo.getItems().clear();
+            records_combo.getItems().addAll(getRestaurant().getDishes().values());
+            info_grid.setVisible(false);
+            alert_grid.setVisible(true);
+            return request;
+        }
+        catch (IllegalArgumentException ex){
+            alert_lbl.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        catch (NullPointerException ex){
+            alert_lbl.setText("Please add at least 1 ingredient to the dish");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        }
+    }
+
+    /**
+     * creates an order based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user
+     * @return
+     * the created record request
+     */
+    private EditRecordRequest editOrderRequest(){
+        try{
+            if(dishes_checkedList.getItems().size() == 0)
+                throw new NullPointerException();
+            EditRecordRequest request = null;
+            if(deliveries_combo.getValue() == null)
+                request = new EditRecordRequest(records_combo.getValue(),
+                        customers_combo.getValue(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
+            else
+                request = new EditRecordRequest(records_combo.getValue(),
+                        customers_combo.getValue(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList(),
+                        deliveries_combo.getValue());
+            records_combo.getItems().clear();
+            records_combo.getItems().addAll(getRestaurant().getOrders().values());
+            info_grid.setVisible(false);
+            alert_grid.setVisible(true);
+            return request;
+        }
+        catch (IllegalArgumentException ex){
+            alert_lbl.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        }
+        catch (NullPointerException ex){
+            alert_lbl.setText("Please add at least 1 dish to the order");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        }
+    }
+
+    /**
+     * creates a delivery based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user
+     * @return
+     * the created record request
+     */
+    private EditRecordRequest editDeliveryRequest(){
+        try{
+            if(orders_checkedList.getItems().size() == 0)
+                throw new NullPointerException();
+            EditRecordRequest request = null;
+            Delivery d = (Delivery) records_combo.getValue();
+            if(d instanceof RegularDelivery){
+                request = new EditRecordRequest(d,
+
+                        deliveryPersons_combo.getValue(),
+                        deliveryDate_dp.getValue(), isDelivered_check.isSelected(),
+                        new HashSet<>(orders_checkedList.getItems()));
+            }
+            else{
+                request = new EditRecordRequest(d,
+                        deliveryAreas_combo.getValue() ,deliveryPersons_combo.getValue(),
+                        deliveryDate_dp.getValue(), isDelivered_check.isSelected(),
+                        orders_combo.getValue(), Double.parseDouble(expressFee_field.getText()));
+            }
+            records_combo.getItems().clear();
+            records_combo.getItems().addAll(getRestaurant().getDeliveries().values());
+            info_grid.setVisible(false);
+            alert_grid.setVisible(true);
+            return request;
+        }catch (IllegalArgumentException ex){
+            alert_lbl.setText("Please fill all the required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        }catch (NullPointerException ex){
+            if(rd_vbox.isVisible())
+                alert_lbl.setText("Please add at least 1 order to the delivery");
+            else
+                alert_lbl.setText("Please fill all the required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        }
     }
 }

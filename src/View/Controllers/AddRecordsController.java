@@ -192,177 +192,27 @@ public class AddRecordsController extends RecordManagementController{
             Pattern intPattern = Pattern.compile("([0-9]+)?");
             Pattern doublePattern = Pattern.compile("((([1-9])(\\d*)|0)(\\.\\d*)?)?");
             Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ -]?)([a-zA-Z]*))*");
+
             if(addCooks_sctn!=null || addDeliPersons_sctn!=null || addCustomers_sctn!=null) {
-
-                fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                ControllerUtils.setAlerts(fname_field, stringPattern, result_label);
-
-                lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                ControllerUtils.setAlerts(lname_field, stringPattern, result_label);
-
-                genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
-
-                birthDate_dp.setConverter(ControllerUtils.getStringConverter());
-                birthDate_dp.setPromptText("dd/mm/yyyy");
-
-                if(addCooks_sctn!=null){
-                    expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
-                }
-                if(addDeliPersons_sctn!=null){
-                    vehicles_combo.getItems().addAll(Arrays.stream(Vehicle.values()).toList());
-                    deliveryAreas_combo.getItems().addAll(getRestaurant().getAreas().values());
-                }
-                if(addCustomers_sctn!=null){
-                    neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
-                    ControllerUtils.setFileChooser(img_choose, img_source);
-                }
+                initPersonsPages(stringPattern);
             }
             if(addComponents_sctn!=null){
-                ingredientName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                ControllerUtils.setAlerts(ingredientName_field, stringPattern, result_label);
-
-                ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
-                ControllerUtils.setAlerts(ingredientPrice_field,doublePattern, result_label);
+                initIngredientPage(stringPattern, doublePattern);
             }
             if(addDishes_sctn!=null){
-                dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
-                addComponents_combo.getItems().addAll(getRestaurant().getComponents().values());
-                addComponents_combo.setVisible(false);
-                addComponents_combo.setOnAction(action->{
-                    Component c = (Component) addComponents_combo.getValue();
-                    if(c != null) {
-                        components_checkedList.getItems().add(new ListedRecord(c));
-                        addComponents_combo.setVisible(false);
-                    }
-                });
-
-                dishName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                ControllerUtils.setAlerts(dishName_field, stringPattern, result_label);
-
-                dishPrepareTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
-                ControllerUtils.setAlerts(dishPrepareTime_field, intPattern, result_label);
+                initDishesPage(stringPattern, intPattern);
             }
             if(addOrders_sctn!=null){
-                customers_combo.setCellFactory(list->new imageListCell<>());
-                customers_combo.getItems().addAll(getRestaurant().getCustomers().values());
-                deliveries_combo.getItems().addAll(getRestaurant().getDeliveries().values());
-                dish_id.setText("0");
-                addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
-
-                addComponents_combo.setOnAction(action->{
-                    Dish d = (Dish) addComponents_combo.getValue();
-                    if(d != null) {
-                        dishesIngredients_checkedList.getItems().addAll(
-                                d.getComponents().stream().map(ListedRecord::new).toList()
-                        );
-                        dish_id.setText(""+d.getId());
-                        ingredients_vbox.setVisible(true);
-                        addComponents_combo.setVisible(false);
-                        dish_name.setText(d.getDishName()+" ingredients: ");
-                        dishPrice_lbl.setText(String.format("%.2f₪",d.getPrice()));
-                    }
-                });
-
-                addSubcomponents_combo.setOnAction(action -> {
-                    Component c = addSubcomponents_combo.getValue();
-                    if(c != null) {
-                        dishesIngredients_checkedList.getItems().add(new ListedRecord(c));
-                        addSubcomponents_combo.setVisible(false);
-                    }
-                });
-                addSubcomp_btn.setOnAction(action -> {
-                    Collection<Component> selectedList = dishesIngredients_checkedList.getItems()
-                            .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
-                            dishList = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()))
-                                    .getComponents().stream().toList();
-                    if(dishList.equals(selectedList)){
-                        dishes_checkedList.getItems().add(
-                                new ListedRecord(getRestaurant().getRealDish(Integer.parseInt(dish_id.getText())))
-                        );
-                    }
-                    else {
-                        Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
-                        dishes_checkedList.getItems().add(
-                                new ListedRecord(new Dish("Custom " + d.getDishName() ,d.getType(), new ArrayList<>(selectedList), d.getTimeToMake()))
-                        );
-                    }
-                    dishesIngredients_checkedList.getItems().clear();
-                    ingredients_vbox.setVisible(false);
-                });
-                Iplus_btn.setOnAction(action->{
-                    addSubcomponents_combo.getItems().clear();
-                    addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
-                    addSubcomponents_combo.setVisible(true);
-                });
-                Iminus_btn.setOnAction(action -> {
-                    Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
-                    dishesIngredients_checkedList.getSelectionModel().clearSelection();
-                    dishesIngredients_checkedList.getItems().removeAll(set);
-                });
-                orderPrice_lbl.setText("0₪");
-                dishes_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
-                    try{
-                        double price = dishes_checkedList.getItems().stream()
-                                .map(ListedRecord::getRecord).map(r -> (Dish) r)
-                                .map(Dish::getPrice).reduce(0.0, Double::sum);
-                        orderPrice_lbl.setText(String.format("%.2f₪", price));
-                    }catch (NullPointerException e){
-                        orderPrice_lbl.setText("0₪");
-                    }
-                });
-                dishPrice_lbl.setText("0₪");
-                dishesIngredients_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>)change -> {
-                    try{
-                        Collection<Component> cmp = dishesIngredients_checkedList.getItems().stream()
-                                .map(ListedRecord::getRecord).map(r->(Component)r).collect(Collectors.toList());
-                        Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
-                        if(d.getComponents().equals(cmp)){
-                            dishPrice_lbl.setText(String.format("%.2f₪", d.getPrice()));
-                        }else{
-                            double price = 3 * dishesIngredients_checkedList.getItems().stream()
-                                    .map(ListedRecord::getRecord).map(r->(Component)r)
-                                    .map(Component::getPrice).reduce(0.0, Double::sum);
-                            dishPrice_lbl.setText(String.format("%.2f₪", price));
-                        }
-                    }catch(NullPointerException e){
-                        dishPrice_lbl.setText("0₪");
-                    }
-                });
+                initOrdersPage();
             }
             if(addDeliveries_sctn!=null){
-                deliveryPersons_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
-                orders_combo.getItems().addAll(getRestaurant().getOrders().values());
-                addComponents_combo.setOnAction(action->{
-                    Order o = (Order) addComponents_combo.getValue();
-                    if(o != null) {
-                        orders_checkedList.getItems().add(o);
-                        addComponents_combo.setVisible(false);
-                    }
-                });
+                initDeliveriesPage();
             }
             if(addAreas_sctn!=null){
-                addComponents_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
-                addComponents_combo.setVisible(false);
-                addComponents_combo.setOnAction(action->{
-                    Neighberhood n = (Neighberhood) addComponents_combo.getValue();
-                    if(n != null) {
-                        neighbourhoods_checkedList.getItems().add(n);
-                        addComponents_combo.setVisible(false);
-                    }
-                });
-                areaName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
-                deliveryTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
+                initAreasPage(stringPattern, intPattern);
             }
             if(addToBlacklist_sctn!=null){
-                customersToBlacklist_combo.setCellFactory(list->new imageListCell<>());
-                customersToBlacklist_combo.getItems()
-                        .addAll(getRestaurant().getCustomers().values().stream().
-                                filter(c->!getRestaurant().getBlacklist().contains(c))
-                                .toList());
-                if(customersToBlacklist_combo.getItems().size() == 0){
-                    GridPane g = (GridPane) window.getParent();
-                    g.getChildren().remove(window);
-                }
+                initBlacklistPage();
             }
         }catch (NullPointerException ex){
             System.out.println(ex.getMessage());
@@ -438,38 +288,8 @@ public class AddRecordsController extends RecordManagementController{
     private void addRecord() {
         result_label.setText("");
         AddRecordRequest request = null;
-        // The code for selecting the checked items is taken from the following site:
-        // https://www.tabnine.com/code/java/classes/org.controlsfx.control.CheckComboBox
         if (addAreas_sctn != null) {
-            try {
-                ObservableList<Neighberhood> selectedItems = neighbourhoods_checkedList.getItems();
-                System.out.println(selectedItems.size());
-                if (selectedItems.size() == 0)
-                    throw new NullPointerException();
-                HashSet<Neighberhood> selectedNeighbourhoods = new HashSet<>(selectedItems.stream().toList());
-                selectedNeighbourhoods = (selectedNeighbourhoods.size() > 0) ? selectedNeighbourhoods : null;
-                String areaName = areaName_field.getText().length() > 0 ? areaName_field.getText() : null;
-                Integer deliveryTime = deliveryTime_field.getText().length() > 0 ? Integer.parseInt(deliveryTime_field.getText()) : null;
-                request = new AddRecordRequest(
-                        new DeliveryArea(-1),
-                        areaName,
-                        selectedNeighbourhoods,
-                        deliveryTime
-                );
-                neighbourhoods_checkedList.getItems().clear();
-                areaName_field.clear();
-                deliveryTime_field.clear();
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Delivery Area added successfully");
-            } catch (IllegalArgumentException e) {
-                result_label.setStyle("-fx-text-fill: red");
-                result_label.setText("Please fill all required fields");
-                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-            } catch (NullPointerException e) {
-                result_label.setStyle("-fx-text-fill: red");
-                result_label.setText("Please add at least 1 neighbourhood to the delivery area");
-                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
-            }
+            request = createAreaRequest();
         }
         if (addCooks_sctn != null || addCustomers_sctn != null || addDeliPersons_sctn != null) {
             String fname = fname_field.getText().length() > 0 ? fname_field.getText() : null;
@@ -714,9 +534,395 @@ public class AddRecordsController extends RecordManagementController{
                 SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
         }
-        if(request!=null)
+        if(request!=null) {
             request.saveRequest();
-        Restaurant.getInstance().saveDatabase("Rest.ser");
-        System.out.printf("%s was added successfully\n", request.getRecord());
+            Restaurant.getInstance().saveDatabase("Rest.ser");
+            System.out.printf("%s was added successfully\n", request.getRecord());
+        }
+    }
+
+    /**
+     * Initializes and populates the fields of customers / delivery persons / cooks pages
+     * @param stringPattern
+     * pattern that restricts user input
+     */
+    private void initPersonsPages(Pattern stringPattern){
+        fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+        ControllerUtils.setAlerts(fname_field, stringPattern, result_label);
+
+        lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+        ControllerUtils.setAlerts(lname_field, stringPattern, result_label);
+
+        genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
+
+        birthDate_dp.setConverter(ControllerUtils.getStringConverter());
+        birthDate_dp.setPromptText("dd/mm/yyyy");
+
+        if(addCooks_sctn!=null){
+            expertises_combo.getItems().addAll(Arrays.stream(Expertise.values()).toList());
+        }
+        if(addDeliPersons_sctn!=null){
+            vehicles_combo.getItems().addAll(Arrays.stream(Vehicle.values()).toList());
+            deliveryAreas_combo.getItems().addAll(getRestaurant().getAreas().values());
+        }
+        if(addCustomers_sctn!=null){
+            neighbourhoods_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
+            ControllerUtils.setFileChooser(img_choose, img_source);
+        }
+    }
+
+    /**
+     * Initializes and populates the fields of ingredients page
+     * @param stringPattern
+     * pattern that restricts user input for ingredient name
+     * @param doublePattern
+     * pattern that restricts user input for ingredient price
+     */
+    private void initIngredientPage(Pattern stringPattern, Pattern doublePattern){
+        ingredientName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+        ControllerUtils.setAlerts(ingredientName_field, stringPattern, result_label);
+
+        ingredientPrice_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
+        ControllerUtils.setAlerts(ingredientPrice_field,doublePattern, result_label);
+    }
+
+    /**
+     * Initializes and populates the fields of dishes page
+     * @param stringPattern
+     * pattern that restricts user input for dish name
+     * @param intPattern
+     * pattern that restricts user input for dish time to make
+     */
+    private void initDishesPage(Pattern stringPattern, Pattern intPattern){
+        dishType_combo.getItems().addAll(Arrays.stream(DishType.values()).toList());
+        addComponents_combo.getItems().addAll(getRestaurant().getComponents().values());
+        addComponents_combo.setVisible(false);
+        addComponents_combo.setOnAction(action->{
+            Component c = (Component) addComponents_combo.getValue();
+            if(c != null) {
+                components_checkedList.getItems().add(new ListedRecord(c));
+                addComponents_combo.setVisible(false);
+            }
+        });
+
+        dishName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+        ControllerUtils.setAlerts(dishName_field, stringPattern, result_label);
+
+        dishPrepareTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
+        ControllerUtils.setAlerts(dishPrepareTime_field, intPattern, result_label);
+    }
+
+    /**
+     * Initializes and populates the fields of orders page
+     */
+    private void initOrdersPage(){
+        dish_id.setText("0");
+        customers_combo.setCellFactory(list->new imageListCell<>());
+        customers_combo.getItems().addAll(getRestaurant().getCustomers().values());
+        deliveries_combo.getItems().addAll(getRestaurant().getDeliveries().values());
+        addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
+
+        addComponents_combo.setOnAction(action->{
+            Dish d = (Dish) addComponents_combo.getValue();
+            if(d != null) {
+                dishesIngredients_checkedList.getItems().addAll(
+                        d.getComponents().stream().map(ListedRecord::new).toList()
+                );
+                dish_id.setText(""+d.getId());
+                ingredients_vbox.setVisible(true);
+                addComponents_combo.setVisible(false);
+                dish_name.setText(d.getDishName()+" ingredients: ");
+                dishPrice_lbl.setText(String.format("%.2f₪",d.getPrice()));
+            }
+        });
+
+        addSubcomponents_combo.setOnAction(action -> {
+            Component c = addSubcomponents_combo.getValue();
+            if(c != null) {
+                dishesIngredients_checkedList.getItems().add(new ListedRecord(c));
+                addSubcomponents_combo.setVisible(false);
+            }
+        });
+        addSubcomp_btn.setOnAction(action -> {
+            Collection<Component> selectedList = dishesIngredients_checkedList.getItems()
+                    .stream().map(ListedRecord::getRecord).map(r->(Component)r).toList(),
+                    dishList = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()))
+                            .getComponents().stream().toList();
+            if(dishList.equals(selectedList)){
+                dishes_checkedList.getItems().add(
+                        new ListedRecord(getRestaurant().getRealDish(Integer.parseInt(dish_id.getText())))
+                );
+            }
+            else {
+                Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
+                dishes_checkedList.getItems().add(
+                        new ListedRecord(new Dish("Custom " + d.getDishName() ,d.getType(), new ArrayList<>(selectedList), d.getTimeToMake()))
+                );
+            }
+            dishesIngredients_checkedList.getItems().clear();
+            ingredients_vbox.setVisible(false);
+        });
+        Iplus_btn.setOnAction(action->{
+            addSubcomponents_combo.getItems().clear();
+            addSubcomponents_combo.getItems().addAll(getRestaurant().getComponents().values());
+            addSubcomponents_combo.setVisible(true);
+        });
+        Iminus_btn.setOnAction(action -> {
+            Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
+            dishesIngredients_checkedList.getSelectionModel().clearSelection();
+            dishesIngredients_checkedList.getItems().removeAll(set);
+        });
+        orderPrice_lbl.setText("0₪");
+        dishes_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
+            try{
+                double price = dishes_checkedList.getItems().stream()
+                        .map(ListedRecord::getRecord).map(r -> (Dish) r)
+                        .map(Dish::getPrice).reduce(0.0, Double::sum);
+                orderPrice_lbl.setText(String.format("%.2f₪", price));
+            }catch (NullPointerException e){
+                orderPrice_lbl.setText("0₪");
+            }
+        });
+        dishPrice_lbl.setText("0₪");
+        dishesIngredients_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>)change -> {
+            try{
+                Collection<Component> cmp = dishesIngredients_checkedList.getItems().stream()
+                        .map(ListedRecord::getRecord).map(r->(Component)r).collect(Collectors.toList());
+                Dish d = getRestaurant().getRealDish(Integer.parseInt(dish_id.getText()));
+                if(d.getComponents().equals(cmp)){
+                    dishPrice_lbl.setText(String.format("%.2f₪", d.getPrice()));
+                }else{
+                    double price = 3 * dishesIngredients_checkedList.getItems().stream()
+                            .map(ListedRecord::getRecord).map(r->(Component)r)
+                            .map(Component::getPrice).reduce(0.0, Double::sum);
+                    dishPrice_lbl.setText(String.format("%.2f₪", price));
+                }
+            }catch(NullPointerException e){
+                dishPrice_lbl.setText("0₪");
+            }
+        });
+    }
+
+    /**
+     * Initializes and populates the fields of deliveries page
+     */
+    private void initDeliveriesPage(){
+        deliveryPersons_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
+        orders_combo.getItems().addAll(getRestaurant().getOrders().values());
+        addComponents_combo.setOnAction(action->{
+            Order o = (Order) addComponents_combo.getValue();
+            if(o != null) {
+                orders_checkedList.getItems().add(o);
+                addComponents_combo.setVisible(false);
+            }
+        });
+    }
+
+    /**
+     * Initializes and populates the fields of delivery areas page
+     */
+    private void initAreasPage(Pattern stringPattern, Pattern intPattern){
+        addComponents_combo.getItems().addAll(Arrays.stream(Neighberhood.values()).toList());
+        addComponents_combo.setVisible(false);
+        addComponents_combo.setOnAction(action->{
+            Neighberhood n = (Neighberhood) addComponents_combo.getValue();
+            if(n != null) {
+                neighbourhoods_checkedList.getItems().add(n);
+                addComponents_combo.setVisible(false);
+            }
+        });
+        areaName_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
+        deliveryTime_field.setTextFormatter(ControllerUtils.textFormatter(intPattern));
+    }
+
+    /**
+     * Initializes and populates the fields of add to blacklist page
+     */
+    private void initBlacklistPage(){
+        customersToBlacklist_combo.setCellFactory(list->new imageListCell<>());
+        customersToBlacklist_combo.getItems()
+                .addAll(getRestaurant().getCustomers().values().stream().
+                        filter(c->!getRestaurant().getBlacklist().contains(c))
+                        .toList());
+        if(customersToBlacklist_combo.getItems().size() == 0){
+            GridPane g = (GridPane) window.getParent();
+            g.getChildren().remove(window);
+        }
+    }
+
+    /**
+     * creates a delivery area based on parameters entered and puts it in record request for analytics purposes
+     * if fails to create one, shows alert to the user
+     * @return
+     * the record request created
+     */
+    public AddRecordRequest createAreaRequest(){
+        try {
+            ObservableList<Neighberhood> selectedItems = neighbourhoods_checkedList.getItems();
+            System.out.println(selectedItems.size());
+            if (selectedItems.size() == 0)
+                throw new NullPointerException();
+            HashSet<Neighberhood> selectedNeighbourhoods = new HashSet<>(selectedItems.stream().toList());
+            selectedNeighbourhoods = (selectedNeighbourhoods.size() > 0) ? selectedNeighbourhoods : null;
+            String areaName = areaName_field.getText().length() > 0 ? areaName_field.getText() : null;
+            Integer deliveryTime = deliveryTime_field.getText().length() > 0 ? Integer.parseInt(deliveryTime_field.getText()) : null;
+            AddRecordRequest request = new AddRecordRequest(
+                    new DeliveryArea(-1),
+                    areaName,
+                    selectedNeighbourhoods,
+                    deliveryTime
+            );
+            neighbourhoods_checkedList.getItems().clear();
+            areaName_field.clear();
+            deliveryTime_field.clear();
+            result_label.setStyle("-fx-text-fill: #00ff00");
+            result_label.setText("Delivery Area added successfully");
+            return request;
+        } catch (IllegalArgumentException e) {
+            result_label.setStyle("-fx-text-fill: red");
+            result_label.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        } catch (NullPointerException e) {
+            result_label.setStyle("-fx-text-fill: red");
+            result_label.setText("Please add at least 1 neighbourhood to the delivery area");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public AddRecordRequest createPersonRequest(){
+        String fname = fname_field.getText().length() > 0 ? fname_field.getText() : null;
+        String lname = lname_field.getText().length() > 0 ? lname_field.getText() : null;
+        Gender gender = genders_combo.getValue();
+        LocalDate birthdate = birthDate_dp.getValue();
+        if (addCooks_sctn != null) {
+            return createCookRequest(fname, lname, birthdate, gender);
+        }
+        if (addDeliPersons_sctn != null) {
+            return createDeliveryPersonRequest(fname, lname, birthdate, gender);
+        }
+        if (addCustomers_sctn != null) {
+            try {
+                Neighberhood neighbourhood = neighbourhoods_combo.getValue();
+                boolean isGlutenIntolerant = glutenIntolerant_check.isSelected();
+                boolean isLactoseIntolerant = lactoseIntolerant_check.isSelected();
+                request = new AddRecordRequest(
+                        new Customer(-1),
+                        fname,
+                        lname,
+                        birthdate,
+                        gender,
+                        neighbourhood,
+                        isGlutenIntolerant,
+                        isLactoseIntolerant,
+                        img_source.getImage()
+                );
+                neighbourhoods_combo.getSelectionModel().clearSelection();
+                glutenIntolerant_check.setSelected(false);
+                lactoseIntolerant_check.setSelected(false);
+                try {
+                    Image img = SwingFXUtils.toFXImage(ImageManager.getInstance().getImage("Default"), null);
+                    img_source.setImage(img);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                result_label.setStyle("-fx-text-fill: #00ff00");
+                result_label.setText("Customer added successfully");
+            }catch (IllegalArgumentException e) {
+                result_label.setStyle("-fx-text-fill: red");
+                result_label.setText("Please fill all required fields");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            }
+        }
+        fname_field.clear();
+        lname_field.clear();
+        genders_combo.getSelectionModel().clearSelection();
+        birthDate_dp.setValue(null);
+        return null;
+    }
+
+    /**
+     * creates a cook based on parameters entered and puts it in record request for analytics purposes
+     * if fails to create one, shows alert to the user
+     * @param fname
+     * the first name of the cook
+     * @param lname
+     * the last name of the cook
+     * @param birthdate
+     * the virth date of the cook
+     * @param gender
+     * the gender of the cook
+     * @return
+     * the record request created
+     */
+    private AddRecordRequest createCookRequest(String fname, String lname, LocalDate birthdate, Gender gender){
+        try{
+            Expertise expertise = expertises_combo.getValue();
+            boolean isChef = isChef_check.isSelected();
+            AddRecordRequest request = new AddRecordRequest(
+                    new Cook(-1),
+                    fname,
+                    lname,
+                    birthdate,
+                    gender,
+                    expertise,
+                    isChef
+            );
+            expertises_combo.getSelectionModel().clearSelection();
+            isChef_check.setSelected(false);
+            result_label.setStyle("-fx-text-fill: #00ff00");
+            result_label.setText("Cook added successfully");
+            return request;
+        }catch (IllegalArgumentException e) {
+            result_label.setStyle("-fx-text-fill: red");
+            result_label.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        }
+    }
+
+    /**
+     * creates a delivery person based on parameters entered and puts it in record request for analytics purposes
+     * if fails to create one, shows alert to the user
+     * @param fname
+     * the first name of the cook
+     * @param lname
+     * the last name of the cook
+     * @param birthdate
+     * the virth date of the cook
+     * @param gender
+     * the gender of the cook
+     * @return
+     * the record request created
+     */
+    private AddRecordRequest createDeliveryPersonRequest(String fname, String lname, LocalDate birthdate, Gender gender){
+        try {
+            Vehicle vehicle = vehicles_combo.getValue();
+            DeliveryArea area = deliveryAreas_combo.getValue();
+            AddRecordRequest request = new AddRecordRequest(
+                    new DeliveryPerson(-1),
+                    fname,
+                    lname,
+                    birthdate,
+                    gender,
+                    vehicle,
+                    area
+            );
+            vehicles_combo.getSelectionModel().clearSelection();
+            deliveryAreas_combo.getSelectionModel().clearSelection();
+            result_label.setStyle("-fx-text-fill: #00ff00");
+            result_label.setText("Delivery man added successfully");
+            return request;
+        }catch (IllegalArgumentException e) {
+            result_label.setStyle("-fx-text-fill: red");
+            result_label.setText("Please fill all required fields");
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
+            return null;
+        }
     }
 }

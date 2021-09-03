@@ -120,6 +120,9 @@ public class AddCustomerOrderController extends RecordManagementController{
 
             dish_id.setText("0");
             orderPrice_lbl.setText("0₪");
+            /**
+             * makes a runtime feature such that the order price can be calculated according to the dishes included in the order
+             */
             dishes_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>) change -> {
                 try{
                     double price = dishes_checkedList.getItems().stream()
@@ -131,6 +134,9 @@ public class AddCustomerOrderController extends RecordManagementController{
                 }
             });
             dishPrice_lbl.setText("0₪");
+            /**
+             * makes a runtime feature such that the dish price can be calculated according to the dishes included in the dish
+             */
             dishesIngredients_checkedList.getItems().addListener((ListChangeListener<? super ListedRecord>)change -> {
                 try{
                     Collection<Component> cmp = dishesIngredients_checkedList.getItems().stream()
@@ -151,7 +157,9 @@ public class AddCustomerOrderController extends RecordManagementController{
             alert_lbl.setText("");
             Restaurant rest = Restaurant.getInstance();
             addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
-
+            /**
+             *
+             */
             addComponents_combo.setOnAction(action->{
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 Dish d = (Dish) addComponents_combo.getValue();
@@ -166,7 +174,9 @@ public class AddCustomerOrderController extends RecordManagementController{
                     addComponents_combo.setVisible(false);
                 }
             });
-
+            /**
+             *
+             */
             addSubcomponents_combo.setOnAction(action -> {
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 Component c = addSubcomponents_combo.getValue();
@@ -175,6 +185,9 @@ public class AddCustomerOrderController extends RecordManagementController{
                     addSubcomponents_combo.setVisible(false);
                 }
             });
+            /**
+             * makes the add dish to list clickable -> adds the dish according to it's ingredients
+             */
             addSubcomp_btn.setOnAction(action -> {
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 Collection<Component> selectedList = dishesIngredients_checkedList.getItems()
@@ -195,18 +208,27 @@ public class AddCustomerOrderController extends RecordManagementController{
                 dishesIngredients_checkedList.getItems().clear();
                 ingredients_vbox.setVisible(false);
             });
+            /**
+             * makes the add component to dish clickable -> when clicked will remove a selected component from ingredients list
+             */
             Iplus_btn.setOnAction(action->{
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 addSubcomponents_combo.getItems().clear();
                 addSubcomponents_combo.getItems().addAll(rest.getComponents().values());
                 addSubcomponents_combo.setVisible(true);
             });
+            /**
+             * makes the remove component from dish clickable -> when clicked will remove a selected component from ingredients list
+             */
             Iminus_btn.setOnAction(action -> {
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 Set<ListedRecord> set = new HashSet<>(dishesIngredients_checkedList.getSelectionModel().getSelectedItems());
                 dishesIngredients_checkedList.getSelectionModel().clearSelection();
                 dishesIngredients_checkedList.getItems().removeAll(set);
             });
+            /**
+             * makes the plus button clickable -> when pressed will open combo-box to choose a dish from
+             */
             plus_btn.setOnAction(action->{
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 addComponents_combo.getItems().clear();
@@ -215,6 +237,9 @@ public class AddCustomerOrderController extends RecordManagementController{
                 addComponents_combo.getItems().addAll(rest.getDishes().values());
                 addComponents_combo.setVisible(true);
             });
+            /**
+             * makes the minus button clickable -> if a dish is selected, it will be removed from the list
+             */
             minus_btn.setOnAction(action->{
                 SFXManager.getInstance().playSound("src/View/sfx/click_sound2.wav");
                 if(addOrders_sctn!=null){
@@ -223,6 +248,10 @@ public class AddCustomerOrderController extends RecordManagementController{
                     dishes_checkedList.getItems().removeAll(set);
                 }
             });
+            /**
+             * makes the submit button clickable -> if the dishes list is not empty will spawn an alert message,
+             * otherwise will add the dishes to the shopping cart
+             */
             submit.setOnAction((action->{
                 try {
                     alert_lbl.setText("");

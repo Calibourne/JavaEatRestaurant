@@ -211,9 +211,7 @@ public class Dish extends Record {
 		if (getClass() != obj.getClass())
 			return false;
 		Dish other = (Dish) obj;
-		if (!getId().equals(other.getId()))
-			return false;
-		return true;
+		return getId().equals(other.getId());
 	}
 	
 	/**

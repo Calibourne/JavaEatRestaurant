@@ -137,8 +137,6 @@ public abstract class Delivery extends Record {
 		if (getClass() != obj.getClass())
 			return false;
 		Delivery other = (Delivery) obj;
-		if (!getId().equals(other.getId()))
-			return false;
-		return true;
+		return getId().equals(other.getId());
 	}
 }

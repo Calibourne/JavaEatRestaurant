@@ -26,7 +26,7 @@ public class Section {
      */
     private double score = 0.0;
 
-    private StringBuilder builder = new StringBuilder();
+    private final StringBuilder builder = new StringBuilder();
 
     private OutputDocument document = null;
 
@@ -35,7 +35,7 @@ public class Section {
     }
 
     public void write(Object o){
-        builder.append(String.valueOf(o)).append("\n");
+        builder.append(o).append("\n");
     }
 
     public String result(){

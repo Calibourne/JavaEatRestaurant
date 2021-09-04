@@ -5,7 +5,7 @@ package Model;
  * it serves like a shell to a record in a checkListView
  */
 public class ListedRecord {
-    private Record record;
+    private final Record record;
 
     public ListedRecord(Record record){
         this.record = record;

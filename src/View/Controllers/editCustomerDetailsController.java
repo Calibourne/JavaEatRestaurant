@@ -81,7 +81,7 @@ public class editCustomerDetailsController{
 
     @FXML
     private void initialize(){
-        Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ \\-\']?)([a-zA-Z]*))*");
+        Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ \\-']?)([a-zA-Z]*))*");
 
         ControllerUtils.setFileChooser(img_choose, img_source);
         try{

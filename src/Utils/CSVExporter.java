@@ -1,6 +1,7 @@
 package Utils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -58,7 +59,7 @@ final public class CSVExporter {
     public static void export( CSVExportRequest request,  ExportCallBack callBack, boolean async){
         Thread s = new Thread(() -> {
             try {
-                PrintWriter writer = new PrintWriter(request.getName() + EXT,"UTF-8");
+                PrintWriter writer = new PrintWriter(request.getName() + EXT, StandardCharsets.UTF_8);
 
                 final int columns = request.getColumns().length;
 

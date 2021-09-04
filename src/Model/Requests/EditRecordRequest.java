@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  * @author Eddie Kanevsky
  */
 public class EditRecordRequest extends RecordRequest{
-    transient private Object[] args;
+    final transient private Object[] args;
     transient Image img;
 
     /**
@@ -105,7 +105,7 @@ public class EditRecordRequest extends RecordRequest{
                     .collect(Collectors.groupingBy(Function.identity(),Collectors.counting())),
                     selected = ((List<Component>) args[3]).stream()
                             .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
-            Set<Component> intersect = selected.keySet().stream().filter(e->current.keySet().contains(e)).collect(Collectors.toSet());
+            Set<Component> intersect = selected.keySet().stream().filter(e-> current.containsKey(e)).collect(Collectors.toSet());
             Set<Component> unite = Stream.concat(current.keySet().stream(),selected.keySet().stream()).collect(Collectors.toSet());
             Set<Component> notIntersect = unite.stream().filter(e->!intersect.contains(e)).collect(Collectors.toSet());
             intersect.forEach(e->{
@@ -151,7 +151,7 @@ public class EditRecordRequest extends RecordRequest{
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())),
                     selected = ((List<Dish>) args[1]).stream()
                             .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
-            Set<Dish> intersect = selected.keySet().stream().filter(e->current.keySet().contains(e)).collect(Collectors.toSet());
+            Set<Dish> intersect = selected.keySet().stream().filter(e-> current.containsKey(e)).collect(Collectors.toSet());
             Set<Dish> unite = Stream.concat(current.keySet().stream(),selected.keySet().stream()).collect(Collectors.toSet());
             Set<Dish> notIntersect = unite.stream().filter(e->!intersect.contains(e)).collect(Collectors.toSet());
             intersect.forEach(e->{

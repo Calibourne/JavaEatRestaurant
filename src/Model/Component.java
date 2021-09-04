@@ -148,9 +148,7 @@ public class Component extends Record implements Comparable<Component> {
 		if (getClass() != obj.getClass())
 			return false;
 		Component other = (Component) obj;
-		if (!getId().equals(other.getId()))
-			return false;
-		return true;
+		return getId().equals(other.getId());
 	}
 
 	@Override

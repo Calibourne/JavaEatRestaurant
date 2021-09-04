@@ -186,7 +186,7 @@ public class EditRecordsController extends RecordManagementController{
     private void initialize(){
         Pattern intPattern = Pattern.compile("([0-9]+)?");
         Pattern doublePattern = Pattern.compile("((([1-9])(\\d*)|0)(\\.\\d*)?)?");
-        Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ \\-\']?)([a-zA-Z]*))*");
+        Pattern stringPattern = Pattern.compile("(([a-zA-Z]*)([ \\-']?)([a-zA-Z]*))*");
         try{
             info_grid.setVisible(false);
             addComponents_combo.setOnAction(action->{

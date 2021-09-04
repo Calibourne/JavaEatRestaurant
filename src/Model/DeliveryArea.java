@@ -218,8 +218,6 @@ public class DeliveryArea extends Record {
 		if (getClass() != obj.getClass())
 			return false;
 		DeliveryArea other = (DeliveryArea) obj;
-		if (getId() != other.getId())
-			return false;
-		return true;
+		return getId() == other.getId();
 	}	
 }

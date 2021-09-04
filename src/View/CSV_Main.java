@@ -22,11 +22,11 @@ import java.util.*;
 
 public class CSV_Main {
 
-    private static Restaurant rest = Restaurant.getInstance();
+    private static final Restaurant rest = Restaurant.getInstance();
 
-    private static OutputDocument document = new OutputDocument();
-    private static Map<String,Command> commands = new HashMap<>();
-    private static Map<String,Section> sections = new HashMap<>();
+    private static final OutputDocument document = new OutputDocument();
+    private static final Map<String,Command> commands = new HashMap<>();
+    private static final Map<String,Section> sections = new HashMap<>();
     private static final String OUTPUT_FILE = "output.txt";
 
     static {

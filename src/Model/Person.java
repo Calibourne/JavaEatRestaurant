@@ -119,9 +119,7 @@ public abstract class Person extends Record {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		if (!getId().equals(other.getId()))
-			return false;
-		return true;
+		return getId().equals(other.getId());
 	}
 	
 	@Override

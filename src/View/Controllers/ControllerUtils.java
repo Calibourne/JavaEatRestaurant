@@ -311,7 +311,7 @@ public class ControllerUtils {
         ingredients_combo.getItems().addAll(Restaurant.getInstance().getComponents().values());
 
         dishes_combo.setOnAction(action->{
-            Dish d = (Dish) dishes_combo.getValue();
+            Dish d = dishes_combo.getValue();
             if(d != null) {
                 ingredients_list.getItems().addAll(
                         d.getComponents().stream().map(ListedRecord::new).toList()

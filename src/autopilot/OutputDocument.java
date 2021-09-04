@@ -15,7 +15,7 @@ public class OutputDocument{
     private char nextName = 'A';
 
     //sections as map
-    private Map<String,Section> sections = new TreeMap<>();
+    private final Map<String,Section> sections = new TreeMap<>();
 
     /**
      * Create a new section.

@@ -643,7 +643,7 @@ public class Restaurant implements Serializable {
 	public Collection<Dish> getReleventDishList(Customer c){
 		HashMap<Integer,Dish> dishList = new HashMap<>();
 		if(!c.isSensitiveToGluten() && !c.isSensitiveToLactose())
-			return (Collection<Dish>) getDishes().values();
+			return getDishes().values();
 		for(Dish d : getDishes().values()) {
 			boolean isValid = true;
 			for(Component comp : d.getComponents()) {
@@ -749,7 +749,7 @@ public class Restaurant implements Serializable {
 			{
 				int result2 = ((Integer)d1.getDeliveryDate().getDayOfMonth()).compareTo(d2.getDeliveryDate().getDayOfMonth());
 				if(result2 == 0)
-					return ((Integer)d2.getId()).compareTo(d1.getId());
+					return d2.getId().compareTo(d1.getId());
 				return result2;
 			}
 			return result1;
@@ -875,7 +875,7 @@ public class Restaurant implements Serializable {
 		Comparator<Component> comp = (c1, c2) -> {
 			int res = comps.get(c2).compareTo(comps.get(c1));
 			if(res == 0)
-				return ((Integer)c2.getId()).compareTo(c1.getId());
+				return c2.getId().compareTo(c1.getId());
 			return res;
 		};
 		LinkedList<Component> query = new LinkedList<>(comps.keySet());
@@ -1043,7 +1043,7 @@ public class Restaurant implements Serializable {
 		}
 		catch(FileNotFoundException ex)
 		{
-			System.err.println("\'Ser\' file not found");
+			System.err.println("'Ser' file not found");
 			System.out.println("Failed to load the database");
 			setFirstRun(true);
 			return false;

@@ -145,14 +145,12 @@ public class Order extends Record implements Comparable<Order> {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		if (getId() != other.getId())
-			return false;
-		return true;
+		return getId() == other.getId();
 	}
 	
 	@Override
 	public int compareTo(Order other) {
-		return ((Integer)getId()).compareTo((Integer)other.getId());
+		return getId().compareTo(other.getId());
 	}
 	
 	public double calcOrderRevenue() {

@@ -503,9 +503,6 @@ public class CSV_Main {
                 System.out.println("All commands executed. Please check \"" + OUTPUT_FILE + "\".");
             }
         }
-        else {
-            System.out.println(rest.getAreas());
-        }
     }
 
     private static void func(String command,String[] args){

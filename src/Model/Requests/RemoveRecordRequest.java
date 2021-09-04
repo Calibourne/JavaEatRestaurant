@@ -14,12 +14,13 @@ public class RemoveRecordRequest extends RecordRequest {
     private DeliveryArea newArea;
 
     /**
-     * Initializes an RemoveRecordRequest according to record type
+     * Initializes a RemoveRecordRequest according to record type
      * @param record
      * the record to remove
      * @param args
      * additional argument for deliveryArea
      * @throws IllegalArgumentException
+     * whenever some/all the arguments are equal to null
      */
     public RemoveRecordRequest(Record record, Object... args) throws IllegalArgumentException{
         if(Arrays.stream(args).anyMatch(o->o==null))

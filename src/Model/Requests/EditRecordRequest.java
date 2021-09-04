@@ -21,10 +21,13 @@ public class EditRecordRequest extends RecordRequest{
     transient Image img;
 
     /**
-     *
+     * Initializes an EditRecordRequest according to record type
      * @param record
+     * the record we want to edit
      * @param args
+     * the arguments needed in order to edit the record
      * @throws IllegalArgumentException
+     * whenever some/all the arguments are equal to null
      */
     public EditRecordRequest(Record record, Object... args) throws IllegalArgumentException{
         this.args = args;
@@ -34,8 +37,10 @@ public class EditRecordRequest extends RecordRequest{
     }
 
     /**
-     *
+     * attempts to edit the record,
+     * and pushes itself to edit request history
      * @return
+     * success / failure of the procedure
      */
     @Override
     public boolean saveRequest() {
@@ -139,7 +144,6 @@ public class EditRecordRequest extends RecordRequest{
                     }
                 }
             });
-            System.out.println(((Dish) record).getComponents().size());
         }
         if(record instanceof Order){
             ((Order) record).setCustomer((Customer) args[0]);
@@ -211,6 +215,11 @@ public class EditRecordRequest extends RecordRequest{
         return true;
     }
 
+    /**
+     * adapts the setImage to editRecordRequest
+     * @param img
+     * the chosen image
+     */
     @Override
     protected void setCustomerImage(Image img) {
         Image current = SwingFXUtils.toFXImage(((Customer)record).getProfileImg(false),null);

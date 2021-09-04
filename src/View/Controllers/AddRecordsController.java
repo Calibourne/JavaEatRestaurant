@@ -856,13 +856,18 @@ public class AddRecordsController extends RecordManagementController{
      * the created record request
      */
     private AddRecordRequest createBlacklistRequest(){
-        try{
-            Customer c = customersToBlacklist_combo.getValue();
-            AddRecordRequest request = new AddRecordRequest(c);
+        try {
+            Customer toBlacklist = customersToBlacklist_combo.getValue();
+            AddRecordRequest request = new AddRecordRequest(toBlacklist);
+            customersToBlacklist_combo.getSelectionModel().clearSelection();
+            customersToBlacklist_combo.setValue(null);
+            System.out.printf("%s added to blacklist\n", toBlacklist);
+            result_label.setStyle("-fx-text-fill: #00ff00");
+            result_label.setText("Successfully blacklisted the customer\n refresh the page to continue");
             return request;
-        }catch (IllegalArgumentException | NullPointerException e){
+        }catch (IllegalArgumentException e) {
             result_label.setStyle("-fx-text-fill: red");
-            result_label.setText("Please select a customer to add to blacklist");
+            result_label.setText("Please fill all required fields");
             SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             return null;
         }

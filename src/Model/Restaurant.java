@@ -86,7 +86,9 @@ public class Restaurant implements Serializable {
 		}
 	}
 
-	//region Getters/Setters
+	/**
+	 * Getters/Setters
+	 */
 	public HashMap<Integer,Cook> getCooks() {
 		return cooks;
 	}

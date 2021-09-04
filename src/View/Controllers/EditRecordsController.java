@@ -583,7 +583,8 @@ public class EditRecordsController extends RecordManagementController{
             try{
                 customers_combo.setCellFactory(list->new imageListCell<>());
                 customers_combo.setValue(((Order)newValue).getCustomer());
-                customers_combo.getItems().addAll(getRestaurant().getCustomers().values());
+                customers_combo.getItems().addAll(getRestaurant().getCustomers().values().stream()
+                        .filter(c->!getRestaurant().getBlacklist().contains(c)).toList());
 
                 deliveries_combo.getItems().addAll(
                         getRestaurant().getDeliveries().values().stream().filter(d -> d instanceof RegularDelivery).toList()

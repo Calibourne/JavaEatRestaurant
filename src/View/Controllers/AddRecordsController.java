@@ -400,7 +400,8 @@ public class AddRecordsController extends RecordManagementController{
     private void initOrdersPage(){
         dish_id.setText("0");
         customers_combo.setCellFactory(list->new imageListCell<>());
-        customers_combo.getItems().addAll(getRestaurant().getCustomers().values());
+        customers_combo.getItems().addAll(getRestaurant().getCustomers().values().stream()
+                .filter(c->!getRestaurant().getBlacklist().contains(c)).toList());
         deliveries_combo.getItems().addAll(getRestaurant().getDeliveries().values());
         ControllerUtils.initOrderListViews(
                 addSubcomponents_combo,

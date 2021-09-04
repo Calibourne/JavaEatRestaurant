@@ -1,6 +1,7 @@
 package View.Controllers;
 
 import Model.Customer;
+import Model.Exceptions.IllegalCustomerException;
 import Model.Restaurant;
 import Utils.SFXManager;
 import javafx.event.ActionEvent;
@@ -77,12 +78,17 @@ public class LoginPageController {
                 && passwordField.getText().equals(rest.getUsersList().get(usernameField.getText()).getPassword())) {
             try {
                 customer = rest.getUsersList().get(usernameField.getText());
+                if(rest.getBlacklist().contains(customer))
+                    throw new IllegalCustomerException();
                 Stage s = (Stage) loginButton.getScene().getWindow();
                 Parent p = FXMLLoader.load(getClass().getResource("fxmls/CustomerHome.fxml"));
                 SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Logon_sound.wav");
                 ControllerUtils.changeScreen(s, p);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+            } catch (IllegalCustomerException e){
+                loginMessageLabel.setText("This customer is blacklisted");
+                SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
             }
         } else {
             loginMessageLabel.setText("Username/Password is incorrect. Please try again.");

@@ -3,33 +3,33 @@
     <output-path>$PROJECT_DIR$/out/artifacts/JavaEatRestaurant_jar</output-path>
     <root id="archive" name="JavaEatRestaurant.jar">
       <element id="module-output" name="JavaEatRestaurant" />
-      <element id="library" level="project" name="JavaEatRestaurant" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/poi-5.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/poi-examples-5.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/poi-excelant-5.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/poi-integration-5.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/poi-ooxml-5.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/poi-ooxml-full-5.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/poi-ooxml-lite-5.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/poi-scratchpad-5.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/lib/SparseBitSet-1.2.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/lib/commons-codec-1.15.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/lib/commons-math3-3.6.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/lib/commons-collections4-4.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/ooxml-lib/curvesapi-1.06.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/ooxml-lib/xmlbeans-4.0.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../poi-5.0.0/ooxml-lib/commons-compress-1.20.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../ControlsFX/controlsfx-11.1.0.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/src.zip" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/javafx-swt.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.web.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.base.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.fxml.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.media.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.swing.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.controls.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.graphics.jar" path-in-jar="/" />
-      <element id="dir-copy" path="$PROJECT_DIR$/../javafx-sdk-16/bin" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/src.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/lib/javafx.graphics.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/controlsfx-11.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/poi-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/poi-examples-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/poi-excelant-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/poi-integration-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/poi-ooxml-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/poi-ooxml-full-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/poi-ooxml-lite-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/poi-scratchpad-5.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/lib/SparseBitSet-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/lib/commons-codec-1.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/lib/commons-math3-3.6.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/lib/commons-collections4-4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/ooxml-lib/curvesapi-1.06.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/ooxml-lib/xmlbeans-4.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../../Program Files/Java/poi-bin-5.0.0-20210120/poi-5.0.0/ooxml-lib/commons-compress-1.20.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/out/artifacts/JavaEatRestaurant_jar/JavaEatRestaurant.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-16/bin" />
     </root>
   </artifact>
 </component>

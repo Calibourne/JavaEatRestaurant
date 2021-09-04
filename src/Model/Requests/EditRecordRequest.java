@@ -12,15 +12,31 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * A record request that is responsible for editing records to the database
+ * @author Eddie Kanevsky
+ */
 public class EditRecordRequest extends RecordRequest{
     transient private Object[] args;
     transient Image img;
+
+    /**
+     *
+     * @param record
+     * @param args
+     * @throws IllegalArgumentException
+     */
     public EditRecordRequest(Record record, Object... args) throws IllegalArgumentException{
         this.args = args;
         if(Arrays.stream(args).anyMatch(o->o==null))
             throw new IllegalArgumentException();
         this.record = record;
     }
+
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean saveRequest() {
         TreeSet<EditRecordRequest> ts;

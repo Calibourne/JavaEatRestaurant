@@ -216,6 +216,12 @@ public class AddRecordsController extends RecordManagementController{
             System.out.println(ex.getMessage());
         }
     }
+
+    /**
+     * Makes most of the buttons clickable (the ones that appear the most)
+     * @param e
+     * the moouse btn click event
+     */
     @FXML
     private void handleButtonClick(ActionEvent e){
         if (e.getSource() == ed_btn)
@@ -312,9 +318,8 @@ public class AddRecordsController extends RecordManagementController{
             request = createBlacklistRequest();
         }
         if(request!=null) {
-            request.saveRequest();
-            Restaurant.getInstance().saveDatabase("Rest.ser");
-            System.out.printf("%s was added successfully\n", request.getRecord());
+            if(request.saveRequest())
+                getRestaurant().saveDatabase("Rest.ser");
         }
     }
 
@@ -428,6 +433,8 @@ public class AddRecordsController extends RecordManagementController{
         });
         expressFee_field.setTextFormatter(ControllerUtils.textFormatter(doublePattern));
         ControllerUtils.setAlerts(expressFee_field, doublePattern, result_label);
+        deliveryDate_dp.setConverter(ControllerUtils.getStringConverter());
+        deliveryDate_dp.setPromptText("dd/mm/yyyy");
     }
 
     /**
@@ -463,8 +470,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a delivery area based on parameters entered and puts it in record request for analytics purposes
-     * if fails to create one, shows alert to the user
+     * attempts to create a delivery area based on parameters entered and puts it in record request for analytics purposes
+     * if fails to create one, shows alert to the user and returns null
      * @return
      * the created record request
      */
@@ -504,8 +511,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a person based on parameters entered and puts it in record request for analytics.
-     * if fails to create one, shows alert to the user
+     * attempts to create a person based on parameters entered and puts it in record request for analytics.
+     * if fails to create one, shows alert to the user and returns null
      * @return
      * the created record request
      */
@@ -534,8 +541,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a cook based on parameters entered and puts it in record request for analytics purposes.
-     * if fails to create one, shows alert to the user
+     * attempts to create a cook based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user and returns null
      * @param fname
      * the first name of the cook
      * @param lname
@@ -574,8 +581,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a delivery person based on parameters entered and puts it in record request for analytics purposes.
-     * if fails to create one, shows alert to the user
+     * attempts to create a delivery person based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user and returns null
      * @param fname
      * the first name of the delivery person
      * @param lname
@@ -614,8 +621,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a customer based on parameters entered and puts it in record request for analytics purposes.
-     * if fails to create one, shows alert to the user
+     * attempts to create a customer based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user and returns null
      * @param fname
      * the first name of the customer
      * @param lname
@@ -664,8 +671,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates an ingredient based on parameters entered and puts it in record request for analytics purposes.
-     * if fails to create one, shows alert to the user
+     * attempts to create an ingredient based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user and returns null
      * @return
      * the created record request
      */
@@ -698,8 +705,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a dish based on parameters entered and puts it in record request for analytics purposes.
-     * if fails to create one, shows alert to the user
+     * attempts to create a dish based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user and returns null
      * @return
      * the created record request
      */
@@ -736,8 +743,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates an order based on parameters entered and puts it in record request for analytics purposes.
-     * if fails to create one, shows alert to the user
+     * attempts to create an order based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user and returns null
      * @return
      * the created record request
      */
@@ -783,8 +790,8 @@ public class AddRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a delivery based on parameters entered and puts it in record request for analytics purposes.
-     * if fails to create one, shows alert to the user
+     * attempts to create a delivery based on parameters entered and puts it in record request for analytics purposes.
+     * if fails to create one, shows alert to the user and returns null
      * @return
      * the created record request
      */
@@ -844,7 +851,7 @@ public class AddRecordsController extends RecordManagementController{
 
     /**
      * attempts to add a selected customer to blacklist and puts it in record request for analytics purposes.
-     * if fails to create one, shows alert to the user
+     * if fails to create one, shows alert to the user and returns null
      * @return
      * the created record request
      */

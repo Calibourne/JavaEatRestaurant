@@ -9,8 +9,22 @@ import javafx.scene.image.Image;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * A record request that is responsible for adding records to the database
+ * @author Eddie Kanevsky
+ */
 public class AddRecordRequest extends RecordRequest {
     private boolean toBlacklist;
+
+    /**
+     * Initializes an AddRecordRequest according to record type
+     * @param record
+     * a dummy variable used to determine which record type we want to add
+     * @param args
+     * the arguments needed in order to create the record
+     * @throws IllegalArgumentException
+     * whenever some/all the arguments are equal to null
+     */
     public AddRecordRequest(Record record, Object... args) throws IllegalArgumentException {
         if(Arrays.stream(args).anyMatch(o->o==null))
             throw new IllegalArgumentException();
@@ -129,6 +143,12 @@ public class AddRecordRequest extends RecordRequest {
         }
     }
 
+    /**
+     * attempts to push the created (excluding blacklisted customer) record to the database,
+     * and pushes itself to add request history
+     * @return
+     * success / failure of the procedure
+     */
     @Override
     public boolean saveRequest() {
         Restaurant restaurant = Restaurant.getInstance();
@@ -184,6 +204,11 @@ public class AddRecordRequest extends RecordRequest {
         return toReturn;
     }
 
+    /**
+     * adapts the setImage to addRecordRequest
+     * @param img
+     * the chosen image
+     */
     @Override
     protected void setCustomerImage(Image img){
         if (!((Customer) record).getProfileImgName().equals("Default"))

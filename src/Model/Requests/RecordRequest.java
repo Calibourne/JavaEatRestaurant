@@ -3,12 +3,8 @@ package Model.Requests;
 import Model.Customer;
 import Model.Record;
 import Utils.ImageManager;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * This class will be responsible for adding/removing/editing records from the database
- * It's used as a wrapper for the management purposes
+ * It's used as a wrapper for analytics purposes
  */
 public abstract class RecordRequest implements Serializable, Comparable<RecordRequest> {
     protected final LocalDate dateOfRequest;
@@ -27,6 +23,11 @@ public abstract class RecordRequest implements Serializable, Comparable<RecordRe
         this.timeOfRequest = LocalTime.now();
     }
 
+    /**
+     * archetype method in charge of saving the request
+     * @return
+     * success / failure in saving
+     */
     public abstract boolean saveRequest();
 
     @Override
@@ -38,6 +39,11 @@ public abstract class RecordRequest implements Serializable, Comparable<RecordRe
         return record;
     }
 
+    /**
+     * saves and assigns the chosen image to customer in the request
+     * @param img
+     * the chosen img
+     */
     protected void setCustomerImage(Image img){
         Customer c = (Customer)record;
         ImageManager manager = ImageManager.getInstance();

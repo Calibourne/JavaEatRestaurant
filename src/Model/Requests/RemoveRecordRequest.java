@@ -6,8 +6,21 @@ import Model.*;
 import java.util.Arrays;
 import java.util.TreeSet;
 
+/**
+ * A record request that is responsible for removing records from the database
+ * @author Eddie Kanevsky
+ */
 public class RemoveRecordRequest extends RecordRequest {
     private DeliveryArea newArea;
+
+    /**
+     * Initializes an RemoveRecordRequest according to record type
+     * @param record
+     * the record to remove
+     * @param args
+     * additional argument for deliveryArea
+     * @throws IllegalArgumentException
+     */
     public RemoveRecordRequest(Record record, Object... args) throws IllegalArgumentException{
         if(Arrays.stream(args).anyMatch(o->o==null))
             throw new IllegalArgumentException();
@@ -17,6 +30,12 @@ public class RemoveRecordRequest extends RecordRequest {
         }
     }
 
+    /**
+     * attempts to remove the record from the database,
+     * and pushes itself to remove request history
+     * @return
+     * success / failure of the procedure
+     */
     @Override
     public boolean saveRequest() {
         Restaurant restaurant = Restaurant.getInstance();

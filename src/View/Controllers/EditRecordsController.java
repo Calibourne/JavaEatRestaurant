@@ -243,6 +243,11 @@ public class EditRecordsController extends RecordManagementController{
         }
     }
 
+    /**
+     * Makes the most buttons clickable (the ones that mostly appear)
+     * @param e
+     * the event of mouse btn clicked
+     */
     @FXML
     private void handleButtonClick(ActionEvent e){
         if(e.getSource() == minus_btn) {
@@ -310,6 +315,9 @@ public class EditRecordsController extends RecordManagementController{
         }
     }
 
+    /**
+     * attempts to edit a chosen record according to given arguments
+     */
     private void editRecords() {
         EditRecordRequest request = null;
         if(editAreas_sctn != null){
@@ -337,33 +345,50 @@ public class EditRecordsController extends RecordManagementController{
             request = editDeliveryRequest();
         }
         if(request!=null) {
-            request.saveRequest();
-            getRestaurant().saveDatabase("Rest.ser");
+            if(request.saveRequest())
+                getRestaurant().saveDatabase("Rest.ser");
         }
     }
 
-    private void setNames(Record newValue, Pattern stringPattern){
+    /**
+     * sets the first and last name fields of the person selected
+     * @param record
+     * the person we want to edit
+     * @param stringPattern
+     * the input restriction pattern
+     */
+    private void setNames(Record record, Pattern stringPattern){
         lname_field.setTextFormatter(null);
         fname_field.setTextFormatter(null);
         fname_field.setText("");
-        fname_field.setText(((Person)newValue).getFirstName());
+        fname_field.setText(((Person)record).getFirstName());
         fname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
         ControllerUtils.setAlerts(fname_field, stringPattern, alert_lbl);
 
         lname_field.setText("");
-        lname_field.setText(((Person)newValue).getLastName());
+        lname_field.setText(((Person)record).getLastName());
         lname_field.setTextFormatter(ControllerUtils.textFormatter(stringPattern));
         ControllerUtils.setAlerts(lname_field, stringPattern, alert_lbl);
     }
 
-    private void setPersonAttributes(Record newValue, Pattern stringPattern){
-        setNames(newValue, stringPattern);
+
+    /**
+     * sets the first and last name fields of the person selected
+     * @param record
+     * the person we want to edit
+     * @param stringPattern
+     * the input restriction pattern
+     */
+    private void setPersonAttributes(Record record, Pattern stringPattern){
+        setNames(record, stringPattern);
 
         genders_combo.getItems().clear();
         genders_combo.getItems().addAll(Arrays.stream(Gender.values()).toList());
-        genders_combo.setValue(((Person)newValue).getGender());
+        genders_combo.setValue(((Person)record).getGender());
 
-        birthDate_dp.setValue(((Person)newValue).getBirthDay());
+        birthDate_dp.setValue(((Person)record).getBirthDay());
+        birthDate_dp.setConverter(ControllerUtils.getStringConverter());
+        birthDate_dp.setPromptText("dd/mm/yyyy");
 
     }
 
@@ -606,6 +631,8 @@ public class EditRecordsController extends RecordManagementController{
                 deliveryPersons_combo.getItems().addAll(getRestaurant().getDeliveryPersons().values());
 
                 deliveryDate_dp.setValue(((Delivery)newValue).getDeliveryDate());
+                deliveryDate_dp.setConverter(ControllerUtils.getStringConverter());
+                deliveryDate_dp.setPromptText("dd/mm/yyyy");
 
                 isDelivered_check.setSelected(((Delivery)newValue).isDelivered());
 
@@ -664,7 +691,7 @@ public class EditRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a delivery area based on parameters entered and puts it in record request for analytics purposes
+     * attempts to edit a delivery area based on parameters entered and puts it in record request for analytics purposes
      * if fails to create one, shows alert to the user
      * @return
      * the created record request
@@ -696,7 +723,7 @@ public class EditRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a cook based on parameters entered and puts it in record request for analytics purposes.
+     * attempts to edit a cook based on parameters entered and puts it in record request for analytics purposes.
      * if fails to create one, shows alert to the user
      * @return
      * the created record request
@@ -720,7 +747,7 @@ public class EditRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a delivery person based on parameters entered and puts it in record request for analytics purposes.
+     * attempts to edit a delivery person based on parameters entered and puts it in record request for analytics purposes.
      * if fails to create one, shows alert to the user
      * @return
      * the created record request
@@ -746,14 +773,14 @@ public class EditRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a customer based on parameters entered and puts it in record request for analytics purposes.
+     * attempts to edit a customer based on parameters entered and puts it in record request for analytics purposes.
      * if fails to create one, shows alert to the user
      * @return
      * the created record request
      */
     private EditRecordRequest editCustomerRequest(){
         try{
-            EditRecordRequest request = null;
+            EditRecordRequest request;
             if(!npass_field.getText().equals(rpass_field.getText()))
                 throw new IllegalArgumentException();
             if(getRestaurant().getUsersList().get(usernameField.getText())!=null)
@@ -792,7 +819,7 @@ public class EditRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates an ingredient based on parameters entered and puts it in record request for analytics purposes.
+     * attempts to edit an ingredient based on parameters entered and puts it in record request for analytics purposes.
      * if fails to create one, shows alert to the user
      * @return
      * the created record request
@@ -816,7 +843,7 @@ public class EditRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a dish based on parameters entered and puts it in record request for analytics purposes.
+     * attempts to edit a dish based on parameters entered and puts it in record request for analytics purposes.
      * if fails to create one, shows alert to the user
      * @return
      * the created record request
@@ -848,7 +875,7 @@ public class EditRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates an order based on parameters entered and puts it in record request for analytics purposes.
+     * attempts to edit an order based on parameters entered and puts it in record request for analytics purposes.
      * if fails to create one, shows alert to the user
      * @return
      * the created record request
@@ -857,7 +884,7 @@ public class EditRecordsController extends RecordManagementController{
         try{
             if(dishes_checkedList.getItems().size() == 0)
                 throw new NullPointerException();
-            EditRecordRequest request = null;
+            EditRecordRequest request;
             if(deliveries_combo.getValue() == null)
                 request = new EditRecordRequest(records_combo.getValue(),
                         customers_combo.getValue(), dishes_checkedList.getItems().stream().map(ListedRecord::getRecord).toList());
@@ -884,7 +911,7 @@ public class EditRecordsController extends RecordManagementController{
     }
 
     /**
-     * creates a delivery based on parameters entered and puts it in record request for analytics purposes.
+     * attempts to edit a delivery based on parameters entered and puts it in record request for analytics purposes.
      * if fails to create one, shows alert to the user
      * @return
      * the created record request
@@ -893,7 +920,7 @@ public class EditRecordsController extends RecordManagementController{
         try{
             if(orders_checkedList.getItems().size() == 0)
                 throw new NullPointerException();
-            EditRecordRequest request = null;
+            EditRecordRequest request;
             Delivery d = (Delivery) records_combo.getValue();
             if(d instanceof RegularDelivery){
                 request = new EditRecordRequest(d,

@@ -3,6 +3,7 @@ package View.Controllers;
 import Model.DeliveryArea;
 import Model.Record;
 import Model.Requests.RemoveRecordRequest;
+import Utils.SFXManager;
 import View.newElements.imageListCell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,27 +55,21 @@ public class RemoveRecordsController extends RecordManagementController{
             record_combo.getItems().addAll(getRestaurant().getCustomers().values());
         }
         if(removeComponents_sctn != null){
-            //record_combo.setPromptText("Choose ingredient to remove");
             record_combo.getItems().addAll(getRestaurant().getComponents().values());
         }
         if(removeDishes_sctn != null){
-            //record_combo.setPromptText("Choose dish to remove");
             record_combo.getItems().addAll(getRestaurant().getDishes().values());
         }
         if(removeDishes_sctn != null){
-            //record_combo.setPromptText("Choose dish to remove");
             record_combo.getItems().addAll(getRestaurant().getDishes().values());
         }
         if(removeOrders_sctn != null){
-            //record_combo.setPromptText("Choose order to remove");
             record_combo.getItems().addAll(getRestaurant().getOrders().values());
         }
         if(removeDeliveries_sctn != null){
-            //record_combo.setPromptText("Choose delivery to remove");
             record_combo.getItems().addAll(getRestaurant().getDeliveries().values());
         }
         if(removeAreas_sctn != null){
-            //record_combo.setPromptText("Choose delivery area to remove");
             record_combo.getItems().addAll(getRestaurant().getAreas().values());
             newArea_combo.getItems().addAll(getRestaurant().getAreas().values());
         }
@@ -97,80 +92,82 @@ public class RemoveRecordsController extends RecordManagementController{
                 DeliveryArea newArea = newArea_combo.getSelectionModel().getSelectedItem();
                 request = new RemoveRecordRequest(oldArea, newArea);
                 newArea_combo.getItems().clear();
-                request.saveRequest();
-                record_combo.getItems().clear();
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Delivery Area removed successfully");
-                initialize();
-                getRestaurant().saveDatabase("Rest.ser");
-                if(getRestaurant().getAreas().values().size()>2) {
-                    return;
+                if(request.saveRequest())
+                {
+                    record_combo.getItems().clear();
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Delivery Area removed successfully");
+                    initialize();
+                    getRestaurant().saveDatabase("Rest.ser");
+                    if(getRestaurant().getAreas().values().size()>2)
+                        return;
                 }
                 GridPane pane = (GridPane) removeAreas_sctn.getParent();
                 pane.getChildren().remove(removeAreas_sctn);
             }
-            request.saveRequest();
-            record_combo.getItems().clear();
-            if (removeCooks_sctn != null) {
-                if(getRestaurant().getCooks().size()==0){
-                    GridPane pane = (GridPane) removeCooks_sctn.getParent();
-                    pane.getChildren().remove(removeCooks_sctn);
+            if(request.saveRequest()) {
+                record_combo.getItems().clear();
+                if (removeCooks_sctn != null) {
+                    if (getRestaurant().getCooks().size() == 0) {
+                        GridPane pane = (GridPane) removeCooks_sctn.getParent();
+                        pane.getChildren().remove(removeCooks_sctn);
+                    }
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Cook removed successfully");
                 }
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Cook removed successfully");
-            }
-            if (removeDeliPersons_sctn != null) {
-                if(getRestaurant().getDeliveryPersons().size()==0){
-                    GridPane pane = (GridPane) removeDeliPersons_sctn.getParent();
-                    pane.getChildren().remove(removeDeliPersons_sctn);
+                if (removeDeliPersons_sctn != null) {
+                    if (getRestaurant().getDeliveryPersons().size() == 0) {
+                        GridPane pane = (GridPane) removeDeliPersons_sctn.getParent();
+                        pane.getChildren().remove(removeDeliPersons_sctn);
+                    }
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Delivery Person removed successfully");
                 }
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Delivery Person removed successfully");
-            }
-            if (removeCustomers_sctn != null) {
-                if(getRestaurant().getCustomers().size()==0){
-                    GridPane pane = (GridPane) removeCustomers_sctn.getParent();
-                    pane.getChildren().remove(removeCustomers_sctn);
+                if (removeCustomers_sctn != null) {
+                    if (getRestaurant().getCustomers().size() == 0) {
+                        GridPane pane = (GridPane) removeCustomers_sctn.getParent();
+                        pane.getChildren().remove(removeCustomers_sctn);
+                    }
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Customer removed successfully");
                 }
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Customer removed successfully");
-            }
-            if (removeComponents_sctn != null) {
-                if(getRestaurant().getComponents().size()==0){
-                    GridPane pane = (GridPane) removeComponents_sctn.getParent();
-                    pane.getChildren().remove(removeComponents_sctn);
+                if (removeComponents_sctn != null) {
+                    if (getRestaurant().getComponents().size() == 0) {
+                        GridPane pane = (GridPane) removeComponents_sctn.getParent();
+                        pane.getChildren().remove(removeComponents_sctn);
+                    }
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Ingredient removed successfully");
                 }
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Ingredient removed successfully");
-            }
-            if (removeDishes_sctn != null) {
-                if(getRestaurant().getDishes().size()==0){
-                    GridPane pane = (GridPane) removeDishes_sctn.getParent();
-                    pane.getChildren().remove(removeDishes_sctn);
+                if (removeDishes_sctn != null) {
+                    if (getRestaurant().getDishes().size() == 0) {
+                        GridPane pane = (GridPane) removeDishes_sctn.getParent();
+                        pane.getChildren().remove(removeDishes_sctn);
+                    }
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Dish removed successfully");
                 }
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Dish removed successfully");
-            }
-            if (removeOrders_sctn != null) {
-                if(getRestaurant().getOrders().size()==0){
-                    GridPane pane = (GridPane) removeOrders_sctn.getParent();
-                    pane.getChildren().remove(removeOrders_sctn);
+                if (removeOrders_sctn != null) {
+                    if (getRestaurant().getOrders().size() == 0) {
+                        GridPane pane = (GridPane) removeOrders_sctn.getParent();
+                        pane.getChildren().remove(removeOrders_sctn);
+                    }
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Dish removed successfully");
                 }
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Dish removed successfully");
-            }
-            if (removeDeliveries_sctn != null) {
-                if(getRestaurant().getCooks().size()==0){
-                    GridPane pane = (GridPane) removeDeliveries_sctn.getParent();
-                    pane.getChildren().remove(removeDeliveries_sctn);
+                if (removeDeliveries_sctn != null) {
+                    if (getRestaurant().getCooks().size() == 0) {
+                        GridPane pane = (GridPane) removeDeliveries_sctn.getParent();
+                        pane.getChildren().remove(removeDeliveries_sctn);
+                    }
+                    result_label.setStyle("-fx-text-fill: #00ff00");
+                    result_label.setText("Dish removed successfully");
                 }
-                result_label.setStyle("-fx-text-fill: #00ff00");
-                result_label.setText("Dish removed successfully");
+                initialize();
+                getRestaurant().saveDatabase("Rest.ser");
             }
-            initialize();
-            getRestaurant().saveDatabase("Rest.ser");
-        } catch (Exception ex){
-            ex.printStackTrace();
+        } catch (IllegalArgumentException ex){
+            SFXManager.getInstance().playSound("src/View/sfx/Windows_XP_Critical_Stop.wav");
         }
 
     }

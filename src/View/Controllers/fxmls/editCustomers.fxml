@@ -174,7 +174,7 @@
                                                          <children>
                                                             <Label alignment="CENTER" contentDisplay="TOP" prefHeight="17.0" prefWidth="224.0" text="new username (optional)" />
                                                             <TextField fx:id="usernameField" prefHeight="26.0" prefWidth="199.0" />
-                                                            <Label fx:id="username_alert" style="-fx-text-fill: red;" text="This Username is already taken" visible="false" />
+                                                            <Label fx:id="username_alert" style="-fx-text-fill: red;" text="This Username is already taken" />
                                                          </children>
                                                       </VBox>
                                                    </children>

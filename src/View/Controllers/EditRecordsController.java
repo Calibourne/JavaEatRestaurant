@@ -75,6 +75,8 @@ public class EditRecordsController extends RecordManagementController{
     private Label pass_alert;
     @FXML
     private TextField usernameField;
+    @FXML
+    private Label username_alert;
     // endregion
     // region Ingredient attributes
     @FXML
@@ -445,6 +447,9 @@ public class EditRecordsController extends RecordManagementController{
 
                 img_source.setImage(SwingFXUtils.toFXImage(((Customer)newValue).getProfileImg(false), null));
                 ControllerUtils.setFileChooser(img_choose, img_source);
+                usernameField.setText("");
+                npass_field.setText("");
+                rpass_field.setText("");
                 info_grid.setVisible(true);
                 alert_grid.setVisible(false);
             }
@@ -475,6 +480,22 @@ public class EditRecordsController extends RecordManagementController{
                 pass_alert.setStyle("-fx-text-fill: red");
                 pass_alert.setText("Passwords don't match 😟");
             }
+        });
+        usernameField.textProperty().addListener(c->{
+            if(usernameField.getText().length()>0) {
+                if (getRestaurant().getUsersList().get(usernameField.getText()) != null) {
+                    username_alert.setStyle("-fx-text-fill: red");
+                    username_alert.setText("This username is taken");
+                }
+                else
+                {
+                    username_alert.setStyle("-fx-text-fill: #00ff00");
+                    username_alert.setText("This username is available");
+                }
+            }
+            else
+                username_alert.setText("");
+
         });
     }
 

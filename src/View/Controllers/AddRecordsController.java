@@ -863,7 +863,7 @@ public class AddRecordsController extends RecordManagementController{
             customersToBlacklist_combo.setValue(null);
             System.out.printf("%s added to blacklist\n", toBlacklist);
             result_label.setStyle("-fx-text-fill: #00ff00");
-            result_label.setText("Successfully blacklisted the customer\n refresh the page to continue");
+            result_label.setText("Customer added to the blacklist successfully");
             return request;
         }catch (IllegalArgumentException e) {
             result_label.setStyle("-fx-text-fill: red");

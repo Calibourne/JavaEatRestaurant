@@ -130,6 +130,13 @@ public class ControllerUtils {
         });
     }
 
+    /**
+     * Initializes the file chooser
+     * @param btn
+     * the button to open the file chooser
+     * @param imgView
+     * the image view to add the chosen image onto
+     */
     protected static void setFileChooser(Button btn, ImageView imgView){
         btn.setOnAction(action->{
             FileChooser fileChooser = new FileChooser();
@@ -284,6 +291,9 @@ public class ControllerUtils {
         });
     }
 
+    /**
+     * initializes the orderListviews in relevant pages
+     */
     protected static void initOrderListViews(
             ComboBox<Component> ingredients_combo,
             ComboBox<Dish> dishes_combo,

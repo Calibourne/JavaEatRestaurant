@@ -857,7 +857,7 @@ public class AddRecordsController extends RecordManagementController{
      */
     private AddRecordRequest createBlacklistRequest(){
         try{
-            Customer c = customers_combo.getValue();
+            Customer c = customersToBlacklist_combo.getValue();
             AddRecordRequest request = new AddRecordRequest(c);
             return request;
         }catch (IllegalArgumentException | NullPointerException e){

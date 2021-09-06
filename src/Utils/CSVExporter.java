@@ -59,7 +59,7 @@ final public class CSVExporter {
     public static void export( CSVExportRequest request,  ExportCallBack callBack, boolean async){
         Thread s = new Thread(() -> {
             try {
-                PrintWriter writer = new PrintWriter(request.getName() + EXT, StandardCharsets.UTF_8);
+                PrintWriter writer = new PrintWriter(request.getName() + EXT, "UTF-8");
 
                 final int columns = request.getColumns().length;
 
